@@ -1,0 +1,94 @@
+.outcomes-module {
+  background: var(--color-white);
+  border-top: 1px solid rgba(8,39,80,.08);
+}
+
+.outcomes-module__eyebrow {
+  color: var(--color-primary-blue);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.outcomes-module__eyebrow span {
+  width: 16px;
+  height: 2px;
+  background: var(--color-coral-red);
+  flex-shrink: 0;
+}
+
+.outcomes-module__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.outcomes-module__heading h2,
+.outcomes-module__heading h3,
+.outcomes-module__heading h4 {
+  color: var(--color-navy-blue);
+  margin: 0;
+}
+
+.outcomes-module__intro p {
+  color: rgba(8,39,80,.6);
+  max-width: 420px;
+  margin: 0;
+}
+
+.outcomes-module__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.outcomes-module__item {
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(8,39,80,.75);
+  display: flex;
+  gap: 12px;
+  padding: 20px 22px;
+  border: 1px solid rgba(8,39,80,.12);
+  border-left: 3px solid var(--accent-color, #0D6FFC);
+  border-radius: 5px;
+}
+
+.outcomes-module__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-color, #0D6FFC);
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+.outcomes-module__closing-note p {
+  color: rgba(8,39,80,.7);
+  margin: 32px 0 0;
+}
+
+.outcomes-module__closing-note strong {
+  color: var(--color-navy-blue);
+}
+
+/* Responsive: the header row already wraps via flex-wrap. The 3-column grid steps
+   down through the theme's two established breakpoints (992px, 767px) rather than
+   collapsing straight to one column, since six short cards have room for an
+   intentional 2-column tablet state before stacking fully on phones. */
+
+@media (max-width: 992px) {
+  .outcomes-module__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .outcomes-module__grid {
+    grid-template-columns: 1fr;
+  }
+}

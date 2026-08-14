@@ -1,0 +1,116 @@
+.approach-module {
+  background: var(--color-white);
+  border-top: 1px solid rgba(8,39,80,.08);
+}
+
+.approach-module__inner {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.approach-module__content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.approach-module__eyebrow {
+  color: var(--color-primary-blue);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.approach-module__eyebrow span {
+  width: 16px;
+  height: 2px;
+  background: var(--color-coral-red);
+  flex-shrink: 0;
+}
+
+.approach-module__heading h2,
+.approach-module__heading h3,
+.approach-module__heading h4 {
+  color: var(--color-navy-blue);
+  margin: 0;
+}
+
+.approach-module__description p {
+  color: rgba(8,39,80,.6);
+  margin: 0;
+}
+
+.approach-module__description p + p {
+  margin-top: 18px;
+}
+
+.approach-module__description p:first-child {
+  color: rgba(8,39,80,.7);
+}
+
+.approach-module__description strong {
+  color: var(--color-navy-blue);
+}
+
+.approach-module__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.approach-module__card {
+  border: 1px solid rgba(8,39,80,.12);
+  border-radius: 5px;
+  padding: 28px 30px;
+  background: rgba(13,111,252,.03);
+}
+
+.approach-module__card-label {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primary-blue);
+  margin-bottom: 16px;
+}
+
+.approach-module__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.approach-module__list-item {
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(8,39,80,.75);
+  display: flex;
+  gap: 12px;
+}
+
+.approach-module__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-primary-blue);
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+/* Responsive: collapse to a single column below 992px, matching the established R2 breakpoint.
+   Source order already places the content column before the card, so the stacked
+   mobile hierarchy (heading/copy first, obstacle card second) matches the intended
+   reading order without any reordering. */
+
+@media (max-width: 992px) {
+  .approach-module__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .approach-module__card{
+    padding:25px 20px;
+  }
+}

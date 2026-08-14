@@ -1,0 +1,81 @@
+[ {
+  "id" : "kicker",
+  "name" : "kicker",
+  "label" : "Kicker",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "bring us your hardest problem ↓"
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h2>Let's <strong><span class=\"highlight\">whiteboard</span></strong> IT.</h2>"
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Placeholder copy — one sentence on what the first session looks like: an hour, a whiteboard, senior engineers, no obligation."
+}, {
+  "id" : "button_text",
+  "name" : "button_text",
+  "label" : "Button text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Schedule a whiteboard session"
+}, {
+  "id" : "button_link",
+  "name" : "button_link",
+  "label" : "Button link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION" ],
+  "show_advanced_rel_options" : true,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "tel:+1",
+      "type" : "EXTERNAL"
+    },
+    "no_follow" : false,
+    "open_in_new_tab" : false
+  }
+}, {
+  "id" : "cta",
+  "name" : "cta",
+  "label" : "Or select a CTA",
+  "help_text" : "Optional. Renders a HubSpot CTA in place of the button above when no Button link is set.",
+  "required" : false,
+  "locked" : false,
+  "type" : "cta",
+  "display_width" : null
+}, {
+  "id" : "style_cta",
+  "name" : "style_cta",
+  "label" : "CTA Style",
+  "required" : false,
+  "locked" : false,
+  "type" : "choice",
+  "display" : "select",
+  "choices" : [
+    [ "cta-primary", "Primary" ],
+    [ "cta-secondary", "Secondary (Outline)" ]
+  ],
+  "display_width" : null,
+  "default" : "cta-primary"
+} ]

@@ -1,0 +1,103 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .trust-bar-module {
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(8,39,80,.08);
+    {{ module.styles.spacing_desktop.css }}
+  }
+  .trust-bar-module__inner {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .trust-bar-module__label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.6pxm;
+    text-transform: uppercase;
+    color: rgba(8,39,80,.45);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .trust-bar-module__divider {
+    width: 1px;
+    height: 44px;
+    background: rgba(8,39,80,.1);
+    flex-shrink: 0;
+  }
+  .trust-bar-module__logos {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 20px;
+    flex: 1;
+  }
+  .trust-bar-module__logo {
+    height: 44px;
+    border: 1px dashed rgba(8,39,80,.2);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(8,39,80,.3);
+  }
+  .trust-bar-module__logo img {
+    max-height: 28px;
+    max-width: 100%;
+  }
+  .trust-bar-module__logo a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Responsive: collapse to a single column below 992px */
+
+  @media (max-width: 992px) {
+    .trust-bar-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+    .trust-bar-module__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .trust-bar-module__divider {
+      display: none;
+    }
+    .trust-bar-module__logos {
+      grid-template-columns: 1fr;
+      width: 100%;
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="trust-bar-module" data-screen-label="Trust bar">
+  <div class="content-wrapper trust-bar-module__inner">
+    <div class="trust-bar-module__label">{{ module.section_label }}</div>
+    <div class="trust-bar-module__divider"></div>
+    <div class="trust-bar-module__logos">
+      {% for item in module.logos %}
+        <div class="trust-bar-module__logo">
+          {% if item.link.url.href %}<a href="{{ item.link.url.href|escape_url }}" aria-label="{{ item.alt_text|escape_attr }}">{% endif %}
+          {% if item.logo.src %}
+            <img src="{{ item.logo.src|escape_url }}" alt="{{ item.alt_text|escape_attr }}" loading="lazy">
+          {% else %}
+            {{ item.alt_text|escape_html }}
+          {% endif %}
+          {% if item.link.url.href %}</a>{% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

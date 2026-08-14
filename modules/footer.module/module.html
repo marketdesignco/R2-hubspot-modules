@@ -1,0 +1,112 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .footer .footer-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  .footer-module__columns {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 64px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    align-items: start;
+  }
+  .footer-module__about {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .footer .footer-module__heading {
+
+    color: white;
+    margin: 0;
+  }
+  .footer p.footer-module__description {
+   
+    color: #828D9C;
+    max-width: 340px;
+    margin: 0;
+  }
+  .footer-module__logo {
+    background: white;
+    border-radius: 4px;
+    padding: 10px 14px;
+    width: fit-content;
+    margin-top: 6px;
+  }
+  .footer-module__logo img {
+    height: 26px;
+    width: auto;
+    display: block;
+  }
+  .footer-module__column {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .footer .footer-module__column-heading {
+    font-weight: 700;
+    color: white;
+    margin-bottom: 2px;
+  }
+  .footer-module__link {
+    font-size: 13px;
+    color:#8E98A5;
+    text-decoration: none;
+  }
+  .footer-module__link:hover {
+    color: white;
+  }
+  .footer-module__bottom {
+    padding-top: 24px;
+  }
+  .footer .footer-module__copyright {
+    font-size: 11px;
+    color: rgba(255,255,255,.3);
+  }
+
+  /* Responsive: collapse to a single column below 992px */
+
+  @media (max-width: 992px) {
+    .footer .footer-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+    .footer-module__columns {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .footer .footer-module__description {
+      max-width: none;
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<div class="content-wrapper footer-module footer">
+  <div class="footer-module__columns">
+    <div class="footer-module__about">
+      <h3 class="footer-module__heading">{{ module.heading|escape_html }}</h3>
+      <p class="footer-module__description">{{ module.description|escape_html }}</p>
+      <div class="footer-module__logo">
+        <img src="{{ module.logo.src|escape_url }}" alt="{{ module.logo.alt|escape_attr }}" loading="lazy">
+      </div>
+    </div>
+    <div class="footer-module__column">
+      <div class="footer-module__column-heading">{{ module.social_heading|escape_html }}</div>
+      {% for item in module.social_links %}
+        <a class="footer-module__link" href="{{ item.link.url.href|escape_url }}">{{ item.link_label|escape_html }}</a>
+      {% endfor %}
+    </div>
+    <div class="footer-module__column">
+      <div class="footer-module__column-heading">{{ module.contact_heading|escape_html }}</div>
+      {% for item in module.contact_links %}
+        <a class="footer-module__link" href="{{ item.link.url.href|escape_url }}">{{ item.link_label|escape_html }}</a>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="footer-module__bottom">
+    <div class="footer-module__copyright">{{ module.copyright|escape_html }}</div>
+  </div>
+</div>

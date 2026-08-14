@@ -1,0 +1,9 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
+  "categories" : [ "forms_and_buttons" ],
+  "host_template_types" : [ "PAGE" ],
+  "label" : "Checklist CTA Band",
+  "icon" : "../../images/module-icons/cta.svg",
+  "is_available_for_new_content" : true
+}

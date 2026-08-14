@@ -1,0 +1,269 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Why R2"
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Use the rich text toolbar's Heading options (H2/H3/H4) to set the semantic level. Bold the accent phrase (e.g. \"looks like\") to apply the Caveat script treatment. Typography always comes from the R2 Design System for whichever level is chosen.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h2>What working with R2 <strong>looks like</strong></h2>"
+}, {
+  "id" : "intro",
+  "name" : "intro",
+  "label" : "Intro",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Highly regulated, growth-oriented organizations need a partner with the engineering depth to design something that actually works in their environment — and the accountability to deliver it.</p>"
+}, {
+  "id" : "cards",
+  "name" : "cards",
+  "label" : "Cards",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "cards.heading",
+    "default" : 4
+  },
+  "children" : [ {
+    "id" : "cards.accent_color",
+    "name" : "accent_color",
+    "label" : "Accent color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#0D6FFC",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "cards.heading",
+    "name" : "heading",
+    "label" : "Heading",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Engineering depth, not sales velocity"
+  }, {
+    "id" : "cards.description",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Our engineers are multi-disciplined and embedded in your environment from assessment through delivery. No handoffs mid-project. No recommendations built around what is easiest to sell."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "accent_color" : {
+      "color" : "#0D6FFC",
+      "opacity" : 100
+    },
+    "heading" : "Engineering depth, not sales velocity",
+    "description" : "Our engineers are multi-disciplined and embedded in your environment from assessment through delivery. No handoffs mid-project. No recommendations built around what is easiest to sell."
+  }, {
+    "accent_color" : {
+      "color" : "#4792A6",
+      "opacity" : 100
+    },
+    "heading" : "Segmentation expertise and compliance alignment",
+    "description" : "We map segmentation policies to the compliance frameworks your organization operates under. Controls are designed to be enforceable, measurable, and audit-ready from day one."
+  }, {
+    "accent_color" : {
+      "color" : "#DB535F",
+      "opacity" : 100
+    },
+    "heading" : "Defined scope, clear milestones, no surprises",
+    "description" : "Every engagement starts with documented deliverables and defined success criteria. We track against those benchmarks throughout and report on progress — so outcomes are visible before the project closes."
+  }, {
+    "accent_color" : {
+      "color" : "#B7C9C5",
+      "opacity" : 100
+    },
+    "heading" : "Accountability after go-live",
+    "description" : "We optimize, report, and evolve the environment as your organization grows. The segmentation fabric your team depends on will not drift because no one is watching it."
+  } ]
+}, {
+  "id" : "closing_note",
+  "name" : "closing_note",
+  "label" : "Closing note",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "We solve, not sell. We show up, work alongside your team, and stay accountable to outcomes. Better is the baseline."
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : {
+      "padding" : {
+        "top" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    },
+    "spacing_mobile" : {
+      "padding" : {
+        "top" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    }
+  }
+} ]

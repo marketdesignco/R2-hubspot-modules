@@ -1,0 +1,129 @@
+.problem-module {
+  background: #FFFFFF;
+  border-bottom: 1px solid rgba(8,39,80,.08);
+}
+
+.problem-module__inner {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.problem-module__content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.problem-module__eyebrow {
+  color: #0D6FFC;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.problem-module__eyebrow span {
+  width: 16px;
+  height: 2px;
+  background: #DB535F;
+  flex-shrink: 0;
+}
+
+.problem-module__heading h2,
+.problem-module__heading h3,
+.problem-module__heading h4 {
+  color: #082750;
+  margin: 0;
+}
+
+.problem-module__description p {
+  color: rgba(8,39,80,.6);
+  margin: 0;
+}
+
+.problem-module__description p + p {
+  margin-top: 18px;
+}
+
+.problem-module__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.problem-module__card {
+  border: 1px solid rgba(8,39,80,.12);
+  border-radius: 5px;
+  padding: 28px 30px;
+}
+
+.problem-module__card-label {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0D6FFC;
+  margin-bottom: 16px;
+}
+
+.problem-module__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.problem-module__list-item {
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(8,39,80,.75);
+  display: flex;
+  gap: 12px;
+}
+
+.problem-module__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #DB535F;
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+.problem-module__stat {
+  background: #082750;
+  border-radius: 5px;
+  padding: 24px 30px;
+}
+
+.problem-module__stat-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.9);
+  margin: 0;
+}
+
+.problem-module__stat-value {
+  font-weight: 900;
+  font-size: 26px;
+  color: white;
+  letter-spacing: -.02em;
+  margin-right: 4px;
+}
+
+/* Responsive: collapse to a single column below 992px, matching the hero/managed-services breakpoint */
+
+@media (max-width: 992px) {
+  .problem-module__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .problem-module__card{
+
+    padding:25px 20px;
+  }
+  .problem-module__stat{
+    padding:20px;
+  }
+}

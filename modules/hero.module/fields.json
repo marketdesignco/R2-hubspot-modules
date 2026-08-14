@@ -1,0 +1,481 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Network Segmentation · Cisco SDA · Meraki Cloud Fabric · Zero Trust"
+}, {
+  "id" : "headline_prefix",
+  "name" : "headline_prefix",
+  "label" : "Headline - line 1",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Your"
+}, {
+  "id" : "headline_suffix",
+  "name" : "headline_suffix",
+  "label" : "Headline - line 3",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "company."
+}, {
+  "id" : "rotating_phrases",
+  "name" : "rotating_phrases",
+  "label" : "Rotating phrases",
+  "help_text" : "The highlighted middle line of the headline rotates through these phrases with a typewriter effect. Each phrase has a matching built-in animated diagram; upload your own SVG or image below to replace it without any code changes.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : 8,
+    "sorting_label_field" : "rotating_phrases.phrase",
+    "default" : 6
+  },
+  "children" : [ {
+    "id" : "rotating_phrases.phrase",
+    "name" : "phrase",
+    "label" : "Phrase",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Network Segmentation"
+  }, {
+    "id" : "rotating_phrases.diagram_style",
+    "name" : "diagram_style",
+    "label" : "Background diagram",
+    "help_text" : "Picks a built-in animated diagram to show behind this phrase. Ignored if a custom SVG or image is uploaded below.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "none", "None" ], [ "managed_services", "Managed services / NOC" ], [ "network_segmentation", "Network segmentation / campus" ], [ "cloud_foundation", "Cloud Foundation (vRealize/NSX/vSphere/vSAN)" ], [ "cisco_sda", "Cisco SD-Access (policy/control/data plane)" ], [ "meraki_cloud_fabric", "Meraki cloud fabric" ], [ "vmware_cloud_foundation", "VMware Cloud Foundation (full SDDC stack)" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "none"
+  }, {
+    "picker" : "file",
+    "id" : "rotating_phrases.svg_file",
+    "name" : "svg_file",
+    "label" : "Custom SVG file (optional, overrides the built-in diagram)",
+    "help_text" : "Upload your own .svg file to fully replace the built-in animated diagram for this phrase — no code changes needed. Takes priority over the background image below.",
+    "required" : false,
+    "locked" : false,
+    "type" : "file",
+    "display_width" : null
+  }, {
+    "id" : "rotating_phrases.background_image",
+    "name" : "background_image",
+    "label" : "Background image (optional, overrides both of the above)",
+    "required" : false,
+    "locked" : false,
+    "responsive" : false,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "src" : "",
+      "alt" : ""
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "phrase" : "Managed Services",
+    "diagram_style" : "managed_services",
+    "svg_file" : null,
+    "background_image" : {
+      "src" : "",
+      "alt" : ""
+    }
+  }, {
+    "phrase" : "Network Segmentation",
+    "diagram_style" : "network_segmentation",
+    "svg_file" : null,
+    "background_image" : {
+      "src" : "",
+      "alt" : ""
+    }
+  }, {
+    "phrase" : "Cloud Foundation",
+    "diagram_style" : "cloud_foundation",
+    "svg_file" : null,
+    "background_image" : {
+      "src" : "",
+      "alt" : ""
+    }
+  }, {
+    "phrase" : "Cisco SDA",
+    "diagram_style" : "cisco_sda",
+    "svg_file" : null,
+    "background_image" : {
+      "src" : "",
+      "alt" : ""
+    }
+  }, {
+    "phrase" : "Meraki Cloud Fabric",
+    "diagram_style" : "meraki_cloud_fabric",
+    "svg_file" : null,
+    "background_image" : {
+      "src" : "",
+      "alt" : ""
+    }
+  }, {
+    "phrase" : "VMware Cloud Foundation",
+    "diagram_style" : "vmware_cloud_foundation",
+    "svg_file" : null,
+    "background_image" : {
+      "src" : "",
+      "alt" : ""
+    }
+  } ]
+}, {
+  "id" : "rotate_seconds",
+  "name" : "rotate_seconds",
+  "label" : "Rotation speed (seconds)",
+  "required" : false,
+  "locked" : false,
+  "display" : "text",
+  "min" : 2,
+  "max" : 12,
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 5
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Nearly two decades. One discipline. <strong>We don't pitch promises; we prove outcomes.</strong> <em>Better is our baseline.</em></p>"
+}, {
+  "id" : "show_button",
+  "name" : "show_button",
+  "label" : "Show button",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "button_text",
+  "name" : "button_text",
+  "label" : "Button text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Let's Whiteboard IT"
+}, {
+  "id" : "button_link",
+  "name" : "button_link",
+  "label" : "Button link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION" ],
+  "show_advanced_rel_options" : true,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "#cta",
+      "type" : "EXTERNAL"
+    },
+    "no_follow" : false,
+    "open_in_new_tab" : false
+  }
+}, {
+  "id" : "cta",
+  "name" : "cta",
+  "label" : "Or select a CTA",
+  "help_text" : "Optional. Renders a HubSpot CTA in place of the button above when no Button link is set.",
+  "required" : false,
+  "locked" : false,
+  "type" : "cta",
+  "display_width" : null
+}, {
+  "id" : "style_cta",
+  "name" : "style_cta",
+  "label" : "CTA Style",
+  "required" : false,
+  "locked" : false,
+  "type" : "choice",
+  "display" : "select",
+  "choices" : [
+    [ "cta-primary", "Primary" ],
+    [ "cta-secondary", "Secondary (Outline)" ]
+  ],
+  "display_width" : null,
+  "default" : "cta-primary"
+}, {
+  "id" : "sidebar_label",
+  "name" : "sidebar_label",
+  "label" : "Sidebar label",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Proof points"
+}, {
+  "id" : "proof_points",
+  "name" : "proof_points",
+  "label" : "Proof points",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "proof_points.title",
+    "default" : 4
+  },
+  "children" : [ {
+    "id" : "proof_points.title",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "35"
+  }, {
+    "id" : "proof_points.description",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Engineers on staff"
+  }, {
+    "id" : "proof_points.border_color",
+    "name" : "border_color",
+    "label" : "Border color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#0D6FFC",
+      "opacity" : 100
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "title" : "35",
+    "description" : "Engineers on staff",
+    "border_color" : {
+      "color" : "#0D6FFC",
+      "opacity" : 100
+    }
+  }, {
+    "title" : "20",
+    "description" : "Years engineering network fabric",
+    "border_color" : {
+      "color" : "#4792A6",
+      "opacity" : 100
+    }
+  }, {
+    "title" : "10",
+    "description" : "XX Lorem Ipsum placeholder",
+    "border_color" : {
+      "color" : "#DB535F",
+      "opacity" : 100
+    }
+  }, {
+    "title" : "0",
+    "description" : "Policy gaps post-deployment",
+    "border_color" : {
+      "color" : "#B7C9C5",
+      "opacity" : 100
+    }
+  } ]
+}, {
+  "id" : "highlights",
+  "name" : "highlights",
+  "label" : "Bottom highlights",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : 3,
+    "sorting_label_field" : "highlights.title",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "highlights.title",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Reduce Technical Debt"
+  }, {
+    "id" : "highlights.description",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Modern network fabric replaces aging, fragmented infrastructure with a unified, policy-driven architecture."
+  }, {
+    "id" : "highlights.dot_color",
+    "name" : "dot_color",
+    "label" : "Dot color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#0D6FFC",
+      "opacity" : 100
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "title" : "Reduce Technical Debt",
+    "description" : "Modern network fabric replaces aging, fragmented infrastructure with a unified, policy-driven architecture.",
+    "dot_color" : {
+      "color" : "#0D6FFC",
+      "opacity" : 100
+    }
+  }, {
+    "title" : "Expand Capacity Without Hiring",
+    "description" : "Managed services and automation extend your internal team without adding headcount.",
+    "dot_color" : {
+      "color" : "#4792A6",
+      "opacity" : 100
+    }
+  }, {
+    "title" : "TBD — Jamie + Rory to Supply",
+    "description" : "Placeholder for third core pain point.",
+    "dot_color" : {
+      "color" : "#DB535F",
+      "opacity" : 100
+    }
+  } ]
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

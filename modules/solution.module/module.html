@@ -1,0 +1,28 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .solution-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .solution-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="solution-module" id="solution" data-screen-label="The solution">
+  <div class="solution-module__glow"></div>
+  <div class="content-wrapper solution-module__inner">
+    <div class="solution-module__content">
+      <div class="solution-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      <div class="solution-module__heading">{{ module.heading|sanitize_html }}</div>
+      <div class="solution-module__description">{{ module.description|sanitize_html }}</div>
+    </div>
+    <div class="solution-module__quote">
+      <h4 class="solution-module__quote-text">{{ module.quote|escape_html }}</h4>
+    </div>
+  </div>
+</section>

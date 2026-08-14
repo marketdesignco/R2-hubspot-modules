@@ -1,0 +1,250 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "The problem"
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Use the rich text toolbar's Heading options (H2/H3/H4) to set the semantic level. Typography always comes from the R2 Design System for whichever level is chosen.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h2>Why traditional segmentation breaks down</h2>"
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Segmentation has been a core networking concept for decades. The environments it needs to protect have changed completely.</p><p>SaaS adoption, hybrid workloads, federated identity, and distributed access mean the network edge no longer exists as a defined boundary. Trust is established quickly. Enforcement often is not. The result is exposure that is hard to see and harder to contain.</p><p>When segmentation does not hold, the blast radius of any incident grows. Response takes longer. Recovery costs more. And control — the thing your team is accountable for — is harder to demonstrate.</p>"
+}, {
+  "id" : "card_label",
+  "name" : "card_label",
+  "label" : "Card label",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Common patterns R2 sees in your environment:"
+}, {
+  "id" : "patterns",
+  "name" : "patterns",
+  "label" : "Patterns",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "patterns.text",
+    "default" : 5
+  },
+  "children" : [ {
+    "id" : "patterns.text",
+    "name" : "text",
+    "label" : "Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Macro-segmentation is in place, but micro-segmentation is inconsistent or absent across campus, branch, and data center"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "text" : "Macro-segmentation is in place, but micro-segmentation is inconsistent or absent across campus, branch, and data center"
+  }, {
+    "text" : "Devices connect and operate without classification — no defined identity, no assigned policy"
+  }, {
+    "text" : "Policy intent at design time drifts from actual enforcement within months of go-live"
+  }, {
+    "text" : "Compliance audits rely on documentation that does not reflect how the network actually behaves"
+  }, {
+    "text" : "Incident response is slow because lateral movement was not contained"
+  } ]
+}, {
+  "id" : "stat_value",
+  "name" : "stat_value",
+  "label" : "Stat value",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "60%"
+}, {
+  "id" : "stat_text",
+  "name" : "stat_text",
+  "label" : "Stat supporting text",
+  "help_text" : "Renders inline immediately after the stat value within a single paragraph.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "of AI and enterprise SaaS applications now operate outside IT visibility. That is the environment segmentation has to work in."
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : {
+      "padding" : {
+        "top" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    },
+    "spacing_mobile" : {
+      "padding" : {
+        "top" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    }
+  }
+} ]

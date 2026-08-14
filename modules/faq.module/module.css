@@ -1,0 +1,67 @@
+.faq-module {
+  background: var(--color-white);
+}
+
+.faq-module__container {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.faq-module__eyebrow {
+  color: var(--color-primary-blue);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.faq-module__eyebrow span {
+  width: 16px;
+  height: 2px;
+  background: var(--color-coral-red);
+  flex-shrink: 0;
+}
+
+.faq-module__heading h2,
+.faq-module__heading h3,
+.faq-module__heading h4 {
+  color: var(--color-navy-blue);
+  margin: 0 0 36px;
+}
+
+.faq-module__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-module__item {
+  border-bottom: 1px solid rgba(8,39,80,.12);
+  padding: 22px 0 24px;
+}
+
+.faq-module__item:last-child {
+  border-bottom: none;
+  padding: 22px 0 6px;
+}
+
+.faq-module__question {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-navy-blue);
+  margin: 0 0 8px;
+}
+
+.faq-module__answer p {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: rgba(8,39,80,.7);
+  margin: 0;
+}
+
+.faq-module__answer p + p {
+  margin-top: 12px;
+}
+
+/* Responsive: this is already a single-column reading layout at every width, so no
+   grid/flex collapse is needed — only the mandatory spacing swap applies at the
+   established R2 breakpoint. */

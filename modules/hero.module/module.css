@@ -1,0 +1,377 @@
+.hero-module {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #082750;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+.hero-module__orb-left,
+.hero-module__orb-right {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-module__orb-left {
+  left: -4%;
+  top: 12%;
+  width: 540px;
+  height: 540px;
+  background: radial-gradient(circle, rgba(13,111,252,.13) 0%, transparent 65%);
+}
+.hero-module__orb-right {
+  right: 0;
+  bottom: 8%;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(71,146,166,.07) 0%, transparent 65%);
+}
+
+/* Animated background: whiteboard-style sketch + optional per-phrase images */
+
+.hero-module__wb {
+  position: absolute;
+  top: 72px;
+  left: 22%;
+  right: 0;
+  bottom: 108px;
+  pointer-events: none;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-module__wb-images {
+  position: absolute;
+  inset: 0;
+}
+.hero-module__wb-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity .6s ease;
+}
+.hero-module__wb-image.is-active {
+  opacity: .22;
+}
+.hero-module__diagram {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+.hero-module__diagram.is-active {
+  opacity: .2;
+}
+.hero-module__diagram-custom {
+  overflow: hidden;
+}
+.hero-module__diagram-custom svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Deliberately no color/font/fill rules here: the built-in diagrams (and
+   any custom SVG a client uploads) set their own stroke/fill/font-family
+   presentation attributes inline, which SVG's native attribute inheritance
+   already handles correctly. A CSS type-selector rule would win the cascade
+   over those attributes and silently strip them (e.g. the Caveat annotation
+   font, or a status pill's tinted fill) — so this file only ever touches
+   layout, opacity, and the draw-in animation, never color or type. */
+
+@keyframes hero-module-draw-path {
+  from { stroke-dashoffset: 2000; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes hero-module-fade-in-text {
+  to { opacity: 1; }
+}
+.hero-module__diagram.is-drawing path,
+.hero-module__diagram.is-drawing line,
+.hero-module__diagram.is-drawing polyline,
+.hero-module__diagram.is-drawing rect,
+.hero-module__diagram.is-drawing circle,
+.hero-module__diagram.is-drawing ellipse {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: hero-module-draw-path 2.4s ease forwards;
+}
+.hero-module__diagram.is-drawing text {
+  opacity: 0;
+  animation: hero-module-fade-in-text .4s ease 1.8s forwards;
+}
+
+.hero-module__body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  position: relative;
+  z-index: 2;
+}
+.hero-module__content {
+  padding: 36px 48px 28px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+.hero-module__eyebrow {
+  color: #0D6FFC;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.hero-module__eyebrow span {
+  width: 16px;
+  height: 2px;
+  background: #DB535F;
+  flex-shrink: 0;
+}
+.hero-module__title {
+  margin-bottom: 80px;
+}
+.hero-module__title h1 {
+  color: #B7C9C5;
+  font-size: 55px;
+  font-weight: 900;
+  line-height: .92;
+  letter-spacing: -.03em;
+  margin: 0 0 18px;
+}
+.hero-module__title span {
+
+}
+.hero-module__title h1 strong {
+  color: #0D6FFC;
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  font-size: 70px;
+  line-height: 120%;
+}
+
+/* Rotating phrase + typewriter cursor */
+
+.hero-module__rotating-line {
+  display: block;
+  min-height: 1.2em;
+}
+.hero-module__rotating-text {
+  display: inline;
+}
+.hero-module__cursor {
+  display: inline-block;
+  width: 2px;
+  height: .8em;
+  margin-left: 10px;
+  background: #0D6FFC;
+  vertical-align: text-bottom;
+  animation: hero-module-blink .8s step-end infinite;
+}
+@keyframes hero-module-blink {
+  50% { opacity: 0; }
+}
+
+.hero-module__description {
+  font-weight: 400;
+  line-height: 1.8;
+  color: rgba(255,255,255,.62);
+  max-width: 440px;
+  margin: 16px 0 24px;
+}
+.hero-module__description strong { color: #fff; font-weight: 700; }
+.hero-module__cta {
+  width: fit-content;
+}
+
+/* Slide dots */
+
+.hero-module__dots {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+.hero-module__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: rgba(255,255,255,.2);
+  cursor: pointer;
+  transition: background .3s, transform .3s;
+}
+.hero-module__dot.is-active {
+  background: #0D6FFC;
+  transform: scale(1.3);
+}
+
+.hero-module__sidebar {
+  border-left: 1px solid rgba(255,255,255,.08);
+  padding: 36px 16px 28px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  background: rgba(0,0,0,.18);
+}
+.hero-module__sidebar-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.25);
+  margin-bottom: 14px;
+}
+.hero-module__proof-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.hero-module__proof-item {
+  padding: 11px 12px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 5px;
+  border-left: 3px solid var(--proof-border-color, #0D6FFC);
+}
+.hero-module__proof-title {
+  font-size: 24px;
+  font-weight: 900;
+  color: white;
+  display: block;
+  line-height: 1;
+  margin-bottom: 3px;
+  letter-spacing: -.02em;
+}
+.hero-module__proof-description {
+  display: block;
+  font-size: 10px;
+  color: rgba(255,255,255,.5);
+  line-height: 1.4;
+}
+
+.hero-module__footer {
+ /* position: absolute;*/
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,.3);
+  border-top: 1px solid rgba(255,255,255,.08);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  z-index: 10;
+}
+.hero-module__highlight {
+  padding: 18px 24px;
+  border-right: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.hero-module__highlight:last-child {
+  border-right: none;
+}
+.hero-module__highlight-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--highlight-dot-color, #0D6FFC);
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.hero-module__highlight-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,.5);
+  line-height: 1.5;
+}
+.hero-module__highlight-copy strong {
+  color: white;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* Responsive: collapse to a single column below 992px */
+
+@media (max-width: 992px) {
+  .hero-module {
+    min-height: auto;
+  }
+  .hero-module__body {
+    grid-template-columns: 1fr;
+  }
+  .hero-module__content {
+    padding: 28px 20px 20px;
+  }
+  .hero-module__wb {
+    left: 0;
+  }
+
+  .hero-module__eyebrow {
+    flex-wrap: wrap;
+    row-gap: 4px;
+  }
+
+  .hero-module__title {
+    margin-bottom: 20px;
+  }
+  .hero-module__title h1 {
+    font-size: 32px;
+    line-height: 1.05;
+    margin: 0 0 10px;
+  }
+  .hero-module__title h1 strong {
+    font-size: 40px;
+    line-height: 1.15;
+  }
+  .hero-module__rotating-line {
+    min-height: 0;
+  }
+
+  .hero-module__description {
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 12px 0 20px;
+    max-width: none;
+  }
+
+  .hero-module__cta {
+    width: 100%;
+  }
+
+  .hero-module__dots {
+    margin-top: 14px;
+  }
+
+  .hero-module__sidebar {
+    border-left: none;
+    border-top: 1px solid rgba(255,255,255,.08);
+    padding: 20px 20px 24px;
+  }
+
+  .hero-module__footer {
+    display: block;
+  }
+  .hero-module__highlight {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    padding: 14px 20px;
+  }
+  .hero-module__highlight:last-child {
+    border-bottom: none;
+  }
+  .hero-module__highlight-copy strong {
+    text-transform: uppercase;
+    letter-spacing: .02em;
+    font-size: 11px;
+  }
+}

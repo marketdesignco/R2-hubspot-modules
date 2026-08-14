@@ -1,0 +1,48 @@
+.checklist-cta-module {
+  background: var(--color-white);
+}
+
+.checklist-cta-module__card {
+  max-width: 1080px;
+  margin: 0 auto;
+  border: 1px solid rgba(8,39,80,.12);
+  border-left: 4px solid var(--color-primary-blue);
+  border-radius: 5px;
+  padding: 40px 48px;
+  background: rgba(13,111,252,.03);
+  display: grid;
+  grid-template-columns: 1.4fr auto;
+  gap: 40px;
+  align-items: center;
+}
+
+.checklist-cta-module__kicker {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primary-blue);
+  margin-bottom: 8px;
+}
+
+.checklist-cta-module__heading h2,
+.checklist-cta-module__heading h3,
+.checklist-cta-module__heading h4 {
+  color: var(--color-navy-blue);
+  margin: 0 0 10px;
+}
+
+.checklist-cta-module__description p {
+  color: rgba(8,39,80,.65);
+  margin: 0;
+}
+
+/* Responsive: collapse to a single column below 992px, matching the established R2
+   breakpoint. The CTA stacks below the copy (source order) and becomes full-width
+   via the shared .btn-mobile utility so it stays an easy touch target. */
+
+@media (max-width: 992px) {
+  .checklist-cta-module__card {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding:25px 20px;
+  }
+}

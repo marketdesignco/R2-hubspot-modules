@@ -1,0 +1,299 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Our service approach — F3EAD"
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h2>A better approach to <strong><span class=\"highlight\">technology service.</span></strong></h2>"
+}, {
+  "id" : "intro",
+  "name" : "intro",
+  "label" : "Intro paragraph",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "R2 utilizes a six-step services approach inspired by the U.S. military's special operations forces: \"Find, Fix, Finish, Exploit, Analyze, and Disseminate\" (F3EAD). Partnering with you on your technology journey, we'll advise, design, implement, and manage your entire IT environment."
+}, {
+  "id" : "quote",
+  "name" : "quote",
+  "label" : "Handwritten quote",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "recommendations that are right for you — even if they aren't our own"
+}, {
+  "id" : "steps",
+  "name" : "steps",
+  "label" : "Steps",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "steps.title",
+    "default" : 6
+  },
+  "children" : [ {
+    "id" : "steps.accent_color",
+    "name" : "accent_color",
+    "label" : "Accent color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#0D6FFC",
+      "opacity" : 90
+    }
+  }, {
+    "id" : "steps.letter",
+    "name" : "letter",
+    "label" : "Letter",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "F"
+  }, {
+    "id" : "steps.title",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Find"
+  }, {
+    "id" : "steps.description",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Placeholder — discover and assess the current state of your environment."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "accent_color" : {
+      "color" : "#0D6FFC",
+      "opacity" : 90
+    },
+    "letter" : "F",
+    "title" : "Find",
+    "description" : "Placeholder — discover and assess the current state of your environment."
+  }, {
+    "accent_color" : {
+      "color" : "#4792A6",
+      "opacity" : 90
+    },
+    "letter" : "F",
+    "title" : "Fix",
+    "description" : "Placeholder — define scope, success criteria, and the target design."
+  }, {
+    "accent_color" : {
+      "color" : "#DB535F",
+      "opacity" : 90
+    },
+    "letter" : "F",
+    "title" : "Finish",
+    "description" : "Placeholder — implement, configure, and validate on time and on budget."
+  }, {
+    "accent_color" : {
+      "color" : "#B7C9C5",
+      "opacity" : 90
+    },
+    "letter" : "E",
+    "title" : "Exploit",
+    "description" : "Placeholder — capture what the deployment reveals about your environment."
+  }, {
+    "accent_color" : {
+      "color" : "#0D6FFC",
+      "opacity" : 90
+    },
+    "letter" : "A",
+    "title" : "Analyze",
+    "description" : "Placeholder — measure outcomes against agreed benchmarks and report clearly."
+  }, {
+    "accent_color" : {
+      "color" : "#4792A6",
+      "opacity" : 90
+    },
+    "letter" : "D",
+    "title" : "Disseminate",
+    "description" : "Placeholder — full documentation, from requirements to as-built. We always deliver what others don't."
+  } ]
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : {
+      "padding" : {
+        "top" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    },
+    "spacing_mobile" : {
+      "padding" : {
+        "top" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    }
+  }
+} ]

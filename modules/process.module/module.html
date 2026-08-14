@@ -1,0 +1,171 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .process-module {
+    background: #082750;
+    position: relative;
+    overflow: hidden;
+    {{ module.styles.spacing_desktop.css }}
+  }
+  .process-module__glow {
+    position: absolute;
+    left: -6%;
+    top: -20%;
+    width: 520px;
+    height: 520px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(13,111,252,.1) 0%, transparent 65%);
+  }
+  .process-module__inner {
+    position: relative;
+  }
+  .process-module__eyebrow {
+    color: #0D6FFC;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .process-module__eyebrow span {
+    width: 16px;
+    height: 2px;
+    background: #DB535F;
+  }
+  .process-module__header {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 54px;
+    align-items: end;
+    margin-bottom: 56px;
+  }
+  .process-module__heading h2 {
+    font-weight: 700;
+    color: #B7C9C5;
+    margin: 0 0 12px;
+  }
+  .process-module__heading h2 strong {
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    color: #0D6FFC;
+    font-size:58px;
+    text-shadow: 0 0 40px rgba(13,111,252,.3);
+  }
+  .process-module__intro {
+    color: rgba(255,255,255,.55);
+    max-width: 560px;
+    margin: 0;
+  }
+  .process-module__quote {
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing:1.6px;
+    color: rgba(183,201,197,.7);
+    transform: rotate(-1.5deg);
+    justify-self: end;
+    padding-bottom: 6px;
+  }
+  .process-module__steps {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,.08);
+  }
+  .process-module__step {
+    padding: 32px 20px 0;
+    border-right: 1px solid rgba(255,255,255,.08);
+  }
+  .process-module__step:first-child {
+    padding-left: 0;
+  }
+  .process-module__step:last-child {
+    padding-right: 0;
+    border-right: none;
+  }
+  .process-module__step-letter {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--accent-color, #0D6FFC);
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .process-module__step-title {
+    font-weight: 700;
+    color: white;
+    margin: 0 0 8px;
+  }
+  .process-module__step-description {
+    font-size: 12px;
+    line-height: 1.7;
+    color: rgba(255,255,255,.5);
+    margin: 0;
+  }
+
+  /* Responsive: collapse to a single column below 992px */
+
+  @media (max-width: 992px) {
+    .process-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+    .process-module__header {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .process-module__quote {
+      justify-self: start;
+    }
+    .process-module__steps {
+      grid-template-columns: 1fr;
+      border-top: none;
+    }
+    .process-module__step {
+      padding: 20px 0;
+      border-right: none;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .process-module__step:first-child {
+      padding-left: 0;
+      padding-top: 0;
+    }
+    .process-module__step:last-child {
+      padding-right: 0;
+      border-bottom: none;
+    }
+  }
+  
+  @media (max-width:767px){
+    .process-module__heading h2 strong{
+    font-size:38px;
+    }
+    .process-module__quote{
+    font-size:16px;
+      transform: none;
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="process-module" id="process" data-screen-label="Process">
+  <div class="process-module__glow"></div>
+  <div class="content-wrapper process-module__inner">
+    <div class="process-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+    <div class="process-module__header">
+      <div>
+        <div class="process-module__heading">{{ module.heading }}</div>
+        <p class="process-module__intro">{{ module.intro|escape_html }}</p>
+      </div>
+      <div class="process-module__quote">{{ module.quote|escape_html }}</div>
+    </div>
+    <div class="process-module__steps">
+      {% for step in module.steps %}
+        <div class="process-module__step" style="--accent-color: rgba({{ step.accent_color.color|convert_rgb }}, {{ step.accent_color.opacity / 100 }});">
+          <div class="process-module__step-letter">{{ step.letter|escape_html }}</div>
+          <h5 class="process-module__step-title">{{ step.title|escape_html }}</h5>
+          <p class="process-module__step-description">{{ step.description|escape_html }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

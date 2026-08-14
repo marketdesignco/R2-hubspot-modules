@@ -1,0 +1,143 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .services-module {
+    background: #FFFFFF;
+    {{ module.styles.spacing_desktop.css }}
+  }
+  .services-module__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+  .services-module__eyebrow {
+    color: #0D6FFC;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .services-module__eyebrow span {
+    width: 16px;
+    height: 2px;
+    background: #DB535F;
+  }
+  .services-module__heading  h2{
+    font-weight: 700;
+    color: #082750;
+    margin: 0;
+  }
+  .services-module__intro {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(8,39,80,.6);
+    max-width: 420px;
+    margin: 0;
+  }
+  .services-module__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .services-module__card {
+    border: 1px solid rgba(8,39,80,.1);
+    border-top: 3px solid var(--accent-color, #0D6FFC);
+    border-radius: 5px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: #FFFFFF;
+    transition: box-shadow .2s, transform .2s;
+  }
+  .services-module__card:hover {
+    box-shadow: 0 12px 32px rgba(8,39,80,.1);
+    transform: translateY(-3px);
+  }
+  .services-module__number {
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent-color, #0D6FFC);
+  }
+  .services-module__title {
+    font-weight: 700;
+    color: #082750;
+    margin: 0;
+  }
+  .services-module__description {
+    color: #8A96A6;
+    margin: 0;
+    flex: 1;
+  }
+  .services-module__bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .services-module__bullet {
+    color: rgba(8,39,80,.55);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .services-module__bullet span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent-color, #0D6FFC);
+    flex-shrink: 0;
+  }
+  .services-module__link {
+    margin-top: 6px;
+  }
+
+  /* Responsive: collapse to a single column below 992px */
+
+  @media (max-width: 992px) {
+    .services-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+    .services-module__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .services-module__intro {
+      max-width: none;
+    }
+    .services-module__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="services-module" id="services" data-screen-label="Services">
+  <div class="content-wrapper">
+    <div class="services-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+    <div class="services-module__header">
+      <div class="services-module__heading">{{ module.heading }}</div>
+      <div class="services-module__intro">{{ module.intro|sanitize_html }}</div>
+    </div>
+    <div class="services-module__grid">
+      {% for card in module.cards %}
+        <div class="services-module__card" style="--accent-color: rgba({{ card.accent_color.color|convert_rgb }}, {{ card.accent_color.opacity / 100 }});">
+          <div class="services-module__number">{{ card.number|escape_html }}</div>
+          <h5 class="services-module__title">{{ card.title|escape_html }}</h5>
+          <p class="services-module__description">{{ card.description|escape_html }}</p>
+          <div class="services-module__bullets">
+            {% if card.bullet_1 %}<div class="services-module__bullet"><span></span>{{ card.bullet_1|escape_html }}</div>{% endif %}
+            {% if card.bullet_2 %}<div class="services-module__bullet"><span></span>{{ card.bullet_2|escape_html }}</div>{% endif %}
+            {% if card.bullet_3 %}<div class="services-module__bullet"><span></span>{{ card.bullet_3|escape_html }}</div>{% endif %}
+          </div>
+          <a class="services-module__link link-1" href="{{ card.link.url.href|escape_url }}">{{ card.link_text|escape_html }}</a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

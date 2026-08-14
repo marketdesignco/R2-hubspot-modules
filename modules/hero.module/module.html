@@ -1,0 +1,415 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .hero-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .hero-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="hero-module" id="hero" data-screen-label="Hero" data-hero-rotate-seconds="{{ module.rotate_seconds }}">
+  <div class="hero-module__orb-left"></div>
+  <div class="hero-module__orb-right"></div>
+
+  <div class="hero-module__wb" aria-hidden="true">
+    <div class="hero-module__wb-images" data-hero-wb-images>
+      {% for item in module.rotating_phrases %}
+        {% if item.background_image.src %}
+          <img class="hero-module__wb-image" data-hero-wb-image="{{ loop.index0 }}" src="{{ item.background_image.src|escape_url }}" alt="{{ item.background_image.alt|escape_attr }}" loading="lazy">
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {# Managed Services: server rack + NOC dashboard + 24/7 badge #}
+    <svg class="hero-module__diagram" data-hero-diagram="managed_services" viewBox="0 0 720 480" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#B7C9C5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <!-- Server rack -->
+        <rect x="60" y="120" width="90" height="280" rx="4" stroke-width="2.6"/>
+        <rect x="68" y="132" width="74" height="18" rx="2" stroke-width="1.8"/>
+        <rect x="68" y="158" width="74" height="18" rx="2" stroke-width="1.8"/>
+        <rect x="68" y="184" width="74" height="18" rx="2" stroke-width="1.8"/>
+        <rect x="68" y="210" width="74" height="18" rx="2" stroke-width="1.8"/>
+        <rect x="68" y="236" width="74" height="18" rx="2" stroke-width="1.8"/>
+        <rect x="68" y="262" width="74" height="18" rx="2" stroke-width="1.8"/>
+        <rect x="68" y="288" width="74" height="18" rx="2" stroke-width="1.8"/>
+        <circle cx="128" cy="141" r="4" stroke-width="1.4"/>
+        <circle cx="128" cy="167" r="4" stroke-width="1.4"/>
+        <circle cx="128" cy="193" r="4" stroke-width="1.4"/>
+        <text x="105" y="398" font-family="Caveat" font-size="13" fill="#B7C9C5" text-anchor="middle">server rack</text>
+
+        <!-- Monitor / dashboard -->
+        <rect x="210" y="100" width="300" height="200" rx="6" stroke-width="2.8"/>
+        <rect x="210" y="100" width="300" height="28" rx="4" stroke-width="1.6" fill="rgba(183,201,197,.06)"/>
+        <text x="360" y="119" font-family="Caveat" font-size="13" fill="#B7C9C5" text-anchor="middle">NOC Dashboard</text>
+        <!-- Graph lines -->
+        <polyline points="225,195 255,170 285,180 315,155 345,165 375,140 405,158 435,145 465,160 490,148" stroke-width="2.2"/>
+        <polyline points="225,220 255,225 285,210 315,228 345,215 375,230 405,218 435,232 465,220 490,225" stroke-width="1.4" stroke-dasharray="4 3"/>
+        <!-- Axis lines -->
+        <line x1="224" y1="240" x2="500" y2="240" stroke-width="1.2"/>
+        <line x1="224" y1="135" x2="224" y2="240" stroke-width="1.2"/>
+        <!-- Status pills -->
+        <rect x="222" y="252" width="60" height="16" rx="8" stroke-width="1.6"/>
+        <text x="252" y="264" font-family="Caveat" font-size="11" fill="#B7C9C5" text-anchor="middle">online</text>
+        <rect x="292" y="252" width="60" height="16" rx="8" stroke-width="1.6"/>
+        <text x="322" y="264" font-family="Caveat" font-size="11" fill="#B7C9C5" text-anchor="middle">patched</text>
+        <rect x="362" y="252" width="60" height="16" rx="8" stroke-width="1.6"/>
+        <text x="392" y="264" font-family="Caveat" font-size="11" fill="#B7C9C5" text-anchor="middle">secure</text>
+
+        <!-- Monitor stand -->
+        <line x1="360" y1="300" x2="360" y2="330" stroke-width="2.4"/>
+        <line x1="320" y1="330" x2="400" y2="330" stroke-width="2.4"/>
+
+        <!-- 24/7 badge -->
+        <circle cx="564" cy="150" r="52" stroke-width="2.6"/>
+        <text x="564" y="143" font-family="Caveat" font-size="26" fill="#B7C9C5" text-anchor="middle" font-weight="700">24/7</text>
+        <text x="564" y="168" font-family="Caveat" font-size="13" fill="#B7C9C5" text-anchor="middle">always on</text>
+
+        <!-- Flow arrows: Monitor -> Alert -> Resolve -->
+        <text x="230" y="390" font-family="Caveat" font-size="14" fill="#B7C9C5">Monitor</text>
+        <line x1="295" y1="383" x2="335" y2="383" stroke-width="1.8"/>
+        <polyline points="330,378 337,383 330,388" stroke-width="1.8"/>
+        <text x="340" y="390" font-family="Caveat" font-size="14" fill="#B7C9C5">Alert</text>
+        <line x1="380" y1="383" x2="418" y2="383" stroke-width="1.8"/>
+        <polyline points="413,378 420,383 413,388" stroke-width="1.8"/>
+        <text x="424" y="390" font-family="Caveat" font-size="14" fill="#B7C9C5">Resolve</text>
+
+        <!-- Uptime annotation -->
+        <text x="460" y="370" font-family="Caveat" font-size="12" fill="#B7C9C5" opacity=".8" transform="rotate(-4 460 370)">99.9% uptime</text>
+        <text x="464" y="386" font-family="Caveat" font-size="12" fill="#B7C9C5" opacity=".8" transform="rotate(-4 464 386)">SLA guaranteed</text>
+
+        <!-- Connection from rack to dashboard -->
+        <path d="M150 200 C180 200 200 180 210 180" stroke-width="1.6" stroke-dasharray="5 4"/>
+      </g>
+    </svg>
+
+    {# Network Segmentation: campus zones around a zero-trust core #}
+    <svg class="hero-module__diagram" data-hero-diagram="network_segmentation" viewBox="0 0 720 480" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#B7C9C5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <!-- Central campus circle -->
+        <circle cx="360" cy="220" r="70" stroke-width="2.8"/>
+        <text x="360" y="215" font-family="Caveat" font-size="15" fill="#B7C9C5" text-anchor="middle" font-weight="700">CAMPUS</text>
+        <text x="360" y="233" font-family="Caveat" font-size="11" fill="#B7C9C5" text-anchor="middle">SD-Access</text>
+
+        <!-- Zone circles -->
+        <circle cx="160" cy="130" r="50" stroke-width="2.4" stroke-dasharray="6 4"/>
+        <text x="160" y="125" font-family="Caveat" font-size="13" fill="#B7C9C5" text-anchor="middle">Finance</text>
+        <text x="160" y="143" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Zone A</text>
+
+        <circle cx="560" cy="130" r="50" stroke-width="2.4" stroke-dasharray="6 4"/>
+        <text x="560" y="125" font-family="Caveat" font-size="13" fill="#B7C9C5" text-anchor="middle">IoT</text>
+        <text x="560" y="143" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Zone B</text>
+
+        <circle cx="160" cy="320" r="50" stroke-width="2.4" stroke-dasharray="6 4"/>
+        <text x="160" y="315" font-family="Caveat" font-size="13" fill="#B7C9C5" text-anchor="middle">Clinical</text>
+        <text x="160" y="333" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Zone C</text>
+
+        <circle cx="560" cy="320" r="50" stroke-width="2.4" stroke-dasharray="6 4"/>
+        <text x="560" y="315" font-family="Caveat" font-size="13" fill="#B7C9C5" text-anchor="middle">Guest</text>
+        <text x="560" y="333" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Zone D</text>
+
+        <!-- Policy lines from campus to zones -->
+        <line x1="295" y1="175" x2="205" y2="152" stroke-width="2.0"/>
+        <line x1="425" y1="175" x2="512" y2="152" stroke-width="2.0"/>
+        <line x1="295" y1="262" x2="205" y2="292" stroke-width="2.0"/>
+        <line x1="425" y1="262" x2="512" y2="292" stroke-width="2.0"/>
+
+        <!-- Lock icons on policy lines -->
+        <rect x="237" y="156" width="14" height="12" rx="2" stroke-width="1.8"/>
+        <path d="M240 156 q0-6 7-6 q7 0 7 6" stroke-width="1.8"/>
+        <rect x="458" y="156" width="14" height="12" rx="2" stroke-width="1.8"/>
+        <path d="M461 156 q0-6 7-6 q7 0 7 6" stroke-width="1.8"/>
+
+        <!-- Zero Trust shield -->
+        <path d="M332 360 l28-12 l28 12 l0 32 q0 22-28 28 q-28-6-28-28 z" stroke-width="2.6"/>
+        <text x="360" y="384" font-family="Caveat" font-size="11" fill="#B7C9C5" text-anchor="middle">zero trust</text>
+
+        <!-- Annotations -->
+        <text x="68" y="228" font-family="Caveat" font-size="11" fill="#B7C9C5" opacity=".8" transform="rotate(-5 68 228)">no lateral</text>
+        <text x="72" y="244" font-family="Caveat" font-size="11" fill="#B7C9C5" opacity=".8" transform="rotate(-5 72 244)">movement</text>
+        <text x="570" y="228" font-family="Caveat" font-size="11" fill="#B7C9C5" opacity=".8" transform="rotate(4 570 228)">policy</text>
+        <text x="570" y="244" font-family="Caveat" font-size="11" fill="#B7C9C5" opacity=".8" transform="rotate(4 570 244)">enforced</text>
+
+        <!-- Compliance -->
+        <text x="420" y="420" font-family="Caveat" font-size="12" fill="#B7C9C5">✓ CJIS &nbsp; ✓ HIPAA &nbsp; ✓ FISMA</text>
+      </g>
+    </svg>
+
+    {# Cloud Foundation: public cloud + SDDC stack #}
+    <svg class="hero-module__diagram" data-hero-diagram="cloud_foundation" viewBox="0 0 720 480" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#B7C9C5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <!-- Cloud shape top -->
+        <path d="M280 80 q-14-38 20-48 q10-28 40-22 q16-26 40-14 q28-4 30 22 q22 4 18 32 q14 20-10 24z" stroke-width="2.8"/>
+        <text x="328" y="88" font-family="Caveat" font-size="14" fill="#B7C9C5" text-anchor="middle">Public Cloud</text>
+
+        <!-- SDDC stack -->
+        <rect x="160" y="160" width="400" height="60" rx="4" stroke-width="2.6"/>
+        <text x="360" y="186" font-family="Caveat" font-size="14" fill="#B7C9C5" text-anchor="middle" font-weight="700">vRealize — Management + Automation</text>
+        <text x="360" y="204" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">SDDC Manager · vCenter · Lifecycle Mgr</text>
+
+        <rect x="160" y="232" width="400" height="52" rx="4" stroke-width="2.6"/>
+        <text x="360" y="256" font-family="Caveat" font-size="14" fill="#B7C9C5" text-anchor="middle" font-weight="700">NSX — Software-Defined Networking</text>
+        <text x="360" y="274" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Microsegmentation · Distributed Firewall · Zero Trust</text>
+
+        <rect x="160" y="296" width="400" height="52" rx="4" stroke-width="2.6"/>
+        <text x="360" y="320" font-family="Caveat" font-size="14" fill="#B7C9C5" text-anchor="middle" font-weight="700">vSphere — Compute Virtualization</text>
+        <text x="360" y="338" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">ESXi Hosts · DRS · HA · vMotion</text>
+
+        <rect x="160" y="360" width="400" height="52" rx="4" stroke-width="2.6"/>
+        <text x="360" y="384" font-family="Caveat" font-size="14" fill="#B7C9C5" text-anchor="middle" font-weight="700">vSAN — Software-Defined Storage</text>
+        <text x="360" y="402" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">HCI · All-Flash · Encryption at Rest</text>
+
+        <!-- Arrow from cloud to SDDC -->
+        <line x1="340" y1="128" x2="340" y2="158" stroke-width="2.0"/>
+        <polyline points="334,153 340,160 346,153" stroke-width="2.0"/>
+
+        <!-- SDDC label -->
+        <text x="580" y="290" font-family="Caveat" font-size="20" fill="#B7C9C5" font-weight="700" transform="rotate(90 580 290)">SDDC</text>
+
+        <!-- Bracket -->
+        <line x1="566" y1="162" x2="566" y2="410" stroke-width="2.0"/>
+        <line x1="560" y1="162" x2="570" y2="162" stroke-width="2.0"/>
+        <line x1="560" y1="410" x2="570" y2="410" stroke-width="2.0"/>
+
+        <!-- On-prem annotation -->
+        <text x="78" y="320" font-family="Caveat" font-size="12" fill="#B7C9C5" opacity=".8" transform="rotate(-90 78 320)">on-premises</text>
+        <line x1="92" y1="162" x2="92" y2="410" stroke-width="1.4" stroke-dasharray="4 4"/>
+      </g>
+    </svg>
+
+    {# Cisco SDA: policy / control / data plane #}
+    <svg class="hero-module__diagram" data-hero-diagram="cisco_sda" viewBox="0 0 720 480" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#B7C9C5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <!-- Policy Plane -->
+        <rect x="100" y="80" width="500" height="90" rx="5" stroke-width="2.8"/>
+        <text x="350" y="108" font-family="Caveat" font-size="16" fill="#B7C9C5" text-anchor="middle" font-weight="700">POLICY PLANE</text>
+        <!-- ISE box inside -->
+        <rect x="200" y="118" width="100" height="36" rx="3" stroke-width="1.8"/>
+        <text x="250" y="136" font-family="Caveat" font-size="12" fill="#B7C9C5" text-anchor="middle">Cisco ISE</text>
+        <text x="250" y="150" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Identity + Policy</text>
+        <!-- DNA Center / Catalyst Center -->
+        <rect x="390" y="118" width="140" height="36" rx="3" stroke-width="1.8"/>
+        <text x="460" y="136" font-family="Caveat" font-size="12" fill="#B7C9C5" text-anchor="middle">Catalyst Center</text>
+        <text x="460" y="150" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Orchestration + Automation</text>
+
+        <!-- Control Plane -->
+        <rect x="100" y="198" width="500" height="80" rx="5" stroke-width="2.8"/>
+        <text x="350" y="224" font-family="Caveat" font-size="16" fill="#B7C9C5" text-anchor="middle" font-weight="700">CONTROL PLANE</text>
+        <text x="350" y="248" font-family="Caveat" font-size="11" fill="#B7C9C5" text-anchor="middle">LISP Map-Server · Border Nodes · Map-Resolver</text>
+        <text x="350" y="265" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Overlay: VXLAN-GPO  ·  Underlay: IS-IS / OSPF</text>
+
+        <!-- Data Plane -->
+        <rect x="100" y="308" width="500" height="80" rx="5" stroke-width="2.8"/>
+        <text x="350" y="334" font-family="Caveat" font-size="16" fill="#B7C9C5" text-anchor="middle" font-weight="700">DATA PLANE</text>
+        <text x="350" y="356" font-family="Caveat" font-size="11" fill="#B7C9C5" text-anchor="middle">Edge Nodes · Fabric Access Points · WLCs</text>
+        <text x="350" y="374" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">TrustSec SGT Tags  ·  Group-Based Policy  ·  VXLAN Encap</text>
+
+        <!-- Arrows between planes -->
+        <line x1="350" y1="170" x2="350" y2="196" stroke-width="2.0"/>
+        <polyline points="344,191 350,198 356,191" stroke-width="2.0"/>
+        <line x1="350" y1="278" x2="350" y2="306" stroke-width="2.0"/>
+        <polyline points="344,301 350,308 356,301" stroke-width="2.0"/>
+
+        <!-- Endpoints below data plane -->
+        <text x="350" y="415" font-family="Caveat" font-size="12" fill="#B7C9C5" text-anchor="middle">Users · Devices · IoT · Servers</text>
+        <line x1="240" y1="388" x2="220" y2="410" stroke-width="1.6"/>
+        <line x1="310" y1="388" x2="300" y2="410" stroke-width="1.6"/>
+        <line x1="390" y1="388" x2="400" y2="410" stroke-width="1.6"/>
+        <line x1="460" y1="388" x2="480" y2="410" stroke-width="1.6"/>
+
+        <!-- SD-Access badge -->
+        <text x="630" y="230" font-family="Caveat" font-size="13" fill="#B7C9C5" transform="rotate(90 630 230)" opacity=".7">SD-Access Fabric</text>
+      </g>
+    </svg>
+
+    {# Meraki Cloud Fabric #}
+    <svg class="hero-module__diagram" data-hero-diagram="meraki_cloud_fabric" viewBox="0 0 720 480" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#B7C9C5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <!-- Meraki Dashboard cloud -->
+        <path d="M280 60 q-16-42 22-54 q12-30 44-24 q18-28 44-16 q30-4 32 24 q24 4 20 36 q16 22-12 26z" stroke-width="2.8"/>
+        <text x="340" y="68" font-family="Caveat" font-size="15" fill="#B7C9C5" text-anchor="middle" font-weight="700">Meraki Dashboard</text>
+        <text x="340" y="86" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">cloud-managed  ·  zero-touch</text>
+
+        <!-- Dashboard UI sketch -->
+        <rect x="240" y="100" width="200" height="130" rx="4" stroke-width="2.0"/>
+        <rect x="240" y="100" width="200" height="20" rx="3" stroke-width="1.4" fill="rgba(183,201,197,.04)"/>
+        <text x="340" y="114" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">dashboard.meraki.com</text>
+        <!-- Graph in dashboard -->
+        <polyline points="252,160 272,145 292,152 312,138 332,148 352,132 372,142 392,135 412,142 428,135" stroke-width="1.8"/>
+        <line x1="250" y1="175" x2="430" y2="175" stroke-width="1.0"/>
+        <text x="340" y="190" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">org-wide visibility</text>
+        <text x="340" y="205" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">network health  ·  client analytics</text>
+        <text x="340" y="222" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">automated alerts  ·  firmware push</text>
+
+        <!-- Lines down to devices -->
+        <line x1="280" y1="230" x2="160" y2="300" stroke-width="2.0"/>
+        <line x1="340" y1="230" x2="340" y2="300" stroke-width="2.0"/>
+        <line x1="400" y1="230" x2="520" y2="300" stroke-width="2.0"/>
+        <line x1="340" y1="112" x2="340" y2="100" stroke-width="1.6" stroke-dasharray="0"/>
+
+        <!-- MX Security Appliance -->
+        <rect x="100" y="300" width="120" height="60" rx="4" stroke-width="2.4"/>
+        <text x="160" y="326" font-family="Caveat" font-size="13" fill="#B7C9C5" text-anchor="middle" font-weight="700">MX</text>
+        <text x="160" y="344" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Security Appliance</text>
+        <text x="160" y="382" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">firewall · SD-WAN · IDS</text>
+
+        <!-- MS Switch -->
+        <rect x="280" y="300" width="120" height="60" rx="4" stroke-width="2.4"/>
+        <text x="340" y="326" font-family="Caveat" font-size="13" fill="#B7C9C5" text-anchor="middle" font-weight="700">MS</text>
+        <text x="340" y="344" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Cloud Switches</text>
+        <text x="340" y="382" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">auto-config · PoE · stacking</text>
+
+        <!-- MR Access Point -->
+        <rect x="460" y="300" width="120" height="60" rx="4" stroke-width="2.4"/>
+        <text x="520" y="326" font-family="Caveat" font-size="13" fill="#B7C9C5" text-anchor="middle" font-weight="700">MR</text>
+        <text x="520" y="344" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Wireless APs</text>
+        <text x="520" y="382" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">wifi 6E · auto-RF · SSID</text>
+
+        <!-- Annotation -->
+        <text x="80" y="440" font-family="Caveat" font-size="12" fill="#B7C9C5" opacity=".75">cloud-managed  ·  zero-touch provisioning  ·  always up-to-date</text>
+      </g>
+    </svg>
+
+    {# VMware Cloud Foundation: full SDDC stack #}
+    <svg class="hero-module__diagram" data-hero-diagram="vmware_cloud_foundation" viewBox="0 0 720 480" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#B7C9C5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+        <!-- VCF logo text -->
+        <text x="360" y="68" font-family="Caveat" font-size="18" fill="#B7C9C5" text-anchor="middle" font-weight="700">VMware Cloud Foundation</text>
+        <text x="360" y="88" font-family="Caveat" font-size="11" fill="#B7C9C5" text-anchor="middle">Software-Defined Data Center · Broadcom</text>
+
+        <!-- Outer SDDC frame -->
+        <rect x="60" y="100" width="580" height="340" rx="6" stroke-width="2.8"/>
+        <text x="350" y="94" font-family="Caveat" font-size="12" fill="#B7C9C5" text-anchor="middle" opacity=".7">SDDC</text>
+
+        <!-- SDDC Manager at top -->
+        <rect x="200" y="112" width="320" height="40" rx="3" stroke-width="2.0"/>
+        <text x="360" y="130" font-family="Caveat" font-size="13" fill="#B7C9C5" text-anchor="middle" font-weight="700">SDDC Manager</text>
+        <text x="360" y="146" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Lifecycle · Bring-Up · Day 2 Ops</text>
+
+        <!-- NSX layer -->
+        <rect x="80" y="168" width="560" height="64" rx="4" stroke-width="2.6"/>
+        <text x="360" y="192" font-family="Caveat" font-size="14" fill="#B7C9C5" text-anchor="middle" font-weight="700">NSX — Network + Security</text>
+        <text x="200" y="214" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Micro-Seg</text>
+        <text x="320" y="214" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Dist. Firewall</text>
+        <text x="440" y="214" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Load Balancer</text>
+        <text x="560" y="214" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">VPN / IDS</text>
+
+        <!-- vSphere layer -->
+        <rect x="80" y="246" width="560" height="64" rx="4" stroke-width="2.6"/>
+        <text x="360" y="270" font-family="Caveat" font-size="14" fill="#B7C9C5" text-anchor="middle" font-weight="700">vSphere — Compute Virtualization</text>
+        <text x="160" y="292" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">ESXi Cluster</text>
+        <text x="280" y="292" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">vCenter</text>
+        <text x="400" y="292" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">DRS / HA</text>
+        <text x="540" y="292" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">vMotion</text>
+
+        <!-- vSAN layer -->
+        <rect x="80" y="324" width="560" height="64" rx="4" stroke-width="2.6"/>
+        <text x="360" y="348" font-family="Caveat" font-size="14" fill="#B7C9C5" text-anchor="middle" font-weight="700">vSAN — Software-Defined Storage</text>
+        <text x="200" y="370" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">HCI All-Flash</text>
+        <text x="360" y="370" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Data-at-Rest Encryption</text>
+        <text x="530" y="370" font-family="Caveat" font-size="10" fill="#B7C9C5" text-anchor="middle">Dedup + Compress</text>
+
+        <!-- Physical layer -->
+        <rect x="80" y="402" width="560" height="30" rx="3" stroke-width="1.6" stroke-dasharray="5 4"/>
+        <text x="360" y="422" font-family="Caveat" font-size="11" fill="#B7C9C5" text-anchor="middle">Physical: Servers · ToR Switches · Shared SAN</text>
+
+        <!-- Arrows between layers -->
+        <line x1="360" y1="152" x2="360" y2="166" stroke-width="1.8"/>
+        <polyline points="355,162 360,168 365,162" stroke-width="1.8"/>
+
+        <!-- Multi-cloud arrow right -->
+        <line x1="642" y1="240" x2="680" y2="240" stroke-width="2.0"/>
+        <polyline points="675,234 682,240 675,246" stroke-width="2.0"/>
+        <text x="688" y="244" font-family="Caveat" font-size="11" fill="#B7C9C5">multi-cloud</text>
+      </g>
+    </svg>
+
+    {# Client-uploaded custom SVG, fetched and inlined at runtime #}
+    <div class="hero-module__diagram hero-module__diagram-custom" data-hero-diagram-custom></div>
+  </div>
+
+  <div class="hero-module__body">
+    <div class="hero-module__content">
+      <div class="hero-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+
+      <div class="hero-module__title">
+        <h1>
+          <span>{{ module.headline_prefix|escape_html }}</span>
+          <span class="hero-module__rotating-line"><strong class="hero-module__rotating-text" data-hero-rotating-text>&nbsp;</strong><span class="hero-module__cursor" data-hero-cursor aria-hidden="true"></span></span>
+          <span>{{ module.headline_suffix|escape_html }}</span>
+        </h1>
+      </div>
+ {% if module.rotating_phrases|length > 1 %}
+        <div class="hero-module__dots" role="tablist" aria-label="Rotating highlights">
+          {% for item in module.rotating_phrases %}
+            <button type="button" class="hero-module__dot" data-hero-dot="{{ loop.index0 }}" aria-label="{{ item.phrase|escape_attr }}" role="tab" aria-selected="{{ 'true' if loop.first else 'false' }}"></button>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="hero-module__description">{{ module.description }}</div>
+
+      {% if module.show_button %}
+        <div class="custom-cta hero-module__cta btn-mobile {{ module.style_cta }}">
+          {% if module.button_link.url.href %}
+            {% set href = module.button_link.url.href %}
+            {% if module.button_link.url.type == "EMAIL_ADDRESS" %}
+              {% set href = "mailto:" + href %}
+            {% elif module.button_link.url.type == "PHONE_NUMBER" %}
+              {% set href = "tel:" + href %}
+            {% endif %}
+            <a
+              {% if module.button_link.url.type == "CALL_TO_ACTION" %}
+                href="{{ href }}"
+              {% else %}
+                href="{{ href|escape_url }}"
+              {% endif %}
+              {% if module.button_link.open_in_new_tab %}target="_blank"{% endif %}
+              {% if module.button_link.rel %}rel="{{ module.button_link.rel|join(" ")|escape_attr }}"{% endif %}
+            >
+              {{ module.button_text|escape_html }}
+            </a>
+          {% elif module.cta %}
+            {% cta guid="{{ module.cta }}" %}
+          {% endif %}
+        </div>
+      {% endif %}
+
+      
+    </div>
+
+    <div class="hero-module__sidebar">
+      <div class="hero-module__sidebar-label">{{ module.sidebar_label|escape_html }}</div>
+      <div class="hero-module__proof-list">
+        {% for item in module.proof_points %}
+          <div class="hero-module__proof-item" style="--proof-border-color: rgba({{ item.border_color.color|convert_rgb }}, {{ item.border_color.opacity / 100 }});">
+            <span class="hero-module__proof-title">{{ item.title|escape_html }}</span>
+            {% if item.description %}<span class="hero-module__proof-description">{{ item.description|escape_html }}</span>{% endif %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-module__footer">
+    {% for item in module.highlights %}
+      <div class="hero-module__highlight" style="--highlight-dot-color: rgba({{ item.dot_color.color|convert_rgb }}, {{ item.dot_color.opacity / 100 }});">
+        <span class="hero-module__highlight-dot"></span>
+        <div class="hero-module__highlight-copy">
+          <strong>{{ item.title|escape_html }}</strong>
+          {{ item.description|escape_html }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <ul class="hero-module__phrase-data" data-hero-phrase-data hidden aria-hidden="true">
+    {% for item in module.rotating_phrases %}
+      <li data-hero-phrase="{{ item.phrase|escape_attr }}" data-hero-has-image="{{ 'true' if item.background_image.src else 'false' }}" data-hero-diagram="{{ item.diagram_style|default('none')|escape_attr }}" data-hero-svg-file="{{ item.svg_file|default('')|escape_attr }}"></li>
+    {% endfor %}
+  </ul>
+</section>

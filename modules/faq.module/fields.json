@@ -1,0 +1,234 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "FAQ"
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Use the rich text toolbar's Heading options (H2/H3/H4) to set the semantic level. Typography always comes from the R2 Design System for whichever level is chosen.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h2>Frequently asked questions</h2>"
+}, {
+  "id" : "faqs",
+  "name" : "faqs",
+  "label" : "FAQs",
+  "help_text" : "Each answer supports rich text formatting (bold, links, lists) for future flexibility.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "faqs.question",
+    "default" : 8
+  },
+  "children" : [ {
+    "id" : "faqs.question",
+    "name" : "question",
+    "label" : "Question",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "What is Segmentation and Fabric?"
+  }, {
+    "id" : "faqs.answer",
+    "name" : "answer",
+    "label" : "Answer",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<p>Segmentation and Fabric is an identity-driven enforcement model built on Cisco's Software-Defined Access (SDA) platform. It replaces location-based access control with policy that follows users and devices across your entire environment — campus, branch, data center, and cloud. Policy is defined once and enforced consistently, without device-by-device configuration.</p>"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "question" : "What is Segmentation and Fabric?",
+    "answer" : "<p>Segmentation and Fabric is an identity-driven enforcement model built on Cisco's Software-Defined Access (SDA) platform. It replaces location-based access control with policy that follows users and devices across your entire environment — campus, branch, data center, and cloud. Policy is defined once and enforced consistently, without device-by-device configuration.</p>"
+  }, {
+    "question" : "How is this different from the VLANs and firewall rules we already have?",
+    "answer" : "<p>Traditional segmentation relies on static, location-based rules maintained device by device. When environments change, those rules drift out of alignment with actual access behavior. Segmentation and Fabric is identity-based. Policy follows the user or device regardless of where they connect and adjusts dynamically based on session context. It scales as your environment grows.</p>"
+  }, {
+    "question" : "What is Cisco SDA and why does R2 build on it?",
+    "answer" : "<p>Cisco Software-Defined Access is the leading platform for building a modern segmentation fabric across complex, distributed environments. It centralizes policy control, automates configuration deployment, and enables identity-based enforcement across wired, wireless, and WAN environments. R2 uses SDA because it delivers the architecture outcomes our clients require — not because it is the most straightforward product to deploy.</p>"
+  }, {
+    "question" : "What does a Segmentation and Fabric Assessment include?",
+    "answer" : "<p>R2's assessment covers your current network architecture, visibility gaps, segmentation coverage, identity classification, and policy enforcement. We identify what is working, where exposure exists, and what changes are needed — and deliver a documented findings report with specific, prioritized recommendations. You will have a clear path forward before any implementation begins.</p>"
+  }, {
+    "question" : "How long does a Segmentation and Fabric deployment take?",
+    "answer" : "<p>Timelines vary based on environment size and complexity. R2 scopes every engagement upfront with defined phases, milestones, and deliverables so expectations are set before work begins. Our approach prioritizes structured execution over speed — reducing rework and delivering stable results.</p>"
+  }, {
+    "question" : "What happens if we delay building out segmentation?",
+    "answer" : "<p>Lateral movement risk increases as environments expand without consistent enforcement. Every new application, site, or unmanaged device added to the network is a potential path that policy does not cover. The cost of an immature segmentation strategy shows up in incident response — in containment time, recovery cost, and the evidence you cannot produce for auditors or insurers.</p>"
+  }, {
+    "question" : "Can R2 work with our existing network infrastructure?",
+    "answer" : "<p>Yes. R2 designs segmentation architectures that align to your current environment. We assess what exists, identify what can be retained, and phase the implementation to reduce disruption. Organizations do not need to replace everything to build an effective segmentation fabric.</p>"
+  }, {
+    "question" : "How do we know the segmentation is actually working after deployment?",
+    "answer" : "<p>R2 measures and reports on segmentation effectiveness, policy adherence, and SLA performance throughout the engagement and after go-live. We define success benchmarks at the start and track against them. Your team has clear, ongoing visibility into how the environment is performing — and so does leadership.</p>"
+  } ]
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : {
+      "padding" : {
+        "top" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 96,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    },
+    "spacing_mobile" : {
+      "padding" : {
+        "top" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 56,
+          "units" : "px"
+        },
+        "left" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "right" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      },
+      "margin" : {
+        "top" : {
+          "value" : 0,
+          "units" : "px"
+        },
+        "bottom" : {
+          "value" : 0,
+          "units" : "px"
+        }
+      }
+    }
+  }
+} ]

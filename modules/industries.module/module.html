@@ -1,0 +1,102 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .industries-module {
+    background: #FFFFFF;
+    {{ module.styles.spacing_desktop.css }}
+  }
+  .industries-module__eyebrow {
+    color: #0D6FFC;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .industries-module__eyebrow span {
+    width: 16px;
+    height: 2px;
+    background: #DB535F;
+  }
+  .industries-module__heading h2 {
+    font-weight: 700;
+    color: #082750;
+    margin: 0 0 48px;
+  }
+  .industries-module__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .industries-module__card {
+    border: 1px solid rgba(8,39,80,.1);
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow .2s;
+  }
+  .industries-module__card:hover {
+    box-shadow: 0 12px 32px rgba(8,39,80,.1);
+  }
+  .industries-module__image {
+    height: 260px;
+    background: rgba(8,39,80,.04);
+  }
+  .industries-module__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .industries-module__body {
+    padding: 28px 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .industries-module__title {
+    color: #082750;
+    margin: 0;
+  }
+  .industries-module__description {;
+    margin: 0;
+  }
+  /* Responsive: collapse to a single column below 992px */
+
+  @media (max-width: 992px) {
+    .industries-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+    .industries-module__heading {
+      margin-bottom: 32px;
+    }
+    .industries-module__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="industries-module" id="industries" data-screen-label="Industries">
+  <div class="content-wrapper">
+    <div class="industries-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+    <h2 class="industries-module__heading">{{ module.heading|sanitize_html }}</h2>
+    <div class="industries-module__grid">
+      {% for industry in module.industries %}
+        <div class="industries-module__card">
+          <div class="industries-module__image">
+            {% if industry.image.src %}
+              <img src="{{ industry.image.src|escape_url }}" alt="{{ industry.image.alt|escape_attr }}" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="industries-module__body">
+            <h5 class="industries-module__title">{{ industry.title|escape_html }}</h5>
+            <p class="industries-module__description">{{ industry.description|escape_html }}</p>
+            <a class="industries-module__link link-1" href="{{ industry.link.url.href|escape_url }}">{{ industry.link_text|escape_html }}</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

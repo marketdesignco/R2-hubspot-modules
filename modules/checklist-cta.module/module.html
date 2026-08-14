@@ -1,0 +1,49 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .checklist-cta-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .checklist-cta-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="checklist-cta-module" id="checklist-cta" data-screen-label="Checklist CTA">
+  <div class="content-wrapper">
+    <div class="checklist-cta-module__card">
+      <div class="checklist-cta-module__copy">
+        <div class="checklist-cta-module__kicker text-accent">{{ module.kicker|escape_html }}</div>
+        <div class="checklist-cta-module__heading">{{ module.heading|sanitize_html }}</div>
+        <div class="checklist-cta-module__description">{{ module.description|sanitize_html }}</div>
+      </div>
+      <div class="custom-cta btn-mobile {{ module.style_cta }}">
+        {% if module.button_link.url.href %}
+          {% set href = module.button_link.url.href %}
+          {% if module.button_link.url.type == "EMAIL_ADDRESS" %}
+            {% set href = "mailto:" + href %}
+          {% elif module.button_link.url.type == "PHONE_NUMBER" %}
+            {% set href = "tel:" + href %}
+          {% endif %}
+          <a
+            {% if module.button_link.url.type == "CALL_TO_ACTION" %}
+              href="{{ href }}"
+            {% else %}
+              href="{{ href|escape_url }}"
+            {% endif %}
+            {% if module.button_link.open_in_new_tab %}target="_blank"{% endif %}
+            {% if module.button_link.rel %}rel="{{ module.button_link.rel|join(" ")|escape_attr }}"{% endif %}
+          >
+            {{ module.button_text|escape_html }}
+          </a>
+        {% elif module.cta %}
+          {% cta guid="{{ module.cta }}" %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

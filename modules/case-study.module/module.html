@@ -1,0 +1,174 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .case-study-module {
+    background: #082750;
+    position: relative;
+    overflow: hidden;
+    {{ module.styles.spacing_desktop.css }}
+  }
+  .case-study-module__glow {
+    position: absolute;
+    right: -4%;
+    bottom: -20%;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(71,146,166,.08) 0%, transparent 65%);
+  }
+  .case-study-module__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    position: relative;
+  }
+  .case-study-module__image {
+    height: 420px;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 5px;
+    overflow: hidden;
+    background: rgba(255,255,255,.04);
+  }
+  .case-study-module__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .case-study-module__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .case-study-module__eyebrow {
+    color: #0D6FFC;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .case-study-module__eyebrow span {
+    width: 16px;
+    height: 2px;
+    background: #DB535F;
+  }
+  .case-study-module__stat {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .case-study-module__stat-value {
+    font-size: 70px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: -.03em;
+    line-height: 1;
+  }
+  .case-study-module__stat-label {
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    font-weight: 700;
+    color: #0D6FFC;
+  }
+  .case-study-module__quote {
+    line-height: 1.8;
+    color:#9CA9B9;
+    margin: 0;
+    border-left: 3px solid #0D6FFC;
+    padding-left: 20px;
+  }
+  .case-study-module__person {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .case-study-module__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.08);
+    border: 1px dashed rgba(255,255,255,.25);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.35);
+    overflow: hidden;
+  }
+  .case-study-module__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .case-study-module__name {
+    font-weight: 700;
+    color: white;
+  }
+  .case-study-module__title {
+    color: rgba(255,255,255,.45);
+  }
+  .case-study-module__link {
+    margin-top: 4px;
+  }
+
+  /* Responsive: collapse to a single column below 992px */
+
+  @media (max-width: 992px) {
+    .case-study-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+    .case-study-module__stat-value{
+    font-size:30px;
+    }
+    .case-study-module__inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .case-study-module__image {
+      height: 280px;
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="case-study-module" data-screen-label="Case study">
+  <div class="case-study-module__glow"></div>
+  <div class="content-wrapper case-study-module__inner">
+    <div class="case-study-module__image">
+      {% if module.image.src %}
+        <img src="{{ module.image.src|escape_url }}" alt="{{ module.image.alt|escape_attr }}" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="case-study-module__content">
+      <div class="case-study-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      <div class="case-study-module__stat">
+        <span class="case-study-module__stat-value">{{ module.stat_value|escape_html }}</span>
+        <span class="case-study-module__stat-label">{{ module.stat_label|escape_html }}</span>
+      </div>
+      <p class="case-study-module__quote">&ldquo;{{ module.quote|escape_html }}&rdquo;</p>
+      <div class="case-study-module__person">
+        <div class="case-study-module__avatar">
+          {% if module.avatar.src %}
+            <img src="{{ module.avatar.src|escape_url }}" alt="{{ module.avatar.alt|escape_attr }}" loading="lazy">
+          {% else %}
+            IMG
+          {% endif %}
+        </div>
+        <div>
+          <div class="case-study-module__name">{{ module.person_name|escape_html }}</div>
+          <div class="case-study-module__title">{{ module.title|escape_html }}</div>
+        </div>
+      </div>
+      {% if module.show_link %}
+        <a class="case-study-module__link link-dark" href="{{ module.link.url.href|escape_url }}"
+          {% if module.link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ module.link_text|escape_html }}</a>
+      {% endif %}
+    </div>
+  </div>
+</section>

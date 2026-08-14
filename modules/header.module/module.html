@@ -1,0 +1,345 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .header-module {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(0,0,0,.09);
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 767px) {
+    .header-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+  .header-module__logo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+  .header-module__logo img {
+    height: 32px;
+    width: auto;
+    display: block;
+  }
+
+  /* Desktop nav */
+
+  .header-module__nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  .header-module__list {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding:0px 14px;
+    list-style: none;
+  }
+  .header-module__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid rgba(8,39,80,.1);
+    padding:20px 0px;
+  }
+  .header-module__dropdown .header-module__item{
+  padding:10px;
+  }
+  .header-module__item:first-child {
+    border-left: 1px solid rgba(8,39,80,.1);
+  }
+  .header-module__link {
+    font-size: 13px;
+    font-weight: 600;
+    color:#6B7D96;
+    text-decoration: none;
+    padding:0px 14px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .header-module__link:hover {
+    color: #082750;
+  }
+  .header-module__caret {
+    font-size: 8px;
+    opacity: .5;
+  }
+  .header-module__dropdown {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background: #FFFFFF;
+    border: 1px solid rgba(8,39,80,.1);
+    border-top: 2px solid #0D6FFC;
+    box-shadow: 0 14px 34px rgba(8,39,80,.16);
+    border-radius: 0 0 5px 5px;
+    min-width: 250px;
+    padding: 8px 0;
+    margin: 0;
+    list-style: none;
+    display: none;
+    flex-direction: column;
+    z-index: 400;
+  }
+  .header-module__item--has-dropdown:hover .header-module__dropdown,
+  .header-module__item--has-dropdown:focus-within .header-module__dropdown {
+    display: flex;
+  }
+  .header-module__dropdown-link {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(8,39,80,.7);
+    text-decoration: none;
+    padding: 9px 18px;
+    display: block;
+  }
+  .header-module__dropdown-link:hover {
+    color: #082750;
+    background: rgba(13,111,252,.06);
+  }
+
+  /* Contact CTA */
+
+  .header-module__contact {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  /* Hamburger toggle (mobile only) */
+
+  .header-module__hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 5px;
+    width: 22px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .header-module__hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #082750;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  .header-module__hamburger[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .header-module__hamburger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .header-module__hamburger[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile panel */
+
+  .header-module__mobile-panel {
+    display: none;
+    flex-direction: column;
+    background: #FFFFFF;
+    border-top: 1px solid rgba(0,0,0,.09);
+  }
+  .header-module__mobile-panel.is-open {
+    display: flex;
+  }
+  .header-module__mobile-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .header-module__mobile-item {
+    border-bottom: 1px solid rgba(8,39,80,.08);
+  }
+  .header-module__mobile-link {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px 20px;
+    font-size: 11px;
+    font-weight: 700;
+    color:#6B7D96;
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    text-align: left;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .header-module__mobile-caret {
+    font-size: 20px;
+    opacity: 1;
+    transition: transform .2s ease;
+    flex-shrink: 0;
+    color:#061B38;
+  }
+  .header-module__mobile-item--open > .header-module__mobile-link .header-module__mobile-caret {
+    transform: rotate(180deg);
+  }
+  .header-module__mobile-dropdown {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: rgba(8,39,80,.03);
+  }
+  .header-module__mobile-item--open > .header-module__mobile-dropdown {
+    display: block;
+  }
+  .header-module__mobile-dropdown-link {
+    display: block;
+    font-size: 11px;
+    color:#6B7D96;
+    text-decoration: none;
+  }
+  .header-module__mobile-contact {
+    display: block;
+    margin: 16px 20px 20px;
+    text-align: center;
+  }
+
+  @media (max-width: 767px) {
+    .header-module__nav,
+    .header-module__contact {
+      display: none;
+    }
+    .header-module__hamburger {
+      display: flex;
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+{% macro render_desktop_item(link, depth) %}
+  <li class="header-module__item{{ ' header-module__item--has-dropdown' if link.children and depth < module.max_levels }}">
+    {% if link.url %}
+      <a class="header-module__link" href="{{ link.url|escape_url }}"
+        {% if link.children and depth < module.max_levels %}aria-haspopup="true" aria-expanded="false"{% endif %}
+        {% if link.linkTarget %}target="_blank" rel="noopener"{% endif %}>
+        {{ link.label|escape_html }}
+        {% if link.children and depth < module.max_levels %}<span class="header-module__caret">▼</span>{% endif %}
+      </a>
+    {% else %}
+      <span class="header-module__link">{{ link.label|escape_html }}</span>
+    {% endif %}
+    {% if link.children and depth < module.max_levels %}
+      <ul class="header-module__dropdown">
+        {% for sub in link.children %}
+          {{ render_desktop_item(sub, depth + 1) }}
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </li>
+{% endmacro %}
+
+{% macro render_mobile_item(link, depth) %}
+  <li class="header-module__mobile-item">
+    {% if link.children and depth < module.max_levels %}
+      <button class="header-module__mobile-link header-module__mobile-toggle" type="button" aria-expanded="false">
+        {{ link.label|escape_html }}
+        <span class="header-module__mobile-caret">▼</span>
+      </button>
+      <ul class="header-module__mobile-dropdown">
+        {% for sub in link.children %}
+          {{ render_mobile_item(sub, depth + 1) }}
+        {% endfor %}
+      </ul>
+    {% else %}
+      <a class="header-module__mobile-dropdown-link header-module__mobile-link" href="{{ link.url|escape_url }}"
+        {% if link.linkTarget %}target="_blank" rel="noopener"{% endif %}>
+        {{ link.label|escape_html }}
+      </a>
+    {% endif %}
+  </li>
+{% endmacro %}
+
+{% set menu_tree = menu(module.menu, "site_root").children %}
+
+<div class="content-wrapper header-module">
+  <a class="header-module__logo" href="/">
+    <img src="{{ module.logo.src|escape_url }}" alt="{{ module.logo.alt|escape_attr }}" loading="eager">
+  </a>
+
+  <nav class="header-module__nav" aria-label="Main navigation">
+    <ul class="header-module__list">
+      {% for link in menu_tree %}
+        {{ render_desktop_item(link, 1) }}
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <div class="custom-cta cta-primary header-module__contact">
+    {% if module.contact_link.url.href %}
+      {% set href = module.contact_link.url.href %}
+      {% if module.contact_link.url.type == "EMAIL_ADDRESS" %}
+        {% set href = "mailto:" + href %}
+      {% elif module.contact_link.url.type == "PHONE_NUMBER" %}
+        {% set href = "tel:" + href %}
+      {% endif %}
+      <a
+        {% if module.contact_link.url.type == "CALL_TO_ACTION" %}
+          href="{{ href }}"
+        {% else %}
+          href="{{ href|escape_url }}"
+        {% endif %}
+        {% if module.contact_link.open_in_new_tab %}target="_blank"{% endif %}
+        {% if module.contact_link.rel %}rel="{{ module.contact_link.rel|join(" ")|escape_attr }}"{% endif %}
+      >
+        {{ module.contact_text|escape_html }}
+      </a>
+    {% elif module.contact_cta %}
+      {% cta guid="{{ module.contact_cta }}" %}
+    {% endif %}
+  </div>
+
+  <button class="header-module__hamburger" type="button" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+
+<div class="header-module__mobile-panel">
+  <ul class="header-module__mobile-list">
+    {% for link in menu_tree %}
+      {{ render_mobile_item(link, 1) }}
+    {% endfor %}
+  </ul>
+  <div class="custom-cta cta-primary header-module__mobile-contact">
+    {% if module.contact_link.url.href %}
+      {% set href = module.contact_link.url.href %}
+      {% if module.contact_link.url.type == "EMAIL_ADDRESS" %}
+        {% set href = "mailto:" + href %}
+      {% elif module.contact_link.url.type == "PHONE_NUMBER" %}
+        {% set href = "tel:" + href %}
+      {% endif %}
+      <a
+        {% if module.contact_link.url.type == "CALL_TO_ACTION" %}
+          href="{{ href }}"
+        {% else %}
+          href="{{ href|escape_url }}"
+        {% endif %}
+        {% if module.contact_link.open_in_new_tab %}target="_blank"{% endif %}
+        {% if module.contact_link.rel %}rel="{{ module.contact_link.rel|join(" ")|escape_attr }}"{% endif %}
+      >
+        {{ module.contact_text|escape_html }}
+      </a>
+    {% elif module.contact_cta %}
+      {% cta guid="{{ module.contact_cta }}" %}
+    {% endif %}
+  </div>
+</div>
