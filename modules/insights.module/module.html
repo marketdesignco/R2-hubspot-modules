@@ -2,102 +2,25 @@
 <style>
 {% scope_css %}
   .insights-module {
-    background: #FFFFFF;
     {{ module.styles.spacing_desktop.css }}
   }
-  .insights-module__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 40px;
-    margin-bottom: 48px;
-    flex-wrap: wrap;
-  }
-  .insights-module__eyebrow {
-    color: #0D6FFC;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-  .insights-module__eyebrow span {
-    width: 16px;
-    height: 2px;
-    background: #DB535F;
-  }
-  .insights-module__heading {
-
-    font-weight: 700;
-    color: #082750;
-    margin: 0;
-  }
-  .insights-module__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .insights-module__card {
-    border: 1px solid rgba(8,39,80,.1);
-    border-radius: 5px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    transition: box-shadow .2s;
-  }
-  .insights-module__card:hover {
-    box-shadow: 0 12px 32px rgba(8,39,80,.1);
-  }
-  .insights-module__image {
-    height: 170px;
-    background: rgba(8,39,80,.04);
-  }
-  .insights-module__image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .insights-module__body {
-    padding: 22px 22px 26px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .insights-module__category {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--accent-color, #0D6FFC);
-  }
-  .insights-module__headline {
-    color: #082750;
-    margin: 0;
-  }
-  .insights-module__meta {
-
-    color:#8A96A6;
-  }
-
-  /* Responsive: collapse to a single column below 992px */
-
   @media (max-width: 992px) {
     .insights-module {
       {{ module.styles.spacing_mobile.css }}
-    }
-    .insights-module__header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 16px;
-    }
-    .insights-module__grid {
-      grid-template-columns: 1fr;
     }
   }
 {% end_scope_css %}
 </style>
 {% end_require_css %}
+
+{% set posts = [] %}
+{% if module.blog %}
+  {% if module.content_mode == "tag" and module.tag %}
+    {% set posts = blog_recent_tag_posts(module.blog, module.tag, module.post_limit) %}
+  {% else %}
+    {% set posts = blog_recent_posts(module.blog, module.post_limit) %}
+  {% endif %}
+{% endif %}
 
 <section class="insights-module" data-screen-label="Insights">
   <div class="content-wrapper">
@@ -112,17 +35,26 @@
       {% endif %}
     </div>
     <div class="insights-module__grid">
-      {% for article in module.articles %}
-        <a class="insights-module__card" href="{{ article.link.url.href|escape_url }}">
+      {% for post in posts %}
+        <a class="insights-module__card" href="{{ post.absolute_url|escape_url }}">
           <div class="insights-module__image">
-            {% if article.image.src %}
-              <img src="{{ article.image.src|escape_url }}" alt="{{ article.image.alt|escape_attr }}" loading="lazy">
+            {% if post.featured_image %}
+              <img src="{{ post.featured_image|escape_url }}" alt="{{ post.featured_image_alt_text|escape_attr }}" loading="lazy">
             {% endif %}
           </div>
           <div class="insights-module__body">
-            <div class="insights-module__category" style="--accent-color: rgba({{ article.category_color.color|convert_rgb }}, {{ article.category_color.opacity / 100 }});">{{ article.category|escape_html }}</div>
-            <h5 class="insights-module__headline">{{ article.headline|escape_html }}</h5>
-            <div class="insights-module__meta">{{ article.meta|escape_html }}</div>
+            {% set primary_tag = "" %}
+            {% if post.tag_list and post.tag_list|length > 0 %}
+              {% set primary_tag = post.tag_list[0].name %}
+            {% endif %}
+            {% if primary_tag %}
+              <div class="insights-module__category">{{ primary_tag|escape_html }}</div>
+            {% endif %}
+            <h5 class="insights-module__headline">{{ post.name|escape_html }}</h5>
+            {% set char_count = post.post_body|striptags|length %}
+            {% set reading_time = (char_count / 1100)|round(0, 'ceil') %}
+            {% if reading_time < 1 %}{% set reading_time = 1 %}{% endif %}
+            <div class="insights-module__meta">{{ post.publish_date|datetimeformat("%B %d, %Y")|escape_html }} · {{ reading_time }} min read</div>
           </div>
         </a>
       {% endfor %}
