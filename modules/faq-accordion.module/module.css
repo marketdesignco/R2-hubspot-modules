@@ -1,0 +1,133 @@
+.faq-accordion-module__inner {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.faq-accordion-module__rail {
+  position: sticky;
+  top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-accordion-module__eyebrow {
+  color: #0D6FFC;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.faq-accordion-module__eyebrow span {
+  width: 16px;
+  height: 2px;
+  background: #DB535F;
+}
+
+.faq-accordion-module__heading h2,
+.faq-accordion-module__heading h3,
+.faq-accordion-module__heading h4 {
+  color: #082750;
+  margin: 0;
+}
+
+.faq-accordion-module__intro p {
+  color: rgba(8,39,80,.6);
+  margin: 0;
+}
+
+.faq-accordion-module__aside {
+  font-size: 20px;
+  color: rgba(8,39,80,.5);
+  transform: rotate(-2deg);
+  width: fit-content;
+}
+
+.faq-accordion-module__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-accordion-module__item {
+  border-bottom: 1px solid rgba(8,39,80,.12);
+  padding: 22px 0;
+}
+
+.faq-accordion-module__item:last-child {
+  border-bottom: none;
+}
+
+.faq-accordion-module__question {
+  font-size: 16px;
+  font-weight: 700;
+  color: #082750;
+  margin: 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  list-style: none;
+}
+
+.faq-accordion-module__question::marker,
+.faq-accordion-module__question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-accordion-module__toggle {
+  font-family: var(--font-secondary);
+  font-size: 24px;
+  font-weight: 700;
+  color: #0D6FFC;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.faq-accordion-module__toggle::before {
+  content: "+";
+}
+
+.faq-accordion-module__item[open] .faq-accordion-module__toggle::before {
+  content: "\2212";
+}
+
+.faq-accordion-module__answer {
+  margin-top: 12px;
+}
+
+.faq-accordion-module__answer p {
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: rgba(8,39,80,.7);
+  margin: 0;
+}
+
+.faq-accordion-module__answer p + p {
+  margin-top: 12px;
+}
+
+.faq-accordion-module__answer ul,
+.faq-accordion-module__answer ol {
+  margin: 8px 0 0;
+  padding-left: 20px;
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: rgba(8,39,80,.7);
+}
+
+/* Responsive: collapse to a single column below 992px and disable the sticky
+   rail, matching the established R2 breakpoint. */
+
+@media (max-width: 992px) {
+  .faq-accordion-module__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .faq-accordion-module__rail {
+    position: static;
+  }
+}

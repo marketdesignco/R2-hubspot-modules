@@ -1,0 +1,258 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Managed Services"
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Always renders as the page's H1. Bold a phrase (e.g. \"Managed Services\") to apply the R2 Caveat script accent treatment.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "Your <strong>Managed Services</strong> partner."
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "help_text" : "Bold a sentence to match the white bold-sentence treatment shown in the reference design.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Nearly two decades. One discipline. <strong>We don't pitch promises; we prove outcomes.</strong> Better is our baseline.</p>"
+}, {
+  "id" : "show_primary_button",
+  "name" : "show_primary_button",
+  "label" : "Show primary button",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "primary_button_text",
+  "name" : "primary_button_text",
+  "label" : "Primary button text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Let's Whiteboard IT"
+}, {
+  "id" : "primary_button_link",
+  "name" : "primary_button_link",
+  "label" : "Primary button link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION" ],
+  "show_advanced_rel_options" : true,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : { "href" : "#cta", "type" : "EXTERNAL" },
+    "no_follow" : false,
+    "open_in_new_tab" : false
+  }
+}, {
+  "id" : "primary_cta",
+  "name" : "primary_cta",
+  "label" : "Or select a CTA (primary)",
+  "help_text" : "Optional. Renders a HubSpot CTA in place of the primary button above when no Primary button link is set.",
+  "required" : false,
+  "locked" : false,
+  "type" : "cta",
+  "display_width" : null
+}, {
+  "id" : "primary_style_cta",
+  "name" : "primary_style_cta",
+  "label" : "Primary CTA style",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "cta-primary", "Primary" ], [ "cta-secondary", "Secondary (Outline)" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "cta-primary"
+}, {
+  "id" : "show_secondary_button",
+  "name" : "show_secondary_button",
+  "label" : "Show secondary button",
+  "help_text" : "The white-outlined jump link to this page's own content anchor.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "secondary_button_text",
+  "name" : "secondary_button_text",
+  "label" : "Secondary button text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "See how it works"
+}, {
+  "id" : "secondary_button_link",
+  "name" : "secondary_button_link",
+  "label" : "Secondary button link",
+  "help_text" : "Typically an in-page anchor, e.g. #content.",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION" ],
+  "show_advanced_rel_options" : true,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : { "href" : "#content", "type" : "EXTERNAL" },
+    "no_follow" : false,
+    "open_in_new_tab" : false
+  }
+}, {
+  "id" : "secondary_cta",
+  "name" : "secondary_cta",
+  "label" : "Or select a CTA (secondary)",
+  "help_text" : "Optional. Renders a HubSpot CTA in place of the secondary button above when no Secondary button link is set.",
+  "required" : false,
+  "locked" : false,
+  "type" : "cta",
+  "display_width" : null
+}, {
+  "id" : "secondary_style_cta",
+  "name" : "secondary_style_cta",
+  "label" : "Secondary CTA style",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "cta-primary", "Primary" ], [ "cta-secondary", "Secondary (Outline)" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "cta-secondary"
+}, {
+  "id" : "highlights",
+  "name" : "highlights",
+  "label" : "Bottom highlights",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : 3,
+    "sorting_label_field" : "highlights.title",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "highlights.title",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Reduce Technical Debt"
+  }, {
+    "id" : "highlights.description",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Modern network fabric replaces aging, fragmented infrastructure with a unified, policy-driven architecture."
+  }, {
+    "id" : "highlights.dot_color",
+    "name" : "dot_color",
+    "label" : "Dot color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#0D6FFC",
+      "opacity" : 100
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "title" : "Reduce Technical Debt",
+    "description" : "Modern network fabric replaces aging, fragmented infrastructure with a unified, policy-driven architecture.",
+    "dot_color" : { "color" : "#0D6FFC", "opacity" : 100 }
+  }, {
+    "title" : "Expand Capacity Without Hiring",
+    "description" : "Managed services and automation extend your internal team without adding headcount.",
+    "dot_color" : { "color" : "#4792A6", "opacity" : 100 }
+  }, {
+    "title" : "Faster Incident Response",
+    "description" : "24/7 monitoring means issues get caught and contained before they become outages.",
+    "dot_color" : { "color" : "#DB535F", "opacity" : 100 }
+  } ]
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

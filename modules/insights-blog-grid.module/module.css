@@ -37,6 +37,10 @@
   gap: 24px;
 }
 
+.insights-module__grid--2-col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .insights-module__card {
   border: 1px solid rgba(8,39,80,.1);
   border-radius: 5px;

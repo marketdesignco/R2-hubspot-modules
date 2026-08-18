@@ -3,8 +3,7 @@
   "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
   "categories" : [ "body_content" ],
   "host_template_types" : [ "PAGE" ],
-  "module_id" : 218656705544,
-  "label" : "Card Grid (Image)",
+  "label" : "Media Band",
   "icon" : "../../images/module-icons/table.svg",
   "is_available_for_new_content" : true
 }

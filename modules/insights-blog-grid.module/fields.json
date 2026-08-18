@@ -71,12 +71,12 @@
   "label" : "Show",
   "required" : false,
   "locked" : false,
-  "type" : "choice",
   "display" : "select",
-  "choices" : [
-    [ "recent", "Recent posts" ],
-    [ "tag", "Posts from a specific tag" ]
-  ],
+  "choices" : [ [ "recent", "Recent posts" ], [ "tag", "Posts from a specific tag" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
   "display_width" : null,
   "default" : "recent"
 }, {
@@ -86,13 +86,17 @@
   "help_text" : "Only used when \"Show\" is set to \"Posts from a specific tag\".",
   "required" : false,
   "locked" : false,
-  "type" : "tag",
-  "display_width" : null,
   "visibility" : {
     "controlling_field" : "content_mode",
+    "controlling_field_path" : null,
     "controlling_value_regex" : "tag",
-    "operator" : "EQUAL"
-  }
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
+  "tag_value" : "SLUG",
+  "type" : "tag",
+  "display_width" : null
 }, {
   "id" : "post_limit",
   "name" : "post_limit",
@@ -106,6 +110,18 @@
   "type" : "number",
   "display_width" : null,
   "default" : 3
+}, {
+  "id" : "columns",
+  "name" : "columns",
+  "label" : "Columns",
+  "help_text" : "Number of columns in the post grid on desktop.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "3", "3 columns" ], [ "2", "2 columns" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "3"
 }, {
   "id" : "styles",
   "name" : "styles",

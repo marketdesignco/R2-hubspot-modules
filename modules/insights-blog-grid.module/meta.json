@@ -1,10 +1,10 @@
 {
   "global" : false,
   "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
-  "categories" : [ "body_content" ],
+  "categories" : [ "blog" ],
   "host_template_types" : [ "PAGE" ],
-  "module_id" : 218656705544,
-  "label" : "Card Grid (Image)",
-  "icon" : "../../images/module-icons/table.svg",
+  "module_id" : 218658302330,
+  "label" : "Blog Grid",
+  "icon" : "../../images/module-icons/blog.svg",
   "is_available_for_new_content" : true
 }

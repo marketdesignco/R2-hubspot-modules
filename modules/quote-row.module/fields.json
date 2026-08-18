@@ -1,0 +1,176 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Testimonials"
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Use the rich text toolbar's Heading options (H2/H3/H4) to set the semantic level. Typography always comes from the R2 Design System for whichever level is chosen.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h2>What our clients say</h2>"
+}, {
+  "id" : "quotes",
+  "name" : "quotes",
+  "label" : "Quotes",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "quotes.testimonial_name",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "quotes.border_color",
+    "name" : "border_color",
+    "label" : "Border color",
+    "help_text" : "Sets this card's top border color.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#0D6FFC",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "quotes.quote_text",
+    "name" : "quote_text",
+    "label" : "Quote",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<p>R2 helped us simplify our process and achieve better results across the organization.</p>"
+  }, {
+    "id" : "quotes.avatar",
+    "name" : "avatar",
+    "label" : "Avatar",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "loading" : "lazy"
+    }
+  }, {
+    "id" : "quotes.testimonial_name",
+    "name" : "testimonial_name",
+    "label" : "Name",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Firstname Lastname"
+  }, {
+    "id" : "quotes.title",
+    "name" : "title",
+    "label" : "Title / organization",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Title, Organization — placeholder"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "border_color" : { "color" : "#0D6FFC", "opacity" : 100 },
+    "quote_text" : "<p>R2 helped us simplify our process and achieve better results across the organization.</p>",
+    "avatar" : { "loading" : "lazy" },
+    "testimonial_name" : "Firstname Lastname",
+    "title" : "Title, Organization — placeholder"
+  }, {
+    "border_color" : { "color" : "#4792A6", "opacity" : 100 },
+    "quote_text" : "<p>Placeholder quote — the team was responsive, technical, and easy to work with from day one.</p>",
+    "avatar" : { "loading" : "lazy" },
+    "testimonial_name" : "Firstname Lastname",
+    "title" : "Title, Organization — placeholder"
+  }, {
+    "border_color" : { "color" : "#DB535F", "opacity" : 100 },
+    "quote_text" : "<p>Placeholder quote — we finally have visibility into what is actually happening across our environment.</p>",
+    "avatar" : { "loading" : "lazy" },
+    "testimonial_name" : "Firstname Lastname",
+    "title" : "Title, Organization — placeholder"
+  } ]
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 96, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 56, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : {
+      "padding" : { "top" : { "value" : 96, "units" : "px" }, "bottom" : { "value" : 96, "units" : "px" }, "left" : { "value" : 0, "units" : "px" }, "right" : { "value" : 0, "units" : "px" } },
+      "margin" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 0, "units" : "px" } }
+    },
+    "spacing_mobile" : {
+      "padding" : { "top" : { "value" : 56, "units" : "px" }, "bottom" : { "value" : 56, "units" : "px" }, "left" : { "value" : 0, "units" : "px" }, "right" : { "value" : 0, "units" : "px" } },
+      "margin" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 0, "units" : "px" } }
+    }
+  }
+} ]

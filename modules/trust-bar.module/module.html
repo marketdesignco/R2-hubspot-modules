@@ -34,7 +34,6 @@
   }
   .trust-bar-module__logo {
     height: 44px;
-    border: 1px dashed rgba(8,39,80,.2);
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -44,6 +43,9 @@
     letter-spacing: .1em;
     text-transform: uppercase;
     color: rgba(8,39,80,.3);
+  }
+  .trust-bar-module__logo--placeholder {
+    border: 1px dashed rgba(8,39,80,.2);
   }
   .trust-bar-module__logo img {
     max-height: 28px;
@@ -88,7 +90,7 @@
     <div class="trust-bar-module__divider"></div>
     <div class="trust-bar-module__logos">
       {% for item in module.logos %}
-        <div class="trust-bar-module__logo">
+        <div class="trust-bar-module__logo{% if not item.logo.src %} trust-bar-module__logo--placeholder{% endif %}">
           {% if item.link.url.href %}<a href="{{ item.link.url.href|escape_url }}" aria-label="{{ item.alt_text|escape_attr }}">{% endif %}
           {% if item.logo.src %}
             <img src="{{ item.logo.src|escape_url }}" alt="{{ item.alt_text|escape_attr }}" loading="lazy">

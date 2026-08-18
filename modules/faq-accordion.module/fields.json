@@ -1,0 +1,172 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "FAQ"
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Use the rich text toolbar's Heading options (H2/H3/H4) to set the semantic level. Typography always comes from the R2 Design System for whichever level is chosen.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h2>Questions, answered</h2>"
+}, {
+  "id" : "intro",
+  "name" : "intro",
+  "label" : "Intro",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Placeholder copy — a short paragraph framing what this FAQ covers and who it is for.</p>"
+}, {
+  "id" : "aside_text",
+  "name" : "aside_text",
+  "label" : "Handwritten aside",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "no question is too basic ↓"
+}, {
+  "id" : "faqs",
+  "name" : "faqs",
+  "label" : "FAQs",
+  "help_text" : "The first question is expanded by default. Only one answer can be open at a time.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "faqs.question",
+    "default" : 5
+  },
+  "children" : [ {
+    "id" : "faqs.question",
+    "name" : "question",
+    "label" : "Question",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Placeholder question — what do prospects usually ask first?"
+  }, {
+    "id" : "faqs.answer",
+    "name" : "answer",
+    "label" : "Answer",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<p>Placeholder answer copy. Supports multiple paragraphs and bullet lists so longer, more detailed answers still read cleanly.</p>"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "question" : "Placeholder question — what do prospects usually ask first?",
+    "answer" : "<p>Placeholder answer copy. Supports multiple paragraphs and bullet lists so longer, more detailed answers still read cleanly.</p>"
+  }, {
+    "question" : "Placeholder question — how long does a typical engagement take?",
+    "answer" : "<p>Placeholder answer copy — timelines vary by scope, but this is where a general range would go.</p>"
+  }, {
+    "question" : "Placeholder question — what makes this different from alternatives?",
+    "answer" : "<p>Placeholder answer copy describing the key differentiators.</p><ul><li>Placeholder differentiator one</li><li>Placeholder differentiator two</li><li>Placeholder differentiator three</li></ul>"
+  }, {
+    "question" : "Placeholder question — do you work with our existing setup?",
+    "answer" : "<p>Placeholder answer copy — yes, with specifics on how integration or compatibility works.</p>"
+  }, {
+    "question" : "Placeholder question — what happens after we sign?",
+    "answer" : "<p>Placeholder answer copy outlining the next steps and what to expect.</p>"
+  } ]
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 96, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 56, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : {
+      "padding" : {
+        "top" : { "value" : 96, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    },
+    "spacing_mobile" : {
+      "padding" : {
+        "top" : { "value" : 56, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }
+} ]

@@ -89,9 +89,9 @@
     <div class="footer-module__about">
       <h3 class="footer-module__heading">{{ module.heading|escape_html }}</h3>
       <p class="footer-module__description">{{ module.description|escape_html }}</p>
-      <div class="footer-module__logo">
+      <a class="footer-module__logo" href="/">
         <img src="{{ module.logo.src|escape_url }}" alt="{{ module.logo.alt|escape_attr }}" loading="lazy">
-      </div>
+      </a>
     </div>
     <div class="footer-module__column">
       <div class="footer-module__column-heading">{{ module.social_heading|escape_html }}</div>

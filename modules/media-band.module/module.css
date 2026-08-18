@@ -1,0 +1,154 @@
+.media-band-module {
+  background: #FFFFFF;
+}
+
+.media-band-module__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.media-band-module__inner--reversed .media-band-module__content {
+  order: 2;
+}
+
+.media-band-module__inner--reversed .media-band-module__media {
+  order: 1;
+}
+
+.media-band-module__content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.media-band-module__eyebrow {
+  color: #0D6FFC;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.media-band-module__eyebrow span {
+  width: 16px;
+  height: 2px;
+  background: #DB535F;
+}
+
+.media-band-module__heading h2,
+.media-band-module__heading h3,
+.media-band-module__heading h4 {
+  color: #082750;
+  margin: 0;
+}
+
+.media-band-module__heading strong {
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  font-size: 1.2em;
+  color: #0D6FFC;
+}
+
+.media-band-module__description p {
+  color: rgba(8,39,80,.6);
+  margin: 0;
+}
+
+.media-band-module__media {
+  position: relative;
+}
+
+.media-band-module__image {
+  border-radius: 5px;
+  overflow: hidden;
+  background: rgba(8,39,80,.04);
+}
+
+.media-band-module__image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.media-band-module__video-wrap {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  background: rgba(8,39,80,.04);
+}
+
+.media-band-module__video-wrap iframe,
+.media-band-module__video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.media-band-module__poster {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.media-band-module__poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.media-band-module__poster--hidden {
+  display: none;
+}
+
+.media-band-module__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: none;
+  background: #0D6FFC;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color .2s, transform .2s;
+  box-shadow: 0 8px 24px rgba(8,39,80,.25);
+}
+
+.media-band-module__play svg {
+  margin-left: 4px;
+}
+
+.media-band-module__play:hover,
+.media-band-module__play:focus-visible {
+  background-color: #0C64E4;
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.media-band-module__play--hidden {
+  display: none;
+}
+
+/* Responsive: collapse to a single column below 992px. Source order already
+   places content first, so the mobile stacking order is reset regardless of
+   the desktop position choice, matching splits-stats-module's precedent. */
+
+@media (max-width: 992px) {
+  .media-band-module__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .media-band-module__inner--reversed .media-band-module__content,
+  .media-band-module__inner--reversed .media-band-module__media {
+    order: initial;
+  }
+}

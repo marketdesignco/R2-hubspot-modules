@@ -1,0 +1,47 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .quote-row-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .quote-row-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="quote-row-module" id="quote-row" data-screen-label="Quote row">
+  <div class="content-wrapper">
+    <div class="quote-row-module__header">
+      <div class="quote-row-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      <div class="quote-row-module__heading">{{ module.heading|sanitize_html }}</div>
+    </div>
+    <div class="quote-row-module__grid">
+      {% for item in module.quotes %}
+        <div class="quote-row-module__card" style="--accent-color: rgba({{ item.border_color.color|convert_rgb }}, {{ item.border_color.opacity / 100 }});">
+          <svg class="quote-row-module__mark" width="34" height="26" viewBox="0 0 34 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M0 26V15.6C0 11.4 0.9 7.8 2.7 4.8C4.5 1.8 7.1 0 10.5 0V5.2C8.7 5.2 7.3 6 6.3 7.6C5.3 9.2 4.8 11.2 4.8 13.6H10.5V26H0Z" fill="currentColor"/>
+            <path d="M18.9 26V15.6C18.9 11.4 19.8 7.8 21.6 4.8C23.4 1.8 26 0 29.4 0V5.2C27.6 5.2 26.2 6 25.2 7.6C24.2 9.2 23.7 11.2 23.7 13.6H29.4V26H18.9Z" fill="currentColor"/>
+          </svg>
+          <div class="quote-row-module__quote">{{ item.quote_text|sanitize_html }}</div>
+          <div class="quote-row-module__person">
+            <div class="quote-row-module__avatar">
+              {% if item.avatar.src %}
+                <img src="{{ item.avatar.src|escape_url }}" alt="{{ item.avatar.alt|escape_attr }}" loading="lazy">
+              {% else %}
+                IMG
+              {% endif %}
+            </div>
+            <div>
+              <div class="quote-row-module__name">{{ item.testimonial_name|escape_html }}</div>
+              <div class="quote-row-module__title">{{ item.title|escape_html }}</div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

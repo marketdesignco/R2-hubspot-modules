@@ -1,0 +1,97 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .media-band-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .media-band-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="media-band-module" id="media-band" data-screen-label="Media band">
+  <div class="content-wrapper media-band-module__inner{% if module.position == "left" %} media-band-module__inner--reversed{% endif %}">
+    <div class="media-band-module__content">
+      <div class="media-band-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      <div class="media-band-module__heading">{{ module.heading|sanitize_html }}</div>
+      <div class="media-band-module__description">{{ module.description|sanitize_html }}</div>
+      {% if module.show_cta %}
+        <div class="custom-cta {{ module.style_cta }}">
+          {% if module.button_link.url.href %}
+            {% set href = module.button_link.url.href %}
+            {% if module.button_link.url.type == "EMAIL_ADDRESS" %}
+              {% set href = "mailto:" + href %}
+            {% elif module.button_link.url.type == "PHONE_NUMBER" %}
+              {% set href = "tel:" + href %}
+            {% endif %}
+            <a
+              {% if module.button_link.url.type == "CALL_TO_ACTION" %}
+                href="{{ href }}"
+              {% else %}
+                href="{{ href|escape_url }}"
+              {% endif %}
+              {% if module.button_link.open_in_new_tab %}target="_blank"{% endif %}
+              {% if module.button_link.rel %}rel="{{ module.button_link.rel|join(" ")|escape_attr }}"{% endif %}
+            >
+              {{ module.button_text|escape_html }}
+            </a>
+          {% elif module.cta %}
+            {% cta guid="{{ module.cta }}" %}
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+    <div class="media-band-module__media">
+      {% if module.media_type == "video" %}
+        <div class="media-band-module__video-wrap">
+          {% if module.media_video %}
+            <video
+              src="{{ module.media_video|escape_url }}"
+              {% if module.media_thumbnail.src %}poster="{{ module.media_thumbnail.src|escape_url }}"{% endif %}
+              preload="metadata"
+              playsinline
+            ></video>
+          {% endif %}
+          <button type="button" class="media-band-module__play" aria-label="Play video">
+            <svg width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <path d="M21 12.1339C21.6667 12.5188 21.6667 13.4812 21 13.8661L1.5 25.1244C0.833334 25.5093 0 25.0281 0 24.2583L0 1.7417C0 0.971901 0.833333 0.490685 1.5 0.875585L21 12.1339Z" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+      {% elif module.media_type == "embed" %}
+        <div class="media-band-module__video-wrap">
+          {% if module.media_embed_url %}
+            <iframe
+              src="{{ module.media_embed_url|escape_url }}"
+              title="{{ module.heading|striptags|escape_attr }}"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          {% endif %}
+          {% if module.media_thumbnail.src %}
+            <div class="media-band-module__poster">
+              <img src="{{ module.media_thumbnail.src|escape_url }}" alt="{{ module.media_thumbnail.alt|escape_attr }}" loading="lazy">
+            </div>
+          {% endif %}
+          <button type="button" class="media-band-module__play" aria-label="Play video">
+            <svg width="22" height="26" viewBox="0 0 22 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <path d="M21 12.1339C21.6667 12.5188 21.6667 13.4812 21 13.8661L1.5 25.1244C0.833334 25.5093 0 25.0281 0 24.2583L0 1.7417C0 0.971901 0.833333 0.490685 1.5 0.875585L21 12.1339Z" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+      {% else %}
+        <div class="media-band-module__image">
+          {% if module.media_image.src %}
+            <img src="{{ module.media_image.src|escape_url }}" alt="{{ module.media_image.alt|escape_attr }}" loading="lazy">
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

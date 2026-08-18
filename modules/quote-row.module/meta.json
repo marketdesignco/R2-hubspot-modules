@@ -1,10 +1,9 @@
 {
   "global" : false,
   "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
-  "categories" : [ "blog" ],
+  "categories" : [ "body_content" ],
   "host_template_types" : [ "PAGE" ],
-  "module_id" : 218658302330,
-  "label" : "Insights",
+  "label" : "Quote Row",
   "icon" : "../../images/module-icons/blog.svg",
   "is_available_for_new_content" : true
 }

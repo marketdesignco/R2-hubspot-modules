@@ -1,0 +1,242 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Overview"
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Use the rich text toolbar's Heading options (H2/H3/H4) to set the semantic level. Bold a phrase (e.g. \"it works\") to apply the Caveat script accent treatment. Typography always comes from the R2 Design System for whichever level is chosen.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h2>See how <strong>it works</strong></h2>"
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Placeholder copy — a short paragraph introducing the image or video shown alongside this text.</p>"
+}, {
+  "id" : "show_cta",
+  "name" : "show_cta",
+  "label" : "Show CTA",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "button_text",
+  "name" : "button_text",
+  "label" : "Button text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Learn more"
+}, {
+  "id" : "button_link",
+  "name" : "button_link",
+  "label" : "Button link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION" ],
+  "show_advanced_rel_options" : true,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : { "href" : "#cta", "type" : "EXTERNAL" },
+    "no_follow" : false,
+    "open_in_new_tab" : false
+  }
+}, {
+  "id" : "cta",
+  "name" : "cta",
+  "label" : "Or select a CTA",
+  "help_text" : "Optional. Renders a HubSpot CTA in place of the button above when no Button link is set.",
+  "required" : false,
+  "locked" : false,
+  "type" : "cta",
+  "display_width" : null
+}, {
+  "id" : "style_cta",
+  "name" : "style_cta",
+  "label" : "CTA Style",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "cta-primary", "Primary" ], [ "cta-secondary", "Secondary (Outline)" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "cta-primary"
+}, {
+  "id" : "media_type",
+  "name" : "media_type",
+  "label" : "Media type",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "image", "Image" ], [ "video", "Video file" ], [ "embed", "Embed" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "image"
+}, {
+  "id" : "media_image",
+  "name" : "media_image",
+  "label" : "Image",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "loading" : "lazy",
+    "alt" : "Media band placeholder image"
+  },
+  "visibility" : {
+    "controlling_field" : "media_type",
+    "controlling_value_regex" : "image",
+    "operator" : "EQUAL"
+  }
+}, {
+  "id" : "media_thumbnail",
+  "name" : "media_thumbnail",
+  "label" : "Video / Embed Thumbnail",
+  "help_text" : "Used as the cover image for both the Video file and Embed options.",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "loading" : "lazy",
+    "alt" : "Video thumbnail"
+  },
+  "visibility" : {
+    "controlling_field" : "media_type",
+    "controlling_value_regex" : "video|embed",
+    "operator" : "EQUAL"
+  }
+}, {
+  "picker" : "file",
+  "id" : "media_video",
+  "name" : "media_video",
+  "label" : "Video file",
+  "help_text" : "Upload a video file (e.g. .mp4) to HubSpot's File Manager.",
+  "required" : false,
+  "locked" : false,
+  "type" : "file",
+  "display_width" : null,
+  "visibility" : {
+    "controlling_field" : "media_type",
+    "controlling_value_regex" : "video",
+    "operator" : "EQUAL"
+  }
+}, {
+  "id" : "media_embed_url",
+  "name" : "media_embed_url",
+  "label" : "Embed URL",
+  "help_text" : "Paste an embeddable video URL, e.g. https://www.youtube.com/embed/VIDEO_ID or https://player.vimeo.com/video/VIDEO_ID.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "",
+  "visibility" : {
+    "controlling_field" : "media_type",
+    "controlling_value_regex" : "embed",
+    "operator" : "EQUAL"
+  }
+}, {
+  "id" : "position",
+  "name" : "position",
+  "label" : "Media position",
+  "help_text" : "Which side of the layout the media appears on.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "right", "Right (Text left)" ], [ "left", "Left (Text right)" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "right"
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 96, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 56, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : {
+      "padding" : { "top" : { "value" : 96, "units" : "px" }, "bottom" : { "value" : 96, "units" : "px" }, "left" : { "value" : 0, "units" : "px" }, "right" : { "value" : 0, "units" : "px" } },
+      "margin" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 0, "units" : "px" } }
+    },
+    "spacing_mobile" : {
+      "padding" : { "top" : { "value" : 56, "units" : "px" }, "bottom" : { "value" : 56, "units" : "px" }, "left" : { "value" : 0, "units" : "px" }, "right" : { "value" : 0, "units" : "px" } },
+      "margin" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 0, "units" : "px" } }
+    }
+  }
+} ]

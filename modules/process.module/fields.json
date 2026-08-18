@@ -147,6 +147,18 @@
     "description" : "Placeholder — full documentation, from requirements to as-built. We always deliver what others don't."
   } ]
 }, {
+  "id" : "columns",
+  "name" : "columns",
+  "label" : "Number of columns",
+  "help_text" : "Number of columns in the process-steps grid on desktop.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "3", "3 Columns" ], [ "4", "4 Columns" ], [ "5", "5 Columns" ], [ "6", "6 Columns" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "6"
+}, {
   "id" : "styles",
   "name" : "styles",
   "label" : "Section spacing",

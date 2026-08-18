@@ -1,0 +1,104 @@
+.quote-row-module {
+  background: #FFFFFF;
+}
+
+.quote-row-module__header {
+  margin-bottom: 40px;
+}
+
+.quote-row-module__eyebrow {
+  color: #0D6FFC;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.quote-row-module__eyebrow span {
+  width: 16px;
+  height: 2px;
+  background: #DB535F;
+}
+
+.quote-row-module__heading h2,
+.quote-row-module__heading h3,
+.quote-row-module__heading h4 {
+  color: #082750;
+  margin: 0;
+}
+
+.quote-row-module__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.quote-row-module__card {
+  border: 1px solid rgba(8,39,80,.1);
+  border-top: 3px solid var(--accent-color, #0D6FFC);
+  border-radius: 5px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #FFFFFF;
+}
+
+.quote-row-module__mark {
+  color: rgba(13,111,252,.15);
+}
+
+.quote-row-module__quote p {
+  line-height: 1.8;
+  color: rgba(8,39,80,.7);
+  margin: 0;
+}
+
+.quote-row-module__person {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: auto;
+}
+
+.quote-row-module__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(8,39,80,.04);
+  border: 1px dashed rgba(8,39,80,.2);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(8,39,80,.35);
+  overflow: hidden;
+}
+
+.quote-row-module__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.quote-row-module__name {
+  font-weight: 700;
+  color: #082750;
+}
+
+.quote-row-module__title {
+  color: #8A96A6;
+}
+
+/* Responsive: collapse to a single column below 992px, matching the
+   established R2 breakpoint used by other 3-column card grids. */
+
+@media (max-width: 992px) {
+  .quote-row-module__grid {
+    grid-template-columns: 1fr;
+  }
+}

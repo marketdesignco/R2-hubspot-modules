@@ -354,7 +354,9 @@
       <div class="hero-module__description">{{ module.description }}</div>
 
       {% if module.show_button %}
-        <div class="custom-cta hero-module__cta btn-mobile {{ module.style_cta }}">
+        {% set cta_style_class = module.style_cta %}
+        {% if module.style_cta == "cta-secondary" %}{% set cta_style_class = "cta-secondary-dark" %}{% endif %}
+        <div class="custom-cta hero-module__cta btn-mobile {{ cta_style_class }}">
           {% if module.button_link.url.href %}
             {% set href = module.button_link.url.href %}
             {% if module.button_link.url.type == "EMAIL_ADDRESS" %}

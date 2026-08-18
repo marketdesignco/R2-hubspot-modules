@@ -1,19 +1,33 @@
 {% require_css %}
 <style>
 {% scope_css %}
+  .header-module__bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(0,0,0,.09);
+  }
+
   .header-module {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    background: #FFFFFF;
-    border-bottom: 1px solid rgba(0,0,0,.09);
+    min-height: 72px;
     {{ module.styles.spacing_desktop.css }}
   }
   @media (max-width: 767px) {
     .header-module {
       {{ module.styles.spacing_mobile.css }}
     }
+  }
+  .header-module__mobile-panel {
+    max-height: calc(100vh - 72px);
+    overflow-y: auto;
   }
   .header-module__logo {
     flex-shrink: 0;
@@ -271,6 +285,7 @@
 
 {% set menu_tree = menu(module.menu, "site_root").children %}
 
+<header class="header-module__bar">
 <div class="content-wrapper header-module">
   <a class="header-module__logo" href="/">
     <img src="{{ module.logo.src|escape_url }}" alt="{{ module.logo.alt|escape_attr }}" loading="eager">
@@ -343,3 +358,4 @@
     {% endif %}
   </div>
 </div>
+</header>

@@ -18,6 +18,18 @@
   "display_width" : null,
   "default" : "<h2>Built for regulated, <br>zero-margin-for-error environments.</h2>"
 }, {
+  "id" : "columns",
+  "name" : "columns",
+  "label" : "Columns",
+  "help_text" : "Number of columns in the card grid on desktop.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "2", "2 columns" ], [ "3", "3 columns" ], [ "4", "4 columns" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "2"
+}, {
   "id" : "industries",
   "name" : "industries",
   "label" : "Industries",

@@ -1,0 +1,208 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Why choose R2"
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Use the rich text toolbar's Heading options (H2/H3/H4) to set the semantic level. Typography always comes from the R2 Design System for whichever level is chosen.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h2>Built for better outcomes</h2>"
+}, {
+  "id" : "intro",
+  "name" : "intro",
+  "label" : "Intro",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Practical solutions designed to help your team work smarter and move forward.</p>"
+}, {
+  "id" : "benefits",
+  "name" : "benefits",
+  "label" : "Benefits",
+  "help_text" : "Each benefit is automatically numbered in the order shown here.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "benefits.title",
+    "default" : 12
+  },
+  "children" : [ {
+    "id" : "benefits.accent_color",
+    "name" : "accent_color",
+    "label" : "Accent color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#0D6FFC",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "benefits.title",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Streamlined Operations"
+  }, {
+    "id" : "benefits.description",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Reduce complexity and create a more efficient workflow across your organization."
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "accent_color" : { "color" : "#0D6FFC", "opacity" : 100 },
+    "title" : "Streamlined Operations",
+    "description" : "Reduce complexity and create a more efficient workflow across your organization."
+  }, {
+    "accent_color" : { "color" : "#4792A6", "opacity" : 100 },
+    "title" : "Faster Decision-Making",
+    "description" : "Give your team the visibility they need to act with confidence."
+  }, {
+    "accent_color" : { "color" : "#DB535F", "opacity" : 100 },
+    "title" : "Reduced Risk Exposure",
+    "description" : "Placeholder copy — close gaps before they become incidents."
+  }, {
+    "accent_color" : { "color" : "#B7C9C5", "opacity" : 100 },
+    "title" : "Predictable Costs",
+    "description" : "Placeholder copy — plan spend with fewer surprises down the line."
+  }, {
+    "accent_color" : { "color" : "#0D6FFC", "opacity" : 100 },
+    "title" : "Stronger Compliance",
+    "description" : "Placeholder copy — documented controls that hold up under audit."
+  }, {
+    "accent_color" : { "color" : "#4792A6", "opacity" : 100 },
+    "title" : "Improved Uptime",
+    "description" : "Placeholder copy — fewer surprises, faster recovery when they happen."
+  }, {
+    "accent_color" : { "color" : "#DB535F", "opacity" : 100 },
+    "title" : "Better Visibility",
+    "description" : "Placeholder copy — see what is actually happening across your environment."
+  }, {
+    "accent_color" : { "color" : "#B7C9C5", "opacity" : 100 },
+    "title" : "Simplified Reporting",
+    "description" : "Placeholder copy — clear metrics your leadership can actually use."
+  }, {
+    "accent_color" : { "color" : "#0D6FFC", "opacity" : 100 },
+    "title" : "Scalable Architecture",
+    "description" : "Placeholder copy — grow without re-architecting every six months."
+  }, {
+    "accent_color" : { "color" : "#4792A6", "opacity" : 100 },
+    "title" : "Faster Onboarding",
+    "description" : "Placeholder copy — get new sites and teams productive sooner."
+  }, {
+    "accent_color" : { "color" : "#DB535F", "opacity" : 100 },
+    "title" : "Fewer Escalations",
+    "description" : "Placeholder copy — issues get resolved before they reach leadership."
+  }, {
+    "accent_color" : { "color" : "#B7C9C5", "opacity" : 100 },
+    "title" : "Long-Term Accountability",
+    "description" : "Placeholder copy — a partner that stays engaged after go-live."
+  } ]
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 96, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 56, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : {
+      "padding" : {
+        "top" : { "value" : 96, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    },
+    "spacing_mobile" : {
+      "padding" : {
+        "top" : { "value" : 56, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }
+} ]

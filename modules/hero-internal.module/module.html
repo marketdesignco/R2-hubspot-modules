@@ -1,0 +1,95 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .hero-internal-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .hero-internal-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="hero-internal-module" id="hero-internal" data-screen-label="Hero (interior)">
+  <div class="hero-internal-module__orb"></div>
+
+  <div class="content-wrapper hero-internal-module__inner">
+    <div class="hero-internal-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+
+    <div class="hero-internal-module__heading">{{ module.heading|sanitize_html }}</div>
+
+    <div class="hero-internal-module__description">{{ module.description }}</div>
+
+    <div class="hero-internal-module__buttons">
+      {% if module.show_primary_button %}
+        <div class="custom-cta btn-mobile {{ module.primary_style_cta }}">
+          {% if module.primary_button_link.url.href %}
+            {% set href = module.primary_button_link.url.href %}
+            {% if module.primary_button_link.url.type == "EMAIL_ADDRESS" %}
+              {% set href = "mailto:" + href %}
+            {% elif module.primary_button_link.url.type == "PHONE_NUMBER" %}
+              {% set href = "tel:" + href %}
+            {% endif %}
+            <a
+              {% if module.primary_button_link.url.type == "CALL_TO_ACTION" %}
+                href="{{ href }}"
+              {% else %}
+                href="{{ href|escape_url }}"
+              {% endif %}
+              {% if module.primary_button_link.open_in_new_tab %}target="_blank"{% endif %}
+              {% if module.primary_button_link.rel %}rel="{{ module.primary_button_link.rel|join(" ")|escape_attr }}"{% endif %}
+            >
+              {{ module.primary_button_text|escape_html }}
+            </a>
+          {% elif module.primary_cta %}
+            {% cta guid="{{ module.primary_cta }}" %}
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if module.show_secondary_button %}
+        {% set secondary_cta_style_class = module.secondary_style_cta %}
+        {% if module.secondary_style_cta == "cta-secondary" %}{% set secondary_cta_style_class = "cta-secondary-dark" %}{% endif %}
+        <div class="custom-cta btn-mobile {{ secondary_cta_style_class }}">
+          {% if module.secondary_button_link.url.href %}
+            {% set href = module.secondary_button_link.url.href %}
+            {% if module.secondary_button_link.url.type == "EMAIL_ADDRESS" %}
+              {% set href = "mailto:" + href %}
+            {% elif module.secondary_button_link.url.type == "PHONE_NUMBER" %}
+              {% set href = "tel:" + href %}
+            {% endif %}
+            <a
+              {% if module.secondary_button_link.url.type == "CALL_TO_ACTION" %}
+                href="{{ href }}"
+              {% else %}
+                href="{{ href|escape_url }}"
+              {% endif %}
+              {% if module.secondary_button_link.open_in_new_tab %}target="_blank"{% endif %}
+              {% if module.secondary_button_link.rel %}rel="{{ module.secondary_button_link.rel|join(" ")|escape_attr }}"{% endif %}
+            >
+              {{ module.secondary_button_text|escape_html }}
+            </a>
+          {% elif module.secondary_cta %}
+            {% cta guid="{{ module.secondary_cta }}" %}
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if module.highlights|length > 0 %}
+    <div class="hero-internal-module__footer">
+      {% for item in module.highlights %}
+        <div class="hero-internal-module__highlight" style="--highlight-dot-color: rgba({{ item.dot_color.color|convert_rgb }}, {{ item.dot_color.opacity / 100 }});">
+          <span class="hero-internal-module__highlight-dot"></span>
+          <div class="hero-internal-module__highlight-copy">
+            <strong>{{ item.title|escape_html }}</strong>
+            {{ item.description|escape_html }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>

@@ -34,7 +34,7 @@
           {% if module.all_link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ module.all_link_text|escape_html }}</a>
       {% endif %}
     </div>
-    <div class="insights-module__grid">
+    <div class="insights-module__grid{% if module.columns == "2" %} insights-module__grid--2-col{% endif %}">
       {% for post in posts %}
         <a class="insights-module__card" href="{{ post.absolute_url|escape_url }}">
           <div class="insights-module__image">

@@ -1,0 +1,191 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .managed-services-module {
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(8,39,80,.08);
+    {{ module.styles.spacing_desktop.css }}
+  }
+  .managed-services-module__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .managed-services-module__content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .managed-services-module__eyebrow {
+    color: #0D6FFC;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .managed-services-module__eyebrow span {
+    width: 16px;
+    height: 2px;
+    background: #DB535F;
+  }
+  .managed-services-module__heading h2 {
+    font-weight: 700;
+    color: #082750;
+    margin: 0;
+  }
+  .managed-services-module__description {
+    line-height: 1.8;
+    color: rgba(8,39,80,.6);
+    max-width: 460px;
+    margin: 0;
+  }
+  .managed-services-module__buttons {
+    display: flex;
+    gap: 14px;
+    margin-top: 6px;
+  }
+  .managed-services-module__inner--reversed .managed-services-module__content {
+    order: 2;
+  }
+  .managed-services-module__inner--reversed .managed-services-module__secondary {
+    order: 1;
+  }
+  .managed-services-module__stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .managed-services-module__stat {
+    border: 1px solid rgba(8,39,80,.1);
+    border-left: 3px solid var(--accent-color, #0D6FFC);
+    border-radius: 5px;
+    padding: 20px 18px;
+  }
+  .managed-services-module__stat-value {
+ 
+    font-size: 20px;
+    font-weight: 700;
+    color: #082750;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .managed-services-module__stat-label {
+    font-size: 12px;
+    line-height: 1.6;
+    margin:0px;
+
+  }
+
+  /* Responsive: collapse to a single column below 992px */
+
+  @media (max-width: 992px) {
+    .managed-services-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+    .managed-services-module__inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .managed-services-module__inner--reversed .managed-services-module__content,
+    .managed-services-module__inner--reversed .managed-services-module__secondary {
+      order: initial;
+    }
+    .managed-services-module__description {
+      max-width: none;
+    }
+    .managed-services-module__buttons {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .managed-services-module__stats {
+      grid-template-columns: 1fr;
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="managed-services-module" id="managed-services" data-screen-label="Managed services">
+  <div class="content-wrapper managed-services-module__inner{% if module.position == "left" %} managed-services-module__inner--reversed{% endif %}">
+    <div class="managed-services-module__content">
+      <div class="managed-services-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      <div class="managed-services-module__heading">{{ module.heading|sanitize_html }}</div>
+      <p class="managed-services-module__description">{{ module.description|escape_html }}</p>
+      <div class="managed-services-module__buttons">
+        {% if module.show_primary_button %}
+          <div class="custom-cta btn-mobile {{ module.primary_style_cta }}">
+            {% if module.primary_button_link.url.href %}
+              {% set href = module.primary_button_link.url.href %}
+              {% if module.primary_button_link.url.type == "EMAIL_ADDRESS" %}
+                {% set href = "mailto:" + href %}
+              {% elif module.primary_button_link.url.type == "PHONE_NUMBER" %}
+                {% set href = "tel:" + href %}
+              {% endif %}
+              <a
+                {% if module.primary_button_link.url.type == "CALL_TO_ACTION" %}
+                  href="{{ href }}"
+                {% else %}
+                  href="{{ href|escape_url }}"
+                {% endif %}
+                {% if module.primary_button_link.open_in_new_tab %}target="_blank"{% endif %}
+                {% if module.primary_button_link.rel %}rel="{{ module.primary_button_link.rel|join(" ")|escape_attr }}"{% endif %}
+              >
+                {{ module.primary_button_text|escape_html }}
+              </a>
+            {% elif module.primary_cta %}
+              {% cta guid="{{ module.primary_cta }}" %}
+            {% endif %}
+          </div>
+        {% endif %}
+        {% if module.show_secondary_button %}
+          <div class="custom-cta btn-mobile {{ module.secondary_style_cta }}">
+            {% if module.secondary_button_link.url.href %}
+              {% set href = module.secondary_button_link.url.href %}
+              {% if module.secondary_button_link.url.type == "EMAIL_ADDRESS" %}
+                {% set href = "mailto:" + href %}
+              {% elif module.secondary_button_link.url.type == "PHONE_NUMBER" %}
+                {% set href = "tel:" + href %}
+              {% endif %}
+              <a
+                {% if module.secondary_button_link.url.type == "CALL_TO_ACTION" %}
+                  href="{{ href }}"
+                {% else %}
+                  href="{{ href|escape_url }}"
+                {% endif %}
+                {% if module.secondary_button_link.open_in_new_tab %}target="_blank"{% endif %}
+                {% if module.secondary_button_link.rel %}rel="{{ module.secondary_button_link.rel|join(" ")|escape_attr }}"{% endif %}
+              >
+                {{ module.secondary_button_text|escape_html }}
+              </a>
+            {% elif module.secondary_cta %}
+              {% cta guid="{{ module.secondary_cta }}" %}
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="managed-services-module__secondary">
+      {% if module.content_type == "form" %}
+        <div class="managed-services-module__form">
+          {% form
+	form_to_use="{{ module.form.form_id }}"
+	response_response_type="{{ module.form.response_type }}"
+	response_message="{{ module.form.message }}"
+	response_redirect_id="{{ module.form.redirect_id }}"
+	response_redirect_url="{{module.form.redirect_url}}"
+	gotowebinar_webinar_key="{{ module.form.gotowebinar_webinar_key }}"
+%}
+        </div>
+      {% else %}
+        <div class="managed-services-module__stats">
+          {% for stat in module.stats %}
+            <div class="managed-services-module__stat" style="--accent-color: rgba({{ stat.accent_color.color|convert_rgb }}, {{ stat.accent_color.opacity / 100 }});">
+              <div class="managed-services-module__stat-value">{{ stat.value|escape_html }}</div>
+              <p class="managed-services-module__stat-label">{{ stat.stat_label|escape_html }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
