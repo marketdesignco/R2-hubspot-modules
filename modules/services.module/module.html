@@ -42,6 +42,12 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
   }
+  .services-module__grid--cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .services-module__grid--cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
   .services-module__card {
     border: 1px solid rgba(8,39,80,.1);
     border-top: 3px solid var(--accent-color, #0D6FFC);
@@ -109,7 +115,9 @@
     .services-module__intro {
       max-width: none;
     }
-    .services-module__grid {
+    .services-module__grid,
+    .services-module__grid--cols-2,
+    .services-module__grid--cols-4 {
       grid-template-columns: 1fr;
     }
   }
@@ -124,7 +132,7 @@
       <div class="services-module__heading">{{ module.heading }}</div>
       <div class="services-module__intro">{{ module.intro|sanitize_html }}</div>
     </div>
-    <div class="services-module__grid">
+    <div class="services-module__grid{% if module.card_columns == "2" %} services-module__grid--cols-2{% elif module.card_columns == "4" %} services-module__grid--cols-4{% endif %}">
       {% for card in module.cards %}
         <div class="services-module__card" style="--accent-color: rgba({{ card.accent_color.color|convert_rgb }}, {{ card.accent_color.opacity / 100 }});">
           <div class="services-module__number">{{ card.number|escape_html }}</div>

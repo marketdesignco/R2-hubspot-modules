@@ -17,13 +17,21 @@
   <div class="content-wrapper faq-module__container">
     <div class="faq-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
     <div class="faq-module__heading">{{ module.heading|sanitize_html }}</div>
+     {% if module.show_link %}
+      <a class="faq-module__link {{ module.link_style }}" href="{{ module.link.url.href|escape_url }}"
+        {% if module.link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ module.link_text|escape_html }}</a>
+    {% endif %}
     <div class="faq-module__list">
       {% for faq in module.faqs %}
-        <div class="faq-module__item">
-          <h3 class="faq-module__question">{{ faq.question|escape_html }}</h3>
+        <details class="faq-module__item" name="faq-{{ module_id }}"{% if loop.first %} open{% endif %}>
+          <summary class="faq-module__question">
+            <span>{{ faq.question|escape_html }}</span>
+            <span class="faq-module__toggle" aria-hidden="true"></span>
+          </summary>
           <div class="faq-module__answer">{{ faq.answer|sanitize_html }}</div>
-        </div>
+        </details>
       {% endfor %}
     </div>
+   
   </div>
 </section>

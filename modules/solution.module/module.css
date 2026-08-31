@@ -81,16 +81,106 @@
   padding: 8px 0 8px 28px;
 }
 
-.solution-module__quote-text {
+.solution-module__quote-text *{
   font-family: var(--font-secondary);
   font-weight: 700;
   color: var(--color-cyan);
+}
+
+.solution-module__quote-text p {
+  margin: 0;
+}
+
+.solution-module__quote-text p + p {
+  margin-top: 12px;
 }
 
 /* Responsive: collapse to a single column below 992px, matching the established R2 breakpoint */
 
 @media (max-width: 992px) {
   .solution-module__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* Background: Light — applies to both Layout 1 and Layout 2 */
+
+.solution-module--light {
+  background: var(--color-white);
+}
+
+.solution-module--light .solution-module__heading h2,
+.solution-module--light .solution-module__heading h3,
+.solution-module--light .solution-module__heading h4 {
+  color: var(--color-navy-blue);
+}
+
+.solution-module--light .solution-module__description p {
+  color: rgba(8,39,80,.6);
+}
+
+.solution-module--light .solution-module__description p:last-child {
+  color: rgba(8,39,80,.85);
+}
+
+.solution-module--light .solution-module__description p:last-child strong {
+  color: var(--color-navy-blue);
+}
+
+.solution-module--light .solution-module__quote-text * {
+  color: var(--color-navy-blue);
+}
+
+.solution-module--light .solution-module__richtext-col {
+  color: rgba(8,39,80,.6);
+}
+
+.solution-module--light .solution-module__richtext-col h1,
+.solution-module--light .solution-module__richtext-col h2,
+.solution-module--light .solution-module__richtext-col h3,
+.solution-module--light .solution-module__richtext-col h4,
+.solution-module--light .solution-module__richtext-col h5,
+.solution-module--light .solution-module__richtext-col h6,
+.solution-module--light .solution-module__richtext-col strong {
+  color: var(--color-navy-blue);
+}
+
+/* Layout 2 — Rich Text only columns */
+
+.solution-module__richtext {
+  position: relative;
+  z-index: 2;
+  display: block;
+}
+
+.solution-module__richtext-col {
+  color: rgba(255,255,255,.62);
+}
+
+.solution-module__richtext-col h1,
+.solution-module__richtext-col h2,
+.solution-module__richtext-col h3,
+.solution-module__richtext-col h4,
+.solution-module__richtext-col h5,
+.solution-module__richtext-col h6,
+.solution-module__richtext-col strong {
+  color: var(--color-white);
+}
+
+.solution-module__richtext-col p + p {
+  margin-top: 18px;
+}
+
+.solution-module__richtext--2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .solution-module__richtext--2col {
     grid-template-columns: 1fr;
     gap: 32px;
   }

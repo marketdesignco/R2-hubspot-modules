@@ -82,6 +82,81 @@
     "answer" : "<p>R2 measures and reports on segmentation effectiveness, policy adherence, and SLA performance throughout the engagement and after go-live. We define success benchmarks at the start and track against them. Your team has clear, ongoing visibility into how the environment is performing — and so does leadership.</p>"
   } ]
 }, {
+  "id" : "show_link",
+  "name" : "show_link",
+  "label" : "Show Link",
+  "help_text" : "Renders an optional text link after the FAQ list. This is a plain text link, not a button.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false
+}, {
+  "id" : "link_text",
+  "name" : "link_text",
+  "label" : "Link Text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Ask us anything",
+  "visibility" : {
+    "controlling_field" : "show_link",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
+}, {
+  "id" : "link",
+  "name" : "link",
+  "label" : "Link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "",
+      "type" : "EXTERNAL"
+    },
+    "no_follow" : false,
+    "open_in_new_tab" : false
+  },
+  "visibility" : {
+    "controlling_field" : "show_link",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
+}, {
+  "id" : "link_style",
+  "name" : "link_style",
+  "label" : "Link Style",
+  "help_text" : "Reuses the existing R2 text-link styles. Not a button/CTA style.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "link-1", "Link 1" ], [ "link-dark", "Link Dark" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "link-1",
+  "visibility" : {
+    "controlling_field" : "show_link",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
+}, {
   "id" : "styles",
   "name" : "styles",
   "label" : "Section spacing",

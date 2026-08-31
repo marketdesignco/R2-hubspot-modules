@@ -83,6 +83,291 @@
   "display_width" : null,
   "default" : "cta-primary"
 }, {
+  "id" : "card_columns",
+  "name" : "card_columns",
+  "label" : "Card Columns",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "2", "2 Columns" ], [ "3", "3 Columns" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "3"
+}, {
+  "id" : "content_cards",
+  "name" : "content_cards",
+  "label" : "Content Cards",
+  "help_text" : "Optional. Leave empty to render nothing. Each card gets its own border color.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : null,
+    "sorting_label_field" : "content_cards.title",
+    "default" : 0
+  },
+  "children" : [ {
+    "id" : "content_cards.title",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "content_cards.description",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "content_cards.border_color",
+    "name" : "border_color",
+    "label" : "Border color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#0D6FFC",
+      "opacity" : 100
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ ]
+}, {
+  "id" : "bottom_links",
+  "name" : "bottom_links",
+  "label" : "Bottom Links",
+  "help_text" : "Optional. Up to 2 items, rendered below the cards, side by side. Each item can independently be a Button or a Link Text.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : 2,
+    "sorting_label_field" : "bottom_links.link_type",
+    "default" : 0
+  },
+  "children" : [ {
+    "id" : "bottom_links.link_type",
+    "name" : "link_type",
+    "label" : "Link Type",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "button", "Button" ], [ "link_text", "Link Text" ] ],
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "link_text"
+  }, {
+    "id" : "bottom_links.button_link_type",
+    "name" : "button_link_type",
+    "label" : "Button Link Type",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "cta", "HubSpot CTA" ], [ "url", "URL" ] ],
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "url",
+    "visibility" : {
+      "controlling_field" : "bottom_links.link_type",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "button",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    }
+  }, {
+    "id" : "bottom_links.cta",
+    "name" : "cta",
+    "label" : "HubSpot CTA",
+    "help_text" : "Renders a HubSpot CTA for this item.",
+    "required" : false,
+    "locked" : false,
+    "type" : "cta",
+    "display_width" : null,
+    "visibility_rules" : "ADVANCED",
+    "advanced_visibility" : {
+      "boolean_operator" : "AND",
+      "criteria" : [ {
+        "controlling_field" : "bottom_links.link_type",
+        "controlling_field_path" : null,
+        "controlling_value_regex" : "button",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      }, {
+        "controlling_field" : "bottom_links.button_link_type",
+        "controlling_field_path" : null,
+        "controlling_value_regex" : "cta",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      } ],
+      "children" : [ ]
+    }
+  }, {
+    "id" : "bottom_links.button_link",
+    "name" : "button_link",
+    "label" : "Button URL",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION" ],
+    "show_advanced_rel_options" : true,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : { "href" : "", "type" : "EXTERNAL" },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    },
+    "visibility_rules" : "ADVANCED",
+    "advanced_visibility" : {
+      "boolean_operator" : "AND",
+      "criteria" : [ {
+        "controlling_field" : "bottom_links.link_type",
+        "controlling_field_path" : null,
+        "controlling_value_regex" : "button",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      }, {
+        "controlling_field" : "bottom_links.button_link_type",
+        "controlling_field_path" : null,
+        "controlling_value_regex" : "url",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      } ],
+      "children" : [ ]
+    }
+  }, {
+    "id" : "bottom_links.button_text",
+    "name" : "button_text",
+    "label" : "Button Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Learn more",
+    "visibility_rules" : "ADVANCED",
+    "advanced_visibility" : {
+      "boolean_operator" : "AND",
+      "criteria" : [ {
+        "controlling_field" : "bottom_links.link_type",
+        "controlling_field_path" : null,
+        "controlling_value_regex" : "button",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      }, {
+        "controlling_field" : "bottom_links.button_link_type",
+        "controlling_field_path" : null,
+        "controlling_value_regex" : "url",
+        "property" : null,
+        "operator" : "EQUAL",
+        "access" : null
+      } ],
+      "children" : [ ]
+    }
+  }, {
+    "id" : "bottom_links.button_style",
+    "name" : "button_style",
+    "label" : "Button Style",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "cta-primary", "Primary" ], [ "cta-secondary", "Secondary (Outline)" ] ],
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "cta-primary",
+    "visibility" : {
+      "controlling_field" : "bottom_links.link_type",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "button",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    }
+  }, {
+    "id" : "bottom_links.link_text",
+    "name" : "link_text",
+    "label" : "Link Text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Learn more",
+    "visibility" : {
+      "controlling_field" : "bottom_links.link_type",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "link_text",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    }
+  }, {
+    "id" : "bottom_links.link",
+    "name" : "link",
+    "label" : "Link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : { "href" : "", "type" : "EXTERNAL" },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    },
+    "visibility" : {
+      "controlling_field" : "bottom_links.link_type",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "link_text",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    }
+  }, {
+    "id" : "bottom_links.link_style",
+    "name" : "link_style",
+    "label" : "Link Style",
+    "help_text" : "Reuses the existing R2 text-link styles. Not a button/CTA style.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "link-1", "Link 1" ], [ "link-dark", "Link Dark" ] ],
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "link-1",
+    "visibility" : {
+      "controlling_field" : "bottom_links.link_type",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "link_text",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ ]
+}, {
   "id" : "media_type",
   "name" : "media_type",
   "label" : "Media type",
@@ -192,16 +477,8 @@
     "type" : "spacing",
     "display_width" : null,
     "default" : {
-      "padding" : {
-        "top" : { "value" : 96, "units" : "px" },
-        "bottom" : { "value" : 96, "units" : "px" },
-        "left" : { "value" : 0, "units" : "px" },
-        "right" : { "value" : 0, "units" : "px" }
-      },
-      "margin" : {
-        "top" : { "value" : 0, "units" : "px" },
-        "bottom" : { "value" : 0, "units" : "px" }
-      }
+      "padding" : { "top" : { "value" : 96, "units" : "px" }, "bottom" : { "value" : 96, "units" : "px" }, "left" : { "value" : 0, "units" : "px" }, "right" : { "value" : 0, "units" : "px" } },
+      "margin" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 0, "units" : "px" } }
     }
   }, {
     "id" : "styles.spacing_mobile",
@@ -212,16 +489,8 @@
     "type" : "spacing",
     "display_width" : null,
     "default" : {
-      "padding" : {
-        "top" : { "value" : 56, "units" : "px" },
-        "bottom" : { "value" : 56, "units" : "px" },
-        "left" : { "value" : 0, "units" : "px" },
-        "right" : { "value" : 0, "units" : "px" }
-      },
-      "margin" : {
-        "top" : { "value" : 0, "units" : "px" },
-        "bottom" : { "value" : 0, "units" : "px" }
-      }
+      "padding" : { "top" : { "value" : 56, "units" : "px" }, "bottom" : { "value" : 56, "units" : "px" }, "left" : { "value" : 0, "units" : "px" }, "right" : { "value" : 0, "units" : "px" } },
+      "margin" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 0, "units" : "px" } }
     }
   } ],
   "tab" : "STYLE",

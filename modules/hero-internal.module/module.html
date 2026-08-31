@@ -19,9 +19,14 @@
   <div class="content-wrapper hero-internal-module__inner">
     <div class="hero-internal-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
 
-    <div class="hero-internal-module__heading">{{ module.heading|sanitize_html }}</div>
+    <div class="hero-internal-module__heading" style="--heading-width: {{ module.heading_width }}%;">{{ module.heading|sanitize_html }}</div>
 
-    <div class="hero-internal-module__description">{{ module.description }}</div>
+    <div class="hero-internal-module__description-grid{% if module.paragraph_columns %} hero-internal-module__description-grid--2col{% endif %}">
+      <div class="hero-internal-module__description">{{ module.description }}</div>
+      {% if module.paragraph_columns %}
+        <div class="hero-internal-module__description">{{ module.paragraph_secondary }}</div>
+      {% endif %}
+    </div>
 
     <div class="hero-internal-module__buttons">
       {% if module.show_primary_button %}

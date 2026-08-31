@@ -51,8 +51,12 @@
     max-width: 480px;
     margin: 0;
   }
-  .cta-module__cta {
+  .cta-module__buttons {
     margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
   }
   @media (max-width:767px){
     .cta-module__kicker{
@@ -72,27 +76,60 @@
     <div class="cta-module__kicker">{{ module.kicker|escape_html }}</div>
     <div class="cta-module__heading">{{ module.heading }}</div>
     <p class="cta-module__description">{{ module.description|escape_html }}</p>
-    <div class="custom-cta cta-module__cta {{ module.style_cta }}">
-      {% if module.button_link.url.href %}
-        {% set href = module.button_link.url.href %}
-        {% if module.button_link.url.type == "EMAIL_ADDRESS" %}
-          {% set href = "mailto:" + href %}
-        {% elif module.button_link.url.type == "PHONE_NUMBER" %}
-          {% set href = "tel:" + href %}
-        {% endif %}
-        <a
-          {% if module.button_link.url.type == "CALL_TO_ACTION" %}
-            href="{{ href }}"
-          {% else %}
-            href="{{ href|escape_url }}"
+    <div class="cta-module__buttons">
+      {% set cta_style_class = module.style_cta %}
+      {% if module.style_cta == "cta-secondary" %}{% set cta_style_class = "cta-secondary-dark" %}{% endif %}
+      <div class="custom-cta cta-module__cta {{ cta_style_class }}">
+        {% if module.button_link.url.href %}
+          {% set href = module.button_link.url.href %}
+          {% if module.button_link.url.type == "EMAIL_ADDRESS" %}
+            {% set href = "mailto:" + href %}
+          {% elif module.button_link.url.type == "PHONE_NUMBER" %}
+            {% set href = "tel:" + href %}
           {% endif %}
-          {% if module.button_link.open_in_new_tab %}target="_blank"{% endif %}
-          {% if module.button_link.rel %}rel="{{ module.button_link.rel|join(" ")|escape_attr }}"{% endif %}
-        >
-          {{ module.button_text|escape_html }}
-        </a>
-      {% elif module.cta %}
-        {% cta guid="{{ module.cta }}" %}
+          <a
+            {% if module.button_link.url.type == "CALL_TO_ACTION" %}
+              href="{{ href }}"
+            {% else %}
+              href="{{ href|escape_url }}"
+            {% endif %}
+            {% if module.button_link.open_in_new_tab %}target="_blank"{% endif %}
+            {% if module.button_link.rel %}rel="{{ module.button_link.rel|join(" ")|escape_attr }}"{% endif %}
+          >
+            {{ module.button_text|escape_html }}
+          </a>
+        {% elif module.cta %}
+          {% cta guid="{{ module.cta }}" %}
+        {% endif %}
+      </div>
+      {% if module.show_cta_2 %}
+        {% set cta_style_class_2 = module.style_cta_2 %}
+        {% if module.style_cta_2 == "cta-secondary" %}{% set cta_style_class_2 = "cta-secondary-dark" %}{% endif %}
+        <div class="custom-cta cta-module__cta {{ cta_style_class_2 }}">
+          {% if module.cta_2_type == "cta" %}
+            {% if module.cta_2 %}
+              {% cta guid="{{ module.cta_2 }}" %}
+            {% endif %}
+          {% elif module.button_link_2.url.href %}
+            {% set href2 = module.button_link_2.url.href %}
+            {% if module.button_link_2.url.type == "EMAIL_ADDRESS" %}
+              {% set href2 = "mailto:" + href2 %}
+            {% elif module.button_link_2.url.type == "PHONE_NUMBER" %}
+              {% set href2 = "tel:" + href2 %}
+            {% endif %}
+            <a
+              {% if module.button_link_2.url.type == "CALL_TO_ACTION" %}
+                href="{{ href2 }}"
+              {% else %}
+                href="{{ href2|escape_url }}"
+              {% endif %}
+              {% if module.button_link_2.open_in_new_tab %}target="_blank"{% endif %}
+              {% if module.button_link_2.rel %}rel="{{ module.button_link_2.rel|join(" ")|escape_attr }}"{% endif %}
+            >
+              {{ module.button_text_2|escape_html }}
+            </a>
+          {% endif %}
+        </div>
       {% endif %}
     </div>
   </div>

@@ -17,6 +17,34 @@
     pointer-events: none;
     background: radial-gradient(circle, rgba(71,146,166,.08) 0%, transparent 65%);
   }
+  .case-study-module__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .case-study-module__intro-eyebrow {
+    color: #0D6FFC;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .case-study-module__intro-eyebrow span {
+    width: 16px;
+    height: 2px;
+    background: #DB535F;
+    flex-shrink: 0;
+  }
+  .case-study-module__intro-heading * {
+    color: white;
+    margin: 0;
+  }
+  .case-study-module__intro-heading strong {
+    color: #0D6FFC;
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+  }
   .case-study-module__inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -71,6 +99,20 @@
     font-weight: 700;
     color: #0D6FFC;
   }
+  .case-study-module__intro-text {
+    line-height: 1.8;
+    color: rgba(255,255,255,.62);
+  }
+  .case-study-module__intro-text p {
+    margin: 0 0 1em;
+  }
+  .case-study-module__intro-text p:last-child {
+    margin-bottom: 0;
+  }
+  .case-study-module__intro-text strong {
+    color: #fff;
+    font-weight: 700;
+  }
   .case-study-module__quote {
     line-height: 1.8;
     color:#9CA9B9;
@@ -87,17 +129,7 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: rgba(255,255,255,.08);
-    border: 1px dashed rgba(255,255,255,.25);
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.35);
     overflow: hidden;
   }
   .case-study-module__avatar img {
@@ -139,36 +171,49 @@
 
 <section class="case-study-module" data-screen-label="Case study">
   <div class="case-study-module__glow"></div>
-  <div class="content-wrapper case-study-module__inner">
-    <div class="case-study-module__image">
-      {% if module.image.src %}
-        <img src="{{ module.image.src|escape_url }}" alt="{{ module.image.alt|escape_attr }}" loading="lazy">
-      {% endif %}
-    </div>
-    <div class="case-study-module__content">
-      <div class="case-study-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
-      <div class="case-study-module__stat">
-        <span class="case-study-module__stat-value">{{ module.stat_value|escape_html }}</span>
-        <span class="case-study-module__stat-label">{{ module.stat_label|escape_html }}</span>
+  <div class="content-wrapper">
+    {% if module.section_eyebrow or module.heading %}
+      <div class="case-study-module__intro">
+        {% if module.section_eyebrow %}
+          <div class="case-study-module__intro-eyebrow eyebrow"><span></span>{{ module.section_eyebrow|escape_html }}</div>
+        {% endif %}
+        {% if module.heading %}
+          <div class="case-study-module__intro-heading">{{ module.heading|sanitize_html }}</div>
+        {% endif %}
       </div>
-      <p class="case-study-module__quote">&ldquo;{{ module.quote|escape_html }}&rdquo;</p>
-      <div class="case-study-module__person">
-        <div class="case-study-module__avatar">
+    {% endif %}
+    <div class="case-study-module__inner">
+      <div class="case-study-module__image">
+        {% if module.image.src %}
+          <img src="{{ module.image.src|escape_url }}" alt="{{ module.image.alt|escape_attr }}" loading="lazy">
+        {% endif %}
+      </div>
+      <div class="case-study-module__content">
+        <div class="case-study-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+        <div class="case-study-module__stat">
+          <span class="case-study-module__stat-value">{{ module.stat_value|escape_html }}</span>
+          <span class="case-study-module__stat-label">{{ module.stat_label|escape_html }}</span>
+        </div>
+        {% if module.intro_text %}
+          <div class="case-study-module__intro-text">{{ module.intro_text }}</div>
+        {% endif %}
+        <p class="case-study-module__quote">&ldquo;{{ module.quote|escape_html }}&rdquo;</p>
+        <div class="case-study-module__person">
           {% if module.avatar.src %}
-            <img src="{{ module.avatar.src|escape_url }}" alt="{{ module.avatar.alt|escape_attr }}" loading="lazy">
-          {% else %}
-            IMG
+            <div class="case-study-module__avatar">
+              <img src="{{ module.avatar.src|escape_url }}" alt="{{ module.avatar.alt|escape_attr }}" loading="lazy">
+            </div>
           {% endif %}
+          <div>
+            <div class="case-study-module__name">{{ module.person_name|escape_html }}</div>
+            <div class="case-study-module__title">{{ module.title|escape_html }}</div>
+          </div>
         </div>
-        <div>
-          <div class="case-study-module__name">{{ module.person_name|escape_html }}</div>
-          <div class="case-study-module__title">{{ module.title|escape_html }}</div>
-        </div>
+        {% if module.show_link %}
+          <a class="case-study-module__link link-dark" href="{{ module.link.url.href|escape_url }}"
+            {% if module.link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ module.link_text|escape_html }}</a>
+        {% endif %}
       </div>
-      {% if module.show_link %}
-        <a class="case-study-module__link link-dark" href="{{ module.link.url.href|escape_url }}"
-          {% if module.link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ module.link_text|escape_html }}</a>
-      {% endif %}
     </div>
   </div>
 </section>

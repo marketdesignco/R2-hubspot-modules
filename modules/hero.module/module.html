@@ -13,10 +13,11 @@
 </style>
 {% end_require_css %}
 
-<section class="hero-module" id="hero" data-screen-label="Hero" data-hero-rotate-seconds="{{ module.rotate_seconds }}">
+<section class="hero-module{% if module.hero_layout != "advanced" %} hero-module--simple{% endif %}" id="hero" data-screen-label="Hero" data-hero-rotate-seconds="{{ module.rotate_seconds }}">
   <div class="hero-module__orb-left"></div>
   <div class="hero-module__orb-right"></div>
 
+  {% if module.hero_layout == "advanced" and module.rotating_phrases|length > 0 %}
   <div class="hero-module__wb" aria-hidden="true">
     <div class="hero-module__wb-images" data-hero-wb-images>
       {% for item in module.rotating_phrases %}
@@ -332,6 +333,7 @@
     {# Client-uploaded custom SVG, fetched and inlined at runtime #}
     <div class="hero-module__diagram hero-module__diagram-custom" data-hero-diagram-custom></div>
   </div>
+  {% endif %}
 
   <div class="hero-module__body">
     <div class="hero-module__content">
@@ -340,7 +342,9 @@
       <div class="hero-module__title">
         <h1>
           <span>{{ module.headline_prefix|escape_html }}</span>
-          <span class="hero-module__rotating-line"><strong class="hero-module__rotating-text" data-hero-rotating-text>&nbsp;</strong><span class="hero-module__cursor" data-hero-cursor aria-hidden="true"></span></span>
+          {% if module.rotating_phrases|length > 0 %}
+            <span class="hero-module__rotating-line"><strong class="hero-module__rotating-text" data-hero-rotating-text>&nbsp;</strong><span class="hero-module__cursor" data-hero-cursor aria-hidden="true"></span></span>
+          {% endif %}
           <span>{{ module.headline_suffix|escape_html }}</span>
         </h1>
       </div>
@@ -353,48 +357,79 @@
       {% endif %}
       <div class="hero-module__description">{{ module.description }}</div>
 
-      {% if module.show_button %}
-        {% set cta_style_class = module.style_cta %}
-        {% if module.style_cta == "cta-secondary" %}{% set cta_style_class = "cta-secondary-dark" %}{% endif %}
-        <div class="custom-cta hero-module__cta btn-mobile {{ cta_style_class }}">
-          {% if module.button_link.url.href %}
-            {% set href = module.button_link.url.href %}
-            {% if module.button_link.url.type == "EMAIL_ADDRESS" %}
-              {% set href = "mailto:" + href %}
-            {% elif module.button_link.url.type == "PHONE_NUMBER" %}
-              {% set href = "tel:" + href %}
-            {% endif %}
-            <a
-              {% if module.button_link.url.type == "CALL_TO_ACTION" %}
-                href="{{ href }}"
-              {% else %}
-                href="{{ href|escape_url }}"
+      {% if module.show_button or module.show_cta_2 %}
+        <div class="hero-module__buttons">
+          {% if module.show_button %}
+            {% set cta_style_class = module.style_cta %}
+            {% if module.style_cta == "cta-secondary" %}{% set cta_style_class = "cta-secondary-dark" %}{% endif %}
+            <div class="custom-cta hero-module__cta btn-mobile {{ cta_style_class }}">
+              {% if module.button_link.url.href %}
+                {% set href = module.button_link.url.href %}
+                {% if module.button_link.url.type == "EMAIL_ADDRESS" %}
+                  {% set href = "mailto:" + href %}
+                {% elif module.button_link.url.type == "PHONE_NUMBER" %}
+                  {% set href = "tel:" + href %}
+                {% endif %}
+                <a
+                  {% if module.button_link.url.type == "CALL_TO_ACTION" %}
+                    href="{{ href }}"
+                  {% else %}
+                    href="{{ href|escape_url }}"
+                  {% endif %}
+                  {% if module.button_link.open_in_new_tab %}target="_blank"{% endif %}
+                  {% if module.button_link.rel %}rel="{{ module.button_link.rel|join(" ")|escape_attr }}"{% endif %}
+                >
+                  {{ module.button_text|escape_html }}
+                </a>
+              {% elif module.cta %}
+                {% cta guid="{{ module.cta }}" %}
               {% endif %}
-              {% if module.button_link.open_in_new_tab %}target="_blank"{% endif %}
-              {% if module.button_link.rel %}rel="{{ module.button_link.rel|join(" ")|escape_attr }}"{% endif %}
-            >
-              {{ module.button_text|escape_html }}
-            </a>
-          {% elif module.cta %}
-            {% cta guid="{{ module.cta }}" %}
+            </div>
+          {% endif %}
+          {% if module.show_cta_2 %}
+            {% set cta_style_class_2 = module.style_cta_2 %}
+            {% if module.style_cta_2 == "cta-secondary" %}{% set cta_style_class_2 = "cta-secondary-dark" %}{% endif %}
+            <div class="custom-cta hero-module__cta btn-mobile {{ cta_style_class_2 }}">
+              {% if module.button_link_2.url.href %}
+                {% set href2 = module.button_link_2.url.href %}
+                {% if module.button_link_2.url.type == "EMAIL_ADDRESS" %}
+                  {% set href2 = "mailto:" + href2 %}
+                {% elif module.button_link_2.url.type == "PHONE_NUMBER" %}
+                  {% set href2 = "tel:" + href2 %}
+                {% endif %}
+                <a
+                  {% if module.button_link_2.url.type == "CALL_TO_ACTION" %}
+                    href="{{ href2 }}"
+                  {% else %}
+                    href="{{ href2|escape_url }}"
+                  {% endif %}
+                  {% if module.button_link_2.open_in_new_tab %}target="_blank"{% endif %}
+                  {% if module.button_link_2.rel %}rel="{{ module.button_link_2.rel|join(" ")|escape_attr }}"{% endif %}
+                >
+                  {{ module.button_text_2|escape_html }}
+                </a>
+              {% elif module.cta_2 %}
+                {% cta guid="{{ module.cta_2 }}" %}
+              {% endif %}
+            </div>
           {% endif %}
         </div>
       {% endif %}
-
-      
     </div>
 
-    <div class="hero-module__sidebar">
-      <div class="hero-module__sidebar-label">{{ module.sidebar_label|escape_html }}</div>
-      <div class="hero-module__proof-list">
-        {% for item in module.proof_points %}
-          <div class="hero-module__proof-item" style="--proof-border-color: rgba({{ item.border_color.color|convert_rgb }}, {{ item.border_color.opacity / 100 }});">
-            <span class="hero-module__proof-title">{{ item.title|escape_html }}</span>
-            {% if item.description %}<span class="hero-module__proof-description">{{ item.description|escape_html }}</span>{% endif %}
-          </div>
-        {% endfor %}
+    {% if module.show_sidebar %}
+      <div class="hero-module__sidebar">
+        <div class="hero-module__sidebar-label">{{ module.sidebar_label|escape_html }}</div>
+        <div class="hero-module__proof-list">
+          {% for item in module.proof_points %}
+            <div class="hero-module__proof-item" style="--proof-border-color: rgba({{ item.border_color.color|convert_rgb }}, {{ item.border_color.opacity / 100 }});">
+              <span class="hero-module__proof-title">{{ item.title|escape_html }}</span>
+              {% if item.description %}<span class="hero-module__proof-description">{{ item.description|escape_html }}</span>{% endif %}
+            </div>
+          {% endfor %}
+        </div>
       </div>
-    </div>
+    {% endif %}
   </div>
 
   <div class="hero-module__footer">
@@ -409,9 +444,11 @@
     {% endfor %}
   </div>
 
+  {% if module.rotating_phrases|length > 0 %}
   <ul class="hero-module__phrase-data" data-hero-phrase-data hidden aria-hidden="true">
     {% for item in module.rotating_phrases %}
       <li data-hero-phrase="{{ item.phrase|escape_attr }}" data-hero-has-image="{{ 'true' if item.background_image.src else 'false' }}" data-hero-diagram="{{ item.diagram_style|default('none')|escape_attr }}" data-hero-svg-file="{{ item.svg_file|default('')|escape_attr }}"></li>
     {% endfor %}
   </ul>
+  {% endif %}
 </section>

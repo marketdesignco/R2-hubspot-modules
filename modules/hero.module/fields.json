@@ -1,4 +1,16 @@
 [ {
+  "id" : "hero_layout",
+  "name" : "hero_layout",
+  "label" : "Hero Layout",
+  "help_text" : "Simple = clean text hero with no rotating phrases, slider, or background image/SVG. Advanced = full existing hero with optional rotating phrases, slider, and background visuals.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "simple", "Hero Layout Simple" ], [ "advanced", "Hero Layout Advanced" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "simple"
+}, {
   "id" : "eyebrow",
   "name" : "eyebrow",
   "label" : "Eyebrow",
@@ -32,11 +44,11 @@
   "id" : "rotating_phrases",
   "name" : "rotating_phrases",
   "label" : "Rotating phrases",
-  "help_text" : "The highlighted middle line of the headline rotates through these phrases with a typewriter effect. Each phrase has a matching built-in animated diagram; upload your own SVG or image below to replace it without any code changes.",
+  "help_text" : "The highlighted middle line of the headline rotates through these phrases with a typewriter effect. Available in both Hero Layout Simple and Advanced. Each phrase's background diagram/SVG/image below is only shown in Hero Layout Advanced.",
   "required" : false,
   "locked" : false,
   "occurrence" : {
-    "min" : 1,
+    "min" : 0,
     "max" : 8,
     "sorting_label_field" : "rotating_phrases.phrase",
     "default" : 6
@@ -55,7 +67,7 @@
     "id" : "rotating_phrases.diagram_style",
     "name" : "diagram_style",
     "label" : "Background diagram",
-    "help_text" : "Picks a built-in animated diagram to show behind this phrase. Ignored if a custom SVG or image is uploaded below.",
+    "help_text" : "Picks a built-in animated diagram to show behind this phrase. Ignored if a custom SVG or image is uploaded below. Only used when Hero Layout is set to Advanced — ignored entirely in Hero Layout Simple.",
     "required" : false,
     "locked" : false,
     "display" : "select",
@@ -71,7 +83,7 @@
     "id" : "rotating_phrases.svg_file",
     "name" : "svg_file",
     "label" : "Custom SVG file (optional, overrides the built-in diagram)",
-    "help_text" : "Upload your own .svg file to fully replace the built-in animated diagram for this phrase — no code changes needed. Takes priority over the background image below.",
+    "help_text" : "Upload your own .svg file to fully replace the built-in animated diagram for this phrase — no code changes needed. Takes priority over the background image below. Only used when Hero Layout is set to Advanced — ignored entirely in Hero Layout Simple.",
     "required" : false,
     "locked" : false,
     "type" : "file",
@@ -80,6 +92,7 @@
     "id" : "rotating_phrases.background_image",
     "name" : "background_image",
     "label" : "Background image (optional, overrides both of the above)",
+    "help_text" : "Only used when Hero Layout is set to Advanced — ignored entirely in Hero Layout Simple.",
     "required" : false,
     "locked" : false,
     "responsive" : false,
@@ -230,6 +243,77 @@
   "display_width" : null,
   "default" : "cta-primary"
 }, {
+  "id" : "show_cta_2",
+  "name" : "show_cta_2",
+  "label" : "Show second button",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false
+}, {
+  "id" : "button_text_2",
+  "name" : "button_text_2",
+  "label" : "Second button text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Learn more"
+}, {
+  "id" : "button_link_2",
+  "name" : "button_link_2",
+  "label" : "Second button link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION" ],
+  "show_advanced_rel_options" : true,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "",
+      "type" : "EXTERNAL"
+    },
+    "no_follow" : false,
+    "open_in_new_tab" : false
+  }
+}, {
+  "id" : "cta_2",
+  "name" : "cta_2",
+  "label" : "Or select a CTA (second)",
+  "help_text" : "Optional. Renders a HubSpot CTA in place of the second button above when no Second button link is set.",
+  "required" : false,
+  "locked" : false,
+  "type" : "cta",
+  "display_width" : null
+}, {
+  "id" : "style_cta_2",
+  "name" : "style_cta_2",
+  "label" : "Second CTA Style",
+  "required" : false,
+  "locked" : false,
+  "type" : "choice",
+  "display" : "select",
+  "choices" : [
+    [ "cta-primary", "Primary" ],
+    [ "cta-secondary", "Secondary (Outline)" ]
+  ],
+  "display_width" : null,
+  "default" : "cta-secondary"
+}, {
+  "id" : "show_sidebar",
+  "name" : "show_sidebar",
+  "label" : "Show Sidebar",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
   "id" : "sidebar_label",
   "name" : "sidebar_label",
   "label" : "Sidebar label",
@@ -238,7 +322,15 @@
   "allow_new_line" : false,
   "type" : "text",
   "display_width" : null,
-  "default" : "Proof points"
+  "default" : "Proof points",
+  "visibility" : {
+    "controlling_field" : "show_sidebar",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
 }, {
   "id" : "proof_points",
   "name" : "proof_points",
@@ -317,7 +409,15 @@
       "color" : "#B7C9C5",
       "opacity" : 100
     }
-  } ]
+  } ],
+  "visibility" : {
+    "controlling_field" : "show_sidebar",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
 }, {
   "id" : "highlights",
   "name" : "highlights",

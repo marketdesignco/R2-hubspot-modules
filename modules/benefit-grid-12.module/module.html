@@ -5,6 +5,9 @@
     background: #FFFFFF;
     {{ module.styles.spacing_desktop.css }}
   }
+  .benefit-grid-12-module.benefit-grid-12-module--dark {
+  background: #082750;
+}
   @media (max-width: 992px) {
     .benefit-grid-12-module {
       {{ module.styles.spacing_mobile.css }}
@@ -14,20 +17,25 @@
 </style>
 {% end_require_css %}
 
-<section class="benefit-grid-12-module" id="benefit-grid-12" data-screen-label="Benefit grid">
+<section class="benefit-grid-12-module{% if module.dark_mode %} benefit-grid-12-module--dark{% endif %}" id="benefit-grid-12" data-screen-label="Benefit grid">
   <div class="content-wrapper">
     <div class="benefit-grid-12-module__header">
       <div class="benefit-grid-12-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
       <div class="benefit-grid-12-module__heading">{{ module.heading|sanitize_html }}</div>
       <div class="benefit-grid-12-module__intro">{{ module.intro|sanitize_html }}</div>
+      {% if module.accent_phrase %}
+        <div class="benefit-grid-12-module__accent-phrase">{{ module.accent_phrase|sanitize_html }}</div>
+      {% endif %}
     </div>
     <div class="benefit-grid-12-module__grid">
       {% for benefit in module.benefits %}
         <div class="benefit-grid-12-module__card" style="--accent-color: rgba({{ benefit.accent_color.color|convert_rgb }}, {{ benefit.accent_color.opacity / 100 }});">
-          <div class="benefit-grid-12-module__top">
-            <span class="benefit-grid-12-module__dot"></span>
-            <span class="benefit-grid-12-module__number">{% if loop.index < 10 %}0{{ loop.index }}{% else %}{{ loop.index }}{% endif %}</span>
-          </div>
+          {% if module.show_numbers %}
+            <div class="benefit-grid-12-module__top">
+              <span class="benefit-grid-12-module__dot"></span>
+              <span class="benefit-grid-12-module__number">{% if loop.index < 10 %}0{{ loop.index }}{% else %}{{ loop.index }}{% endif %}</span>
+            </div>
+          {% endif %}
           <h6 class="benefit-grid-12-module__title">{{ benefit.title|escape_html }}</h6>
           <p class="benefit-grid-12-module__description">{{ benefit.description|escape_html }}</p>
         </div>

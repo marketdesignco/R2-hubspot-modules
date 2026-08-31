@@ -1,4 +1,25 @@
 [ {
+  "id" : "section_eyebrow",
+  "name" : "section_eyebrow",
+  "label" : "Eyebrow",
+  "help_text" : "Optional eyebrow rendered above the case study section. Leave empty to render nothing.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Optional heading rendered above the case study section. Leave empty to render nothing. Bold a phrase to apply the R2 Caveat script accent treatment.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : ""
+}, {
   "id" : "image",
   "name" : "image",
   "label" : "Image",
@@ -43,6 +64,16 @@
   "type" : "text",
   "display_width" : null,
   "default" : "placeholder stat"
+}, {
+  "id" : "intro_text",
+  "name" : "intro_text",
+  "label" : "Intro paragraph",
+  "help_text" : "Optional paragraph rendered above the quote. Leave empty to render nothing.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : ""
 }, {
   "id" : "quote",
   "name" : "quote",

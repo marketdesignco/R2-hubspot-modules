@@ -19,6 +19,18 @@
   "display_width" : null,
   "default" : "Your <strong>Managed Services</strong> partner."
 }, {
+  "id" : "heading_width",
+  "name" : "heading_width",
+  "label" : "Heading width",
+  "help_text" : "Controls the max-width of the heading on desktop only. Does not affect the section container width; the heading always uses 100% width on mobile.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "100", "100% — Full width" ], [ "75", "75%" ], [ "66.66", "66.66%" ], [ "50", "50%" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "100"
+}, {
   "id" : "description",
   "name" : "description",
   "label" : "Description",
@@ -28,6 +40,35 @@
   "type" : "richtext",
   "display_width" : null,
   "default" : "<p>Nearly two decades. One discipline. <strong>We don't pitch promises; we prove outcomes.</strong> Better is our baseline.</p>"
+}, {
+  "id" : "paragraph_columns",
+  "name" : "paragraph_columns",
+  "label" : "Paragraph columns",
+  "help_text" : "OFF = 1 column (default). ON = 2 columns, adding a second paragraph field next to the existing one.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false
+}, {
+  "id" : "paragraph_secondary",
+  "name" : "paragraph_secondary",
+  "label" : "Paragraph - Column 2",
+  "help_text" : "Only shown/rendered when \"Paragraph columns\" is enabled.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Use this space to add additional supporting content, context, or messaging for the page.</p>",
+  "visibility" : {
+    "controlling_field" : "paragraph_columns",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
 }, {
   "id" : "show_primary_button",
   "name" : "show_primary_button",
@@ -219,7 +260,7 @@
     "display_width" : null,
     "default" : {
       "padding" : {
-        "top" : { "value" : 0, "units" : "px" },
+        "top" : { "value" : 80, "units" : "px" },
         "bottom" : { "value" : 0, "units" : "px" },
         "left" : { "value" : 0, "units" : "px" },
         "right" : { "value" : 0, "units" : "px" }
@@ -239,7 +280,7 @@
     "display_width" : null,
     "default" : {
       "padding" : {
-        "top" : { "value" : 0, "units" : "px" },
+        "top" : { "value" : 60, "units" : "px" },
         "bottom" : { "value" : 0, "units" : "px" },
         "left" : { "value" : 0, "units" : "px" },
         "right" : { "value" : 0, "units" : "px" }

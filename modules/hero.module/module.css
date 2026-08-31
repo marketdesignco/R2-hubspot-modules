@@ -187,6 +187,23 @@
   margin: 16px 0 24px;
 }
 .hero-module__description strong { color: #fff; font-weight: 700; }
+
+/* Hero Layout Simple: tighter title spacing (no background diagram to leave
+   room for) and a full-width description (no split-column visual to share
+   space with). */
+
+.hero-module--simple .hero-module__title {
+  margin-bottom: 20px;
+}
+.hero-module--simple .hero-module__description {
+  max-width: none;
+  width: 100%;
+}
+.hero-module__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
 .hero-module__cta {
   width: fit-content;
 }
@@ -344,6 +361,10 @@
     max-width: none;
   }
 
+  .hero-module__buttons {
+    flex-direction: column;
+    align-items: flex-start;
+  }
   .hero-module__cta {
     width: 100%;
   }

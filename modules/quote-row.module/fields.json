@@ -44,6 +44,26 @@
       "opacity" : 100
     }
   }, {
+    "id" : "quotes.card_title",
+    "name" : "card_title",
+    "label" : "Card title",
+    "help_text" : "Optional. Rendered above the quote. Leave empty to render nothing.",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "quotes.card_description",
+    "name" : "card_description",
+    "label" : "Card description",
+    "help_text" : "Optional. Rendered above the quote. Leave empty to render nothing.",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : ""
+  }, {
     "id" : "quotes.quote_text",
     "name" : "quote_text",
     "label" : "Quote",

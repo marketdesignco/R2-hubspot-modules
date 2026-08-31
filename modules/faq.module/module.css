@@ -45,10 +45,38 @@
 }
 
 .faq-module__question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
   font-size: 16px;
   font-weight: 700;
   color: var(--color-navy-blue);
   margin: 0 0 8px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-module__question::marker,
+.faq-module__question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-module__toggle {
+  font-family: var(--font-secondary);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primary-blue);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.faq-module__toggle::before {
+  content: "+";
+}
+
+.faq-module__item[open] .faq-module__toggle::before {
+  content: "\2212";
 }
 
 .faq-module__answer p {
@@ -60,6 +88,11 @@
 
 .faq-module__answer p + p {
   margin-top: 12px;
+}
+
+.faq-module__link {
+  display: inline-block;
+  margin-top: 24px;
 }
 
 /* Responsive: this is already a single-column reading layout at every width, so no

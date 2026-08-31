@@ -206,6 +206,17 @@
     }
   } ]
 }, {
+  "id" : "card_columns",
+  "name" : "card_columns",
+  "label" : "Card Columns",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "2", "2 Columns" ], [ "3", "3 Columns" ], [ "4", "4 Columns" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "3"
+}, {
   "id" : "styles",
   "name" : "styles",
   "label" : "Section spacing",

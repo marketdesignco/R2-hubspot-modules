@@ -39,6 +39,12 @@
     max-width: 460px;
     margin: 0;
   }
+  .managed-services-module__description p {
+    margin: 0 0 1em;
+  }
+  .managed-services-module__description p:last-child {
+    margin-bottom: 0;
+  }
   .managed-services-module__buttons {
     display: flex;
     gap: 14px;
@@ -49,6 +55,14 @@
   }
   .managed-services-module__inner--reversed .managed-services-module__secondary {
     order: 1;
+  }
+  .managed-services-module__stats-heading {
+    margin: 0 0 16px;
+  }
+  .managed-services-module__stats-heading * {
+    font-weight: 700;
+    color: #082750;
+    margin: 0;
   }
   .managed-services-module__stats {
     display: grid;
@@ -74,6 +88,31 @@
     line-height: 1.6;
     margin:0px;
 
+  }
+
+  /* Background: Dark — additive, does not alter the Light styles above */
+
+  .managed-services-module.is-dark {
+    background: var(--color-navy-blue);
+    border-bottom-color: rgba(255,255,255,.08);
+  }
+  .managed-services-module.is-dark .managed-services-module__heading h2 {
+    color: #B7C9C5;
+  }
+  .managed-services-module.is-dark .managed-services-module__description {
+    color: rgba(255,255,255,.55);
+  }
+  .managed-services-module.is-dark .managed-services-module__stats-heading * {
+    color: #B7C9C5;
+  }
+  .managed-services-module.is-dark .managed-services-module__stat {
+    border-color: rgba(255,255,255,.15);
+  }
+  .managed-services-module.is-dark .managed-services-module__stat-value {
+    color: #FFFFFF;
+  }
+  .managed-services-module.is-dark .managed-services-module__stat-label {
+    color: rgba(255,255,255,.55);
   }
 
   /* Responsive: collapse to a single column below 992px */
@@ -105,12 +144,14 @@
 </style>
 {% end_require_css %}
 
-<section class="managed-services-module" id="managed-services" data-screen-label="Managed services">
+<section class="managed-services-module{% if module.background == "dark" %} is-dark{% endif %}" id="managed-services" data-screen-label="Managed services">
   <div class="content-wrapper managed-services-module__inner{% if module.position == "left" %} managed-services-module__inner--reversed{% endif %}">
     <div class="managed-services-module__content">
       <div class="managed-services-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
       <div class="managed-services-module__heading">{{ module.heading|sanitize_html }}</div>
-      <p class="managed-services-module__description">{{ module.description|escape_html }}</p>
+      {% if module.description %}
+        <div class="managed-services-module__description">{{ module.description }}</div>
+      {% endif %}
       <div class="managed-services-module__buttons">
         {% if module.show_primary_button %}
           <div class="custom-cta btn-mobile {{ module.primary_style_cta }}">
@@ -177,6 +218,9 @@
 %}
         </div>
       {% else %}
+        {% if module.stats_heading %}
+          <div class="managed-services-module__stats-heading">{{ module.stats_heading }}</div>
+        {% endif %}
         <div class="managed-services-module__stats">
           {% for stat in module.stats %}
             <div class="managed-services-module__stat" style="--accent-color: rgba({{ stat.accent_color.color|convert_rgb }}, {{ stat.accent_color.opacity / 100 }});">

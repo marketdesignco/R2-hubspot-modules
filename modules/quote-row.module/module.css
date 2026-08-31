@@ -44,8 +44,31 @@
   background: #FFFFFF;
 }
 
+.quote-row-module__card-title * {
+  color: #082750;
+  margin: 0;
+}
+
+.quote-row-module__card-description {
+  line-height: 1.8;
+  color: rgba(8,39,80,.6);
+}
+
+.quote-row-module__card-description p {
+  margin: 0 0 1em;
+}
+
+.quote-row-module__card-description p:last-child {
+  margin-bottom: 0;
+}
+
 .quote-row-module__mark {
   color: rgba(13,111,252,.15);
+}
+
+.quote-row-module__quote {
+  border-left: 3px solid var(--accent-color, #0D6FFC);
+  padding-left: 16px;
 }
 
 .quote-row-module__quote p {
@@ -65,17 +88,7 @@
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: rgba(8,39,80,.04);
-  border: 1px dashed rgba(8,39,80,.2);
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: rgba(8,39,80,.35);
   overflow: hidden;
 }
 

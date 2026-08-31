@@ -29,6 +29,16 @@
   margin: 0;
 }
 
+.benefit-grid-12-module__accent-phrase {
+  margin-top: 16px;
+}
+
+.benefit-grid-12-module__accent-phrase * {
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  color: #0D6FFC;
+}
+
 .benefit-grid-12-module__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -86,6 +96,52 @@
   line-height: 1.5;
   color: #8A96A6;
   margin: 0;
+}
+
+/* Dark Mode: recolors only — grid/card structure, spacing, and
+   responsive behavior are untouched. Compound class selectors are used
+   throughout so these overrides win regardless of whether module.css or
+   the module's own inline require_css block (which sets the light-mode
+   background) is concatenated first. */
+
+
+.benefit-grid-12-module--dark .benefit-grid-12-module__heading h2,
+.benefit-grid-12-module--dark .benefit-grid-12-module__heading h3,
+.benefit-grid-12-module--dark .benefit-grid-12-module__heading h4 {
+  color: #B7C9C5;
+}
+
+.benefit-grid-12-module--dark .benefit-grid-12-module__intro p {
+  color: rgba(255,255,255,.55);
+}
+
+.benefit-grid-12-module--dark .benefit-grid-12-module__accent-phrase * {
+      letter-spacing: 1.6px;
+    color: rgba(183, 201, 197, .7);
+   font-family: var(--font-secondary);
+
+}
+
+.benefit-grid-12-module--dark .benefit-grid-12-module__grid {
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.08);
+}
+
+.benefit-grid-12-module--dark .benefit-grid-12-module__card {
+  background: #0B2E56;
+  border-left: 3px solid var(--accent-color, #0D6FFC);
+}
+
+.benefit-grid-12-module--dark .benefit-grid-12-module__card:hover {
+  background-color: rgba(255,255,255,.04);
+}
+
+.benefit-grid-12-module--dark .benefit-grid-12-module__title {
+  color: #FFFFFF;
+}
+
+.benefit-grid-12-module--dark .benefit-grid-12-module__description {
+  color: rgba(255,255,255,.55);
 }
 
 /* Responsive: step down through the theme's established breakpoints —

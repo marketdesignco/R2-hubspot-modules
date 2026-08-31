@@ -44,6 +44,60 @@
           {% endif %}
         </div>
       {% endif %}
+      {% if module.content_cards|length > 0 %}
+        <div class="media-band-module__cards{% if module.card_columns == "2" %} media-band-module__cards--cols-2{% endif %}">
+          {% for card in module.content_cards %}
+            <div class="media-band-module__card" style="--card-accent-color: rgba({{ card.border_color.color|convert_rgb }}, {{ card.border_color.opacity / 100 }});">
+              {% if card.title %}
+                <div class="media-band-module__card-title">{{ card.title|sanitize_html }}</div>
+              {% endif %}
+              {% if card.description %}
+                <div class="media-band-module__card-description">{{ card.description|sanitize_html }}</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% if module.bottom_links|length > 0 %}
+        <div class="media-band-module__links">
+          {% for item in module.bottom_links %}
+            {% if item.link_type == "button" %}
+              {% if item.button_link_type == "cta" %}
+                {% if item.cta %}
+                  <div class="custom-cta {{ item.button_style }}">
+                    {% cta guid="{{ item.cta }}" %}
+                  </div>
+                {% endif %}
+              {% else %}
+                {% if item.button_link.url.href %}
+                  {% set bhref = item.button_link.url.href %}
+                  {% if item.button_link.url.type == "EMAIL_ADDRESS" %}
+                    {% set bhref = "mailto:" + bhref %}
+                  {% elif item.button_link.url.type == "PHONE_NUMBER" %}
+                    {% set bhref = "tel:" + bhref %}
+                  {% endif %}
+                  <div class="custom-cta {{ item.button_style }}">
+                    <a
+                      {% if item.button_link.url.type == "CALL_TO_ACTION" %}
+                        href="{{ bhref }}"
+                      {% else %}
+                        href="{{ bhref|escape_url }}"
+                      {% endif %}
+                      {% if item.button_link.open_in_new_tab %}target="_blank"{% endif %}
+                      {% if item.button_link.rel %}rel="{{ item.button_link.rel|join(" ")|escape_attr }}"{% endif %}
+                    >
+                      {{ item.button_text|escape_html }}
+                    </a>
+                  </div>
+                {% endif %}
+              {% endif %}
+            {% else %}
+              <a class="media-band-module__link {{ item.link_style }}" href="{{ item.link.url.href|escape_url }}"
+                {% if item.link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ item.link_text|escape_html }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
     <div class="media-band-module__media">
       {% if module.media_type == "video" %}

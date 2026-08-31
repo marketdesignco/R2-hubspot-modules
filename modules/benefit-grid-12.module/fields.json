@@ -28,6 +28,27 @@
   "display_width" : null,
   "default" : "<p>Practical solutions designed to help your team work smarter and move forward.</p>"
 }, {
+  "id" : "accent_phrase",
+  "name" : "accent_phrase",
+  "label" : "Accent phrase",
+  "help_text" : "Optional. Rendered below the heading/intro. Leave empty to render nothing. Bold text automatically uses the R2 Caveat script treatment, e.g. <strong>twelve advantages, one program ↓</strong>",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "show_numbers",
+  "name" : "show_numbers",
+  "label" : "Show Numbers",
+  "help_text" : "Toggles the numbered dot/index shown above each card's title.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
   "id" : "benefits",
   "name" : "benefits",
   "label" : "Benefits",
@@ -127,6 +148,18 @@
     "title" : "Long-Term Accountability",
     "description" : "Placeholder copy — a partner that stays engaged after go-live."
   } ]
+}, {
+  "id" : "dark_mode",
+  "name" : "dark_mode",
+  "label" : "Dark Mode",
+  "help_text" : "Switches the section to a dark navy background with light content colors, matching the R2 dark-section treatment used elsewhere. Layout is unaffected.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false,
+  "tab" : "STYLE"
 }, {
   "id" : "styles",
   "name" : "styles",

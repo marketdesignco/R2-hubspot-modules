@@ -78,4 +78,144 @@
   ],
   "display_width" : null,
   "default" : "cta-primary"
+}, {
+  "id" : "show_cta_2",
+  "name" : "show_cta_2",
+  "label" : "Show Second CTA",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false
+}, {
+  "id" : "cta_2_type",
+  "name" : "cta_2_type",
+  "label" : "Second CTA type",
+  "help_text" : "Choose whether the second CTA is a regular link or a HubSpot CTA.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "link", "Link" ], [ "cta", "HubSpot CTA" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "link",
+  "visibility" : {
+    "controlling_field" : "show_cta_2",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
+}, {
+  "id" : "button_text_2",
+  "name" : "button_text_2",
+  "label" : "Second button text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Call (561) 515-6800",
+  "visibility" : {
+    "boolean_operator" : "AND",
+    "criteria" : [ {
+      "controlling_field" : "show_cta_2",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "true",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    }, {
+      "controlling_field" : "cta_2_type",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "link",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    } ]
+  }
+}, {
+  "id" : "button_link_2",
+  "name" : "button_link_2",
+  "label" : "Second button link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION" ],
+  "show_advanced_rel_options" : true,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "",
+      "type" : "EXTERNAL"
+    },
+    "no_follow" : false,
+    "open_in_new_tab" : false
+  },
+  "visibility" : {
+    "boolean_operator" : "AND",
+    "criteria" : [ {
+      "controlling_field" : "show_cta_2",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "true",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    }, {
+      "controlling_field" : "cta_2_type",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "link",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    } ]
+  }
+}, {
+  "id" : "cta_2",
+  "name" : "cta_2",
+  "label" : "Second HubSpot CTA",
+  "help_text" : "Used when Second CTA type is set to HubSpot CTA.",
+  "required" : false,
+  "locked" : false,
+  "type" : "cta",
+  "display_width" : null,
+  "visibility" : {
+    "boolean_operator" : "AND",
+    "criteria" : [ {
+      "controlling_field" : "show_cta_2",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "true",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    }, {
+      "controlling_field" : "cta_2_type",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "cta",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    } ]
+  }
+}, {
+  "id" : "style_cta_2",
+  "name" : "style_cta_2",
+  "label" : "Second CTA style",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "cta-primary", "Primary" ], [ "cta-secondary", "Secondary (Outline)" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "cta-secondary",
+  "visibility" : {
+    "controlling_field" : "show_cta_2",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
 } ]

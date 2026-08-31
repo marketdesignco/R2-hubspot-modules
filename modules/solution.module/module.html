@@ -13,16 +13,31 @@
 </style>
 {% end_require_css %}
 
-<section class="solution-module" id="solution" data-screen-label="The solution">
-  <div class="solution-module__glow"></div>
-  <div class="content-wrapper solution-module__inner">
-    <div class="solution-module__content">
-      <div class="solution-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
-      <div class="solution-module__heading">{{ module.heading|sanitize_html }}</div>
-      <div class="solution-module__description">{{ module.description|sanitize_html }}</div>
+<section class="solution-module{% if module.background == "light" %} solution-module--light{% endif %}" id="solution" data-screen-label="The solution">
+  {% if module.layout == "layout_2" %}
+    <div class="content-wrapper solution-module__richtext{% if module.columns == "two_columns" %} solution-module__richtext--2col{% endif %}">
+      <div class="solution-module__richtext-col">{{ module.rich_text_1|sanitize_html }}</div>
+      {% if module.columns == "two_columns" %}
+        {% if module.rich_text_2_as_quote %}
+          <div class="solution-module__quote">
+            <div class="solution-module__quote-text">{{ module.rich_text_2|sanitize_html }}</div>
+          </div>
+        {% else %}
+          <div class="solution-module__richtext-col">{{ module.rich_text_2|sanitize_html }}</div>
+        {% endif %}
+      {% endif %}
     </div>
-    <div class="solution-module__quote">
-      <h4 class="solution-module__quote-text">{{ module.quote|escape_html }}</h4>
+  {% else %}
+    <div class="solution-module__glow"></div>
+    <div class="content-wrapper solution-module__inner">
+      <div class="solution-module__content">
+        <div class="solution-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+        <div class="solution-module__heading">{{ module.heading|sanitize_html }}</div>
+        <div class="solution-module__description">{{ module.description|sanitize_html }}</div>
+      </div>
+      <div class="solution-module__quote">
+        <h4 class="solution-module__quote-text">{{ module.quote|escape_html }}</h4>
+      </div>
     </div>
-  </div>
+  {% endif %}
 </section>

@@ -1,4 +1,15 @@
 [ {
+  "id" : "layout",
+  "name" : "layout",
+  "label" : "Layout",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "layout_1", "Layout 1" ], [ "layout_2", "Layout 2" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "layout_1"
+}, {
   "id" : "eyebrow",
   "name" : "eyebrow",
   "label" : "Eyebrow",
@@ -7,7 +18,15 @@
   "allow_new_line" : false,
   "type" : "text",
   "display_width" : null,
-  "default" : "The solution"
+  "default" : "The solution",
+  "visibility" : {
+    "controlling_field" : "layout",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "layout_1",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
 }, {
   "id" : "heading",
   "name" : "heading",
@@ -17,7 +36,15 @@
   "locked" : false,
   "type" : "richtext",
   "display_width" : null,
-  "default" : "<h2>Segmentation and Fabric: <span style=\"color:#FFFFFF;\">control that follows the user,</span> <strong>not the port</strong></h2>"
+  "default" : "<h2>Segmentation and Fabric: <span style=\"color:#FFFFFF;\">control that follows the user,</span> <strong>not the port</strong></h2>",
+  "visibility" : {
+    "controlling_field" : "layout",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "layout_1",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
 }, {
   "id" : "description",
   "name" : "description",
@@ -27,7 +54,15 @@
   "locked" : false,
   "type" : "richtext",
   "display_width" : null,
-  "default" : "<p>Segmentation and Fabric is an identity-driven enforcement model. Policy is tied to who the user is and what the device is — not where it happens to connect. That policy is applied consistently across your environment: campus, branch, data center, and cloud.</p><p>R2 builds this on Cisco's Software-Defined Access (SDA) platform. SDA creates a centralized fabric where access intent is defined once and enforced everywhere. Configuration changes deploy consistently across sites. Unknown devices get classified. Policies do not drift because they are not maintained device by device.</p><p><strong>This is not a product refresh. It is an operational shift</strong> — from a network your team manages manually to one that enforces policy automatically and reports on it clearly.</p>"
+  "default" : "<p>Segmentation and Fabric is an identity-driven enforcement model. Policy is tied to who the user is and what the device is — not where it happens to connect. That policy is applied consistently across your environment: campus, branch, data center, and cloud.</p><p>R2 builds this on Cisco's Software-Defined Access (SDA) platform. SDA creates a centralized fabric where access intent is defined once and enforced everywhere. Configuration changes deploy consistently across sites. Unknown devices get classified. Policies do not drift because they are not maintained device by device.</p><p><strong>This is not a product refresh. It is an operational shift</strong> — from a network your team manages manually to one that enforces policy automatically and reports on it clearly.</p>",
+  "visibility" : {
+    "controlling_field" : "layout",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "layout_1",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
 }, {
   "id" : "quote",
   "name" : "quote",
@@ -37,7 +72,118 @@
   "allow_new_line" : false,
   "type" : "text",
   "display_width" : null,
-  "default" : "\"Authentication is the starting line, not the finish line. Every session inside the network needs to be classified, authorized, and enforced.\""
+  "default" : "\"Authentication is the starting line, not the finish line. Every session inside the network needs to be classified, authorized, and enforced.\"",
+  "visibility" : {
+    "controlling_field" : "layout",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "layout_1",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
+}, {
+  "id" : "columns",
+  "name" : "columns",
+  "label" : "Columns",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "one_column", "1 Column" ], [ "two_columns", "2 Columns" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "one_column",
+  "visibility" : {
+    "controlling_field" : "layout",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "layout_2",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
+}, {
+  "id" : "rich_text_1",
+  "name" : "rich_text_1",
+  "label" : "Rich Text 1",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "",
+  "visibility" : {
+    "controlling_field" : "layout",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "layout_2",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
+}, {
+  "id" : "rich_text_2",
+  "name" : "rich_text_2",
+  "label" : "Rich Text 2",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "",
+  "visibility" : {
+    "boolean_operator" : "AND",
+    "criteria" : [ {
+      "controlling_field" : "layout",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "layout_2",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    }, {
+      "controlling_field" : "columns",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "two_columns",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    } ]
+  }
+}, {
+  "id" : "rich_text_2_as_quote",
+  "name" : "rich_text_2_as_quote",
+  "label" : "Display Second Rich Text as Quote",
+  "help_text" : "Renders Rich Text 2 using the same quote styling as the Layout 1 handwritten quote (vertical line + script typography), while keeping it a fully editable Rich Text field.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false,
+  "visibility" : {
+    "boolean_operator" : "AND",
+    "criteria" : [ {
+      "controlling_field" : "layout",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "layout_2",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    }, {
+      "controlling_field" : "columns",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "two_columns",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    } ]
+  }
+}, {
+  "id" : "background",
+  "name" : "background",
+  "label" : "Background",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "dark", "Dark" ], [ "light", "Light" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "dark"
 }, {
   "id" : "styles",
   "name" : "styles",

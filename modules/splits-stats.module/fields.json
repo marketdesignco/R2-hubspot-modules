@@ -1,4 +1,15 @@
 [ {
+  "id" : "background",
+  "name" : "background",
+  "label" : "Background",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "light", "Light" ], [ "dark", "Dark" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "light"
+}, {
   "id" : "eyebrow",
   "name" : "eyebrow",
   "label" : "Eyebrow",
@@ -23,10 +34,9 @@
   "label" : "Description",
   "required" : false,
   "locked" : false,
-  "allow_new_line" : false,
-  "type" : "text",
+  "type" : "richtext",
   "display_width" : null,
-  "default" : "Placeholder copy — 24/7 NOC, monitoring, and co-managed operations framed as extending the client's team without adding headcount. Two or three sentences from transcript messaging."
+  "default" : "<p>Placeholder copy — 24/7 NOC, monitoring, and co-managed operations framed as extending the client's team without adding headcount. Two or three sentences from transcript messaging.</p>"
 }, {
   "id" : "show_primary_button",
   "name" : "show_primary_button",
@@ -81,7 +91,7 @@
   "required" : false,
   "locked" : false,
   "display" : "select",
-  "choices" : [ [ "cta-primary", "Primary" ], [ "cta-secondary", "Secondary (Outline)" ] ],
+  "choices" : [ [ "cta-primary", "Primary" ], [ "cta-secondary", "Secondary (Outline)" ], [ "cta-secondary-dark", "Secondary (Dark)" ] ],
   "multiple" : false,
   "reordering_enabled" : true,
   "preset" : null,
@@ -142,7 +152,7 @@
   "required" : false,
   "locked" : false,
   "display" : "select",
-  "choices" : [ [ "cta-primary", "Primary" ], [ "cta-secondary", "Secondary (Outline)" ] ],
+  "choices" : [ [ "cta-primary", "Primary" ], [ "cta-secondary", "Secondary (Outline)" ], [ "cta-secondary-dark", "Secondary (Dark)" ] ],
   "multiple" : false,
   "reordering_enabled" : true,
   "preset" : null,
@@ -193,6 +203,21 @@
   "type" : "choice",
   "display_width" : null,
   "default" : "right"
+}, {
+  "id" : "stats_heading",
+  "name" : "stats_heading",
+  "label" : "Statistics heading",
+  "help_text" : "Optional heading rendered above the stats grid. Leave empty to render nothing.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "",
+  "visibility" : {
+    "controlling_field" : "content_type",
+    "controlling_value_regex" : "stats",
+    "operator" : "EQUAL"
+  }
 }, {
   "id" : "stats",
   "name" : "stats",
