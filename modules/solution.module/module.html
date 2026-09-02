@@ -31,7 +31,9 @@
     <div class="solution-module__glow"></div>
     <div class="content-wrapper solution-module__inner">
       <div class="solution-module__content">
-        <div class="solution-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+        {% if module.eyebrow %}
+          <div class="solution-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+        {% endif %}
         <div class="solution-module__heading">{{ module.heading|sanitize_html }}</div>
         <div class="solution-module__description">{{ module.description|sanitize_html }}</div>
       </div>

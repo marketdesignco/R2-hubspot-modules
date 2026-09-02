@@ -127,7 +127,9 @@
 
 <section class="services-module" id="services" data-screen-label="Services">
   <div class="content-wrapper">
-    <div class="services-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+    {% if module.eyebrow %}
+      <div class="services-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+    {% endif %}
     <div class="services-module__header">
       <div class="services-module__heading">{{ module.heading }}</div>
       <div class="services-module__intro">{{ module.intro|sanitize_html }}</div>

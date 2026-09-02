@@ -15,7 +15,9 @@
 
 <section class="faq-module" id="faq" data-screen-label="FAQ">
   <div class="content-wrapper faq-module__container">
-    <div class="faq-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+    {% if module.eyebrow %}
+      <div class="faq-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+    {% endif %}
     <div class="faq-module__heading">{{ module.heading|sanitize_html }}</div>
      {% if module.show_link %}
       <a class="faq-module__link {{ module.link_style }}" href="{{ module.link.url.href|escape_url }}"

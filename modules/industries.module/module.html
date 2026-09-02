@@ -86,7 +86,9 @@
 
 <section class="industries-module" id="industries" data-screen-label="Industries">
   <div class="content-wrapper">
-    <div class="industries-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+    {% if module.eyebrow %}
+      <div class="industries-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+    {% endif %}
     <h2 class="industries-module__heading">{{ module.heading|sanitize_html }}</h2>
     <div class="industries-module__grid{% if module.columns == "3" %} industries-module__grid--3-col{% elif module.columns == "4" %} industries-module__grid--4-col{% endif %}">
       {% for industry in module.industries %}

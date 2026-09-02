@@ -189,7 +189,9 @@
         {% endif %}
       </div>
       <div class="case-study-module__content">
-        <div class="case-study-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+        {% if module.eyebrow %}
+          <div class="case-study-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+        {% endif %}
         <div class="case-study-module__stat">
           <span class="case-study-module__stat-value">{{ module.stat_value|escape_html }}</span>
           <span class="case-study-module__stat-label">{{ module.stat_label|escape_html }}</span>

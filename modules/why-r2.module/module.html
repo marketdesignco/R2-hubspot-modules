@@ -16,7 +16,9 @@
 <section class="why-r2-module" id="why-r2" data-screen-label="Why R2">
   <div class="why-r2-module__glow"></div>
   <div class="content-wrapper why-r2-module__inner">
-    <div class="why-r2-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+    {% if module.eyebrow %}
+      <div class="why-r2-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+    {% endif %}
     <div class="why-r2-module__heading">{{ module.heading|sanitize_html }}</div>
     <div class="why-r2-module__intro">{{ module.intro|sanitize_html }}</div>
     <div class="why-r2-module__grid">

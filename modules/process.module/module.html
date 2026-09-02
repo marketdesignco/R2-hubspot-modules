@@ -164,7 +164,9 @@
 <section class="process-module" id="process" data-screen-label="Process">
   <div class="process-module__glow"></div>
   <div class="content-wrapper process-module__inner">
-    <div class="process-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+    {% if module.eyebrow %}
+      <div class="process-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+    {% endif %}
     <div class="process-module__header">
       <div>
         <div class="process-module__heading">{{ module.heading }}</div>

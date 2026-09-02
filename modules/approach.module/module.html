@@ -16,7 +16,9 @@
 <section class="approach-module" id="approach" data-screen-label="Our approach">
   <div class="content-wrapper approach-module__inner">
     <div class="approach-module__content">
-      <div class="approach-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% if module.eyebrow %}
+        <div class="approach-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% endif %}
       <div class="approach-module__heading">{{ module.heading|sanitize_html }}</div>
       <div class="approach-module__description">{{ module.description|sanitize_html }}</div>
     </div>

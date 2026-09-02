@@ -147,7 +147,9 @@
 <section class="managed-services-module{% if module.background == "dark" %} is-dark{% endif %}" id="managed-services" data-screen-label="Managed services">
   <div class="content-wrapper managed-services-module__inner{% if module.position == "left" %} managed-services-module__inner--reversed{% endif %}">
     <div class="managed-services-module__content">
-      <div class="managed-services-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% if module.eyebrow %}
+        <div class="managed-services-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% endif %}
       <div class="managed-services-module__heading">{{ module.heading|sanitize_html }}</div>
       {% if module.description %}
         <div class="managed-services-module__description">{{ module.description }}</div>

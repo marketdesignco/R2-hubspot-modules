@@ -15,7 +15,9 @@
 
 <section class="outcomes-module" id="outcomes" data-screen-label="Outcomes">
   <div class="content-wrapper">
-    <div class="outcomes-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+    {% if module.eyebrow %}
+      <div class="outcomes-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+    {% endif %}
     <div class="outcomes-module__header">
       <div class="outcomes-module__heading">{{ module.heading|sanitize_html }}</div>
       <div class="outcomes-module__intro">{{ module.intro|sanitize_html }}</div>

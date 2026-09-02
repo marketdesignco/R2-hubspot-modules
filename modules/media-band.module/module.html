@@ -16,7 +16,9 @@
 <section class="media-band-module" id="media-band" data-screen-label="Media band">
   <div class="content-wrapper media-band-module__inner{% if module.position == "left" %} media-band-module__inner--reversed{% endif %}">
     <div class="media-band-module__content">
-      <div class="media-band-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% if module.eyebrow %}
+        <div class="media-band-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% endif %}
       <div class="media-band-module__heading">{{ module.heading|sanitize_html }}</div>
       <div class="media-band-module__description">{{ module.description|sanitize_html }}</div>
       {% if module.show_cta %}

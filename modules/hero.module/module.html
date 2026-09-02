@@ -337,7 +337,9 @@
 
   <div class="hero-module__body">
     <div class="hero-module__content">
-      <div class="hero-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% if module.eyebrow %}
+        <div class="hero-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% endif %}
 
       <div class="hero-module__title">
         <h1>

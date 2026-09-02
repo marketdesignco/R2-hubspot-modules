@@ -16,7 +16,9 @@
 <section class="faq-accordion-module" id="faq-accordion" data-screen-label="FAQ accordion">
   <div class="content-wrapper faq-accordion-module__inner">
     <div class="faq-accordion-module__rail">
-      <div class="faq-accordion-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% if module.eyebrow %}
+        <div class="faq-accordion-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% endif %}
       <div class="faq-accordion-module__heading">{{ module.heading|sanitize_html }}</div>
       <div class="faq-accordion-module__intro">{{ module.intro|sanitize_html }}</div>
       {% if module.aside_text %}

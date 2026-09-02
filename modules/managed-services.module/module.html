@@ -98,7 +98,9 @@
 <section class="managed-services-module" id="managed-services" data-screen-label="Managed services">
   <div class="content-wrapper managed-services-module__inner">
     <div class="managed-services-module__content">
-      <div class="managed-services-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% if module.eyebrow %}
+        <div class="managed-services-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% endif %}
       <div class="managed-services-module__heading">{{ module.heading|sanitize_html }}</div>
       <p class="managed-services-module__description">{{ module.description|escape_html }}</p>
       <div class="managed-services-module__buttons">

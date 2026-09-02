@@ -20,7 +20,9 @@
 <section class="benefit-grid-12-module{% if module.dark_mode %} benefit-grid-12-module--dark{% endif %}" id="benefit-grid-12" data-screen-label="Benefit grid">
   <div class="content-wrapper">
     <div class="benefit-grid-12-module__header">
-      <div class="benefit-grid-12-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% if module.eyebrow %}
+        <div class="benefit-grid-12-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% endif %}
       <div class="benefit-grid-12-module__heading">{{ module.heading|sanitize_html }}</div>
       <div class="benefit-grid-12-module__intro">{{ module.intro|sanitize_html }}</div>
       {% if module.accent_phrase %}

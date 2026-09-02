@@ -16,7 +16,9 @@
 <section class="quote-row-module" id="quote-row" data-screen-label="Quote row">
   <div class="content-wrapper">
     <div class="quote-row-module__header">
-      <div class="quote-row-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% if module.eyebrow %}
+        <div class="quote-row-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% endif %}
       <div class="quote-row-module__heading">{{ module.heading|sanitize_html }}</div>
     </div>
     <div class="quote-row-module__grid">

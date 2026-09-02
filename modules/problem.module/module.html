@@ -16,7 +16,9 @@
 <section class="problem-module" id="problem" data-screen-label="The problem">
   <div class="content-wrapper problem-module__inner">
     <div class="problem-module__content">
-      <div class="problem-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% if module.eyebrow %}
+        <div class="problem-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% endif %}
       <div class="problem-module__heading">{{ module.heading|sanitize_html }}</div>
       <div class="problem-module__description">{{ module.description|sanitize_html }}</div>
     </div>
