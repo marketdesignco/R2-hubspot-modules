@@ -1,4 +1,14 @@
 [ {
+  "id" : "show_eyebrow",
+  "name" : "show_eyebrow",
+  "label" : "Show eyebrow",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
   "id" : "eyebrow",
   "name" : "eyebrow",
   "label" : "Eyebrow",
@@ -68,6 +78,61 @@
     "property" : null,
     "operator" : "EQUAL",
     "access" : null
+  }
+}, {
+  "id" : "show_side_image",
+  "name" : "show_side_image",
+  "label" : "Two-column layout with image",
+  "help_text" : "OFF by default. Only available when \"Paragraph columns\" is disabled. When enabled, the existing hero content renders in one column with an image in the other.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false,
+  "visibility" : {
+    "controlling_field" : "paragraph_columns",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "false",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
+}, {
+  "id" : "side_image",
+  "name" : "side_image",
+  "label" : "Side image",
+  "help_text" : "Rendered next to the hero content when the two-column layout above is enabled.",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "loading" : "lazy",
+    "alt" : "Hero side image"
+  },
+  "visibility_rules" : "ADVANCED",
+  "advanced_visibility" : {
+    "boolean_operator" : "AND",
+    "criteria" : [ {
+      "controlling_field" : "paragraph_columns",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "false",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    }, {
+      "controlling_field" : "show_side_image",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "true",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    } ],
+    "children" : [ ]
   }
 }, {
   "id" : "show_primary_button",
@@ -244,6 +309,34 @@
     "description" : "24/7 monitoring means issues get caught and contained before they become outages.",
     "dot_color" : { "color" : "#DB535F", "opacity" : 100 }
   } ]
+}, {
+  "id" : "background_type",
+  "name" : "background_type",
+  "label" : "Background Type",
+  "help_text" : "None = no background image/overlay is rendered (default). Full Section = the image covers the whole hero with a subtle readability overlay behind all content. Right 50% = the image fills only the right half of the hero as a background area; content stays confined to the left half and needs no overlay. Full Section and Right 50% only apply when a Background image is set below.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "none", "None" ], [ "full", "Full Section" ], [ "right_half", "Right 50%" ] ],
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "none"
+}, {
+  "id" : "background_image",
+  "name" : "background_image",
+  "label" : "Background image",
+  "help_text" : "Optional. Rendered per the Background Type above. Leave empty to keep the existing solid background.",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "loading" : "lazy",
+    "alt" : "Hero background image"
+  }
 }, {
   "id" : "styles",
   "name" : "styles",
