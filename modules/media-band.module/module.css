@@ -55,6 +55,25 @@
   margin: 0;
 }
 
+/* Caveat Rich Text — every heading/paragraph tag typed into this field must
+   render in the R2 Caveat script font, so each possible tag is targeted
+   directly here rather than relying on inherited font-family, which the
+   theme's own h1-h6/p typography rules (theme-overrides.css) would otherwise
+   override. */
+
+.media-band-module__caveat-text,
+.media-band-module__caveat-text h1,
+.media-band-module__caveat-text h2,
+.media-band-module__caveat-text h3,
+.media-band-module__caveat-text h4,
+.media-band-module__caveat-text h5,
+.media-band-module__caveat-text h6,
+.media-band-module__caveat-text p {
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  color: #0D6FFC;
+}
+
 .media-band-module__cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

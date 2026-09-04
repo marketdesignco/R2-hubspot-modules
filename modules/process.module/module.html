@@ -56,6 +56,12 @@
     max-width: 560px;
     margin: 0;
   }
+  .process-module__intro p {
+    margin: 0;
+  }
+  .process-module__intro p + p {
+    margin-top: 12px;
+  }
   .process-module__quote {
     font-family: 'Caveat', cursive;
     font-size: 20px;
@@ -170,7 +176,7 @@
     <div class="process-module__header">
       <div>
         <div class="process-module__heading">{{ module.heading }}</div>
-        <p class="process-module__intro">{{ module.intro|escape_html }}</p>
+        <div class="process-module__intro">{{ module.intro|sanitize_html }}</div>
       </div>
       <div class="process-module__quote">{{ module.quote|escape_html }}</div>
     </div>

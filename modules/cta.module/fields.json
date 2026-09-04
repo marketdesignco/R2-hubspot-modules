@@ -23,8 +23,7 @@
   "label" : "Description",
   "required" : false,
   "locked" : false,
-  "allow_new_line" : false,
-  "type" : "text",
+  "type" : "richtext",
   "display_width" : null,
   "default" : "Placeholder copy — one sentence on what the first session looks like: an hour, a whiteboard, senior engineers, no obligation."
 }, {

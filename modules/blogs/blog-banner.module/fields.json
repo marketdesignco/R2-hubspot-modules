@@ -1,0 +1,162 @@
+[ {
+  "id" : "home_label",
+  "name" : "home_label",
+  "label" : "Home breadcrumb label",
+  "help_text" : "The first breadcrumb item. Always links to the site homepage.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "R2"
+}, {
+  "id" : "blog",
+  "name" : "blog",
+  "label" : "Blog",
+  "help_text" : "Optional. Used to determine the current Blog Listing's name for the breadcrumb, and to calculate the resource count below. Leave empty to hide the resource count.",
+  "required" : false,
+  "locked" : false,
+  "type" : "blog",
+  "display_width" : null
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Always renders as the page's H1. Bold a phrase (e.g. \"can't guess\") to apply the R2 Caveat script accent treatment.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h1>Guides + Checklists for teams who <strong>can't guess</strong>.</h1>"
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "help_text" : "Rich text — bold a sentence to match the emphasis treatment shown in the reference design.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Every resource here was written by the engineers who do the work. Take what you need — no gate, no follow-up sequence. <strong>Better is our baseline.</strong></p>"
+}, {
+  "id" : "search_label",
+  "name" : "search_label",
+  "label" : "Search label",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Search the library"
+}, {
+  "id" : "search_placeholder",
+  "name" : "search_placeholder",
+  "label" : "Search placeholder text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Segmentation, managed services, CJIS..."
+}, {
+  "id" : "show_resource_count",
+  "name" : "show_resource_count",
+  "label" : "Show resource count",
+  "help_text" : "Requires \"Blog\" above to be set. Shows an approximate count based on recent posts.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "background_color",
+  "name" : "background_color",
+  "label" : "Background Color",
+  "required" : false,
+  "locked" : false,
+  "type" : "color",
+  "display_width" : null,
+  "default" : {
+    "color" : "#082750",
+    "opacity" : 100
+  }
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 60, "units" : "px" },
+        "bottom" : { "value" : 60, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 45, "units" : "px" },
+        "bottom" : { "value" : 45, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : {
+      "padding" : {
+        "top" : { "value" : 60, "units" : "px" },
+        "bottom" : { "value" : 60, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    },
+    "spacing_mobile" : {
+      "padding" : {
+        "top" : { "value" : 45, "units" : "px" },
+        "bottom" : { "value" : 45, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }
+} ]

@@ -23,8 +23,7 @@
   "label" : "Intro paragraph",
   "required" : false,
   "locked" : false,
-  "allow_new_line" : false,
-  "type" : "text",
+  "type" : "richtext",
   "display_width" : null,
   "default" : "R2 utilizes a six-step services approach inspired by the U.S. military's special operations forces: \"Find, Fix, Finish, Exploit, Analyze, and Disseminate\" (F3EAD). Partnering with you on your technology journey, we'll advise, design, implement, and manage your entire IT environment."
 }, {

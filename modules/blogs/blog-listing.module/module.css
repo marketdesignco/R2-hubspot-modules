@@ -1,0 +1,508 @@
+/*
+  Blog Listing module — static visual styling.
+
+  Structure and dynamic content live in module.html; behavior (filtering,
+  sorting, pagination, AJAX swap) lives in module.js. This file is
+  everything else: layout, typography, color, borders, states, transitions,
+  and responsive rules.
+
+  The only styling that stays inline in module.html is the module's own
+  editor-configurable section spacing (module.styles.spacing_desktop/mobile),
+  since that's a runtime HubSpot field value, not a static rule.
+*/
+
+.blog-listing-module {
+  background: var(--color-white);
+  /* Centralized tag → color mapping (reused theme tokens, no inline styles
+     per post, no per-tag color picker). Add a --tag-<slug> here for any
+     additional tag that should get its own color; anything else falls
+     back to --tag-default. */
+  --tag-default: var(--color-steel-gray);
+  --tag-guide: var(--color-primary-blue);
+  --tag-software-defined-access: var(--color-slate-blue);
+  --tag-consultation: var(--color-coral-red);
+  --tag-checklist: var(--color-teal);
+  --tag-managed-services: var(--color-navy-blue);
+  --tag-security: var(--color-steel-gray);
+  /* Remaining current HubSpot tags (2026-09-04) — brand tokens not already
+     spoken for above. Boca Raton/Mississauga/Full-time are location/
+     employment tags, not content topics, so they share one neutral
+     "meta" treatment (light chip + navy text) instead of a vivid color. */
+  --tag-cloud: var(--color-cyan);
+  --tag-networking: var(--color-dark-navy-01);
+  --tag-data-center: var(--color-dark-navy-02);
+  --tag-collaboration: var(--color-black);
+  --tag-professional-services: var(--color-primary-blue);
+  --tag-technical-strategy-session: var(--color-coral-red);
+  --tag-boca-raton-fl: var(--color-light-gray);
+  --tag-mississauga-on: var(--color-light-gray);
+  --tag-full-time: var(--color-light-gray);
+}
+
+.blog-listing-module__filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(8,39,80,.08);
+  margin-bottom: 32px;
+}
+
+.blog-listing-module__tag-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.blog-listing-module__tag-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-primary);
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(8,39,80,.6);
+  background: var(--color-white);
+  border: 1px solid rgba(8,39,80,.14);
+  border-radius: 6px;
+  padding: 9px 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color .15s, color .15s, background-color .15s;
+}
+
+.blog-listing-module__tag-btn:hover,
+.blog-listing-module__tag-btn:focus-visible {
+  border-color: var(--color-primary-blue);
+  color: var(--color-navy-blue);
+}
+
+.blog-listing-module__tag-btn.is-active {
+  background: var(--color-primary-blue);
+  border-color: var(--color-primary-blue);
+  color: var(--color-white);
+}
+
+.blog-listing-module__tag-count {
+  font-weight: 700;
+  opacity: .6;
+  font-size: 11px;
+}
+
+.blog-listing-module__sort {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background:none;
+}
+
+.blog-listing-module__sort-label {
+  font-family: var(--font-primary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(8,39,80,.4);
+}
+
+.blog-listing-module__sort-select {
+  font-family: var(--font-primary);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-navy-blue);
+  background: var(--color-white);
+  border: 1px solid rgba(8,39,80,.14);
+  border-radius: 6px;
+  padding: 9px 32px 9px 14px;
+  cursor: pointer;
+}
+
+/* No-JS fallback only — hidden once JS auto-submits on change. */
+.blog-listing-module__sort-submit {
+  font-family: var(--font-primary);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-white);
+  background: var(--color-primary-blue);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.blog-listing-module.is-enhanced .blog-listing-module__sort-submit {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.blog-listing-module.is-loading .blog-listing-module__results {
+  opacity: .5;
+  transition: opacity .15s;
+}
+
+/* The Featured Blog's top border is always brand blue, regardless of its
+   configured tag — unlike the dynamic cards below, it never follows the
+   tag-color mapping and is never affected by sort/filter state. */
+.blog-listing-module__featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid #E7EAEE;
+  border-top: 2px solid #0D6FFC;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.blog-listing-module__featured-media {
+  display: block;
+  background: rgba(8,39,80,.05);
+  min-height: 220px;
+}
+
+.blog-listing-module__featured-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.blog-listing-module__featured-body {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+}
+
+.blog-listing-module__featured-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+/* Featured Blog tag typography is intentionally larger than the dynamic
+   card tags below (9px / 1.26px) — scoped to this meta row only so it
+   never leaks onto the dynamic listing's tags. */
+.blog-listing-module__featured-meta .tag {
+  font-size: 12px;
+  letter-spacing: 1.6px;
+}
+.blog-listing-module__featured-meta .featured-tag{
+  background:none;
+  color:#8A96A6;
+}
+.blog-listing-module__badge {
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  background: var(--color-primary-blue);
+  color: var(--color-white);
+  border-radius: 4px;
+  padding: 5px 9px;
+  font-size: 12px;
+    letter-spacing: 1.6px;
+}
+
+.blog-listing-module__secondary-tag {
+  color: rgba(8,39,80,.45);
+}
+
+.blog-listing-module__featured-title {
+  margin: 0;
+  font-weight: 700;
+  color: var(--color-navy-blue);
+}
+
+/* The Featured Blog title link must never show an underline, on hover or
+   otherwise — it must read as part of the heading, not a plain text link.
+   Both states pin the color to Navy so global theme link styles (which
+   darken/change color on hover) can't take over. */
+.blog-listing-module__featured-title a,
+.blog-listing-module__featured-title a:hover,
+.blog-listing-module__featured-title a:focus,
+.blog-listing-module__featured-title a:focus-visible,
+.blog-listing-module__featured-title a:active {
+  font-weight: 700;
+  color: var(--color-navy-blue);
+  text-decoration: none;
+}
+
+/* Handwritten aside text sits beside the CTA button, in that order, so a
+   wrap (narrow viewport) only ever drops the CTA to its own line below —
+   never the other way around. min-width: 0 lets the aside's text wrap
+   within its own box instead of forcing the whole row to break early. */
+.blog-listing-module__featured-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Reuses the theme's existing Caveat accent token (--font-secondary, the
+   same one .text-accent and the H1/H2 strong-accent treatment use) rather
+   than loading a duplicate font. Rendered as an H5 (semantic heading), so
+   the field's rich text is stripped to plain text at render time to avoid
+   nesting block markup inside a heading. */
+.blog-listing-module__featured-aside {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  color: #8A96A6;
+  transform: rotate(-2deg);
+    transform-origin: left center;
+}
+
+.blog-listing-module__featured-summary,
+.blog-listing-module__featured-summary * {
+  color: #6B7D96;
+}
+
+.blog-listing-module__featured-summary {
+  margin: 0;
+  max-width: 60ch;
+}
+
+.blog-listing-module__featured-summary p {
+  margin: 0;
+}
+
+.blog-listing-module__featured-cta {
+  width: fit-content;
+  flex-shrink: 0;
+}
+
+.blog-listing-module__empty {
+  text-align: center;
+  padding: 64px 24px;
+  color: rgba(8,39,80,.5);
+  border: 1px dashed rgba(8,39,80,.14);
+  border-radius: 6px;
+}
+
+.blog-listing-module__posts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.blog-listing-module__card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #E7EAEE;
+  border-top: 3px solid var(--tag-default);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.blog-listing-module__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 12px 32px 0px #0827501A;
+}
+
+.blog-listing-module__card-media {
+  display: block;
+  background: rgba(8,39,80,.05);
+  height: 170px;
+  overflow: hidden;
+}
+
+.blog-listing-module__card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.blog-listing-module__card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.blog-listing-module__card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+}
+
+.blog-listing-module__card-title {
+  margin: 0;
+  font-weight: 700;
+  color: var(--color-navy-blue);
+  flex: 1;
+}
+
+.blog-listing-module__card-title a {
+  font-weight: 700;
+  color: var(--color-navy-blue);
+  text-decoration: none;
+}
+
+.blog-listing-module__card-title a:hover,
+.blog-listing-module__card-title a:focus-visible {
+  color: var(--color-navy-blue);
+}
+
+.blog-listing-module__card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.blog-listing-module__card-readtime {
+  font-size: 12px;
+  color: rgba(8,39,80,.4);
+}
+
+.tag {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: var(--color-white);
+  background: var(--tag-default);
+  font-size: 9px;
+  letter-spacing: 1.26px;
+}
+
+.tag--consultation { background: var(--tag-consultation); }
+.tag--checklist { background: var(--tag-checklist); }
+.tag--guide { background: var(--tag-guide); }
+.tag--software-defined-access { background: var(--tag-software-defined-access); }
+.tag--managed-services { background: var(--tag-managed-services); }
+.tag--security { background: var(--tag-security); }
+.tag--cloud { background: var(--tag-cloud); }
+.tag--networking { background: var(--tag-networking); }
+.tag--data-center { background: var(--tag-data-center); }
+.tag--collaboration { background: var(--tag-collaboration); }
+.tag--professional-services { background: var(--tag-professional-services); }
+.tag--technical-strategy-session { background: var(--tag-technical-strategy-session); }
+.tag--boca-raton-fl { background: var(--tag-boca-raton-fl); color: var(--color-navy-blue); }
+.tag--mississauga-on { background: var(--tag-mississauga-on); color: var(--color-navy-blue); }
+.tag--full-time { background: var(--tag-full-time); color: var(--color-navy-blue); }
+
+/* Only the TOP border follows the primary tag's color, using the same
+   --tag-* mapping above; the left/right/bottom borders always stay
+   #E7EAEE (set on .blog-listing-module__card itself). Applies only to
+   the dynamic cards — the Featured Blog's border is always brand blue
+   and never carries a card-border--* class. An unrecognized or missing
+   tag simply matches no rule here and keeps the --tag-default top border
+   already set on .blog-listing-module__card, so the fallback is
+   automatic. */
+.card-border--guide { border-top-color: var(--tag-guide); }
+.card-border--consultation { border-top-color: var(--tag-consultation); }
+.card-border--checklist { border-top-color: var(--tag-checklist); }
+.card-border--software-defined-access { border-top-color: var(--tag-software-defined-access); }
+.card-border--managed-services { border-top-color: var(--tag-managed-services); }
+.card-border--security { border-top-color: var(--tag-security); }
+.card-border--cloud { border-top-color: var(--tag-cloud); }
+.card-border--networking { border-top-color: var(--tag-networking); }
+.card-border--data-center { border-top-color: var(--tag-data-center); }
+.card-border--collaboration { border-top-color: var(--tag-collaboration); }
+.card-border--professional-services { border-top-color: var(--tag-professional-services); }
+.card-border--technical-strategy-session { border-top-color: var(--tag-technical-strategy-session); }
+.card-border--boca-raton-fl { border-top-color: var(--tag-boca-raton-fl); }
+.card-border--mississauga-on { border-top-color: var(--tag-mississauga-on); }
+.card-border--full-time { border-top-color: var(--tag-full-time); }
+
+.blog-listing-module__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.blog-listing-module__page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(8,39,80,.14);
+  color: var(--color-navy-blue);
+  font-family: var(--font-primary);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.blog-listing-module__page-btn:hover,
+.blog-listing-module__page-btn:focus-visible {
+  border-color: var(--color-primary-blue);
+}
+
+.blog-listing-module__page-btn.is-active {
+  background: var(--color-primary-blue);
+  border-color: var(--color-primary-blue);
+  color: var(--color-white);
+}
+
+.blog-listing-module__page-btn.is-disabled {
+  opacity: .35;
+  pointer-events: none;
+}
+
+@media (max-width: 992px) {
+  .blog-listing-module__featured {
+    grid-template-columns: 1fr;
+  }
+  .blog-listing-module__featured-body {
+    padding: 20px 16px;
+  }
+  .blog-listing-module__posts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .blog-listing-module__filters {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  /* Filter tags become a single horizontally scrollable row on mobile —
+     full labels always stay intact (no ellipsis/truncation/clipping);
+     the row scrolls instead of wrapping or shrinking any tag. */
+  .blog-listing-module__tag-filter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    padding-bottom: 4px;
+  }
+  .blog-listing-module__tag-btn {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  .blog-listing-module__posts {
+    grid-template-columns: 1fr;
+  }
+  .blog-listing-module__featured-footer{
+    flex-direction:column;
+    align-items: flex-start;
+  }
+}

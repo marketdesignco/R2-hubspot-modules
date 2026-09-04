@@ -1,0 +1,320 @@
+{#
+  Blog Listing — HubSpot-native data + vanilla-JS enhancement.
+
+  All post data (title, image, tags, URL, read time) comes from HubSpot's own
+  blog objects — nothing here is manually authored except which tags appear
+  as filters and which post is Featured.
+
+  Tag/sort/page state lives in the URL query string (namespaced per module
+  instance via module_id, so multiple instances on one page never collide),
+  not in a /tag/... route. JS progressively enhances the plain links/form
+  below into an in-place fetch-and-swap so there is no full page reload; with
+  JS disabled every control still works via a normal navigation to this same
+  URL, server-rendered by the exact same HubL below.
+
+  Known platform limit (disclosed, not hidden): blog_recent_posts/
+  blog_recent_tag_posts have no offset/sort parameters and cap at 200/100
+  posts respectively (HubSpot's own ceiling, not introduced here). Sorting
+  and pagination below are therefore computed over that capped pool. This
+  comfortably covers real growth well beyond the current blog size without
+  ever loading more than one page of posts into the DOM.
+#}
+
+{% set mid = module_id %}
+{% set tag_param = "tag--" ~ mid %}
+{% set sort_param = "sort--" ~ mid %}
+{% set page_param = "page--" ~ mid %}
+{% set active_tag = request.query_dict[tag_param]|default("all") %}
+{% set active_sort = request.query_dict[sort_param]|default("newest") %}
+{% set active_page = (request.query_dict[page_param]|default("1"))|int %}
+{% if active_page < 1 %}{% set active_page = 1 %}{% endif %}
+{% set per_page = module.posts_per_page|default(6) %}
+{% set is_ajax = request.query_dict.ajax == "1" %}
+{% set base_path = request.path %}
+
+{% set all_tags = [] %}
+{% set all_posts_count = 0 %}
+{% set blog_posts_all = [] %}
+{% set pool_state = namespace(pool=[]) %}
+
+{% if module.blog %}
+  {% set all_tags = blog_tags(module.blog, 250) %}
+  {# Fetched once and reused for both the "All Posts" count and pool below,
+     instead of calling blog_recent_posts() twice. #}
+  {% set blog_posts_all = blog_recent_posts(module.blog, 200) %}
+  {% set all_posts_count = blog_posts_all|length %}
+
+  {% if active_tag == "all" %}
+    {% set pool_state.pool = blog_posts_all %}
+  {% else %}
+    {% set pool_state.pool = blog_recent_tag_posts(module.blog, active_tag, 100) %}
+  {% endif %}
+
+  {# Sort is fully independent of the Featured Blog: the Featured Blog is
+     resolved separately below via content_by_id(), never from this pool, so
+     nothing here can ever reorder, hide, or duplicate it. `pool_state` is a
+     namespace so each branch's reassignment reliably persists past this
+     conditional block, regardless of HubL's block-scoping behavior.
+
+     HubL's `sort` filter is called positionally here — sort(reverse,
+     case_sensitive, attribute) — rather than with attribute=/reverse=
+     keyword arguments. The keyword form silently failed to reorder anything
+     in this account even though it's valid vanilla-Jinja2 syntax; this
+     positional form is the syntax confirmed working in HubSpot's own
+     community examples for sorting blog content by publish_date. #}
+  {% if active_sort == "older" %}
+    {% set pool_state.pool = pool_state.pool|sort(False, False, "publish_date") %}
+  {% elif active_sort == "az" %}
+    {% set pool_state.pool = pool_state.pool|sort(False, False, "name") %}
+  {% else %}
+    {% set pool_state.pool = pool_state.pool|sort(True, False, "publish_date") %}
+  {% endif %}
+{% endif %}
+
+{% set active_pool = pool_state.pool %}
+{% set total_posts = active_pool|length %}
+{% set total_pages = (total_posts / per_page)|round(0, "ceil")|int %}
+{% if total_pages < 1 %}{% set total_pages = 1 %}{% endif %}
+{% if active_page > total_pages %}{% set active_page = total_pages %}{% endif %}
+{% set start_idx = (active_page - 1) * per_page %}
+{% set page_posts = active_pool[start_idx:start_idx + per_page] %}
+
+{# Featured Blog: module.featured.featured_page is HubSpot's native "page"
+   field type — it returns the selected content item's numeric ID (not a
+   URL, not an object), which content_by_id() resolves into the actual
+   landing page / website page / blog post object. content_by_id() is
+   documented to work across all three content types, which is exactly
+   what lets this module support both an individual blog post AND a plain
+   page from the same field: whichever was selected, `featured` ends up
+   holding its real object, and templates below simply render whatever
+   attributes exist on it (e.g. a plain page has no tag_list, so no tag
+   renders — no special-casing needed for that). #}
+{% set featured = false %}
+{% set featured_page_id = module.featured.featured_page %}
+{% if featured_page_id %}
+  {% set featured_content = content_by_id(featured_page_id) %}
+  {% if featured_content %}{% set featured = featured_content %}{% endif %}
+{% endif %}
+
+{% if not is_ajax %}
+{% require_css %}
+<style>
+{% scope_css %}
+  /* All static styling lives in module.css (auto-loaded for every instance,
+     same as module.js). Only this module's own editor-configurable section
+     spacing stays here, since it's a runtime HubSpot field value rather
+     than a static rule. */
+  .blog-listing-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .blog-listing-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="blog-listing-module" id="blog-listing-{{ mid }}" data-screen-label="Blog listing"
+  data-blog-listing
+  data-module-id="{{ mid }}"
+  data-base-path="{{ base_path|escape_attr }}"
+  data-tag-param="{{ tag_param }}"
+  data-sort-param="{{ sort_param }}"
+  data-page-param="{{ page_param }}"
+  data-active-tag="{{ active_tag|escape_attr }}"
+  data-active-sort="{{ active_sort|escape_attr }}"
+  data-active-page="{{ active_page }}">
+  <div class="content-wrapper">
+    <div class="blog-listing-module__filters">
+      <div class="blog-listing-module__tag-filter" role="group" aria-label="Filter posts by tag">
+        <a
+          class="blog-listing-module__tag-btn{% if active_tag == "all" %} is-active{% endif %}"
+          href="{{ base_path }}?{{ tag_param }}=all&{{ sort_param }}={{ active_sort|escape_attr }}&{{ page_param }}=1"
+          data-tag-link
+          data-tag="all"
+          {% if active_tag == "all" %}aria-current="true"{% endif %}
+        >All Posts <span class="blog-listing-module__tag-count">{{ all_posts_count }}</span></a>
+        {% for item in module.filter_tags %}
+          {% if item.tag %}
+            {% set tag_label = item.tag %}
+            {% set tag_label_matches = all_tags|selectattr("slug", "equalto", item.tag)|list %}
+            {% if tag_label_matches|length > 0 %}{% set tag_label = tag_label_matches[0].name %}{% endif %}
+            {% set tag_item_count = 0 %}
+            {% if module.blog %}{% set tag_item_count = blog_recent_tag_posts(module.blog, item.tag, 100)|length %}{% endif %}
+            <a
+              class="blog-listing-module__tag-btn{% if active_tag == item.tag %} is-active{% endif %}"
+              href="{{ base_path }}?{{ tag_param }}={{ item.tag|escape_attr }}&{{ sort_param }}={{ active_sort|escape_attr }}&{{ page_param }}=1"
+              data-tag-link
+              data-tag="{{ item.tag|escape_attr }}"
+              {% if active_tag == item.tag %}aria-current="true"{% endif %}
+            >{{ tag_label|escape_html }} <span class="blog-listing-module__tag-count">{{ tag_item_count }}</span></a>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <form class="blog-listing-module__sort" method="get" action="{{ base_path }}" data-sort-form>
+        <input type="hidden" name="{{ tag_param }}" value="{{ active_tag|escape_attr }}" data-tag-input>
+        <input type="hidden" name="{{ page_param }}" value="1">
+        <label class="blog-listing-module__sort-label" for="blog-sort-{{ mid }}">Sort</label>
+        <select id="blog-sort-{{ mid }}" name="{{ sort_param }}" class="blog-listing-module__sort-select" data-sort-select>
+          <option value="newest" {% if active_sort == "newest" %}selected{% endif %}>Newest first</option>
+          <option value="older" {% if active_sort == "older" %}selected{% endif %}>Oldest first</option>
+          <option value="az" {% if active_sort == "az" %}selected{% endif %}>A-Z</option>
+        </select>
+        <button type="submit" class="blog-listing-module__sort-submit">Apply</button>
+      </form>
+    </div>
+{% endif %}
+
+    <div class="blog-listing-module__results" data-results aria-live="polite">
+      {% if active_tag == "all" and featured %}
+        {# A plain page (not a blog post) has no tag_list at all — check
+           truthiness before ever calling |list on it, so a normal page
+           never errors here, it just ends up with zero tags and no tag
+           markup renders below (see requirement: no empty tag/badge for
+           non-blog-post pages). #}
+        {% set featured_tags = [] %}
+        {% if featured.tag_list %}{% set featured_tags = featured.tag_list|list %}{% endif %}
+        {% set featured_tag_key = "default" %}
+        {% if featured_tags|length > 0 %}
+          {# Same normalization as the dynamic cards below — real HubSpot
+             tag names can carry a language suffix like
+             "(English - United States)"; falls through to --tag-default
+             for any key with no matching class. This key is NOT used for
+             the Featured Blog's border — that border is always brand blue
+             regardless of tag (see module.css). #}
+          {% set featured_tag_key = featured_tags[0].name|lower
+            |replace("(english - united states)", "")
+            |replace("(english)", "")
+            |trim
+            |replace(",", "")
+            |replace(".", "")
+            |replace(" - ", "-")
+            |replace(" ", "-")
+            |replace("--", "-")
+            |trim("-") %}
+          {% if featured_tag_key == "" %}{% set featured_tag_key = "default" %}{% endif %}
+        {% endif %}
+        <article class="blog-listing-module__featured">
+          <a class="blog-listing-module__featured-media" href="{{ featured.absolute_url|escape_url }}" tabindex="-1" aria-hidden="true">
+            {% if featured.featured_image %}
+              <img src="{{ featured.featured_image|escape_url }}" alt="" loading="lazy">
+            {% endif %}
+          </a>
+          <div class="blog-listing-module__featured-body">
+            <div class="blog-listing-module__featured-meta">
+              <span class="blog-listing-module__badge">Start Here</span>
+              {% if featured_tags|length > 0 %}
+                <span class="tag featured-tag">{{ featured_tags[0].name|escape_html }}</span>
+              {% endif %}
+              {% if featured_tags|length > 1 %}
+                <span class="blog-listing-module__secondary-tag">{{ featured_tags[1].name|escape_html }}</span>
+              {% endif %}
+            </div>
+            <h3 class="blog-listing-module__featured-title"><a href="{{ featured.absolute_url|escape_url }}">{{ featured.name|escape_html }}</a></h3>
+            {% if featured.post_summary %}
+              <p class="blog-listing-module__featured-summary">{{ featured.post_summary|striptags|truncate(200)|escape_html }}</p>
+            {% endif %}
+            <div class="blog-listing-module__featured-footer">
+              <div class="blog-listing-module__featured-cta custom-cta cta-primary">
+                <a href="{{ featured.absolute_url|escape_url }}">Read the guide</a>
+              </div>
+               {% if module.featured.aside_text %}
+                <h5 class="blog-listing-module__featured-aside">{{ module.featured.aside_text|striptags|trim|escape_html }}</h5>
+              {% endif %}
+            </div>
+          </div>
+        </article>
+      {% endif %}
+
+      {% if page_posts|length == 0 %}
+        <div class="blog-listing-module__empty">No posts found.</div>
+      {% else %}
+        <div class="blog-listing-module__posts">
+          {% for post in page_posts %}
+            {# blog_recent_posts() (used for "All Posts") and
+               blog_recent_tag_posts() (used for a specific tag filter) do
+               not reliably return the same tag_list object shape — indexing
+               directly into post.tag_list[0] silently came back empty for
+               "All Posts" specifically, even though post.tag_list|length
+               and a plain for-loop over it both work fine either way.
+               Forcing it through |list first guarantees a real, indexable
+               list in both cases, so tags always render regardless of
+               which filter produced this post. #}
+            {% set post_tags = post.tag_list|list %}
+            {% set post_tag_key = "default" %}
+            {% if post_tags|length > 0 %}
+              {% set post_tag_key = post_tags[0].name|lower
+                |replace("(english - united states)", "")
+                |replace("(english)", "")
+                |trim
+                |replace(",", "")
+                |replace(".", "")
+                |replace(" - ", "-")
+                |replace(" ", "-")
+                |replace("--", "-")
+                |trim("-") %}
+              {% if post_tag_key == "" %}{% set post_tag_key = "default" %}{% endif %}
+            {% endif %}
+            <article class="blog-listing-module__card card-border--{{ post_tag_key }}">
+              <a class="blog-listing-module__card-media" href="{{ post.absolute_url|escape_url }}" tabindex="-1" aria-hidden="true">
+                {% if post.featured_image %}
+                  <img src="{{ post.featured_image|escape_url }}" alt="" loading="lazy">
+                {% endif %}
+              </a>
+              <div class="blog-listing-module__card-body">
+                <div class="blog-listing-module__card-meta">
+                  {% if post_tags|length > 0 %}
+                    <span class="tag tag--{{ post_tag_key }}">{{ post_tags[0].name|escape_html }}</span>
+                  {% endif %}
+                  {% if post_tags|length > 1 %}
+                    <span class="blog-listing-module__secondary-tag">{{ post_tags[1].name|escape_html }}</span>
+                  {% endif %}
+                </div>
+                <h5 class="blog-listing-module__card-title"><a href="{{ post.absolute_url|escape_url }}">{{ post.name|escape_html }}</a></h5>
+                <div class="blog-listing-module__card-footer">
+                  {% set char_count = post.post_body|striptags|length %}
+                  {% set reading_time = (char_count / 1100)|round(0, "ceil")|int %}
+                  {% if reading_time < 1 %}{% set reading_time = 1 %}{% endif %}
+                  <span class="blog-listing-module__card-readtime">{{ reading_time }} min read</span>
+                  <a class="blog-listing-module__card-link link-1" href="{{ post.absolute_url|escape_url }}">Read more &rarr;</a>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if total_pages > 1 %}
+        <nav class="blog-listing-module__pagination" aria-label="Blog pagination">
+          <a
+            class="blog-listing-module__page-btn blog-listing-module__page-btn--prev{% if active_page <= 1 %} is-disabled{% endif %}"
+            {% if active_page > 1 %}href="{{ base_path }}?{{ tag_param }}={{ active_tag|escape_attr }}&{{ sort_param }}={{ active_sort|escape_attr }}&{{ page_param }}={{ active_page - 1 }}"{% endif %}
+            data-page-link
+            data-page="{{ active_page - 1 }}"
+            {% if active_page <= 1 %}aria-disabled="true" tabindex="-1"{% endif %}
+          >&larr; Prev</a>
+          {% for p in range(1, total_pages + 1) %}
+            <a
+              class="blog-listing-module__page-btn{% if p == active_page %} is-active{% endif %}"
+              href="{{ base_path }}?{{ tag_param }}={{ active_tag|escape_attr }}&{{ sort_param }}={{ active_sort|escape_attr }}&{{ page_param }}={{ p }}"
+              data-page-link
+              data-page="{{ p }}"
+              {% if p == active_page %}aria-current="page"{% endif %}
+            >{{ p }}</a>
+          {% endfor %}
+          <a
+            class="blog-listing-module__page-btn blog-listing-module__page-btn--next{% if active_page >= total_pages %} is-disabled{% endif %}"
+            {% if active_page < total_pages %}href="{{ base_path }}?{{ tag_param }}={{ active_tag|escape_attr }}&{{ sort_param }}={{ active_sort|escape_attr }}&{{ page_param }}={{ active_page + 1 }}"{% endif %}
+            data-page-link
+            data-page="{{ active_page + 1 }}"
+            {% if active_page >= total_pages %}aria-disabled="true" tabindex="-1"{% endif %}
+          >Next &rarr;</a>
+        </nav>
+      {% endif %}
+    </div>
+{% if not is_ajax %}
+  </div>
+</section>
+{% endif %}

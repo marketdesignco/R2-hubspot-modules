@@ -21,28 +21,31 @@
       {% endif %}
       <div class="media-band-module__heading">{{ module.heading|sanitize_html }}</div>
       <div class="media-band-module__description">{{ module.description|sanitize_html }}</div>
+      {% if module.caveat_text %}
+        <div class="media-band-module__caveat-text">{{ module.caveat_text|sanitize_html }}</div>
+      {% endif %}
       {% if module.show_cta %}
-        <div class="custom-cta {{ module.style_cta }}">
-          {% if module.button_link.url.href %}
-            {% set href = module.button_link.url.href %}
-            {% if module.button_link.url.type == "EMAIL_ADDRESS" %}
+        <div class="custom-cta {{ module.cta_settings.style_cta }}">
+          {% if module.cta_settings.button_link.url.href %}
+            {% set href = module.cta_settings.button_link.url.href %}
+            {% if module.cta_settings.button_link.url.type == "EMAIL_ADDRESS" %}
               {% set href = "mailto:" + href %}
-            {% elif module.button_link.url.type == "PHONE_NUMBER" %}
+            {% elif module.cta_settings.button_link.url.type == "PHONE_NUMBER" %}
               {% set href = "tel:" + href %}
             {% endif %}
             <a
-              {% if module.button_link.url.type == "CALL_TO_ACTION" %}
+              {% if module.cta_settings.button_link.url.type == "CALL_TO_ACTION" %}
                 href="{{ href }}"
               {% else %}
                 href="{{ href|escape_url }}"
               {% endif %}
-              {% if module.button_link.open_in_new_tab %}target="_blank"{% endif %}
-              {% if module.button_link.rel %}rel="{{ module.button_link.rel|join(" ")|escape_attr }}"{% endif %}
+              {% if module.cta_settings.button_link.open_in_new_tab %}target="_blank"{% endif %}
+              {% if module.cta_settings.button_link.rel %}rel="{{ module.cta_settings.button_link.rel|join(" ")|escape_attr }}"{% endif %}
             >
-              {{ module.button_text|escape_html }}
+              {{ module.cta_settings.button_text|escape_html }}
             </a>
-          {% elif module.cta %}
-            {% cta guid="{{ module.cta }}" %}
+          {% elif module.cta_settings.cta %}
+            {% cta guid="{{ module.cta_settings.cta }}" %}
           {% endif %}
         </div>
       {% endif %}

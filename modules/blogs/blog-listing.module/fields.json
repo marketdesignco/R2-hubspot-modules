@@ -1,0 +1,175 @@
+[ {
+  "id" : "blog",
+  "name" : "blog",
+  "label" : "Blog",
+  "help_text" : "The HubSpot blog this listing pulls posts from.",
+  "required" : false,
+  "locked" : false,
+  "type" : "blog",
+  "display_width" : null
+}, {
+  "id" : "filter_tags",
+  "name" : "filter_tags",
+  "label" : "Filter Tags",
+  "help_text" : "Which existing HubSpot blog tags should appear as filter options, and in what order. This only controls the filter UI — it does not create or duplicate any blog content. An \"All Posts\" option is always shown first automatically.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : null,
+    "sorting_label_field" : "filter_tags.tag",
+    "default" : 0
+  },
+  "children" : [ {
+    "id" : "filter_tags.tag",
+    "name" : "tag",
+    "label" : "Tag",
+    "help_text" : "Pick an existing HubSpot blog tag.",
+    "required" : false,
+    "locked" : false,
+    "tag_value" : "SLUG",
+    "type" : "tag",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [
+    { "tag" : "checklist" },
+    { "tag" : "guide" },
+    { "tag" : "software-defined-access" },
+    { "tag" : "managed-services" },
+    { "tag" : "security" }
+  ]
+}, {
+  "id" : "featured",
+  "name" : "featured",
+  "label" : "Featured Blog",
+  "help_text" : "Shown full-width directly below the filters, only when \"All Posts\" is the active filter. Its image, title, URL, and (for blog posts) tag all come automatically from the selected page below — the only thing you write here is the handwritten note.",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "featured.featured_page",
+    "name" : "featured_page",
+    "label" : "Featured page",
+    "help_text" : "Select the page or blog post to feature. Its image, title, and URL are pulled automatically; if the selected item is a blog post, its tag is pulled automatically too — nothing here is re-typed manually. NOTE: this is HubSpot's native page-picker field type, so its content-type coverage (which kinds of pages it lists) is controlled by HubSpot, not by this module; if a blog post you expect doesn't appear in the picker, that's this field type's own scope, not a bug here. If a normal (non-blog) page is selected, no tag is shown — that's expected.",
+    "required" : false,
+    "locked" : false,
+    "type" : "page",
+    "display_width" : null,
+    "default" : null
+  }, {
+    "id" : "featured.aside_text",
+    "name" : "aside_text",
+    "label" : "Handwritten note",
+    "help_text" : "Short handwritten-style note shown beside the \"Read the guide\" button (e.g. the most-asked question you get). This is the only manually-written Featured Blog content — everything else comes from the selected page above.",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<p>“What’s the one question you get asked the most?” This is it.</p>"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "featured_page" : null,
+    "aside_text" : "<p>“What’s the one question you get asked the most?” This is it.</p>"
+  }
+}, {
+  "id" : "posts_per_page",
+  "name" : "posts_per_page",
+  "label" : "Posts per page",
+  "help_text" : "Number of regular listing cards shown per page (not counting the Featured Blog Post).",
+  "required" : false,
+  "locked" : false,
+  "display" : "text",
+  "min" : 2,
+  "max" : 12,
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 6
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 48, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 32, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : {
+      "padding" : {
+        "top" : { "value" : 48, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    },
+    "spacing_mobile" : {
+      "padding" : {
+        "top" : { "value" : 32, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }
+} ]

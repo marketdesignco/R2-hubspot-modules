@@ -37,9 +37,19 @@
         <div class="solution-module__heading">{{ module.heading|sanitize_html }}</div>
         <div class="solution-module__description">{{ module.description|sanitize_html }}</div>
       </div>
-      <div class="solution-module__quote">
-        <h4 class="solution-module__quote-text">{{ module.quote|escape_html }}</h4>
-      </div>
+      {% if module.show_second_rich_text %}
+        {% if module.rich_text_2_as_quote %}
+          <div class="solution-module__quote">
+            <div class="solution-module__quote-text">{{ module.rich_text_2|sanitize_html }}</div>
+          </div>
+        {% else %}
+          <div class="solution-module__richtext-col">{{ module.rich_text_2|sanitize_html }}</div>
+        {% endif %}
+      {% else %}
+        <div class="solution-module__quote">
+          <h4 class="solution-module__quote-text">{{ module.quote|escape_html }}</h4>
+        </div>
+      {% endif %}
     </div>
   {% endif %}
 </section>

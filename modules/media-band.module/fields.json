@@ -28,9 +28,20 @@
   "display_width" : null,
   "default" : "<p>Placeholder copy — a short paragraph introducing the image or video shown alongside this text.</p>"
 }, {
+  "id" : "caveat_text",
+  "name" : "caveat_text",
+  "label" : "Caveat Rich Text",
+  "help_text" : "Optional. Displayed directly below the Description, above the CTA. Every heading and paragraph typed here renders in the R2 Caveat script font, regardless of which tag (H1-H6, paragraph, etc.) is used in the rich text toolbar.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : ""
+}, {
   "id" : "show_cta",
   "name" : "show_cta",
   "label" : "Show CTA",
+  "help_text" : "Displays a CTA button below the Description and Caveat Rich Text content above. Configure the button/link and style in the CTA Settings group below.",
   "required" : false,
   "locked" : false,
   "display" : "checkbox",
@@ -38,50 +49,80 @@
   "display_width" : null,
   "default" : true
 }, {
-  "id" : "button_text",
-  "name" : "button_text",
-  "label" : "Button text",
+  "id" : "cta_settings",
+  "name" : "cta_settings",
+  "label" : "CTA Settings",
+  "help_text" : "Only used when Show CTA is enabled above. This CTA renders below the Description and Caveat Rich Text content.",
   "required" : false,
   "locked" : false,
-  "allow_new_line" : false,
-  "type" : "text",
+  "children" : [ {
+    "id" : "cta_settings.button_text",
+    "name" : "button_text",
+    "label" : "Button text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Learn more"
+  }, {
+    "id" : "cta_settings.button_link",
+    "name" : "button_link",
+    "label" : "Button link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION" ],
+    "show_advanced_rel_options" : true,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : { "href" : "#cta", "type" : "EXTERNAL" },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    }
+  }, {
+    "id" : "cta_settings.cta",
+    "name" : "cta",
+    "label" : "Or select a CTA",
+    "help_text" : "Optional. Renders a HubSpot CTA in place of the button above when no Button link is set.",
+    "required" : false,
+    "locked" : false,
+    "type" : "cta",
+    "display_width" : null
+  }, {
+    "id" : "cta_settings.style_cta",
+    "name" : "style_cta",
+    "label" : "CTA Style",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "cta-primary", "Primary" ], [ "cta-secondary", "Secondary (Outline)" ] ],
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "cta-primary"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
   "display_width" : null,
-  "default" : "Learn more"
-}, {
-  "id" : "button_link",
-  "name" : "button_link",
-  "label" : "Button link",
-  "required" : false,
-  "locked" : false,
-  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION" ],
-  "show_advanced_rel_options" : true,
-  "type" : "link",
-  "display_width" : null,
+  "visibility" : {
+    "controlling_field" : "show_cta",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "true",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  },
   "default" : {
-    "url" : { "href" : "#cta", "type" : "EXTERNAL" },
-    "no_follow" : false,
-    "open_in_new_tab" : false
+    "button_text" : "Learn more",
+    "button_link" : {
+      "url" : { "href" : "#cta", "type" : "EXTERNAL" },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    },
+    "style_cta" : "cta-primary"
   }
-}, {
-  "id" : "cta",
-  "name" : "cta",
-  "label" : "Or select a CTA",
-  "help_text" : "Optional. Renders a HubSpot CTA in place of the button above when no Button link is set.",
-  "required" : false,
-  "locked" : false,
-  "type" : "cta",
-  "display_width" : null
-}, {
-  "id" : "style_cta",
-  "name" : "style_cta",
-  "label" : "CTA Style",
-  "required" : false,
-  "locked" : false,
-  "display" : "select",
-  "choices" : [ [ "cta-primary", "Primary" ], [ "cta-secondary", "Secondary (Outline)" ] ],
-  "type" : "choice",
-  "display_width" : null,
-  "default" : "cta-primary"
 }, {
   "id" : "card_columns",
   "name" : "card_columns",
@@ -147,7 +188,7 @@
   "id" : "bottom_links",
   "name" : "bottom_links",
   "label" : "Bottom Links",
-  "help_text" : "Optional. Up to 2 items, rendered below the cards, side by side. Each item can independently be a Button or a Link Text.",
+  "help_text" : "Displayed below the Content Cards above. Optional — up to 2 items, rendered side by side. Each item can independently be a Button or a Link Text.",
   "required" : false,
   "locked" : false,
   "occurrence" : {

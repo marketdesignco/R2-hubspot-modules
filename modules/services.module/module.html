@@ -141,9 +141,9 @@
           <h5 class="services-module__title">{{ card.title|escape_html }}</h5>
           <p class="services-module__description">{{ card.description|escape_html }}</p>
           <div class="services-module__bullets">
-            {% if card.bullet_1 %}<div class="services-module__bullet"><span></span>{{ card.bullet_1|escape_html }}</div>{% endif %}
-            {% if card.bullet_2 %}<div class="services-module__bullet"><span></span>{{ card.bullet_2|escape_html }}</div>{% endif %}
-            {% if card.bullet_3 %}<div class="services-module__bullet"><span></span>{{ card.bullet_3|escape_html }}</div>{% endif %}
+            {% for bullet in card.bullets %}
+              {% if bullet.text %}<div class="services-module__bullet"><span></span>{{ bullet.text|escape_html }}</div>{% endif %}
+            {% endfor %}
           </div>
           <a class="services-module__link link-1" href="{{ card.link.url.href|escape_url }}">{{ card.link_text|escape_html }}</a>
         </div>

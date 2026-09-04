@@ -67,12 +67,42 @@
   "id" : "quote",
   "name" : "quote",
   "label" : "Handwritten quote",
+  "help_text" : "The fallback shown when \"Show Rich Text 2\" below is OFF. Hidden here (and on the frontend) when \"Show Rich Text 2\" is ON.",
   "required" : false,
   "locked" : false,
   "allow_new_line" : false,
   "type" : "text",
   "display_width" : null,
   "default" : "\"Authentication is the starting line, not the finish line. Every session inside the network needs to be classified, authorized, and enforced.\"",
+  "visibility" : {
+    "boolean_operator" : "AND",
+    "criteria" : [ {
+      "controlling_field" : "layout",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "layout_1",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    }, {
+      "controlling_field" : "show_second_rich_text",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "false",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    } ]
+  }
+}, {
+  "id" : "show_second_rich_text",
+  "name" : "show_second_rich_text",
+  "label" : "Show Rich Text 2",
+  "help_text" : "Optional, OFF by default. OFF = show the Handwritten Quote below (default). ON = show Rich Text 2 (further down) in place of the Handwritten Quote, which is then hidden here and on the frontend. Mutually exclusive with Handwritten Quote — only one renders at a time.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false,
   "visibility" : {
     "controlling_field" : "layout",
     "controlling_field_path" : null,
@@ -121,24 +151,25 @@
   "id" : "rich_text_2",
   "name" : "rich_text_2",
   "label" : "Rich Text 2",
+  "help_text" : "Layout 2: shown when Columns above is set to 2 Columns. Layout 1: shown when \"Show Rich Text 2\" above is ON, in place of the Handwritten Quote.",
   "required" : false,
   "locked" : false,
   "type" : "richtext",
   "display_width" : null,
   "default" : "",
   "visibility" : {
-    "boolean_operator" : "AND",
+    "boolean_operator" : "OR",
     "criteria" : [ {
-      "controlling_field" : "layout",
+      "controlling_field" : "columns",
       "controlling_field_path" : null,
-      "controlling_value_regex" : "layout_2",
+      "controlling_value_regex" : "two_columns",
       "property" : null,
       "operator" : "EQUAL",
       "access" : null
     }, {
-      "controlling_field" : "columns",
+      "controlling_field" : "show_second_rich_text",
       "controlling_field_path" : null,
-      "controlling_value_regex" : "two_columns",
+      "controlling_value_regex" : "true",
       "property" : null,
       "operator" : "EQUAL",
       "access" : null
@@ -148,7 +179,7 @@
   "id" : "rich_text_2_as_quote",
   "name" : "rich_text_2_as_quote",
   "label" : "Display Second Rich Text as Quote",
-  "help_text" : "Renders Rich Text 2 using the same quote styling as the Layout 1 handwritten quote (vertical line + script typography), while keeping it a fully editable Rich Text field.",
+  "help_text" : "Renders Rich Text 2 using the same quote styling as the Handwritten Quote (vertical line + script typography), while keeping it a fully editable Rich Text field. Applies in both Layout 1 (when Show Rich Text 2 is ON) and Layout 2 (when Columns is set to 2 Columns).",
   "required" : false,
   "locked" : false,
   "display" : "checkbox",
@@ -156,18 +187,18 @@
   "display_width" : null,
   "default" : false,
   "visibility" : {
-    "boolean_operator" : "AND",
+    "boolean_operator" : "OR",
     "criteria" : [ {
-      "controlling_field" : "layout",
+      "controlling_field" : "columns",
       "controlling_field_path" : null,
-      "controlling_value_regex" : "layout_2",
+      "controlling_value_regex" : "two_columns",
       "property" : null,
       "operator" : "EQUAL",
       "access" : null
     }, {
-      "controlling_field" : "columns",
+      "controlling_field" : "show_second_rich_text",
       "controlling_field_path" : null,
-      "controlling_value_regex" : "two_columns",
+      "controlling_value_regex" : "true",
       "property" : null,
       "operator" : "EQUAL",
       "access" : null

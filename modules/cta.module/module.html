@@ -51,6 +51,12 @@
     max-width: 480px;
     margin: 0;
   }
+  .cta-module__description p {
+    margin: 0;
+  }
+  .cta-module__description p + p {
+    margin-top: 12px;
+  }
   .cta-module__buttons {
     margin-top: 6px;
     display: flex;
@@ -62,6 +68,10 @@
     .cta-module__kicker{
     font-size:26px;
       
+    }
+    .cta-module__buttons div,
+    .cta-module__buttons a{
+      width:100%;
     }
     .cta-module__heading strong{
     font-size:45px;
@@ -75,7 +85,7 @@
   <div class="content-wrapper cta-module__inner">
     <div class="cta-module__kicker">{{ module.kicker|escape_html }}</div>
     <div class="cta-module__heading">{{ module.heading }}</div>
-    <p class="cta-module__description">{{ module.description|escape_html }}</p>
+    <div class="cta-module__description">{{ module.description|sanitize_html }}</div>
     <div class="cta-module__buttons">
       {% set cta_style_class = module.style_cta %}
       {% if module.style_cta == "cta-secondary" %}{% set cta_style_class = "cta-secondary-dark" %}{% endif %}

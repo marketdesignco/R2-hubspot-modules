@@ -1,0 +1,80 @@
+{#
+  Call to Action - Blog — a simple, fully manual CTA banner for the Blog
+  Listing template (e.g. "Ask us anything"). No HubSpot data dependency,
+  no JavaScript — every field is editor-authored rich text or a button
+  repeater (max 2), matching the reference design's bordered card with a
+  blue accent left border, handwritten eyebrow, title, description, and up
+  to two buttons.
+
+  All static styling lives in module.css (auto-loaded for this module,
+  same as blog-listing.module/module.css). Only this module's own
+  editor-configurable padding stays inline below, since it's a runtime
+  HubSpot field value, not a static rule.
+#}
+
+{% require_css %}
+<style>
+{% scope_css %}
+  .cta-blog-module {
+    {{ module.styles.padding_desktop.css }}
+  }
+  @media (max-width: 767px) {
+    .cta-blog-module {
+      {{ module.styles.padding_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="cta-blog-module" data-screen-label="Call to Action - Blog">
+  <div class="content-wrapper">
+    <div class="cta-blog-module__box">
+      <div class="cta-blog-module__content">
+        {% if module.handwritten_text %}
+          <div class="cta-blog-module__handwritten">{{ module.handwritten_text|sanitize_html }}</div>
+        {% endif %}
+        {% if module.title %}
+          <div class="cta-blog-module__title">{{ module.title|sanitize_html }}</div>
+        {% endif %}
+        {% if module.description %}
+          <div class="cta-blog-module__description">{{ module.description|sanitize_html }}</div>
+        {% endif %}
+      </div>
+
+      {% if module.buttons|length > 0 %}
+        <div class="cta-blog-module__buttons">
+          {% for item in module.buttons %}
+            {% if item.button_type == "cta" %}
+              {% if item.cta %}
+                <div class="custom-cta {{ item.button_style }}">
+                  {% cta guid="{{ item.cta }}" %}
+                </div>
+              {% endif %}
+            {% else %}
+              {% if item.button_link.url.href %}
+                {% set bhref = item.button_link.url.href %}
+                {% if item.button_link.url.type == "EMAIL_ADDRESS" %}
+                  {% set bhref = "mailto:" + bhref %}
+                {% elif item.button_link.url.type == "PHONE_NUMBER" %}
+                  {% set bhref = "tel:" + bhref %}
+                {% endif %}
+                <div class="custom-cta {{ item.button_style }}">
+                  <a
+                    {% if item.button_link.url.type == "CALL_TO_ACTION" %}
+                      href="{{ bhref }}"
+                    {% else %}
+                      href="{{ bhref|escape_url }}"
+                    {% endif %}
+                    {% if item.button_link.open_in_new_tab %}target="_blank"{% endif %}
+                    {% if item.button_link.rel %}rel="{{ item.button_link.rel|join(" ")|escape_attr }}"{% endif %}
+                  >{{ item.button_text|escape_html }}</a>
+                </div>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

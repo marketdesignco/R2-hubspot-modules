@@ -81,35 +81,35 @@
     "display_width" : null,
     "default" : "We build modern network fabric that delivers segmentation, enforces zero trust, nails compliance audits, and scales with your organization."
   }, {
-    "id" : "cards.bullet_1",
-    "name" : "bullet_1",
-    "label" : "Bullet 1",
+    "id" : "cards.bullets",
+    "name" : "bullets",
+    "label" : "Bullets",
+    "help_text" : "Optional. Add, remove, or reorder as many bullet points as this card needs. Bullet color always comes from this card's Accent color above — there is no separate per-bullet color control.",
     "required" : false,
     "locked" : false,
-    "allow_new_line" : false,
-    "type" : "text",
+    "occurrence" : {
+      "min" : 0,
+      "max" : null,
+      "sorting_label_field" : "cards.bullets.text",
+      "default" : 0
+    },
+    "children" : [ {
+      "id" : "cards.bullets.text",
+      "name" : "text",
+      "label" : "Bullet text",
+      "required" : false,
+      "locked" : false,
+      "allow_new_line" : false,
+      "type" : "text",
+      "display_width" : null,
+      "default" : ""
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : false,
+    "group_occurrence_meta" : null,
+    "type" : "group",
     "display_width" : null,
-    "default" : "Cisco SDA · TrustSec · ISE"
-  }, {
-    "id" : "cards.bullet_2",
-    "name" : "bullet_2",
-    "label" : "Bullet 2",
-    "required" : false,
-    "locked" : false,
-    "allow_new_line" : false,
-    "type" : "text",
-    "display_width" : null,
-    "default" : "Zero-trust microsegmentation"
-  }, {
-    "id" : "cards.bullet_3",
-    "name" : "bullet_3",
-    "label" : "Bullet 3",
-    "required" : false,
-    "locked" : false,
-    "allow_new_line" : false,
-    "type" : "text",
-    "display_width" : null,
-    "default" : "CJIS · HIPAA · FISMA alignment"
+    "default" : [ ]
   }, {
     "id" : "cards.link_text",
     "name" : "link_text",
@@ -152,9 +152,11 @@
     "number" : "01",
     "title" : "Software-Defined Networking",
     "description" : "We build modern network fabric that delivers segmentation, enforces zero trust, nails compliance audits, and scales with your organization.",
-    "bullet_1" : "Cisco SDA · TrustSec · ISE",
-    "bullet_2" : "Zero-trust microsegmentation",
-    "bullet_3" : "CJIS · HIPAA · FISMA alignment",
+    "bullets" : [
+      { "text" : "Cisco SDA · TrustSec · ISE" },
+      { "text" : "Zero-trust microsegmentation" },
+      { "text" : "CJIS · HIPAA · FISMA alignment" }
+    ],
     "link_text" : "Learn more →",
     "link" : {
       "url" : {
@@ -172,9 +174,11 @@
     "number" : "02",
     "title" : "Software-Defined Data Center",
     "description" : "Placeholder copy — VCF message. VMware Cloud Foundation and private-cloud engineering positioned around control, cost predictability, and audit-ready infrastructure.",
-    "bullet_1" : "VMware VCF · NSX · vSAN",
-    "bullet_2" : "SDDC design + lifecycle",
-    "bullet_3" : "Hybrid + multi-cloud paths",
+    "bullets" : [
+      { "text" : "VMware VCF · NSX · vSAN" },
+      { "text" : "SDDC design + lifecycle" },
+      { "text" : "Hybrid + multi-cloud paths" }
+    ],
     "link_text" : "Learn more →",
     "link" : {
       "url" : {
@@ -192,9 +196,11 @@
     "number" : "03",
     "title" : "Software-Defined Campus",
     "description" : "Placeholder copy — Meraki / Cisco campus message. Cloud-managed switching, wireless, and security with zero-touch provisioning and org-wide visibility.",
-    "bullet_1" : "Meraki MX · MS · MR",
-    "bullet_2" : "Cloud-managed · zero-touch provisioning",
-    "bullet_3" : "Cisco SD-Access campus fabric",
+    "bullets" : [
+      { "text" : "Meraki MX · MS · MR" },
+      { "text" : "Cloud-managed · zero-touch provisioning" },
+      { "text" : "Cisco SD-Access campus fabric" }
+    ],
     "link_text" : "Learn more →",
     "link" : {
       "url" : {

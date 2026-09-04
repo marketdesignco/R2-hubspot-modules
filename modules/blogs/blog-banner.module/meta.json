@@ -1,0 +1,8 @@
+{
+  "global" : false,
+  "content_types" : [ "BLOG_LISTING", "BLOG_POST" ],
+  "categories" : [ "blog" ],
+  "label" : "Blog Banner",
+  "icon" : "../../../images/module-icons/blog.svg",
+  "is_available_for_new_content" : true
+}

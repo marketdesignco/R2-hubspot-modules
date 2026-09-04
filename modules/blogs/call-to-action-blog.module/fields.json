@@ -1,0 +1,214 @@
+[ {
+  "id" : "handwritten_text",
+  "name" : "handwritten_text",
+  "label" : "Handwritten text",
+  "help_text" : "Small accent line above the title. Rendered in the theme's Caveat handwritten font via CSS — no need to select a font in the editor.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>didn't find what you needed?</p>"
+}, {
+  "id" : "title",
+  "name" : "title",
+  "label" : "Title",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h2>Ask us anything.</h2>"
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>If we haven't written it yet, an engineer will answer it directly. No gate, no sequence — just an answer.</p>"
+}, {
+  "id" : "buttons",
+  "name" : "buttons",
+  "label" : "Buttons",
+  "help_text" : "Up to 2 buttons. Each can be a normal link or a HubSpot CTA, styled as Primary or Secondary.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : 2,
+    "sorting_label_field" : "buttons.button_text",
+    "default" : 0
+  },
+  "children" : [ {
+    "id" : "buttons.button_text",
+    "name" : "button_text",
+    "label" : "Button text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Button text"
+  }, {
+    "id" : "buttons.button_type",
+    "name" : "button_type",
+    "label" : "Button type",
+    "help_text" : "Choose whether this button is a normal link or a HubSpot CTA.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "link", "Link" ], [ "cta", "HubSpot CTA" ] ],
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "link"
+  }, {
+    "id" : "buttons.button_link",
+    "name" : "button_link",
+    "label" : "Link",
+    "help_text" : "Used when Button type is set to Link.",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "show_advanced_rel_options" : true,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : { "href" : "", "type" : "EXTERNAL" },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    },
+    "visibility" : {
+      "controlling_field" : "buttons.button_type",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "link",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    }
+  }, {
+    "id" : "buttons.cta",
+    "name" : "cta",
+    "label" : "HubSpot CTA",
+    "help_text" : "Used when Button type is set to HubSpot CTA.",
+    "required" : false,
+    "locked" : false,
+    "type" : "cta",
+    "display_width" : null,
+    "visibility" : {
+      "controlling_field" : "buttons.button_type",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "cta",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    }
+  }, {
+    "id" : "buttons.button_style",
+    "name" : "button_style",
+    "label" : "Button style",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "cta-primary", "Primary" ], [ "cta-secondary", "Secondary" ] ],
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "cta-primary"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [
+    {
+      "button_text" : "Ask us anything",
+      "button_type" : "link",
+      "button_link" : { "url" : { "href" : "", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false },
+      "button_style" : "cta-primary"
+    },
+    {
+      "button_text" : "(561) 515-6800",
+      "button_type" : "link",
+      "button_link" : { "url" : { "href" : "tel:+15615156800", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false },
+      "button_style" : "cta-secondary"
+    }
+  ]
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.padding_desktop",
+    "name" : "padding_desktop",
+    "label" : "Padding - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 48, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.padding_mobile",
+    "name" : "padding_mobile",
+    "label" : "Padding - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 32, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "padding_desktop" : {
+      "padding" : {
+        "top" : { "value" : 48, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    },
+    "padding_mobile" : {
+      "padding" : {
+        "top" : { "value" : 32, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }
+} ]
