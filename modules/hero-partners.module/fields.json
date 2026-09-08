@@ -1,0 +1,314 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Florida's IT Partner Ecosystem"
+}, {
+  "id" : "headline_prefix",
+  "name" : "headline_prefix",
+  "label" : "Headline - line 1",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Powered by"
+}, {
+  "id" : "headline_cursive",
+  "name" : "headline_cursive",
+  "label" : "Headline - cursive word/phrase",
+  "help_text" : "Renders in the R2 Caveat-script accent treatment, same as the bolded phrase in other R2 headings.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "partnerships."
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>You get the best-in-breed product for every segment of your environment. That's the one standard behind all twelve of our partners. <strong>We solve, not sell.</strong></p>"
+}, {
+  "id" : "show_button",
+  "name" : "show_button",
+  "label" : "Show button",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "button_text",
+  "name" : "button_text",
+  "label" : "Button text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Let's Whiteboard IT"
+}, {
+  "id" : "button_link",
+  "name" : "button_link",
+  "label" : "Button link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION" ],
+  "show_advanced_rel_options" : true,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "https://r2ut.com/contact",
+      "type" : "EXTERNAL"
+    },
+    "no_follow" : false,
+    "open_in_new_tab" : false
+  }
+}, {
+  "id" : "cta",
+  "name" : "cta",
+  "label" : "Or select a CTA",
+  "help_text" : "Optional. Renders a HubSpot CTA in place of the button above when no Button link is set.",
+  "required" : false,
+  "locked" : false,
+  "type" : "cta",
+  "display_width" : null
+}, {
+  "id" : "style_cta",
+  "name" : "style_cta",
+  "label" : "CTA Style",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "cta-primary", "Primary" ], [ "cta-secondary", "Secondary (Outline)" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "cta-primary"
+}, {
+  "id" : "show_cta_2",
+  "name" : "show_cta_2",
+  "label" : "Show second button",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "button_text_2",
+  "name" : "button_text_2",
+  "label" : "Second button text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Meet the partners"
+}, {
+  "id" : "button_link_2",
+  "name" : "button_link_2",
+  "label" : "Second button link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION" ],
+  "show_advanced_rel_options" : true,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "#security",
+      "type" : "EXTERNAL"
+    },
+    "no_follow" : false,
+    "open_in_new_tab" : false
+  }
+}, {
+  "id" : "cta_2",
+  "name" : "cta_2",
+  "label" : "Or select a CTA (second)",
+  "help_text" : "Optional. Renders a HubSpot CTA in place of the second button above when no Second button link is set.",
+  "required" : false,
+  "locked" : false,
+  "type" : "cta",
+  "display_width" : null
+}, {
+  "id" : "style_cta_2",
+  "name" : "style_cta_2",
+  "label" : "Second CTA Style",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "cta-primary", "Primary" ], [ "cta-secondary", "Secondary (Outline)" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "cta-secondary"
+}, {
+  "id" : "show_diagram",
+  "name" : "show_diagram",
+  "label" : "Show ecosystem diagram",
+  "help_text" : "Static whiteboard-style illustration: R2 at the center of Security / Networking / Cloud + Data Center.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "show_decorative_rings",
+  "name" : "show_decorative_rings",
+  "label" : "Show decorative corner rings",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "highlights",
+  "name" : "highlights",
+  "label" : "Bottom highlights",
+  "help_text" : "Each highlight can optionally link to a section id further down this page (e.g. \"security\") to smooth-scroll there.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 0,
+    "max" : 3,
+    "sorting_label_field" : "highlights.title",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "highlights.title",
+    "name" : "title",
+    "label" : "Title",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Security"
+  }, {
+    "id" : "highlights.description",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Palo Alto · Fortinet · Arctic Wolf · Huntress · KnowBe4"
+  }, {
+    "id" : "highlights.dot_color",
+    "name" : "dot_color",
+    "label" : "Dot color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#0D6FFC",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "highlights.anchor_id",
+    "name" : "anchor_id",
+    "label" : "Link to section id (optional)",
+    "help_text" : "e.g. \"security\" — jumps to the matching section id on this page. Leave blank to render as a static, non-clickable block.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "security"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "title" : "Security",
+    "description" : "Palo Alto · Fortinet · Arctic Wolf · Huntress · KnowBe4",
+    "dot_color" : { "color" : "#0D6FFC", "opacity" : 100 },
+    "anchor_id" : "security"
+  }, {
+    "title" : "Networking + Collaboration",
+    "description" : "Cisco · Cisco Meraki",
+    "dot_color" : { "color" : "#4792A6", "opacity" : 100 },
+    "anchor_id" : "networking"
+  }, {
+    "title" : "Cloud + Data Center",
+    "description" : "Microsoft · VMware · DellEMC · Pure Storage · Rubrik",
+    "dot_color" : { "color" : "#DB535F", "opacity" : 100 },
+    "anchor_id" : "cloud"
+  } ]
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

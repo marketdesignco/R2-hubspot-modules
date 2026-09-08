@@ -1,0 +1,343 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Security"
+}, {
+  "id" : "eyebrow_accent_color",
+  "name" : "eyebrow_accent_color",
+  "label" : "Eyebrow accent color",
+  "required" : false,
+  "locked" : false,
+  "type" : "color",
+  "display_width" : null,
+  "default" : {
+    "color" : "#0D6FFC",
+    "opacity" : 100
+  }
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Use the rich text toolbar's Heading options (H2/H3/H4) to set the semantic level. Typography always comes from the R2 Design System for whichever level is chosen.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h2>Security Partners.</h2>"
+}, {
+  "id" : "blurb",
+  "name" : "blurb",
+  "label" : "Blurb (right-aligned)",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Detection, response, prevention + the human layer."
+}, {
+  "id" : "section_id",
+  "name" : "section_id",
+  "label" : "Section anchor id",
+  "help_text" : "Used as this section's HTML id (e.g. \"security\") so other elements on the page — like a hero highlight — can link to it with #security.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "security"
+}, {
+  "id" : "background",
+  "name" : "background",
+  "label" : "Background",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "white", "White" ], [ "light-gray", "Light Gray" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "white"
+}, {
+  "id" : "show_learn_more_cta",
+  "name" : "show_learn_more_cta",
+  "label" : "Show \"Learn More\" CTA on partner rows",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "partners",
+  "name" : "partners",
+  "label" : "Partners",
+  "help_text" : "The first partner is expanded by default. Only one can be open at a time.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "partners.partner_name",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "partners.accent_color",
+    "name" : "accent_color",
+    "label" : "Accent color",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#0D6FFC",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "partners.logo",
+    "name" : "logo",
+    "label" : "Logo",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "loading" : "lazy"
+    }
+  }, {
+    "id" : "partners.partner_name",
+    "name" : "partner_name",
+    "label" : "Name",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Placeholder Partner"
+  }, {
+    "id" : "partners.tag",
+    "name" : "tag",
+    "label" : "Tag (one line)",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Placeholder one-line descriptor."
+  }, {
+    "id" : "partners.copy",
+    "name" : "copy",
+    "label" : "Copy",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<p>Placeholder copy describing this partnership.</p>"
+  }, {
+    "id" : "partners.quote_text",
+    "name" : "quote_text",
+    "label" : "Quote",
+    "help_text" : "Use the rich text toolbar's Heading 5 option so it renders bold using the R2 Design System's H5 typography.",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<h5>Placeholder quote.</h5>"
+  }, {
+    "id" : "partners.who",
+    "name" : "who",
+    "label" : "Quote attribution — name",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "R2 Unified Technologies"
+  }, {
+    "id" : "partners.role",
+    "name" : "role",
+    "label" : "Quote attribution — role (optional)",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "partners.cta_button_text",
+    "name" : "cta_button_text",
+    "label" : "CTA button text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Learn More About This Partnership"
+  }, {
+    "id" : "partners.cta_button_link",
+    "name" : "cta_button_link",
+    "label" : "CTA button link",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION" ],
+    "show_advanced_rel_options" : true,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "href" : "",
+        "type" : "EXTERNAL"
+      },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    }
+  }, {
+    "id" : "partners.cta",
+    "name" : "cta",
+    "label" : "Or select a CTA",
+    "help_text" : "Optional. Renders a HubSpot CTA in place of the button above when no CTA button link is set.",
+    "required" : false,
+    "locked" : false,
+    "type" : "cta",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "partner_name" : "Placeholder Partner One",
+    "tag" : "Placeholder one-line descriptor.",
+    "accent_color" : { "color" : "#0D6FFC", "opacity" : 100 },
+    "copy" : "<p>Placeholder copy describing this partnership.</p>",
+    "quote_text" : "<h5>Placeholder quote.</h5>",
+    "who" : "R2 Unified Technologies",
+    "role" : "",
+    "cta_button_text" : "Learn More About This Partnership",
+    "cta_button_link" : {
+      "url" : { "href" : "", "type" : "EXTERNAL" },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    },
+    "logo" : { "loading" : "lazy" }
+  }, {
+    "partner_name" : "Placeholder Partner Two",
+    "tag" : "Placeholder one-line descriptor.",
+    "accent_color" : { "color" : "#4792A6", "opacity" : 100 },
+    "copy" : "<p>Placeholder copy describing this partnership.</p>",
+    "quote_text" : "<h5>Placeholder quote.</h5>",
+    "who" : "R2 Unified Technologies",
+    "role" : "",
+    "cta_button_text" : "Learn More About This Partnership",
+    "cta_button_link" : {
+      "url" : { "href" : "", "type" : "EXTERNAL" },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    },
+    "logo" : { "loading" : "lazy" }
+  }, {
+    "partner_name" : "Placeholder Partner Three",
+    "tag" : "Placeholder one-line descriptor.",
+    "accent_color" : { "color" : "#DB535F", "opacity" : 100 },
+    "copy" : "<p>Placeholder copy describing this partnership.</p>",
+    "quote_text" : "<h5>Placeholder quote.</h5>",
+    "who" : "R2 Unified Technologies",
+    "role" : "",
+    "cta_button_text" : "Learn More About This Partnership",
+    "cta_button_link" : {
+      "url" : { "href" : "", "type" : "EXTERNAL" },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    },
+    "logo" : { "loading" : "lazy" }
+  } ]
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 96, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 56, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : {
+      "padding" : {
+        "top" : { "value" : 96, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    },
+    "spacing_mobile" : {
+      "padding" : {
+        "top" : { "value" : 56, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }
+} ]

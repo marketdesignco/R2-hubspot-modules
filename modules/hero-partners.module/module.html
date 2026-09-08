@@ -1,0 +1,160 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .hero-partners-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .hero-partners-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="hero-partners-module" id="hero" data-screen-label="Hero - Partners">
+  <div class="hero-partners-module__orb-left"></div>
+  {% if module.show_decorative_rings %}
+    <img class="hero-partners-module__rings" src="https://www.r2ut.com/hubfs/Boilerplate/Container.svg" alt="" aria-hidden="true" loading="lazy">
+  {% endif %}
+
+  <div class="content-wrapper hero-partners-module__body">
+    <div class="hero-partners-module__content">
+      {% if module.eyebrow %}
+        <div class="hero-partners-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+      {% endif %}
+
+      <h1 class="hero-partners-module__title">
+        <span>{{ module.headline_prefix|escape_html }}</span>
+        {% if module.headline_cursive %}<strong>{{ module.headline_cursive|escape_html }}</strong>{% endif %}
+      </h1>
+
+      <div class="hero-partners-module__description">{{ module.description|sanitize_html }}</div>
+
+      {% if module.show_button or module.show_cta_2 %}
+        <div class="hero-partners-module__buttons">
+          {% if module.show_button %}
+            {% set cta_style_class = module.style_cta %}
+            {% if module.style_cta == "cta-secondary" %}{% set cta_style_class = "cta-secondary-dark" %}{% endif %}
+            <div class="custom-cta hero-partners-module__cta btn-mobile {{ cta_style_class }}">
+              {% if module.button_link.url.href %}
+                {% set href = module.button_link.url.href %}
+                {% if module.button_link.url.type == "EMAIL_ADDRESS" %}
+                  {% set href = "mailto:" + href %}
+                {% elif module.button_link.url.type == "PHONE_NUMBER" %}
+                  {% set href = "tel:" + href %}
+                {% endif %}
+                <a
+                  {% if module.button_link.url.type == "CALL_TO_ACTION" %}
+                    href="{{ href }}"
+                  {% else %}
+                    href="{{ href|escape_url }}"
+                  {% endif %}
+                  {% if module.button_link.open_in_new_tab %}target="_blank"{% endif %}
+                  {% if module.button_link.rel %}rel="{{ module.button_link.rel|join(" ")|escape_attr }}"{% endif %}
+                >
+                  {{ module.button_text|escape_html }}
+                </a>
+              {% elif module.cta %}
+                {% cta guid="{{ module.cta }}" %}
+              {% endif %}
+            </div>
+          {% endif %}
+          {% if module.show_cta_2 %}
+            {% set cta_style_class_2 = module.style_cta_2 %}
+            {% if module.style_cta_2 == "cta-secondary" %}{% set cta_style_class_2 = "cta-secondary-dark" %}{% endif %}
+            <div class="custom-cta hero-partners-module__cta btn-mobile {{ cta_style_class_2 }}">
+              {% if module.button_link_2.url.href %}
+                {% set href2 = module.button_link_2.url.href %}
+                {% if module.button_link_2.url.type == "EMAIL_ADDRESS" %}
+                  {% set href2 = "mailto:" + href2 %}
+                {% elif module.button_link_2.url.type == "PHONE_NUMBER" %}
+                  {% set href2 = "tel:" + href2 %}
+                {% endif %}
+                <a
+                  {% if module.button_link_2.url.type == "CALL_TO_ACTION" %}
+                    href="{{ href2 }}"
+                  {% else %}
+                    href="{{ href2|escape_url }}"
+                  {% endif %}
+                  {% if module.button_link_2.open_in_new_tab %}target="_blank"{% endif %}
+                  {% if module.button_link_2.rel %}rel="{{ module.button_link_2.rel|join(" ")|escape_attr }}"{% endif %}
+                >
+                  {{ module.button_text_2|escape_html }}
+                </a>
+              {% elif module.cta_2 %}
+                {% cta guid="{{ module.cta_2 }}" %}
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if module.show_diagram %}
+      <div class="hero-partners-module__diagram-wrap" aria-hidden="true">
+        <svg class="hero-partners-module__diagram" viewBox="0 0 720 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Whiteboard sketch of the R2 partner ecosystem: Security, Networking, and Cloud + Data Center partners around R2">
+          <g stroke="#B7C9C5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+            <circle cx="360" cy="240" r="62" stroke-width="2.8"/>
+            <circle cx="360" cy="240" r="70" stroke-width="1.2" stroke-dasharray="5 5" opacity=".5"/>
+            <text x="360" y="236" font-family="Caveat, cursive" font-size="30" fill="#B7C9C5" text-anchor="middle" font-weight="700" stroke="none">R2</text>
+            <text x="360" y="262" font-family="Caveat, cursive" font-size="14" fill="#B7C9C5" text-anchor="middle" stroke="none">your team</text>
+            <path d="M310 200 C260 160 230 150 196 138" stroke-width="2" stroke-dasharray="6 5"/>
+            <path d="M412 202 C470 165 500 155 532 146" stroke-width="2" stroke-dasharray="6 5"/>
+            <path d="M360 305 C360 335 360 350 360 365" stroke-width="2" stroke-dasharray="6 5"/>
+            <rect x="60" y="70" width="200" height="112" rx="8" stroke-width="2.6"/>
+            <path d="M78 60 l14 22 M92 60 l-14 22" stroke-width="1.8" stroke="#4792A6"/>
+            <text x="160" y="96" font-family="Caveat, cursive" font-size="19" fill="#B7C9C5" text-anchor="middle" font-weight="700" stroke="none">Security</text>
+            <text x="160" y="120" font-family="Caveat, cursive" font-size="14" fill="#B7C9C5" text-anchor="middle" stroke="none">Palo Alto &#183; Fortinet</text>
+            <text x="160" y="140" font-family="Caveat, cursive" font-size="14" fill="#B7C9C5" text-anchor="middle" stroke="none">Arctic Wolf &#183; Huntress</text>
+            <text x="160" y="160" font-family="Caveat, cursive" font-size="14" fill="#B7C9C5" text-anchor="middle" stroke="none">KnowBe4</text>
+            <rect x="470" y="82" width="200" height="86" rx="8" stroke-width="2.6"/>
+            <text x="570" y="110" font-family="Caveat, cursive" font-size="19" fill="#B7C9C5" text-anchor="middle" font-weight="700" stroke="none">Networking</text>
+            <text x="570" y="134" font-family="Caveat, cursive" font-size="14" fill="#B7C9C5" text-anchor="middle" stroke="none">Cisco &#183; Meraki</text>
+            <text x="570" y="154" font-family="Caveat, cursive" font-size="14" fill="#B7C9C5" text-anchor="middle" stroke="none">collaboration too</text>
+            <rect x="245" y="372" width="230" height="86" rx="8" stroke-width="2.6"/>
+            <text x="360" y="399" font-family="Caveat, cursive" font-size="19" fill="#B7C9C5" text-anchor="middle" font-weight="700" stroke="none">Cloud + Data Center</text>
+            <text x="360" y="423" font-family="Caveat, cursive" font-size="14" fill="#B7C9C5" text-anchor="middle" stroke="none">Microsoft &#183; VMware &#183; DellEMC</text>
+            <text x="360" y="443" font-family="Caveat, cursive" font-size="14" fill="#B7C9C5" text-anchor="middle" stroke="none">Pure Storage &#183; Rubrik</text>
+            <circle cx="128" cy="252" r="3" fill="#B7C9C5" stroke="none"/>
+            <text x="140" y="258" font-family="Caveat, cursive" font-size="14" fill="#B7C9C5" stroke="none">best in breed,</text>
+            <text x="140" y="278" font-family="Caveat, cursive" font-size="14" fill="#B7C9C5" stroke="none">every segment</text>
+            <path d="M200 288 C230 305 255 300 285 280" stroke-width="1.6" stroke-dasharray="5 4"/>
+            <polyline points="280,276 288,278 284,286" stroke-width="1.6"/>
+            <text x="520" y="270" font-family="Caveat, cursive" font-size="14" fill="#B7C9C5" transform="rotate(-4 520 270)" stroke="none">12 partners</text>
+            <text x="524" y="290" font-family="Caveat, cursive" font-size="14" fill="#B7C9C5" transform="rotate(-4 524 290)" stroke="none">zero shelfware</text>
+            <circle cx="505" cy="264" r="3" fill="#DB535F" stroke="none"/>
+          </g>
+        </svg>
+      </div>
+    {% endif %}
+  </div>
+
+  {% if module.highlights|length > 0 %}
+    <div class="hero-partners-module__footer">
+      <div class="content-wrapper hero-partners-module__footer-inner">
+        {% for item in module.highlights %}
+          {% set highlight_style = "--highlight-dot-color: rgba(" + item.dot_color.color|convert_rgb + ", " + (item.dot_color.opacity / 100)|string + ");" %}
+          {% if item.anchor_id %}
+            <a href="#{{ item.anchor_id|escape_attr }}" class="hero-partners-module__highlight" style="{{ highlight_style }}">
+              <span class="hero-partners-module__highlight-dot"></span>
+              <div class="hero-partners-module__highlight-copy">
+                <strong>{{ item.title|escape_html }}</strong>
+                {{ item.description|escape_html }}
+              </div>
+            </a>
+          {% else %}
+            <div class="hero-partners-module__highlight" style="{{ highlight_style }}">
+              <span class="hero-partners-module__highlight-dot"></span>
+              <div class="hero-partners-module__highlight-copy">
+                <strong>{{ item.title|escape_html }}</strong>
+                {{ item.description|escape_html }}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</section>

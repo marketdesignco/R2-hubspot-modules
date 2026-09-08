@@ -1,0 +1,90 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .partner-accordion-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .partner-accordion-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="partner-accordion-module{% if module.background == "light-gray" %} partner-accordion-module--light{% endif %}" id="{{ module.section_id|default('partners')|escape_attr }}" data-screen-label="{{ module.eyebrow|escape_html }} partners">
+  <div class="content-wrapper partner-accordion-module__inner">
+
+    <div class="partner-accordion-module__header">
+      <div class="partner-accordion-module__header-text">
+        {% if module.eyebrow %}
+          <div class="partner-accordion-module__eyebrow eyebrow" style="--eyebrow-accent: rgba({{ module.eyebrow_accent_color.color|convert_rgb }}, {{ module.eyebrow_accent_color.opacity / 100 }});"><span></span>{{ module.eyebrow|escape_html }}</div>
+        {% endif %}
+        <div class="partner-accordion-module__heading">{{ module.heading|sanitize_html }}</div>
+      </div>
+      {% if module.blurb %}
+        <p class="partner-accordion-module__blurb">{{ module.blurb|escape_html }}</p>
+      {% endif %}
+    </div>
+
+    <div class="partner-accordion-module__list">
+      {% for partner in module.partners %}
+        <details class="partner-accordion-module__item" name="partner-accordion-{{ module_id }}"{% if loop.first %} open{% endif %} style="--accent-color: rgba({{ partner.accent_color.color|convert_rgb }}, {{ partner.accent_color.opacity / 100 }});">
+          <summary class="partner-accordion-module__summary">
+            <div class="partner-accordion-module__logo">
+              {% if partner.logo.src %}
+                <img src="{{ partner.logo.src|escape_url }}" alt="{{ partner.partner_name|escape_attr }} logo" loading="lazy">
+              {% endif %}
+            </div>
+            <div class="partner-accordion-module__summary-text">
+              <h3>{{ partner.partner_name|escape_html }}</h3>
+              {% if partner.tag %}<p>{{ partner.tag|escape_html }}</p>{% endif %}
+            </div>
+            <span class="partner-accordion-module__toggle" aria-hidden="true"></span>
+          </summary>
+
+          <div class="partner-accordion-module__body">
+            <div class="partner-accordion-module__copy">
+              <div class="partner-accordion-module__copy-text">{{ partner.copy|sanitize_html }}</div>
+              {% if module.show_learn_more_cta %}
+                <div class="custom-cta partner-accordion-module__cta cta-primary">
+                  {% if partner.cta_button_link.url.href %}
+                    {% set href = partner.cta_button_link.url.href %}
+                    {% if partner.cta_button_link.url.type == "EMAIL_ADDRESS" %}
+                      {% set href = "mailto:" + href %}
+                    {% elif partner.cta_button_link.url.type == "PHONE_NUMBER" %}
+                      {% set href = "tel:" + href %}
+                    {% endif %}
+                    <a
+                      {% if partner.cta_button_link.url.type == "CALL_TO_ACTION" %}
+                        href="{{ href }}"
+                      {% else %}
+                        href="{{ href|escape_url }}"
+                      {% endif %}
+                      {% if partner.cta_button_link.open_in_new_tab %}target="_blank"{% endif %}
+                      {% if partner.cta_button_link.rel %}rel="{{ partner.cta_button_link.rel|join(" ")|escape_attr }}"{% endif %}
+                    >
+                      {{ partner.cta_button_text|escape_html }}
+                    </a>
+                  {% elif partner.cta %}
+                    {% cta guid="{{ partner.cta }}" %}
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+            {% if partner.quote_text %}
+              <aside class="partner-accordion-module__quote">
+                <div class="partner-accordion-module__quote-text">{{ partner.quote_text|sanitize_html }}</div>
+                <p class="partner-accordion-module__person">
+                  <strong>{{ partner.who|escape_html }}</strong>
+                  {% if partner.role %}<br><span>{{ partner.role|escape_html }}</span>{% endif %}
+                </p>
+              </aside>
+            {% endif %}
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
