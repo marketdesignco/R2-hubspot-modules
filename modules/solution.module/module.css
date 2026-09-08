@@ -168,6 +168,13 @@
   color: var(--color-white);
 }
 
+.solution-module__richtext-col p {
+  font-size: var(--font-size-body);
+  font-weight: 400;
+  line-height: var(--line-height-body);
+  margin: 0;
+}
+
 .solution-module__richtext-col p + p {
   margin-top: 18px;
 }
