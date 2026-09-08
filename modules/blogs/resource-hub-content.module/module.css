@@ -1,0 +1,507 @@
+/*
+  Resource Hub Content module — static visual styling.
+
+  Structure and dynamic content live in module.html; the module's own
+  editor-configurable section spacing stays inline there (runtime field
+  value). Everything else — layout, color, borders, states, responsive
+  rules — lives here, same split used by blog-listing.module.
+*/
+
+.resource-hub-content-module {
+  background: var(--color-white);
+  /* Tag -> accent color mapping, same convention as blog-listing.module.
+     Falls back to --tag-default for any tag not listed here. */
+  --tag-default: var(--color-steel-gray);
+  --tag-case-study: var(--color-coral-red);
+  --tag-video: var(--color-teal);
+  --tag-guide: var(--color-primary-blue);
+  --tag-checklist: var(--color-teal);
+  --tag-insight: var(--color-navy-blue);
+  --tag-security: var(--color-steel-gray);
+  --tag-managed-services: var(--color-navy-blue);
+  --tag-software-defined-access: var(--color-slate-blue);
+}
+
+/* ---------- Sticky tabs ---------- */
+
+.resource-hub-content-module__tabs {
+  position: sticky;
+  top: var(--r2-header-height, 0);
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: var(--color-white);
+  padding: 16px 0;
+  margin-bottom: 32px;
+  border-bottom: 1px solid rgba(8, 39, 80, .08);
+}
+
+.resource-hub-content-module__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-primary);
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(8, 39, 80, .6);
+  background: var(--color-white);
+  border: 1px solid rgba(8, 39, 80, .14);
+  border-radius: 999px;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: border-color .15s, color .15s, background-color .15s;
+}
+
+.resource-hub-content-module__tab:hover,
+.resource-hub-content-module__tab:focus-visible {
+  border-color: var(--color-primary-blue);
+  color: var(--color-navy-blue);
+}
+
+.resource-hub-content-module__tab.is-active {
+  background: var(--color-primary-blue);
+  border-color: var(--color-primary-blue);
+  color: var(--color-white);
+}
+
+.resource-hub-content-module__tab-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* The dot's own color comes from a per-tab inline style (module.html), so
+   overriding it for the active state needs !important — the only place
+   in this module that's necessary. */
+.resource-hub-content-module__tab.is-active .resource-hub-content-module__tab-dot {
+  background: var(--color-white) !important;
+}
+
+.resource-hub-content-module__tab-count {
+  font-size: 11px;
+  opacity: .7;
+}
+
+.resource-hub-content-module__tab.is-active .resource-hub-content-module__tab-count {
+  opacity: 1;
+  background: rgba(255, 255, 255, .25);
+  color: var(--color-white);
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+
+/* ---------- Row 1: Case study / Video ---------- */
+
+.resource-hub-content-module__row1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.resource-hub-content-module__card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px 0 rgba(8, 39, 80, .10);
+  transition: box-shadow .2s ease;
+}
+
+.resource-hub-content-module__card:hover {
+  box-shadow: 0 16px 40px 0 rgba(8, 39, 80, .18);
+}
+
+.resource-hub-content-module__card-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 9;
+  background: rgba(8, 39, 80, .04);
+  overflow: hidden;
+}
+
+.resource-hub-content-module__card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.resource-hub-content-module__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  flex: 1;
+}
+
+.resource-hub-content-module__card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.resource-hub-content-module__badge {
+  display: inline-block;
+  font-family: var(--font-primary);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--color-white);
+  background: var(--tag-default);
+  border-radius: 4px;
+  padding: 4px 10px;
+}
+
+.resource-hub-content-module__eyebrow {
+  font-family: var(--font-primary);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: rgba(8, 39, 80, .5);
+}
+
+.resource-hub-content-module__card-title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.3;
+}
+
+.resource-hub-content-module__card-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.resource-hub-content-module__card-excerpt {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(8, 39, 80, .62);
+}
+
+.resource-hub-content-module__card-link {
+  margin-top: auto;
+}
+
+/* Case study — dark card */
+
+.resource-hub-content-module__card--case_study {
+  background: var(--color-navy-blue);
+  border-top: 3px solid var(--color-coral-red);
+  box-shadow: 0 12px 32px 0 rgba(8, 39, 80, .20);
+}
+
+.resource-hub-content-module__card--case_study:hover {
+  box-shadow: 0 16px 40px 0 rgba(8, 39, 80, .28);
+}
+
+.resource-hub-content-module__card--case_study .resource-hub-content-module__card-title,
+.resource-hub-content-module__card--case_study .resource-hub-content-module__card-title a {
+  color: var(--color-white);
+}
+
+.resource-hub-content-module__card--case_study .resource-hub-content-module__card-excerpt {
+  color: rgba(255, 255, 255, .62);
+  border-left: 2px solid var(--color-primary-blue);
+  padding-left: 14px;
+}
+
+.resource-hub-content-module__card--case_study .resource-hub-content-module__eyebrow {
+  color: rgba(255, 255, 255, .5);
+}
+
+.resource-hub-content-module__card--case_study .resource-hub-content-module__badge {
+  background: var(--tag-case-study);
+}
+
+/* Video — light card with play affordance */
+
+.resource-hub-content-module__card--video {
+  background: var(--color-white);
+  border-top: 3px solid var(--color-teal);
+}
+
+.resource-hub-content-module__card--video .resource-hub-content-module__badge {
+  background: var(--tag-video);
+}
+
+.resource-hub-content-module__play {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-primary-blue);
+}
+
+.resource-hub-content-module__play::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 7px 0 7px 11px;
+  border-color: transparent transparent transparent var(--color-white);
+}
+
+.resource-hub-content-module__duration {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  background: rgba(8, 39, 80, .85);
+  color: var(--color-white);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* ---------- Row 2: Event ---------- */
+
+.resource-hub-content-module__event {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid var(--color-primary-blue);
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin-bottom: 32px;
+}
+
+.resource-hub-content-module__event-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border: 1px solid rgba(8, 39, 80, .12);
+  border-top: 3px solid var(--color-coral-red);
+  border-radius: 4px;
+}
+
+.resource-hub-content-module__event-status-label {
+  font-family: var(--font-primary);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--color-coral-red);
+  text-transform: uppercase;
+}
+
+.resource-hub-content-module__event-status-dash {
+  font-size: 11px;
+  line-height: 1;
+  color: rgba(8, 39, 80, .3);
+}
+
+.resource-hub-content-module__event-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.resource-hub-content-module__event-eyebrow {
+  font-family: var(--font-primary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--color-primary-blue);
+}
+
+.resource-hub-content-module__event-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-navy-blue);
+}
+
+.resource-hub-content-module__event-details {
+  font-size: 13px;
+  color: rgba(8, 39, 80, .55);
+}
+
+/* ---------- Row 3: Featured Guide / Checklist / Insight ---------- */
+
+.resource-hub-content-module__featured-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+.resource-hub-content-module__featured-row .resource-hub-content-module__card {
+  box-shadow: none;
+  border: 1px solid rgba(8, 39, 80, .12);
+  border-left: 3px solid var(--tag-default);
+}
+
+.resource-hub-content-module__featured-row .resource-hub-content-module__card:hover {
+  box-shadow: 0 12px 32px 0 rgba(8, 39, 80, .10);
+}
+
+.resource-hub-content-module__featured-row .resource-hub-content-module__card--guide {
+  border-left-color: var(--tag-guide);
+}
+
+.resource-hub-content-module__featured-row .resource-hub-content-module__card--checklist {
+  border-left-color: var(--tag-checklist);
+}
+
+.resource-hub-content-module__featured-row .resource-hub-content-module__card--insight {
+  border-left-color: var(--tag-insight);
+}
+
+.resource-hub-content-module__featured-row .resource-hub-content-module__card-media {
+  display: none;
+}
+
+/* Guide & Checklist: handwritten Caveat kicker, no pill background — the
+   only rule setting background/color for these two, so it can never lose
+   a specificity fight with a tag-color pill rule. */
+.resource-hub-content-module__featured-row .resource-hub-content-module__card--guide .resource-hub-content-module__badge,
+.resource-hub-content-module__featured-row .resource-hub-content-module__card--checklist .resource-hub-content-module__badge {
+  font-family: var(--font-secondary);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 14px;
+  background: none;
+  padding: 0;
+}
+
+.resource-hub-content-module__featured-row .resource-hub-content-module__card--guide .resource-hub-content-module__badge {
+  color: var(--tag-guide);
+}
+
+.resource-hub-content-module__featured-row .resource-hub-content-module__card--checklist .resource-hub-content-module__badge {
+  color: var(--tag-checklist);
+}
+
+/* Insight: keeps the standard solid-pill badge styling (uppercase, white
+   text, padding) from the base .badge rule — only the fill color changes. */
+.resource-hub-content-module__featured-row .resource-hub-content-module__card--insight .resource-hub-content-module__badge {
+  background: var(--tag-insight);
+}
+
+/* ---------- Rows 4-6: section headers + mini grids ---------- */
+
+.resource-hub-content-module__section {
+  margin-bottom: 48px;
+}
+
+.resource-hub-content-module__section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.resource-hub-content-module__section-title {
+  font-size: var(--font-size-h3);
+  color: var(--color-navy-blue);
+  margin: 0;
+}
+
+.resource-hub-content-module__mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.resource-hub-content-module__mini-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--color-white);
+  border: 1px solid rgba(8, 39, 80, .12);
+  border-left: 3px solid var(--card-accent, var(--tag-default));
+  border-radius: 6px;
+  padding: 20px;
+  transition: box-shadow .2s ease;
+}
+
+.resource-hub-content-module__mini-card:hover {
+  box-shadow: 0 12px 32px 0 rgba(8, 39, 80, .10);
+}
+
+.resource-hub-content-module__mini-badge {
+  font-family: var(--font-primary);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--card-accent, var(--tag-default));
+}
+
+.resource-hub-content-module__mini-title {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.resource-hub-content-module__mini-title a {
+  color: var(--color-navy-blue);
+  text-decoration: none;
+}
+
+.resource-hub-content-module__outcome-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  border: 1px solid rgba(8, 39, 80, .12);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: box-shadow .2s ease;
+}
+
+.resource-hub-content-module__outcome-card:hover {
+  box-shadow: 0 12px 32px 0 rgba(8, 39, 80, .10);
+}
+
+.resource-hub-content-module__outcome-card .resource-hub-content-module__card-media {
+  border-radius: 0;
+}
+
+.resource-hub-content-module__outcome-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 992px) {
+  .resource-hub-content-module__tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .resource-hub-content-module__row1,
+  .resource-hub-content-module__featured-row,
+  .resource-hub-content-module__mini-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .resource-hub-content-module__event {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .resource-hub-content-module__section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

@@ -1,0 +1,328 @@
+{#
+  Resource Hub Content — the "Everything we've put on the whiteboard" feed.
+
+  Every fetchable slot picks a blog and shows its most recent post(s) — no
+  tag has to match anything; tags only ever drive the displayed badge.
+  Per slot: build a pool, drop any post id already used by an earlier slot
+  (`fetched`/`used_ids`), take what's left. No blog set, or an empty pool,
+  means no entry in `fetched` and a fallback to that slot's manual/mock
+  fields.
+
+  IMPORTANT: all of the above, plus the tag-key normalization for badge
+  coloring, is written as plain top-level {% set %}/{% do %} statements or
+  inline {% set x %}...{% endset %} block-captures — never through a
+  macro call. Two earlier versions routed this through macros (mutating a
+  dict/list passed as a macro parameter, and calling a macro as a
+  value-returning expression) and both silently produced nothing, no
+  error. Keep new logic here inline too; only use a macro for pure markup
+  rendering (render_card etc. below).
+#}
+
+{% set used_ids = [] %}
+{% set fetched = {} %}
+
+{# Row 1 #}
+{% set pool = blog_recent_posts(module.row1_a.source_blog, 10) if module.row1_a.source_blog else [] %}
+{% set available = pool|rejectattr('id', 'in', used_ids)|list %}
+{% if available|length > 0 %}
+  {% do fetched.update({'row1_a': available[0]}) %}
+  {% do used_ids.append(available[0].id) %}
+{% endif %}
+
+{% set pool = blog_recent_posts(module.row1_b.source_blog, 10) if module.row1_b.source_blog else [] %}
+{% set available = pool|rejectattr('id', 'in', used_ids)|list %}
+{% if available|length > 0 %}
+  {% do fetched.update({'row1_b': available[0]}) %}
+  {% do used_ids.append(available[0].id) %}
+{% endif %}
+
+{# Row 2 — Event #}
+{% set pool = blog_recent_posts(module.event.source_blog, 10) if module.event.source_blog else [] %}
+{% set available = pool|rejectattr('id', 'in', used_ids)|list %}
+{% if available|length > 0 %}
+  {% do fetched.update({'event': available[0]}) %}
+  {% do used_ids.append(available[0].id) %}
+{% endif %}
+
+{# Row 3 — Featured Guide / Checklist / Insight #}
+{% set pool = blog_recent_posts(module.featured_guide.source_blog, 10) if module.featured_guide.source_blog else [] %}
+{% set available = pool|rejectattr('id', 'in', used_ids)|list %}
+{% if available|length > 0 %}
+  {% do fetched.update({'featured_guide': available[0]}) %}
+  {% do used_ids.append(available[0].id) %}
+{% endif %}
+
+{% set pool = blog_recent_posts(module.featured_checklist.source_blog, 10) if module.featured_checklist.source_blog else [] %}
+{% set available = pool|rejectattr('id', 'in', used_ids)|list %}
+{% if available|length > 0 %}
+  {% do fetched.update({'featured_checklist': available[0]}) %}
+  {% do used_ids.append(available[0].id) %}
+{% endif %}
+
+{% set pool = blog_recent_posts(module.featured_insight.source_blog, 10) if module.featured_insight.source_blog else [] %}
+{% set available = pool|rejectattr('id', 'in', used_ids)|list %}
+{% if available|length > 0 %}
+  {% do fetched.update({'featured_insight': available[0]}) %}
+  {% do used_ids.append(available[0].id) %}
+{% endif %}
+
+{# Row 4 — Latest Insights (3 cards from one pool) #}
+{% set pool = blog_recent_posts(module.latest_insights.source_blog, 20) if module.latest_insights.source_blog else [] %}
+{% set available = pool|rejectattr('id', 'in', used_ids)|list %}
+{% if available|length > 0 %}
+  {% do fetched.update({'latest_insights_1': available[0]}) %}
+  {% do used_ids.append(available[0].id) %}
+{% endif %}
+{% set available = pool|rejectattr('id', 'in', used_ids)|list %}
+{% if available|length > 0 %}
+  {% do fetched.update({'latest_insights_2': available[0]}) %}
+  {% do used_ids.append(available[0].id) %}
+{% endif %}
+{% set available = pool|rejectattr('id', 'in', used_ids)|list %}
+{% if available|length > 0 %}
+  {% do fetched.update({'latest_insights_3': available[0]}) %}
+  {% do used_ids.append(available[0].id) %}
+{% endif %}
+
+{# Row 5 — Customer Outcomes (3 cards from one pool) #}
+{% set pool = blog_recent_posts(module.customer_outcomes.source_blog, 20) if module.customer_outcomes.source_blog else [] %}
+{% set available = pool|rejectattr('id', 'in', used_ids)|list %}
+{% if available|length > 0 %}
+  {% do fetched.update({'customer_outcomes_1': available[0]}) %}
+  {% do used_ids.append(available[0].id) %}
+{% endif %}
+{% set available = pool|rejectattr('id', 'in', used_ids)|list %}
+{% if available|length > 0 %}
+  {% do fetched.update({'customer_outcomes_2': available[0]}) %}
+  {% do used_ids.append(available[0].id) %}
+{% endif %}
+{% set available = pool|rejectattr('id', 'in', used_ids)|list %}
+{% if available|length > 0 %}
+  {% do fetched.update({'customer_outcomes_3': available[0]}) %}
+  {% do used_ids.append(available[0].id) %}
+{% endif %}
+
+{# Row 6 — Guides + Checklists (3 cards from one pool) #}
+{% set pool = blog_recent_posts(module.guides_checklists.source_blog, 20) if module.guides_checklists.source_blog else [] %}
+{% set available = pool|rejectattr('id', 'in', used_ids)|list %}
+{% if available|length > 0 %}
+  {% do fetched.update({'guides_checklists_1': available[0]}) %}
+  {% do used_ids.append(available[0].id) %}
+{% endif %}
+{% set available = pool|rejectattr('id', 'in', used_ids)|list %}
+{% if available|length > 0 %}
+  {% do fetched.update({'guides_checklists_2': available[0]}) %}
+  {% do used_ids.append(available[0].id) %}
+{% endif %}
+{% set available = pool|rejectattr('id', 'in', used_ids)|list %}
+{% if available|length > 0 %}
+  {% do fetched.update({'guides_checklists_3': available[0]}) %}
+  {% do used_ids.append(available[0].id) %}
+{% endif %}
+
+{% macro render_card(post, manual, style_variant) %}
+  {% set is_live = post is not none %}
+  {% set title = post.name if is_live else manual.title %}
+  {% set href = post.absolute_url if is_live else manual.link.url.href %}
+  {% set image_src = post.featured_image if is_live else manual.image.src %}
+  {% set image_alt = post.featured_image_alt_text if is_live else manual.image.alt|default("") %}
+  {% set link_text = manual.link_text %}
+  {% set badge = manual.badge_label %}
+  {% set excerpt_html = "" %}
+  {% if is_live and post.post_summary %}
+    {% set excerpt_html %}{{ post.post_summary|striptags|trim|truncate(180)|escape_html }}{% endset %}
+  {% elif manual.excerpt %}
+    {% set excerpt_html %}{{ manual.excerpt|sanitize_html }}{% endset %}
+  {% endif %}
+  {% if is_live and post.tag_list|list|length > 0 %}
+    {% set badge = (post.tag_list|list)[0].name %}
+  {% endif %}
+  {% set tag_key = "default" %}
+  {% if badge %}
+    {% set tag_key %}{{ badge|lower|replace("(english - united states)", "")|replace("(english)", "")|trim|replace(",", "")|replace(".", "")|replace(" - ", "-")|replace(" ", "-")|replace("--", "-")|trim("-") }}{% endset %}
+  {% endif %}
+  <article class="resource-hub-content-module__card resource-hub-content-module__card--{{ style_variant }}" style="--card-accent: var(--tag-{{ tag_key|escape_attr }}, var(--tag-default));">
+    <a class="resource-hub-content-module__card-media" href="{{ href|escape_url }}" tabindex="-1" aria-hidden="true">
+      {% if image_src %}
+        <img src="{{ image_src|escape_url }}" alt="{{ image_alt|escape_attr }}" loading="lazy">
+      {% endif %}
+      {% if style_variant == "video" %}
+        <span class="resource-hub-content-module__play" aria-hidden="true"></span>
+        {% if manual.duration_label %}
+          <span class="resource-hub-content-module__duration">{{ manual.duration_label|escape_html }}</span>
+        {% endif %}
+      {% endif %}
+    </a>
+    <div class="resource-hub-content-module__card-body">
+      <div class="resource-hub-content-module__card-meta">
+        {% if badge %}<span class="resource-hub-content-module__badge resource-hub-content-module__badge--{{ style_variant }}">{{ badge|escape_html }}</span>{% endif %}
+        {% if manual.eyebrow %}<span class="resource-hub-content-module__eyebrow">{{ manual.eyebrow|escape_html }}</span>{% endif %}
+      </div>
+      <h3 class="resource-hub-content-module__card-title"><a href="{{ href|escape_url }}">{{ title|escape_html }}</a></h3>
+      {% if excerpt_html and style_variant != "video" %}
+        <div class="resource-hub-content-module__card-excerpt">{{ excerpt_html }}</div>
+      {% endif %}
+      <a class="resource-hub-content-module__card-link link-1" href="{{ href|escape_url }}">{{ link_text|escape_html }} &rarr;</a>
+    </div>
+  </article>
+{% endmacro %}
+
+{% macro render_simple_card(post, manual) %}
+  {% set is_live = post is not none %}
+  {% set title = post.name if is_live else manual.title %}
+  {% set href = post.absolute_url if is_live else manual.link.url.href %}
+  {% set badge = manual.badge_label %}
+  {% if is_live and post.tag_list|list|length > 0 %}{% set badge = (post.tag_list|list)[0].name %}{% endif %}
+  {% set tag_key = "default" %}
+  {% if badge %}
+    {% set tag_key %}{{ badge|lower|replace("(english - united states)", "")|replace("(english)", "")|trim|replace(",", "")|replace(".", "")|replace(" - ", "-")|replace(" ", "-")|replace("--", "-")|trim("-") }}{% endset %}
+  {% endif %}
+  <article class="resource-hub-content-module__mini-card" style="--card-accent: var(--tag-{{ tag_key|escape_attr }}, var(--tag-default));">
+    {% if badge %}<span class="resource-hub-content-module__mini-badge">{{ badge|escape_html }}</span>{% endif %}
+    <h4 class="resource-hub-content-module__mini-title"><a href="{{ href|escape_url }}">{{ title|escape_html }}</a></h4>
+    <a class="resource-hub-content-module__mini-link link-1" href="{{ href|escape_url }}">Read more &rarr;</a>
+  </article>
+{% endmacro %}
+
+{% macro render_outcome_card(post, manual) %}
+  {% set is_live = post is not none %}
+  {% set title = post.name if is_live else manual.title %}
+  {% set href = post.absolute_url if is_live else manual.link.url.href %}
+  {% set image_src = post.featured_image if is_live else manual.image.src %}
+  {% set image_alt = post.featured_image_alt_text if is_live else manual.image.alt|default("") %}
+  {% set eyebrow = manual.eyebrow %}
+  {% if is_live and post.tag_list|list|length > 0 %}{% set eyebrow = (post.tag_list|list)[0].name %}{% endif %}
+  <article class="resource-hub-content-module__outcome-card">
+    <a class="resource-hub-content-module__card-media" href="{{ href|escape_url }}" tabindex="-1" aria-hidden="true">
+      {% if image_src %}
+        <img src="{{ image_src|escape_url }}" alt="{{ image_alt|escape_attr }}" loading="lazy">
+      {% endif %}
+    </a>
+    <div class="resource-hub-content-module__outcome-body">
+      {% if eyebrow %}<span class="resource-hub-content-module__eyebrow">{{ eyebrow|escape_html }}</span>{% endif %}
+      <h4 class="resource-hub-content-module__mini-title"><a href="{{ href|escape_url }}">{{ title|escape_html }}</a></h4>
+    </div>
+  </article>
+{% endmacro %}
+
+{% require_css %}
+<style>
+{% scope_css %}
+  .resource-hub-content-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .resource-hub-content-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="resource-hub-content-module" id="resource-hub-content" data-screen-label="Resource hub content">
+  <div class="content-wrapper">
+
+    {% if module.tabs %}
+      <div class="resource-hub-content-module__tabs" role="navigation" aria-label="Content filters">
+        {% for tab in module.tabs %}
+          <a
+            class="resource-hub-content-module__tab{% if tab.is_current %} is-active{% endif %}"
+            href="{{ tab.tab_link.url.href|escape_url }}"
+            {% if tab.tab_link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}
+            {% if tab.is_current %}aria-current="page"{% endif %}
+          >
+            <span class="resource-hub-content-module__tab-dot" style="background: rgba({{ tab.tab_color.color|convert_rgb }}, {{ tab.tab_color.opacity / 100 }});" aria-hidden="true"></span>
+            {{ tab.tab_label|escape_html }}
+            {% if tab.tab_count_label %}<span class="resource-hub-content-module__tab-count">{{ tab.tab_count_label|escape_html }}</span>{% endif %}
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="resource-hub-content-module__row1">
+      {{ render_card(fetched.row1_a, module.row1_a, module.row1_a.style_variant) }}
+      {{ render_card(fetched.row1_b, module.row1_b, module.row1_b.style_variant) }}
+    </div>
+
+    {% if module.show_event %}
+      {% set ev = fetched.event %}
+      {% set ev_status = module.event.status_label %}
+      {% set ev_title = ev.name if ev else module.event.title %}
+      {% set ev_href = ev.absolute_url if ev else module.event.link.url.href %}
+      {% set ev_eyebrow = module.event.eyebrow %}
+      {% if ev and ev.tag_list|list|length > 0 %}{% set ev_eyebrow = (ev.tag_list|list)[0].name %}{% endif %}
+      <div class="resource-hub-content-module__event">
+        <div class="resource-hub-content-module__event-status">
+          <span class="resource-hub-content-module__event-status-label">{{ ev_status|escape_html }}</span>
+          <span class="resource-hub-content-module__event-status-dash" aria-hidden="true">&mdash;&mdash;</span>
+        </div>
+        <div class="resource-hub-content-module__event-body">
+          {% if ev_eyebrow %}<div class="resource-hub-content-module__event-eyebrow">{{ ev_eyebrow|escape_html }}</div>{% endif %}
+          <div class="resource-hub-content-module__event-title">{{ ev_title|escape_html }}</div>
+          <div class="resource-hub-content-module__event-details">{{ module.event.details|escape_html }}</div>
+        </div>
+        <div class="resource-hub-content-module__event-cta custom-cta cta-primary">
+          <a href="{{ ev_href|escape_url }}">{{ module.event.cta_text|escape_html }}</a>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if module.show_featured_row %}
+      <div class="resource-hub-content-module__featured-row">
+        {{ render_card(fetched.featured_guide, module.featured_guide, "guide") }}
+        {{ render_card(fetched.featured_checklist, module.featured_checklist, "checklist") }}
+        {{ render_card(fetched.featured_insight, module.featured_insight, "insight") }}
+      </div>
+    {% endif %}
+
+    {% if module.show_latest_insights %}
+      <div class="resource-hub-content-module__section">
+        <div class="resource-hub-content-module__section-header">
+          <h2 class="resource-hub-content-module__section-title">Latest insights</h2>
+          {% if module.latest_insights.all_link.url.href %}
+            <a class="resource-hub-content-module__section-link link-1" href="{{ module.latest_insights.all_link.url.href|escape_url }}">{{ module.latest_insights.all_link_text|escape_html }} &rarr;</a>
+          {% endif %}
+        </div>
+        <div class="resource-hub-content-module__mini-grid">
+          {{ render_simple_card(fetched.latest_insights_1, module.latest_insights.fallback_1) }}
+          {{ render_simple_card(fetched.latest_insights_2, module.latest_insights.fallback_2) }}
+          {{ render_simple_card(fetched.latest_insights_3, module.latest_insights.fallback_3) }}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if module.show_customer_outcomes %}
+      <div class="resource-hub-content-module__section">
+        <div class="resource-hub-content-module__section-header">
+          <h2 class="resource-hub-content-module__section-title">Customer outcomes</h2>
+          {% if module.customer_outcomes.all_link.url.href %}
+            <a class="resource-hub-content-module__section-link link-1" href="{{ module.customer_outcomes.all_link.url.href|escape_url }}">{{ module.customer_outcomes.all_link_text|escape_html }} &rarr;</a>
+          {% endif %}
+        </div>
+        <div class="resource-hub-content-module__mini-grid">
+          {{ render_outcome_card(fetched.customer_outcomes_1, module.customer_outcomes.fallback_1) }}
+          {{ render_outcome_card(fetched.customer_outcomes_2, module.customer_outcomes.fallback_2) }}
+          {{ render_outcome_card(fetched.customer_outcomes_3, module.customer_outcomes.fallback_3) }}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if module.show_guides_checklists %}
+      <div class="resource-hub-content-module__section">
+        <div class="resource-hub-content-module__section-header">
+          <h2 class="resource-hub-content-module__section-title">Guides + Checklists</h2>
+          {% if module.guides_checklists.all_link.url.href %}
+            <a class="resource-hub-content-module__section-link link-1" href="{{ module.guides_checklists.all_link.url.href|escape_url }}">{{ module.guides_checklists.all_link_text|escape_html }} &rarr;</a>
+          {% endif %}
+        </div>
+        <div class="resource-hub-content-module__mini-grid">
+          {{ render_simple_card(fetched.guides_checklists_1, module.guides_checklists.fallback_1) }}
+          {{ render_simple_card(fetched.guides_checklists_2, module.guides_checklists.fallback_2) }}
+          {{ render_simple_card(fetched.guides_checklists_3, module.guides_checklists.fallback_3) }}
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+</section>

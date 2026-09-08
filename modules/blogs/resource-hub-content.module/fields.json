@@ -1,0 +1,402 @@
+[ {
+  "id" : "tabs",
+  "name" : "tabs",
+  "label" : "Sticky filter tabs",
+  "help_text" : "Navigation tabs shown above the content rows. Each tab is a plain link to that category's own listing page (this module does not filter in place). Add/remove tabs freely.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "tabs.tab_label",
+    "default" : 6
+  },
+  "children" : [ {
+    "id" : "tabs.tab_label",
+    "name" : "tab_label",
+    "label" : "Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Everything"
+  }, {
+    "id" : "tabs.tab_color",
+    "name" : "tab_color",
+    "label" : "Dot color",
+    "help_text" : "Color of the small dot shown before the label.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : { "color" : "#0D6FFC", "opacity" : 100 }
+  }, {
+    "id" : "tabs.tab_link",
+    "name" : "tab_link",
+    "label" : "Link",
+    "help_text" : "Where this tab navigates to when clicked.",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : { "href" : "#", "type" : "EXTERNAL" },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    }
+  }, {
+    "id" : "tabs.tab_count_label",
+    "name" : "tab_count_label",
+    "label" : "Count badge (optional)",
+    "help_text" : "Manual count shown next to the label, e.g. \"35\". Leave empty to hide the badge.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "tabs.is_current",
+    "name" : "is_current",
+    "label" : "Highlight as active",
+    "help_text" : "Manually mark the tab matching the current page — there's no reliable way to detect this automatically across every page this module is used on.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [
+    { "tab_label" : "Everything", "is_current" : true, "tab_count_label" : "", "tab_color" : { "color" : "#0D6FFC", "opacity" : 100 } },
+    { "tab_label" : "Insights", "tab_count_label" : "", "tab_color" : { "color" : "#0D6FFC", "opacity" : 100 } },
+    { "tab_label" : "Videos", "tab_count_label" : "", "tab_color" : { "color" : "#0D6FFC", "opacity" : 100 } },
+    { "tab_label" : "Events", "tab_count_label" : "", "tab_color" : { "color" : "#DB535F", "opacity" : 100 } },
+    { "tab_label" : "Guides + Checklists", "tab_count_label" : "", "tab_color" : { "color" : "#0D6FFC", "opacity" : 100 } },
+    { "tab_label" : "Case Studies", "tab_count_label" : "", "tab_color" : { "color" : "#DB535F", "opacity" : 100 } }
+  ]
+}, {
+  "id" : "row1_a",
+  "name" : "row1_a",
+  "label" : "Row 1 — Card A",
+  "help_text" : "Defaults to Case Study. Content auto-fetches the selected blog's most recent post (skipping any post already used higher up); the fields below are the fallback shown when no blog is set or no post is found.",
+  "required" : false,
+  "locked" : false,
+  "children" : [
+    { "id" : "row1_a.style_variant", "name" : "style_variant", "label" : "Card style", "required" : false, "locked" : false, "type" : "choice", "display" : "select", "choices" : [ [ "case_study", "Case study (dark)" ], [ "video", "Video" ] ], "display_width" : null, "default" : "case_study" },
+    { "id" : "row1_a.source_blog", "name" : "source_blog", "label" : "Source blog", "help_text" : "Shows this blog's most recent post.", "required" : false, "locked" : false, "type" : "blog", "display_width" : null },
+    { "id" : "row1_a.badge_label", "name" : "badge_label", "label" : "Badge (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Case Study" },
+    { "id" : "row1_a.eyebrow", "name" : "eyebrow", "label" : "Eyebrow (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Government" },
+    { "id" : "row1_a.title", "name" : "title", "label" : "Title (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "R2 helps the City of Weston become one of the premier smart cities in the US" },
+    { "id" : "row1_a.excerpt", "name" : "excerpt", "label" : "Excerpt / quote (fallback)", "required" : false, "locked" : false, "type" : "richtext", "display_width" : null, "default" : "<p>“We have the ability to reach into the R2 toolbox, which has all these diverse talents, when we need them.” — Ryan Fernandes, Director of Technology Services</p>" },
+    { "id" : "row1_a.duration_label", "name" : "duration_label", "label" : "Duration badge (video style only)", "help_text" : "Purely manual — there's no real duration data on a blog post.", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "08:12" },
+    { "id" : "row1_a.image", "name" : "image", "label" : "Image (fallback)", "required" : false, "locked" : false, "responsive" : true, "resizable" : true, "show_loading" : false, "type" : "image", "display_width" : null, "default" : { "loading" : "lazy", "alt" : "City of Weston — smart city imagery" } },
+    { "id" : "row1_a.link", "name" : "link", "label" : "Link (fallback)", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } },
+    { "id" : "row1_a.link_text", "name" : "link_text", "label" : "Link text (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Read the case study" }
+  ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "row1_b",
+  "name" : "row1_b",
+  "label" : "Row 1 — Card B",
+  "help_text" : "Defaults to Video. Same behavior as Card A — independently set to case study or video.",
+  "required" : false,
+  "locked" : false,
+  "children" : [
+    { "id" : "row1_b.style_variant", "name" : "style_variant", "label" : "Card style", "required" : false, "locked" : false, "type" : "choice", "display" : "select", "choices" : [ [ "case_study", "Case study (dark)" ], [ "video", "Video" ] ], "display_width" : null, "default" : "video" },
+    { "id" : "row1_b.source_blog", "name" : "source_blog", "label" : "Source blog", "help_text" : "Shows this blog's most recent post.", "required" : false, "locked" : false, "type" : "blog", "display_width" : null },
+    { "id" : "row1_b.badge_label", "name" : "badge_label", "label" : "Badge (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Video" },
+    { "id" : "row1_b.eyebrow", "name" : "eyebrow", "label" : "Eyebrow (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Whiteboard Sessions" },
+    { "id" : "row1_b.title", "name" : "title", "label" : "Title (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "R2 helps the City of Weston become one of the premier smart cities in the US" },
+    { "id" : "row1_b.excerpt", "name" : "excerpt", "label" : "Excerpt (fallback, hidden for video style)", "required" : false, "locked" : false, "type" : "richtext", "display_width" : null, "default" : "" },
+    { "id" : "row1_b.duration_label", "name" : "duration_label", "label" : "Duration badge (video style only)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "08:12" },
+    { "id" : "row1_b.image", "name" : "image", "label" : "Image (fallback)", "required" : false, "locked" : false, "responsive" : true, "resizable" : true, "show_loading" : false, "type" : "image", "display_width" : null, "default" : { "loading" : "lazy", "alt" : "Video still — whiteboard session" } },
+    { "id" : "row1_b.link", "name" : "link", "label" : "Link (fallback)", "help_text" : "Where “Watch” redirects — the post/page where the video lives.", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } },
+    { "id" : "row1_b.link_text", "name" : "link_text", "label" : "Link text (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Watch" }
+  ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "show_event",
+  "name" : "show_event",
+  "label" : "Show event row",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "event",
+  "name" : "event",
+  "label" : "Row 2 — Event",
+  "required" : false,
+  "locked" : false,
+  "children" : [
+    { "id" : "event.source_blog", "name" : "source_blog", "label" : "Source blog", "help_text" : "Shows this blog's most recent post.", "required" : false, "locked" : false, "type" : "blog", "display_width" : null },
+    { "id" : "event.status_label", "name" : "status_label", "label" : "Status label (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "TBD" },
+    { "id" : "event.eyebrow", "name" : "eyebrow", "label" : "Eyebrow (fallback)", "help_text" : "Small label above the title, e.g. \"Next Event · Placeholder\".", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Next Event · Placeholder" },
+    { "id" : "event.title", "name" : "title", "label" : "Title (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Cisco SDA whiteboard workshop, Boca Raton" },
+    { "id" : "event.details", "name" : "details", "label" : "Details (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Date, venue and capacity to be supplied · 90 minutes · limited seats" },
+    { "id" : "event.cta_text", "name" : "cta_text", "label" : "Button text", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Save a seat" },
+    { "id" : "event.link", "name" : "link", "label" : "Link (fallback)", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } }
+  ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "show_featured_row",
+  "name" : "show_featured_row",
+  "label" : "Show featured Guide/Checklist/Insight row",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "featured_guide",
+  "name" : "featured_guide",
+  "label" : "Row 3 — Featured Guide",
+  "required" : false,
+  "locked" : false,
+  "children" : [
+    { "id" : "featured_guide.source_blog", "name" : "source_blog", "label" : "Source blog", "help_text" : "Shows this blog's most recent post.", "required" : false, "locked" : false, "type" : "blog", "display_width" : null },
+    { "id" : "featured_guide.badge_label", "name" : "badge_label", "label" : "Badge (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "12 questions" },
+    { "id" : "featured_guide.eyebrow", "name" : "eyebrow", "label" : "Eyebrow (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Guide · Managed Services" },
+    { "id" : "featured_guide.title", "name" : "title", "label" : "Title (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "The 12-Point Evaluation Guide for Choosing a Managed Services Partner" },
+    { "id" : "featured_guide.excerpt", "name" : "excerpt", "label" : "Excerpt (fallback)", "required" : false, "locked" : false, "type" : "richtext", "display_width" : null, "default" : "" },
+    { "id" : "featured_guide.image", "name" : "image", "label" : "Image (fallback, unused for this style)", "required" : false, "locked" : false, "responsive" : true, "resizable" : true, "show_loading" : false, "type" : "image", "display_width" : null, "default" : { "loading" : "lazy" } },
+    { "id" : "featured_guide.link", "name" : "link", "label" : "Link (fallback)", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } },
+    { "id" : "featured_guide.link_text", "name" : "link_text", "label" : "Link text (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Read the guide" }
+  ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "featured_checklist",
+  "name" : "featured_checklist",
+  "label" : "Row 3 — Featured Checklist",
+  "required" : false,
+  "locked" : false,
+  "children" : [
+    { "id" : "featured_checklist.source_blog", "name" : "source_blog", "label" : "Source blog", "help_text" : "Shows this blog's most recent post.", "required" : false, "locked" : false, "type" : "blog", "display_width" : null },
+    { "id" : "featured_checklist.badge_label", "name" : "badge_label", "label" : "Badge (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Proactive or reactive?" },
+    { "id" : "featured_checklist.eyebrow", "name" : "eyebrow", "label" : "Eyebrow (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Checklist · Security" },
+    { "id" : "featured_checklist.title", "name" : "title", "label" : "Title (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Checklist: Is Your Security Strategy Proactive or Reactive?" },
+    { "id" : "featured_checklist.excerpt", "name" : "excerpt", "label" : "Excerpt (fallback)", "required" : false, "locked" : false, "type" : "richtext", "display_width" : null, "default" : "" },
+    { "id" : "featured_checklist.image", "name" : "image", "label" : "Image (fallback, unused for this style)", "required" : false, "locked" : false, "responsive" : true, "resizable" : true, "show_loading" : false, "type" : "image", "display_width" : null, "default" : { "loading" : "lazy" } },
+    { "id" : "featured_checklist.link", "name" : "link", "label" : "Link (fallback)", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } },
+    { "id" : "featured_checklist.link_text", "name" : "link_text", "label" : "Link text (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Read the checklist" }
+  ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "featured_insight",
+  "name" : "featured_insight",
+  "label" : "Row 3 — Featured Insight",
+  "required" : false,
+  "locked" : false,
+  "children" : [
+    { "id" : "featured_insight.source_blog", "name" : "source_blog", "label" : "Source blog", "help_text" : "Shows this blog's most recent post.", "required" : false, "locked" : false, "type" : "blog", "display_width" : null },
+    { "id" : "featured_insight.badge_label", "name" : "badge_label", "label" : "Badge (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Insight" },
+    { "id" : "featured_insight.eyebrow", "name" : "eyebrow", "label" : "Eyebrow (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Software · Defined Access" },
+    { "id" : "featured_insight.title", "name" : "title", "label" : "Title (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Enforcing Trust Inside the Network" },
+    { "id" : "featured_insight.excerpt", "name" : "excerpt", "label" : "Excerpt (fallback)", "required" : false, "locked" : false, "type" : "richtext", "display_width" : null, "default" : "<p>Trust doesn't end with log-in. That's where it begins.</p>" },
+    { "id" : "featured_insight.image", "name" : "image", "label" : "Image (fallback, unused for this style)", "required" : false, "locked" : false, "responsive" : true, "resizable" : true, "show_loading" : false, "type" : "image", "display_width" : null, "default" : { "loading" : "lazy" } },
+    { "id" : "featured_insight.link", "name" : "link", "label" : "Link (fallback)", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } },
+    { "id" : "featured_insight.link_text", "name" : "link_text", "label" : "Link text (fallback)", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Read More" }
+  ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "show_latest_insights",
+  "name" : "show_latest_insights",
+  "label" : "Show “Latest insights” row",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "latest_insights",
+  "name" : "latest_insights",
+  "label" : "Row 4 — Latest Insights",
+  "help_text" : "Shows the 3 most recent posts from the selected blog (skipping any already used higher up). The 3 fallback cards below are only used per-slot when there's no live post at that position.",
+  "required" : false,
+  "locked" : false,
+  "children" : [
+    { "id" : "latest_insights.source_blog", "name" : "source_blog", "label" : "Source blog", "required" : false, "locked" : false, "type" : "blog", "display_width" : null },
+    { "id" : "latest_insights.all_link", "name" : "all_link", "label" : "“All insights” button link", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } },
+    { "id" : "latest_insights.all_link_text", "name" : "all_link_text", "label" : "“All insights” button text", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "All insights" },
+    { "id" : "latest_insights.fallback_1", "name" : "fallback_1", "label" : "Fallback card 1", "required" : false, "locked" : false, "children" : [
+      { "id" : "latest_insights.fallback_1.badge_label", "name" : "badge_label", "label" : "Tag", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Security" },
+      { "id" : "latest_insights.fallback_1.title", "name" : "title", "label" : "Title", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "How Cybersecurity Solutions Power Business Continuity and Uptime" },
+      { "id" : "latest_insights.fallback_1.link", "name" : "link", "label" : "Link", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } }
+    ], "tab" : "CONTENT", "expanded" : false, "group_occurrence_meta" : null, "type" : "group", "display_width" : null },
+    { "id" : "latest_insights.fallback_2", "name" : "fallback_2", "label" : "Fallback card 2", "required" : false, "locked" : false, "children" : [
+      { "id" : "latest_insights.fallback_2.badge_label", "name" : "badge_label", "label" : "Tag", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Managed Services" },
+      { "id" : "latest_insights.fallback_2.title", "name" : "title", "label" : "Title", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "When Growth Outpaces IT: 6 Signs Your Support Model Is Becoming a Risk" },
+      { "id" : "latest_insights.fallback_2.link", "name" : "link", "label" : "Link", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } }
+    ], "tab" : "CONTENT", "expanded" : false, "group_occurrence_meta" : null, "type" : "group", "display_width" : null },
+    { "id" : "latest_insights.fallback_3", "name" : "fallback_3", "label" : "Fallback card 3", "required" : false, "locked" : false, "children" : [
+      { "id" : "latest_insights.fallback_3.badge_label", "name" : "badge_label", "label" : "Tag", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Security" },
+      { "id" : "latest_insights.fallback_3.title", "name" : "title", "label" : "Title", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Building OT Cybersecurity Resilience: How Cisco Cyber Vision Delivers on CISA's Asset Inventory Guidance" },
+      { "id" : "latest_insights.fallback_3.link", "name" : "link", "label" : "Link", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } }
+    ], "tab" : "CONTENT", "expanded" : false, "group_occurrence_meta" : null, "type" : "group", "display_width" : null }
+  ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "show_customer_outcomes",
+  "name" : "show_customer_outcomes",
+  "label" : "Show “Customer outcomes” row",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "customer_outcomes",
+  "name" : "customer_outcomes",
+  "label" : "Row 5 — Customer Outcomes",
+  "help_text" : "Shows the 3 most recent posts from the selected blog (skipping any already used higher up, e.g. by Row 1's Case Study card if it shares the same blog).",
+  "required" : false,
+  "locked" : false,
+  "children" : [
+    { "id" : "customer_outcomes.source_blog", "name" : "source_blog", "label" : "Source blog", "required" : false, "locked" : false, "type" : "blog", "display_width" : null },
+    { "id" : "customer_outcomes.all_link", "name" : "all_link", "label" : "“All outcomes” button link", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } },
+    { "id" : "customer_outcomes.all_link_text", "name" : "all_link_text", "label" : "“All outcomes” button text", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "All insights" },
+    { "id" : "customer_outcomes.fallback_1", "name" : "fallback_1", "label" : "Fallback card 1", "required" : false, "locked" : false, "children" : [
+      { "id" : "customer_outcomes.fallback_1.image", "name" : "image", "label" : "Image", "required" : false, "locked" : false, "responsive" : true, "resizable" : true, "show_loading" : false, "type" : "image", "display_width" : null, "default" : { "loading" : "lazy", "alt" : "Embraer imagery" } },
+      { "id" : "customer_outcomes.fallback_1.eyebrow", "name" : "eyebrow", "label" : "Eyebrow", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Embraer · Aerospace" },
+      { "id" : "customer_outcomes.fallback_1.title", "name" : "title", "label" : "Title", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "R2 helps Embraer enhance their customer excellence standards" },
+      { "id" : "customer_outcomes.fallback_1.link", "name" : "link", "label" : "Link", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } }
+    ], "tab" : "CONTENT", "expanded" : false, "group_occurrence_meta" : null, "type" : "group", "display_width" : null },
+    { "id" : "customer_outcomes.fallback_2", "name" : "fallback_2", "label" : "Fallback card 2", "required" : false, "locked" : false, "children" : [
+      { "id" : "customer_outcomes.fallback_2.image", "name" : "image", "label" : "Image", "required" : false, "locked" : false, "responsive" : true, "resizable" : true, "show_loading" : false, "type" : "image", "display_width" : null, "default" : { "loading" : "lazy", "alt" : "Sage Dental imagery" } },
+      { "id" : "customer_outcomes.fallback_2.eyebrow", "name" : "eyebrow", "label" : "Eyebrow", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Sage Dental · Healthcare" },
+      { "id" : "customer_outcomes.fallback_2.title", "name" : "title", "label" : "Title", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "R2 deploys Cisco Meraki's SDWAN solution across Sage Dental Group" },
+      { "id" : "customer_outcomes.fallback_2.link", "name" : "link", "label" : "Link", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } }
+    ], "tab" : "CONTENT", "expanded" : false, "group_occurrence_meta" : null, "type" : "group", "display_width" : null },
+    { "id" : "customer_outcomes.fallback_3", "name" : "fallback_3", "label" : "Fallback card 3", "required" : false, "locked" : false, "children" : [
+      { "id" : "customer_outcomes.fallback_3.image", "name" : "image", "label" : "Image", "required" : false, "locked" : false, "responsive" : true, "resizable" : true, "show_loading" : false, "type" : "image", "display_width" : null, "default" : { "loading" : "lazy", "alt" : "Cendyn imagery" } },
+      { "id" : "customer_outcomes.fallback_3.eyebrow", "name" : "eyebrow", "label" : "Eyebrow", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Cendyn · Hospitality Tech" },
+      { "id" : "customer_outcomes.fallback_3.title", "name" : "title", "label" : "Title", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Cendyn SPACES improves work culture and customer satisfaction" },
+      { "id" : "customer_outcomes.fallback_3.link", "name" : "link", "label" : "Link", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } }
+    ], "tab" : "CONTENT", "expanded" : false, "group_occurrence_meta" : null, "type" : "group", "display_width" : null }
+  ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "show_guides_checklists",
+  "name" : "show_guides_checklists",
+  "label" : "Show “Guides + Checklists” row",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "guides_checklists",
+  "name" : "guides_checklists",
+  "label" : "Row 6 — Guides + Checklists",
+  "help_text" : "Shows the 3 most recent posts from the selected blog (skipping anything already used higher up).",
+  "required" : false,
+  "locked" : false,
+  "children" : [
+    { "id" : "guides_checklists.source_blog", "name" : "source_blog", "label" : "Source blog", "required" : false, "locked" : false, "type" : "blog", "display_width" : null },
+    { "id" : "guides_checklists.all_link", "name" : "all_link", "label" : "“All guides” button link", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } },
+    { "id" : "guides_checklists.all_link_text", "name" : "all_link_text", "label" : "“All guides” button text", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "All guides" },
+    { "id" : "guides_checklists.fallback_1", "name" : "fallback_1", "label" : "Fallback card 1", "required" : false, "locked" : false, "children" : [
+      { "id" : "guides_checklists.fallback_1.badge_label", "name" : "badge_label", "label" : "Tag", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Checklist" },
+      { "id" : "guides_checklists.fallback_1.title", "name" : "title", "label" : "Title", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Checklist: Is Your IT Strategy Future-Ready?" },
+      { "id" : "guides_checklists.fallback_1.link", "name" : "link", "label" : "Link", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } }
+    ], "tab" : "CONTENT", "expanded" : false, "group_occurrence_meta" : null, "type" : "group", "display_width" : null },
+    { "id" : "guides_checklists.fallback_2", "name" : "fallback_2", "label" : "Fallback card 2", "required" : false, "locked" : false, "children" : [
+      { "id" : "guides_checklists.fallback_2.badge_label", "name" : "badge_label", "label" : "Tag", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Guide · Software-Defined Access" },
+      { "id" : "guides_checklists.fallback_2.title", "name" : "title", "label" : "Title", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Is Your Segmentation Policy Enforceable at Scale?" },
+      { "id" : "guides_checklists.fallback_2.link", "name" : "link", "label" : "Link", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } }
+    ], "tab" : "CONTENT", "expanded" : false, "group_occurrence_meta" : null, "type" : "group", "display_width" : null },
+    { "id" : "guides_checklists.fallback_3", "name" : "fallback_3", "label" : "Fallback card 3", "required" : false, "locked" : false, "children" : [
+      { "id" : "guides_checklists.fallback_3.badge_label", "name" : "badge_label", "label" : "Tag", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Consultation · Managed Services" },
+      { "id" : "guides_checklists.fallback_3.title", "name" : "title", "label" : "Title", "required" : false, "locked" : false, "allow_new_line" : false, "type" : "text", "display_width" : null, "default" : "Schedule Your House Call" },
+      { "id" : "guides_checklists.fallback_3.link", "name" : "link", "label" : "Link", "required" : false, "locked" : false, "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "BLOG" ], "show_advanced_rel_options" : false, "type" : "link", "display_width" : null, "default" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false } }
+    ], "tab" : "CONTENT", "expanded" : false, "group_occurrence_meta" : null, "type" : "group", "display_width" : null }
+  ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 96, "units" : "px" }, "left" : { "value" : 0, "units" : "px" }, "right" : { "value" : 0, "units" : "px" } },
+      "margin" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 0, "units" : "px" } }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 56, "units" : "px" }, "left" : { "value" : 0, "units" : "px" }, "right" : { "value" : 0, "units" : "px" } },
+      "margin" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 0, "units" : "px" } }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]
