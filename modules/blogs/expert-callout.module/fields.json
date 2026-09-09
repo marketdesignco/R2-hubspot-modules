@@ -1,0 +1,211 @@
+[ {
+  "id" : "show_module",
+  "name" : "show_module",
+  "label" : "Show this section",
+  "help_text" : "This module is meant to sit inside blog-post.html for every post. Off by default — turn on per post to show the callout.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false
+}, {
+  "id" : "talking_to",
+  "name" : "talking_to",
+  "label" : "Left card — Who you'll be talking to",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "talking_to.eyebrow",
+    "name" : "eyebrow",
+    "label" : "Eyebrow",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Who you'll be talking to"
+  }, {
+    "id" : "talking_to.photo",
+    "name" : "photo",
+    "label" : "Photo",
+    "help_text" : "Optional. Renders as an empty gray circle if left blank.",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : false,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "loading" : "lazy"
+    }
+  }, {
+    "id" : "talking_to.engineer_name",
+    "name" : "engineer_name",
+    "label" : "Name",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "[Engineer name]"
+  }, {
+    "id" : "talking_to.meta_line",
+    "name" : "meta_line",
+    "label" : "Title / credentials line",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "[Title] · CCIE / CCNP · [years] years in fabric + segmentation"
+  }, {
+    "id" : "talking_to.description",
+    "name" : "description",
+    "label" : "Description",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<p>You get an engineer on the call, not a rep. Same person who would scope the work if you move forward.</p>"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "leave_with",
+  "name" : "leave_with",
+  "label" : "Right card — What you leave with",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "leave_with.eyebrow",
+    "name" : "eyebrow",
+    "label" : "Eyebrow",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "What you leave with"
+  }, {
+    "id" : "leave_with.headline",
+    "name" : "headline",
+    "label" : "Headline",
+    "help_text" : "Use the rich text toolbar's Heading options (H3/H4) to set the semantic level. Typography (size) always comes from the R2 Design System for whichever level is chosen; this headline is automatically rendered in the accent script/blue treatment.",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<h3>A written read-out, not a follow-up deck.</h3>"
+  }, {
+    "id" : "leave_with.bullets",
+    "name" : "bullets",
+    "label" : "Bullet list",
+    "required" : false,
+    "locked" : false,
+    "occurrence" : {
+      "min" : 1,
+      "max" : null,
+      "sorting_label_field" : "leave_with.bullets.text",
+      "default" : 3
+    },
+    "children" : [ {
+      "id" : "leave_with.bullets.text",
+      "name" : "text",
+      "label" : "Bullet text",
+      "required" : false,
+      "locked" : false,
+      "type" : "richtext",
+      "display_width" : null,
+      "default" : "<p>Add your point here.</p>"
+    }, {
+      "id" : "leave_with.bullets.color",
+      "name" : "color",
+      "label" : "Bullet color",
+      "required" : false,
+      "locked" : false,
+      "type" : "color",
+      "display_width" : null,
+      "default" : {
+        "color" : "#0D6FFC",
+        "opacity" : 100
+      }
+    } ],
+    "tab" : "CONTENT",
+    "expanded" : true,
+    "group_occurrence_meta" : null,
+    "type" : "group",
+    "display_width" : null,
+    "default" : [ {
+      "text" : "<p>Where policy intent and enforcement diverge today</p>",
+      "color" : { "color" : "#0D6FFC", "opacity" : 100 }
+    }, {
+      "text" : "<p>Visibility and containment gaps, ranked by exposure</p>",
+      "color" : { "color" : "#0D6FFC", "opacity" : 100 }
+    }, {
+      "text" : "<p>A sequenced next step sized to your operational readiness</p>",
+      "color" : { "color" : "#DB535F", "opacity" : 100 }
+    } ]
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : true,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

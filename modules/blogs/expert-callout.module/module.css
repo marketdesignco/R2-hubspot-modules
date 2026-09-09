@@ -1,0 +1,152 @@
+/*
+  Expert Callout — two-column trust block ("who you'll be talking to" /
+  "what you leave with"). Layout/decoration only; typography sizing comes
+  from the R2 Design System via semantic tags, per module.html.
+*/
+
+.expert-callout-module__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.expert-callout-module__card {
+  border-radius: 8px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.expert-callout-module__card--light {
+  background: var(--color-white, #FFFFFF);
+  border: 1px solid #A6C8F9;
+}
+
+.expert-callout-module__card--dark {
+  background: var(--color-navy-blue, #082750);
+  box-shadow: 0 12px 32px 0 rgba(8, 39, 80, .20);
+}
+
+/* Card 1 — top row (avatar + eyebrow/name/meta) */
+
+.expert-callout-module__top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.expert-callout-module__avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: var(--color-light-gray, #F8F8F8);
+}
+
+.expert-callout-module__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.expert-callout-module__meta {
+  min-width: 0;
+}
+
+.expert-callout-module__eyebrow {
+  color: var(--color-primary-blue, #0D6FFC);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.expert-callout-module__eyebrow span {
+  width: 16px;
+  height: 2px;
+  flex-shrink: 0;
+  background: var(--color-coral-red, #DB535F);
+}
+
+.expert-callout-module__eyebrow--light {
+  color: var(--color-white, #FFFFFF);
+}
+
+.expert-callout-module__name {
+  font-weight: 700;
+  color: var(--color-navy-blue, #082750);
+}
+
+.expert-callout-module__meta-line {
+  color: var(--color-steel-gray, #8A96A6);
+}
+
+.expert-callout-module__description {
+  color: rgba(8, 39, 80, .7);
+}
+
+.expert-callout-module__description p {
+  margin: 0;
+}
+
+/* Card 2 — headline + bullets */
+
+.expert-callout-module__headline h2,
+.expert-callout-module__headline h3,
+.expert-callout-module__headline h4 {
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  color: var(--color-primary-blue, #0D6FFC);
+  margin: 0;
+}
+
+.expert-callout-module__bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.expert-callout-module__bullet {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.expert-callout-module__bullet-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+.expert-callout-module__bullet-text {
+  color: var(--color-white, #FFFFFF);
+}
+
+.expert-callout-module__bullet-text p {
+  margin: 0;
+}
+
+/* Responsive: stack cards below the established two-column breakpoint */
+
+@media (max-width: 992px) {
+  .expert-callout-module__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Guard against the avatar/text row cramping at very narrow phone widths */
+
+@media (max-width: 420px) {
+  .expert-callout-module__top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

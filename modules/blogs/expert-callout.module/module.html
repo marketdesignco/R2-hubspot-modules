@@ -1,0 +1,65 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .expert-callout-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .expert-callout-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+{% if module.show_module %}
+  <section class="expert-callout-module" id="expert-callout" data-screen-label="Expert callout">
+    <div class="content-wrapper expert-callout-module__grid">
+
+      <div class="expert-callout-module__card expert-callout-module__card--light">
+        <div class="expert-callout-module__top">
+          <div class="expert-callout-module__avatar">
+            {% if module.talking_to.photo.src %}
+              <img src="{{ module.talking_to.photo.src|escape_url }}" alt="{{ module.talking_to.photo.alt|escape_attr }}" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="expert-callout-module__meta">
+            {% if module.talking_to.eyebrow %}
+              <div class="expert-callout-module__eyebrow eyebrow"><span></span>{{ module.talking_to.eyebrow|escape_html }}</div>
+            {% endif %}
+            {% if module.talking_to.engineer_name %}
+              <div class="expert-callout-module__name">{{ module.talking_to.engineer_name|escape_html }}</div>
+            {% endif %}
+            {% if module.talking_to.meta_line %}
+              <div class="expert-callout-module__meta-line">{{ module.talking_to.meta_line|escape_html }}</div>
+            {% endif %}
+          </div>
+        </div>
+        {% if module.talking_to.description %}
+          <div class="expert-callout-module__description">{{ module.talking_to.description|sanitize_html }}</div>
+        {% endif %}
+      </div>
+
+      <div class="expert-callout-module__card expert-callout-module__card--dark">
+        {% if module.leave_with.eyebrow %}
+          <div class="expert-callout-module__eyebrow expert-callout-module__eyebrow--light eyebrow"><span></span>{{ module.leave_with.eyebrow|escape_html }}</div>
+        {% endif %}
+        {% if module.leave_with.headline %}
+          <div class="expert-callout-module__headline">{{ module.leave_with.headline|sanitize_html }}</div>
+        {% endif %}
+        {% if module.leave_with.bullets|length > 0 %}
+          <ul class="expert-callout-module__bullets">
+            {% for item in module.leave_with.bullets %}
+              <li class="expert-callout-module__bullet">
+                <span class="expert-callout-module__bullet-dot" style="background: rgba({{ item.color.color|convert_rgb }}, {{ item.color.opacity / 100 }});" aria-hidden="true"></span>
+                <div class="expert-callout-module__bullet-text">{{ item.text|sanitize_html }}</div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+
+    </div>
+  </section>
+{% endif %}
