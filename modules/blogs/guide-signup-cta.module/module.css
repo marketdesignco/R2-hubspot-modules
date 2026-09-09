@@ -1,0 +1,101 @@
+/*
+  Structure and dynamic content live in module.html. This file is everything
+  else: layout, color, borders, shadows, and responsive rules. Section
+  spacing (desktop/mobile) is editor-controlled and stays out of this file —
+  see the {% require_css %}/{% scope_css %} block in module.html. No
+  font-size/family/weight/line-height/letter-spacing is declared here; the
+  Design System governs typography via semantic tags and the shared
+  .eyebrow class.
+*/
+
+.guide-signup-cta-module__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.guide-signup-cta-module__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guide-signup-cta-module__image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.guide-signup-cta-module__card {
+  background: var(--color-white);
+  border-top: 3px solid var(--color-primary-blue);
+  border-radius: 6px;
+  box-shadow: 0px 2px 10px 0px #0A1F330F;
+  padding: 32px;
+}
+
+.guide-signup-cta-module__eyebrow {
+  color: var(--color-primary-blue);
+  margin-bottom: 12px;
+}
+
+.guide-signup-cta-module__heading {
+  margin-bottom: 12px;
+}
+
+.guide-signup-cta-module__description {
+  color: var(--color-slate-blue);
+  margin-bottom: 20px;
+}
+
+.guide-signup-cta-module__form .hs-form-field {
+  margin-bottom: 1.2rem;
+}
+
+.guide-signup-cta-module__form .hs-form-field .hs-field-desc,
+.guide-signup-cta-module__form .hs-richtext,
+.guide-signup-cta-module__form .hs-richtext p,
+.guide-signup-cta-module__form .legal-consent-container,
+.guide-signup-cta-module__form .legal-consent-container p {
+  color: var(--color-steel-gray);
+}
+
+.guide-signup-cta-module__form form input[type="submit"],
+.guide-signup-cta-module__form form .hs-button {
+  display: block;
+  width: 100% !important;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-button);
+  font-weight: 700;
+  color: var(--color-white);
+  background-color: var(--color-primary-blue);
+  border: none;
+  border-radius: var(--button-radius);
+  padding: 14px 24px;
+}
+
+.guide-signup-cta-module__form form input[type="submit"]:hover,
+.guide-signup-cta-module__form form .hs-button:hover {
+  border-radius: var(--button-radius-hover);
+  background-color: #0C64E4;
+}
+
+.guide-signup-cta-module__disclaimer {
+  color: var(--color-steel-gray);
+  margin-top: 14px;
+}
+
+@media (max-width: 991px) {
+  .guide-signup-cta-module__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .guide-signup-cta-module__card {
+    padding: 24px;
+  }
+}

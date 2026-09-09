@@ -1,0 +1,152 @@
+[ {
+  "id" : "show_module",
+  "name" : "show_module",
+  "label" : "Show this section",
+  "help_text" : "This module is meant to sit inside blog-post.html for every post. Off by default — turn this on for posts that should show the guide signup CTA.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false
+}, {
+  "id" : "image",
+  "name" : "image",
+  "label" : "Illustration",
+  "help_text" : "A single self-contained graphic (illustration + any caption already baked into the image). Displayed on the left.",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "src" : "https://1885982.fs1.hubspotusercontent-na1.net/hubfs/1885982/Boilerplate/files.svg",
+    "alt" : "Stack of preview pages from the guide",
+    "loading" : "lazy"
+  }
+}, {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Read a few pages first"
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Renders as an H3 by default — this is an in-article CTA card, not a page-level heading. Editors can change the heading level in the rich text toolbar.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h3>Get the Segmentation Readiness Guide.</h3>"
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>The full read-out format, the maturity checkpoints, and the questions we'll ask on the call. One email, no sequence.</p>"
+}, {
+  "id" : "form",
+  "name" : "form",
+  "label" : "Form",
+  "help_text" : "Select the HubSpot form to display (e.g. the Segmentation Readiness Guide form).",
+  "required" : false,
+  "locked" : false,
+  "type" : "form",
+  "display_width" : null,
+  "default" : {
+    "response_response_id" : "",
+    "message" : "Thanks for submitting the form.",
+    "form_id" : "",
+    "gotowebinar_webinar_key" : ""
+  }
+}, {
+  "id" : "disclaimer_text",
+  "name" : "disclaimer_text",
+  "label" : "Disclaimer text",
+  "help_text" : "Small print shown below the form. Leave empty to hide.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Used once, to send the PDF. No newsletter, no list."
+}, {
+  "id" : "background_color",
+  "name" : "background_color",
+  "label" : "Background Color",
+  "required" : false,
+  "locked" : false,
+  "type" : "color",
+  "display_width" : null,
+  "default" : {
+    "color" : "#EAF2FE",
+    "opacity" : 100
+  }
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 60, "units" : "px" },
+        "bottom" : { "value" : 60, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 45, "units" : "px" },
+        "bottom" : { "value" : 45, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : { "padding" : { "top" : {"value":60,"units":"px"}, "bottom" : {"value":60,"units":"px"}, "left" : {"value":0,"units":"px"}, "right" : {"value":0,"units":"px"} }, "margin" : { "top" : {"value":0,"units":"px"}, "bottom" : {"value":0,"units":"px"} } },
+    "spacing_mobile" : { "padding" : { "top" : {"value":45,"units":"px"}, "bottom" : {"value":45,"units":"px"}, "left" : {"value":0,"units":"px"}, "right" : {"value":0,"units":"px"} }, "margin" : { "top" : {"value":0,"units":"px"}, "bottom" : {"value":0,"units":"px"} } }
+  }
+} ]

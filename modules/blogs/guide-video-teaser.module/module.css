@@ -1,0 +1,227 @@
+/*
+  Guide Video Teaser module — static visual styling.
+
+  Structure and dynamic content live in module.html; editor-configurable
+  section spacing stays inline there (runtime field value). Everything
+  else — layout, color, borders, states, responsive rules — lives here,
+  same split used by resource-hub-content.module / media-band.module.
+*/
+
+.guide-video-teaser-module {
+  background: var(--bg-color, #082750);
+}
+
+.guide-video-teaser-module__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+/* ---------- Content column ---------- */
+
+.guide-video-teaser-module__content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.guide-video-teaser-module__eyebrow {
+  color: rgba(255, 255, 255, .6);
+}
+
+.guide-video-teaser-module__heading h2,
+.guide-video-teaser-module__heading h3,
+.guide-video-teaser-module__heading h4 {
+  color: var(--color-white, #FFFFFF);
+  margin: 0;
+}
+
+.guide-video-teaser-module__heading strong {
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  color: var(--color-primary-blue, #0D6FFC);
+}
+
+.guide-video-teaser-module__description p {
+  color: rgba(255, 255, 255, .62);
+  margin: 0;
+}
+
+/* Caveat Rich Text — every heading/paragraph tag typed into this field must
+   render in the R2 Caveat script font, so each possible tag is targeted
+   directly here rather than relying on inherited font-family, which the
+   theme's own h1-h6/p typography rules (theme-overrides.css) would otherwise
+   override. Same convention as media-band-module__caveat-text. */
+
+.guide-video-teaser-module__caveat,
+.guide-video-teaser-module__caveat h1,
+.guide-video-teaser-module__caveat h2,
+.guide-video-teaser-module__caveat h3,
+.guide-video-teaser-module__caveat h4,
+.guide-video-teaser-module__caveat h5,
+.guide-video-teaser-module__caveat h6,
+.guide-video-teaser-module__caveat p {
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  color: var(--color-primary-blue, #0D6FFC);
+  margin: 0;
+}
+
+/* ---------- Media column ---------- */
+
+.guide-video-teaser-module__media {
+  display: flex;
+  justify-content: center;
+  border: 1px dashed rgba(166, 200, 249, .35);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.guide-video-teaser-module__stack {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guide-video-teaser-module__stack[hidden] {
+  display: none;
+}
+
+.guide-video-teaser-module__page {
+  position: absolute;
+  width: 130px;
+  height: 190px;
+  border-radius: 8px;
+  background: #E4E9F2;
+  box-shadow: 0 20px 40px rgba(4, 15, 33, .35);
+}
+
+.guide-video-teaser-module__page--left {
+  transform: translateX(-64px) rotate(-8deg);
+  z-index: 1;
+}
+
+.guide-video-teaser-module__page--right {
+  transform: translateX(64px) rotate(8deg);
+  z-index: 1;
+}
+
+.guide-video-teaser-module__page--center {
+  width: 150px;
+  height: 210px;
+  background: var(--color-white, #FFFFFF);
+  z-index: 2;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guide-video-teaser-module__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- Full-size player (revealed on play, replaces the stack) ---------- */
+
+.guide-video-teaser-module__player {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000000;
+}
+
+.guide-video-teaser-module__player[hidden] {
+  display: none;
+}
+
+.guide-video-teaser-module__frame {
+  width: 100%;
+  height: 100%;
+}
+
+.guide-video-teaser-module__frame iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
+
+.guide-video-teaser-module__play {
+  position: relative;
+  z-index: 2;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-primary-blue, #0D6FFC);
+  color: var(--color-white, #FFFFFF);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color .2s, transform .2s;
+  box-shadow: 0 8px 24px rgba(8, 39, 80, .35);
+}
+
+.guide-video-teaser-module__play svg {
+  margin-left: 3px;
+}
+
+.guide-video-teaser-module__play:hover,
+.guide-video-teaser-module__play:focus-visible {
+  background-color: #0C64E4;
+  transform: scale(1.06);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 992px) {
+  .guide-video-teaser-module__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .guide-video-teaser-module__media {
+    order: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .guide-video-teaser-module__stack {
+    height: 190px;
+  }
+
+  .guide-video-teaser-module__page {
+    width: 100px;
+    height: 150px;
+  }
+
+  .guide-video-teaser-module__page--left {
+    transform: translateX(-46px) rotate(-8deg);
+  }
+
+  .guide-video-teaser-module__page--right {
+    transform: translateX(46px) rotate(8deg);
+  }
+
+  .guide-video-teaser-module__page--center {
+    width: 116px;
+    height: 168px;
+  }
+
+  .guide-video-teaser-module__play {
+    width: 46px;
+    height: 46px;
+  }
+}

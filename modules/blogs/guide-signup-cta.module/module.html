@@ -1,0 +1,60 @@
+{# Guide signup CTA — optional lead-gen card for blog-post.html.
+   Left: a single self-contained illustration (image field).
+   Right: eyebrow + heading + description + a real HubSpot form + disclaimer.
+   show_module wraps the whole section so editors can hide it per post,
+   same pattern as guide-video-teaser.module. #}
+{% if module.show_module %}
+
+{% require_css %}
+<style>
+{% scope_css %}
+  .guide-signup-cta-module {
+    background: var(--bg-color, #EAF2FE);
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 991px) {
+    .guide-signup-cta-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="guide-signup-cta-module" id="guide-signup-cta" data-screen-label="Guide signup CTA"
+         style="--bg-color: rgba({{ module.background_color.color|convert_rgb }}, {{ module.background_color.opacity / 100 }});">
+  <div class="content-wrapper guide-signup-cta-module__grid">
+    <div class="guide-signup-cta-module__media">
+      {% if module.image.src %}
+        <img class="guide-signup-cta-module__image"
+             src="{{ module.image.src|escape_url }}"
+             alt="{{ module.image.alt|escape_attr }}"
+             loading="lazy">
+      {% endif %}
+    </div>
+    <div class="guide-signup-cta-module__card">
+      {% if module.eyebrow %}
+        <div class="guide-signup-cta-module__eyebrow eyebrow">{{ module.eyebrow|escape_html }}</div>
+      {% endif %}
+      <div class="guide-signup-cta-module__heading">{{ module.heading|sanitize_html }}</div>
+      <div class="guide-signup-cta-module__description">{{ module.description|sanitize_html }}</div>
+      {% if module.form.form_id %}
+        <div class="guide-signup-cta-module__form">
+          {% form
+            form_to_use="{{ module.form.form_id }}"
+            response_response_type="{{ module.form.response_type }}"
+            response_message="{{ module.form.message }}"
+            response_redirect_id="{{ module.form.redirect_id }}"
+            response_redirect_url="{{ module.form.redirect_url }}"
+            gotowebinar_webinar_key="{{ module.form.gotowebinar_webinar_key }}"
+          %}
+        </div>
+      {% endif %}
+      {% if module.disclaimer_text %}
+        <div class="guide-signup-cta-module__disclaimer">{{ module.disclaimer_text|escape_html }}</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% endif %}
