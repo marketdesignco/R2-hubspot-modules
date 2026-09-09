@@ -1,0 +1,44 @@
+/*
+  Structure and dynamic content live in module.html. This file is everything
+  else: layout, color, borders, and responsive rules. Section spacing
+  (desktop/mobile) is editor-controlled and stays out of this file — see the
+  {% require_css %}/{% scope_css %} block in module.html. No font-size/
+  family/weight/line-height/letter-spacing is declared here; the Design
+  System governs typography via semantic tags and the shared .eyebrow class.
+*/
+
+.not-ready-to-book-cta-module__card {
+  max-width: 1080px;
+  margin: 0 auto;
+  background: var(--color-white);
+  border: 2px solid var(--color-primary-blue, #0D6FFC);
+  border-radius: 8px;
+  padding: 40px 48px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+}
+
+.not-ready-to-book-cta-module__eyebrow {
+  color: var(--color-primary-blue, #0D6FFC);
+  margin-bottom: 12px;
+}
+
+.not-ready-to-book-cta-module__heading {
+  color: var(--color-navy-blue, #082750);
+  margin-bottom: 10px;
+}
+
+.not-ready-to-book-cta-module__description {
+  color: var(--color-slate-blue);
+  margin: 0;
+}
+
+@media (max-width: 992px) {
+  .not-ready-to-book-cta-module__card {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 28px 24px;
+  }
+}

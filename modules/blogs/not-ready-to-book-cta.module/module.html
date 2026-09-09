@@ -1,0 +1,55 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .not-ready-to-book-cta-module {
+    background: var(--bg-color, #082750);
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .not-ready-to-book-cta-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+{% if module.show_module %}
+<section class="not-ready-to-book-cta-module dark-bg" id="not-ready-to-book-cta" data-screen-label="Not ready to book CTA"
+         style="--bg-color: rgba({{ module.background_color.color|convert_rgb }}, {{ module.background_color.opacity / 100 }});">
+  <div class="content-wrapper">
+    <div class="not-ready-to-book-cta-module__card">
+      <div class="not-ready-to-book-cta-module__copy">
+        {% if module.eyebrow %}
+          <div class="not-ready-to-book-cta-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+        {% endif %}
+        <div class="not-ready-to-book-cta-module__heading">{{ module.heading|sanitize_html }}</div>
+        <div class="not-ready-to-book-cta-module__description">{{ module.description|sanitize_html }}</div>
+      </div>
+      <div class="custom-cta btn-mobile {{ module.style_cta }}">
+        {% if module.button_link.url.href %}
+          {% set href = module.button_link.url.href %}
+          {% if module.button_link.url.type == "EMAIL_ADDRESS" %}
+            {% set href = "mailto:" + href %}
+          {% elif module.button_link.url.type == "PHONE_NUMBER" %}
+            {% set href = "tel:" + href %}
+          {% endif %}
+          <a
+            {% if module.button_link.url.type == "CALL_TO_ACTION" %}
+              href="{{ href }}"
+            {% else %}
+              href="{{ href|escape_url }}"
+            {% endif %}
+            {% if module.button_link.open_in_new_tab %}target="_blank"{% endif %}
+            {% if module.button_link.rel %}rel="{{ module.button_link.rel|join(" ")|escape_attr }}"{% endif %}
+          >
+            {{ module.button_text|escape_html }}
+          </a>
+        {% elif module.cta %}
+          {% cta guid="{{ module.cta }}" %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}

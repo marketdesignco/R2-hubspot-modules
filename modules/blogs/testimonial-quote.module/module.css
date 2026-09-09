@@ -1,0 +1,73 @@
+/*
+  Structure and dynamic content live in module.html. This file is everything
+  else: layout, color, and responsive rules. Section spacing (desktop/mobile)
+  is editor-controlled and stays out of this file — see the
+  {% require_css %}/{% scope_css %} block in module.html. Typography comes
+  from the Design System and the shared .text-accent utility, except two
+  deliberate, precedented exceptions: the quote's bold weight (matching the
+  source design, same approach as other modules' scoped <strong> emphasis)
+  and the tagline's size/color (the .text-accent utility itself only sets
+  font-family, per theme-overrides.css).
+*/
+
+.testimonial-quote-module__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.testimonial-quote-module__tagline {
+  font-size: 26px;
+  color: rgba(183, 201, 197, .8);
+  margin-bottom: 24px;
+}
+
+.testimonial-quote-module__icon {
+  height: 32px;
+  width: auto;
+  display: block;
+  margin: 0 auto 24px;
+}
+
+.testimonial-quote-module__quote {
+  margin: 0;
+  font-weight: 700;
+  color: var(--color-white);
+  line-height: 1.6;
+}
+
+.testimonial-quote-module__quote p {
+  margin: 0;
+}
+
+.testimonial-quote-module__attribution {
+  margin-top: 28px;
+}
+
+.testimonial-quote-module__name {
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.testimonial-quote-module__meta {
+  color: rgba(255, 255, 255, .6);
+  margin-top: 4px;
+}
+
+@media (max-width: 767px) {
+  .testimonial-quote-module__tagline {
+    font-size: 22px;
+  }
+
+  .testimonial-quote-module__icon {
+    height: 26px;
+    margin-bottom: 20px;
+  }
+
+  .testimonial-quote-module__attribution {
+    margin-top: 20px;
+  }
+}

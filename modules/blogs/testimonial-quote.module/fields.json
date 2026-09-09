@@ -1,0 +1,147 @@
+[ {
+  "id" : "show_module",
+  "name" : "show_module",
+  "label" : "Show this section",
+  "help_text" : "This module is meant to sit inside blog-post.html for every post. Not every post needs a testimonial — turn this off to hide the whole section on posts where it doesn't apply, without removing it from the template.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "tagline",
+  "name" : "tagline",
+  "label" : "Tagline",
+  "help_text" : "Short handwritten-style line above the quote icon.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Software Defined. Human Approved."
+}, {
+  "id" : "quote_icon",
+  "name" : "quote_icon",
+  "label" : "Quote icon",
+  "help_text" : "The quotation-mark graphic shown above the quote.",
+  "required" : false,
+  "locked" : false,
+  "responsive" : true,
+  "resizable" : true,
+  "show_loading" : false,
+  "type" : "image",
+  "display_width" : null,
+  "default" : {
+    "src" : "https://www.r2ut.com/hubfs/Boilerplate/Component%202.svg",
+    "alt" : "Quotation mark",
+    "loading" : "lazy"
+  }
+}, {
+  "id" : "quote_text",
+  "name" : "quote_text",
+  "label" : "Quote",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>R2 helped me take my network and security to the next level. I call on them for consulting and implementation that is beyond the scope of my IT Team or as additional resources to help achieve my goals quickly. R2 is truly my trusted partner. We look at them as an augmentation of our own IT department.</p>"
+}, {
+  "id" : "person_name",
+  "name" : "person_name",
+  "label" : "Name",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Matt Forchette"
+}, {
+  "id" : "job_title",
+  "name" : "job_title",
+  "label" : "Job title",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Infrastructure Manager"
+}, {
+  "id" : "company",
+  "name" : "company",
+  "label" : "Company",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Insurance Technologies, Inc."
+}, {
+  "id" : "background_color",
+  "name" : "background_color",
+  "label" : "Background Color",
+  "required" : false,
+  "locked" : false,
+  "type" : "color",
+  "display_width" : null,
+  "default" : {
+    "color" : "#082750",
+    "opacity" : 100
+  }
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 60, "units" : "px" },
+        "bottom" : { "value" : 60, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 45, "units" : "px" },
+        "bottom" : { "value" : 45, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : { "padding" : { "top" : {"value":60,"units":"px"}, "bottom" : {"value":60,"units":"px"}, "left" : {"value":0,"units":"px"}, "right" : {"value":0,"units":"px"} }, "margin" : { "top" : {"value":0,"units":"px"}, "bottom" : {"value":0,"units":"px"} } },
+    "spacing_mobile" : { "padding" : { "top" : {"value":45,"units":"px"}, "bottom" : {"value":45,"units":"px"}, "left" : {"value":0,"units":"px"}, "right" : {"value":0,"units":"px"} }, "margin" : { "top" : {"value":0,"units":"px"}, "bottom" : {"value":0,"units":"px"} } }
+  }
+} ]

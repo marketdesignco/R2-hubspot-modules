@@ -1,0 +1,52 @@
+{# Testimonial quote — optional dark-navy testimonial for blog-post.html.
+   Tagline (Caveat script) + quote icon + bold centered quote + attribution.
+   show_module wraps the whole section so editors can hide it per post,
+   same pattern as guide-video-teaser.module / guide-signup-cta.module. #}
+{% if module.show_module %}
+
+{% require_css %}
+<style>
+{% scope_css %}
+  .testimonial-quote-module {
+    background: var(--bg-color, #082750);
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 991px) {
+    .testimonial-quote-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="testimonial-quote-module dark-bg" id="testimonial-quote" data-screen-label="Testimonial quote"
+         style="--bg-color: rgba({{ module.background_color.color|convert_rgb }}, {{ module.background_color.opacity / 100 }});">
+  <div class="content-wrapper testimonial-quote-module__inner">
+    {% if module.tagline %}
+      <div class="testimonial-quote-module__tagline text-accent">{{ module.tagline|escape_html }}</div>
+    {% endif %}
+    {% if module.quote_icon.src %}
+      <img class="testimonial-quote-module__icon"
+           src="{{ module.quote_icon.src|escape_url }}"
+           alt="{{ module.quote_icon.alt|escape_attr }}"
+           loading="lazy">
+    {% endif %}
+    <blockquote class="testimonial-quote-module__quote">
+      {{ module.quote_text|sanitize_html }}
+    </blockquote>
+    <footer class="testimonial-quote-module__attribution">
+      {% if module.person_name %}
+        <div class="testimonial-quote-module__name">{{ module.person_name|escape_html }}</div>
+      {% endif %}
+      {% if module.job_title %}
+        <div class="testimonial-quote-module__meta">{{ module.job_title|escape_html }}</div>
+      {% endif %}
+      {% if module.company %}
+        <div class="testimonial-quote-module__meta">{{ module.company|escape_html }}</div>
+      {% endif %}
+    </footer>
+  </div>
+</section>
+
+{% endif %}

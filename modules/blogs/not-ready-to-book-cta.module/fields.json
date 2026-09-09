@@ -1,0 +1,182 @@
+[ {
+  "id" : "show_module",
+  "name" : "show_module",
+  "label" : "Show this section",
+  "help_text" : "Off by default. When placed in blog-post.html, turn on per post to show this CTA.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false
+}, {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Not ready to book?"
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Use the rich text toolbar's Heading options (H2/H3/H4) to set the semantic level. Typography always comes from the R2 Design System for whichever level is chosen.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h3>Take the pre-call checklist instead.</h3>"
+}, {
+  "id" : "description",
+  "name" : "description",
+  "label" : "Description",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<p>Twelve questions our engineers ask before any segmentation project. Run it internally, book the call when the answers get uncomfortable.</p>"
+}, {
+  "id" : "button_text",
+  "name" : "button_text",
+  "label" : "Button text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Get the checklist"
+}, {
+  "id" : "button_link",
+  "name" : "button_link",
+  "label" : "Button link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG", "CALL_TO_ACTION" ],
+  "show_advanced_rel_options" : true,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "#cta",
+      "type" : "EXTERNAL"
+    },
+    "no_follow" : false,
+    "open_in_new_tab" : false
+  }
+}, {
+  "id" : "cta",
+  "name" : "cta",
+  "label" : "Or select a CTA",
+  "help_text" : "Optional. Renders a HubSpot CTA in place of the button above when no Button link is set.",
+  "required" : false,
+  "locked" : false,
+  "type" : "cta",
+  "display_width" : null
+}, {
+  "id" : "style_cta",
+  "name" : "style_cta",
+  "label" : "CTA Style",
+  "required" : false,
+  "locked" : false,
+  "type" : "choice",
+  "display" : "select",
+  "choices" : [
+    [ "cta-primary", "Primary" ],
+    [ "cta-secondary", "Secondary (Outline)" ]
+  ],
+  "display_width" : null,
+  "default" : "cta-secondary"
+}, {
+  "id" : "background_color",
+  "name" : "background_color",
+  "label" : "Background Color",
+  "required" : false,
+  "locked" : false,
+  "type" : "color",
+  "display_width" : null,
+  "default" : {
+    "color" : "#082750",
+    "opacity" : 100
+  }
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 72, "units" : "px" },
+        "bottom" : { "value" : 72, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 40, "units" : "px" },
+        "bottom" : { "value" : 40, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : {
+      "padding" : {
+        "top" : { "value" : 72, "units" : "px" },
+        "bottom" : { "value" : 72, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    },
+    "spacing_mobile" : {
+      "padding" : {
+        "top" : { "value" : 40, "units" : "px" },
+        "bottom" : { "value" : 40, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }
+} ]
