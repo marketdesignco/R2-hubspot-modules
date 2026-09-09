@@ -1,11 +1,22 @@
 [ {
+  "id" : "show_module",
+  "name" : "show_module",
+  "label" : "Show this section",
+  "help_text" : "On by default (used across existing landing/site pages). When this module is placed in blog-post.html, override this to off in the template's module tag so it starts hidden per post.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
   "id" : "layout",
   "name" : "layout",
   "label" : "Layout",
   "required" : false,
   "locked" : false,
   "display" : "select",
-  "choices" : [ [ "layout_1", "Layout 1" ], [ "layout_2", "Layout 2" ] ],
+  "choices" : [ [ "layout_1", "Layout 1" ], [ "layout_2", "Layout 2" ], [ "layout_3", "Layout 3 (Heading + 2 Columns)" ] ],
   "type" : "choice",
   "display_width" : null,
   "default" : "layout_1"
@@ -41,6 +52,42 @@
     "controlling_field" : "layout",
     "controlling_field_path" : null,
     "controlling_value_regex" : "layout_1",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
+}, {
+  "id" : "layout3_eyebrow",
+  "name" : "layout3_eyebrow",
+  "label" : "Eyebrow",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "Why segmentation stalls",
+  "visibility" : {
+    "controlling_field" : "layout",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "layout_3",
+    "property" : null,
+    "operator" : "EQUAL",
+    "access" : null
+  }
+}, {
+  "id" : "layout3_heading",
+  "name" : "layout3_heading",
+  "label" : "Heading",
+  "help_text" : "Use the rich text toolbar's Heading options (H2/H3/H4) to set the semantic level. Bold the accent phrase to apply the Caveat/blue accent treatment. Typography always comes from the R2 Design System for whichever level is chosen.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h2>The policy is written. <strong>The network doesn't know it.</strong></h2>",
+  "visibility" : {
+    "controlling_field" : "layout",
+    "controlling_field_path" : null,
+    "controlling_value_regex" : "layout_3",
     "property" : null,
     "operator" : "EQUAL",
     "access" : null
@@ -138,11 +185,11 @@
   "locked" : false,
   "type" : "richtext",
   "display_width" : null,
-  "default" : "",
+  "default" : "<p>Most segmentation programs don't fail at design. They fail in translation — between the policy your security team wrote and what switches, firewalls, and identity systems actually enforce. VLANs multiply, exceptions accumulate, and within a year nobody can say with confidence what can reach what.</p><p>That gap is invisible until an audit, an incident, or a lateral-movement finding makes it expensive. The strategy call exists to surface it early, while it's still a design conversation instead of a remediation project.</p>",
   "visibility" : {
     "controlling_field" : "layout",
     "controlling_field_path" : null,
-    "controlling_value_regex" : "layout_2",
+    "controlling_value_regex" : "^(layout_2|layout_3)$",
     "property" : null,
     "operator" : "EQUAL",
     "access" : null
@@ -156,7 +203,7 @@
   "locked" : false,
   "type" : "richtext",
   "display_width" : null,
-  "default" : "",
+  "default" : "<p>Fabric architectures like Cisco SDA close the gap by making intent the source of truth — policy defined once, enforced by identity, validated continuously. But the technology is the smaller half of the work. Readiness, sequencing, and operational fit decide whether it holds up.</p><p>That's what we assess on the call: where your environment is today, what a defensible target state looks like, and the shortest sequence between the two that your team can actually operate.</p>",
   "visibility" : {
     "boolean_operator" : "OR",
     "criteria" : [ {
@@ -170,6 +217,13 @@
       "controlling_field" : "show_second_rich_text",
       "controlling_field_path" : null,
       "controlling_value_regex" : "true",
+      "property" : null,
+      "operator" : "EQUAL",
+      "access" : null
+    }, {
+      "controlling_field" : "layout",
+      "controlling_field_path" : null,
+      "controlling_value_regex" : "^layout_3$",
       "property" : null,
       "operator" : "EQUAL",
       "access" : null

@@ -13,6 +13,7 @@
 </style>
 {% end_require_css %}
 
+{% if module.show_module %}
 <section class="faq-module" id="faq" data-screen-label="FAQ">
   <div class="content-wrapper faq-module__container">
     {% if module.eyebrow %}
@@ -34,6 +35,7 @@
         </details>
       {% endfor %}
     </div>
-   
+
   </div>
 </section>
+{% endif %}

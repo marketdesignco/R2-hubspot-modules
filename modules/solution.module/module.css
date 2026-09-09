@@ -146,6 +146,22 @@
   color: var(--color-navy-blue);
 }
 
+/* Layout 3 — Heading + 2 plain rich text columns */
+
+.solution-module__layout3 {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 992px) {
+  .solution-module__layout3 {
+    gap: 28px;
+  }
+}
+
 /* Layout 2 — Rich Text only columns */
 
 .solution-module__richtext {

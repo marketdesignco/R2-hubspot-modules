@@ -13,6 +13,7 @@
 </style>
 {% end_require_css %}
 
+{% if module.show_module %}
 <section class="solution-module{% if module.background == "light" %} solution-module--light{% endif %}" id="solution" data-screen-label="The solution">
   {% if module.layout == "layout_2" %}
     <div class="content-wrapper solution-module__richtext{% if module.columns == "two_columns" %} solution-module__richtext--2col{% endif %}">
@@ -26,6 +27,21 @@
           <div class="solution-module__richtext-col">{{ module.rich_text_2|sanitize_html }}</div>
         {% endif %}
       {% endif %}
+    </div>
+  {% elif module.layout == "layout_3" %}
+    <div class="content-wrapper solution-module__layout3">
+      <div class="solution-module__content">
+        {% if module.layout3_eyebrow %}
+          <div class="solution-module__eyebrow eyebrow"><span></span>{{ module.layout3_eyebrow|escape_html }}</div>
+        {% endif %}
+        <div class="solution-module__heading">{{ module.layout3_heading|sanitize_html }}</div>
+      </div>
+      <div class="solution-module__richtext solution-module__richtext--2col">
+        <div class="solution-module__richtext-col">{{ module.rich_text_1|sanitize_html }}</div>
+        {% if module.rich_text_2 %}
+          <div class="solution-module__richtext-col">{{ module.rich_text_2|sanitize_html }}</div>
+        {% endif %}
+      </div>
     </div>
   {% else %}
     <div class="solution-module__glow"></div>
@@ -53,3 +69,4 @@
     </div>
   {% endif %}
 </section>
+{% endif %}

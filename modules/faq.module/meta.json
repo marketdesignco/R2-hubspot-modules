@@ -1,6 +1,6 @@
 {
   "global" : false,
-  "content_types" : [ "LANDING_PAGE", "SITE_PAGE" ],
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE", "BLOG_POST" ],
   "categories" : [ "body_content" ],
   "host_template_types" : [ "PAGE" ],
   "label" : "FAQ",

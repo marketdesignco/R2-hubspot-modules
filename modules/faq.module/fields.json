@@ -1,4 +1,15 @@
 [ {
+  "id" : "show_module",
+  "name" : "show_module",
+  "label" : "Show this section",
+  "help_text" : "Off by default. When placed in blog-post.html, turn on per post to show the FAQ.",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : false
+}, {
   "id" : "eyebrow",
   "name" : "eyebrow",
   "label" : "Eyebrow",
