@@ -1,0 +1,162 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .flagship-outcome-module {
+    background: #082750;
+    position: relative;
+    overflow: hidden;
+    {{ module.styles.spacing_desktop.css }}
+  }
+  .flagship-outcome-module__glow {
+    position: absolute;
+    right: -4%;
+    bottom: -20%;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(71,146,166,.08) 0%, transparent 65%);
+  }
+  .flagship-outcome-module__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    position: relative;
+  }
+  .flagship-outcome-module__image {
+    height: 420px;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 5px;
+    overflow: hidden;
+    background: rgba(255,255,255,.04);
+  }
+  .flagship-outcome-module__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .flagship-outcome-module__content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .flagship-outcome-module__eyebrow {
+    color: #0D6FFC;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .flagship-outcome-module__eyebrow span {
+    width: 16px;
+    height: 2px;
+    background: #DB535F;
+    flex-shrink: 0;
+  }
+  .flagship-outcome-module__heading * {
+    color: white;
+    margin: 0;
+  }
+  .flagship-outcome-module__heading strong {
+    color: #0D6FFC;
+    font-family: var(--font-secondary);
+    font-weight: 700;
+  }
+  .flagship-outcome-module__quote {
+    line-height: 1.8;
+    color: #9CA9B9;
+    margin: 0;
+    border-left: 3px solid #0D6FFC;
+    padding-left: 20px;
+  }
+  .flagship-outcome-module__person-name {
+    font-weight: 700;
+    color: white;
+  }
+  .flagship-outcome-module__person-role {
+    color: rgba(255,255,255,.45);
+  }
+  .flagship-outcome-module__cta {
+    margin-top: 4px;
+  }
+
+  /* Responsive: collapse to a single column below 992px */
+
+  @media (max-width: 992px) {
+    .flagship-outcome-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+    .flagship-outcome-module__inner {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .flagship-outcome-module__image {
+      height: 280px;
+    }
+    .flagship-outcome-module__cta .custom-cta a,
+    .flagship-outcome-module__cta .custom-cta button {
+      width: 100%;
+      text-align: center;
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="flagship-outcome-module" data-screen-label="Flagship outcome">
+  <div class="flagship-outcome-module__glow"></div>
+  <div class="content-wrapper flagship-outcome-module__inner">
+    <div class="flagship-outcome-module__image">
+      {% if module.image.src %}
+        <img src="{{ module.image.src|escape_url }}" alt="{{ module.image.alt|escape_attr }}" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="flagship-outcome-module__content">
+      {% if module.eyebrow_kicker or module.eyebrow_category %}
+        <div class="flagship-outcome-module__eyebrow eyebrow">
+          <span></span>{% if module.eyebrow_kicker %}{{ module.eyebrow_kicker|escape_html }}{% endif %}{% if module.eyebrow_kicker and module.eyebrow_category %} &middot; {% endif %}{% if module.eyebrow_category %}{{ module.eyebrow_category|escape_html }}{% endif %}
+        </div>
+      {% endif %}
+      {% if module.heading %}
+        <div class="flagship-outcome-module__heading">{{ module.heading|sanitize_html }}</div>
+      {% endif %}
+      {% if module.quote %}
+        <p class="flagship-outcome-module__quote">&ldquo;{{ module.quote|escape_html }}&rdquo;</p>
+      {% endif %}
+      {% if module.person_name or module.person_role %}
+        <div class="flagship-outcome-module__person">
+          {% if module.person_name %}<div class="flagship-outcome-module__person-name">{{ module.person_name|escape_html }}</div>{% endif %}
+          {% if module.person_role %}<div class="flagship-outcome-module__person-role">{{ module.person_role|escape_html }}</div>{% endif %}
+        </div>
+      {% endif %}
+      {% if module.button_link.url.href or module.cta %}
+        <div class="flagship-outcome-module__cta">
+          <div class="custom-cta {{ module.style_cta }}">
+            {% if module.button_link.url.href %}
+              {% set href = module.button_link.url.href %}
+              {% if module.button_link.url.type == "EMAIL_ADDRESS" %}
+                {% set href = "mailto:" + href %}
+              {% elif module.button_link.url.type == "PHONE_NUMBER" %}
+                {% set href = "tel:" + href %}
+              {% endif %}
+              <a
+                {% if module.button_link.url.type == "CALL_TO_ACTION" %}
+                  href="{{ href }}"
+                {% else %}
+                  href="{{ href|escape_url }}"
+                {% endif %}
+                {% if module.button_link.open_in_new_tab %}target="_blank"{% endif %}
+                {% if module.button_link.rel %}rel="{{ module.button_link.rel|join(" ")|escape_attr }}"{% endif %}
+              >
+                {{ module.button_text|escape_html }}
+              </a>
+            {% elif module.cta %}
+              {% cta guid="{{ module.cta }}" %}
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
