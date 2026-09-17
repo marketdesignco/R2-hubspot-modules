@@ -1,0 +1,112 @@
+[ {
+  "id" : "blog",
+  "name" : "blog",
+  "label" : "Blog",
+  "help_text" : "The HubSpot blog this grid pulls Guide/Checklist posts from. Must be the SAME blog selected on the Guides + Checklists Filter module elsewhere on this page — the two modules are independent and do not share fields.",
+  "required" : false,
+  "locked" : false,
+  "type" : "blog",
+  "display_width" : null
+}, {
+  "id" : "filter_tags",
+  "name" : "filter_tags",
+  "label" : "Filter Tags",
+  "help_text" : "The tags this grid treats as in-scope. When no pill is selected (\"All\"), the grid shows every post carrying any of these tags. IMPORTANT: this must match the SAME list configured on the Guides + Checklists Filter module on this page — the two modules compute this independently and cannot share fields.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "filter_tags.tag",
+    "default" : 5
+  },
+  "children" : [ {
+    "id" : "filter_tags.tag",
+    "name" : "tag",
+    "label" : "Tag",
+    "help_text" : "Pick an existing HubSpot blog tag.",
+    "required" : false,
+    "locked" : false,
+    "tag_value" : "SLUG",
+    "type" : "tag",
+    "display_width" : null
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [
+    { "tag" : "checklist" },
+    { "tag" : "guide" },
+    { "tag" : "software-defined-access" },
+    { "tag" : "managed-services" },
+    { "tag" : "security" }
+  ]
+}, {
+  "id" : "posts_per_page",
+  "name" : "posts_per_page",
+  "label" : "Maximum cards shown",
+  "help_text" : "No pagination on this grid — this is a hard cap on how many cards render.",
+  "required" : false,
+  "locked" : false,
+  "display" : "text",
+  "min" : 2,
+  "max" : 50,
+  "step" : 1,
+  "type" : "number",
+  "display_width" : null,
+  "default" : 24
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

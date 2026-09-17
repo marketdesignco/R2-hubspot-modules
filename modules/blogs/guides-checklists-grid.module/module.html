@@ -1,0 +1,127 @@
+{#
+  Guides + Checklists Grid — the card grid only, no filter pills.
+
+  Deliberately a SEPARATE module from guides-checklists-filter.module (see
+  that module's own top comment for why). Reads the same plain `gc_tag`
+  query param the filter module writes, independently and server-side —
+  no shared fields, no JS coupling required for the base functionality.
+  With JS, the filter module's own script finds and swaps this module's
+  results container via [data-guides-checklists-grid-results], a plain
+  page-unique ID (this module is used exactly once per page, so no
+  per-instance namespacing is needed here).
+
+  The tag set in scope comes from the `filter_tags` field below, which must
+  match the list configured on guides-checklists-filter.module — "All"
+  means "every post carrying any of these tags", and both modules compute
+  that independently because they cannot share fields. Both ship with
+  identical defaults, so they only diverge if someone edits one only.
+
+  No sort control, no pagination, no "Featured" callout — none of those
+  were in the source design for this grid, so they aren't here either.
+#}
+
+{% set active_tag = request.query_dict.gc_tag|default("all") %}
+{% set is_ajax = request.query_dict.ajax == "1" %}
+{% set limit = module.posts_per_page|default(24) %}
+
+{% set tag_state = namespace(scope=[]) %}
+{% for item in module.filter_tags %}
+  {% if item.tag %}
+    {% set tag_state.scope = tag_state.scope + [item.tag] %}
+  {% endif %}
+{% endfor %}
+{% set scope_tags = tag_state.scope %}
+
+{% set pool_state = namespace(pool=[], seen=[]) %}
+
+{% if module.blog %}
+  {% if active_tag == "all" %}
+    {% for t in scope_tags %}
+      {% for p in blog_recent_tag_posts(module.blog, t, 100) %}
+        {% if p.id not in pool_state.seen %}
+          {% set pool_state.seen = pool_state.seen + [p.id] %}
+          {% set pool_state.pool = pool_state.pool + [p] %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% elif active_tag in scope_tags %}
+    {% set pool_state.pool = blog_recent_tag_posts(module.blog, active_tag, 100) %}
+  {% endif %}
+  {% set pool_state.pool = pool_state.pool|sort(True, False, "publish_date") %}
+{% endif %}
+
+{% set page_posts = pool_state.pool[0:limit] %}
+
+{% if not is_ajax %}
+{% require_css %}
+<style>
+{% scope_css %}
+  .guides-checklists-grid-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .guides-checklists-grid-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="guides-checklists-grid-module" data-screen-label="Guides + Checklists grid">
+  <div class="content-wrapper">
+{% endif %}
+    <div class="guides-checklists-grid-module__results" data-guides-checklists-grid-results aria-live="polite">
+      {% if page_posts|length == 0 %}
+        <div class="guides-checklists-grid-module__empty">No posts found.</div>
+      {% else %}
+        <div class="guides-checklists-grid-module__posts">
+          {% for post in page_posts %}
+            {% set post_tags = post.tag_list|list %}
+            {% set post_tag_key = "default" %}
+            {% if post_tags|length > 0 %}
+              {% set post_tag_key = post_tags[0].name|lower
+                |replace("(english - united states)", "")
+                |replace("(english)", "")
+                |trim
+                |replace(",", "")
+                |replace(".", "")
+                |replace(" - ", "-")
+                |replace(" ", "-")
+                |replace("--", "-")
+                |trim("-") %}
+              {% if post_tag_key == "" %}{% set post_tag_key = "default" %}{% endif %}
+            {% endif %}
+            <article class="guides-checklists-grid-module__card card-border--{{ post_tag_key }}">
+              <a class="guides-checklists-grid-module__card-media" href="{{ post.absolute_url|escape_url }}" tabindex="-1" aria-hidden="true">
+                {% if post.featured_image %}
+                  <img src="{{ post.featured_image|escape_url }}" alt="" loading="lazy">
+                {% endif %}
+              </a>
+              <div class="guides-checklists-grid-module__card-body">
+                <div class="guides-checklists-grid-module__card-meta">
+                  {% if post_tags|length > 0 %}
+                    <span class="tag tag--{{ post_tag_key }}">{{ post_tags[0].name|escape_html }}</span>
+                  {% endif %}
+                  {% if post_tags|length > 1 %}
+                    <span class="guides-checklists-grid-module__secondary-tag">{{ post_tags[1].name|escape_html }}</span>
+                  {% endif %}
+                </div>
+                <h5 class="guides-checklists-grid-module__card-title"><a href="{{ post.absolute_url|escape_url }}">{{ post.name|escape_html }}</a></h5>
+                <div class="guides-checklists-grid-module__card-footer">
+                  {% set char_count = post.post_body|striptags|length %}
+                  {% set reading_time = (char_count / 1100)|round(0, "ceil")|int %}
+                  {% if reading_time < 1 %}{% set reading_time = 1 %}{% endif %}
+                  <span class="guides-checklists-grid-module__card-readtime">{% if post_tags|length > 0 %}{{ post_tags[0].name|escape_html }} &middot; {% endif %}{{ reading_time }} min read</span>
+                  <a class="guides-checklists-grid-module__card-link link-1" href="{{ post.absolute_url|escape_url }}">Read more &rarr;</a>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+{% if not is_ajax %}
+  </div>
+</section>
+{% endif %}

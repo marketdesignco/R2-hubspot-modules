@@ -1,0 +1,153 @@
+.guides-checklists-grid-module {
+  background: var(--color-white);
+  /* Centralized tag → color mapping (reused theme tokens, no inline styles
+     per post). Add a --tag-<slug> here for any additional tag that should
+     get its own color; anything else falls back to --tag-default. */
+  --tag-default: var(--color-steel-gray);
+  --tag-guide: var(--color-primary-blue);
+  --tag-checklist: var(--color-teal);
+  --tag-software-defined-access: var(--color-slate-blue);
+  --tag-managed-services: var(--color-navy-blue);
+  --tag-security: var(--color-steel-gray);
+  /* Not a filter pill, but posts can carry it and the design shows it on
+     cards, so it needs its own color rather than the gray fallback. */
+  --tag-consultation: var(--color-coral-red);
+}
+
+.guides-checklists-grid-module__empty {
+  text-align: center;
+  padding: 64px 24px;
+  color: rgba(8, 39, 80, .5);
+  border: 1px dashed rgba(8, 39, 80, .14);
+  border-radius: 6px;
+}
+
+.guides-checklists-grid-module__posts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.guides-checklists-grid-module__card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #E7EAEE;
+  border-top: 3px solid var(--tag-default);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.guides-checklists-grid-module__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 12px 32px 0px #0827501A;
+}
+
+.guides-checklists-grid-module__card-media {
+  display: block;
+  background: rgba(8, 39, 80, .05);
+  height: 170px;
+  overflow: hidden;
+}
+
+.guides-checklists-grid-module__card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.guides-checklists-grid-module__card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.guides-checklists-grid-module__card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+}
+
+.guides-checklists-grid-module__card-title {
+  margin: 0;
+  font-weight: 700;
+  color: var(--color-navy-blue);
+  flex: 1;
+}
+
+.guides-checklists-grid-module__card-title a {
+  font-weight: 700;
+  color: var(--color-navy-blue);
+  text-decoration: none;
+}
+
+.guides-checklists-grid-module__card-title a:hover,
+.guides-checklists-grid-module__card-title a:focus-visible {
+  color: var(--color-navy-blue);
+}
+
+.guides-checklists-grid-module__card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.guides-checklists-grid-module__card-readtime {
+  font-size: 12px;
+  color: rgba(8, 39, 80, .4);
+}
+
+.guides-checklists-grid-module__secondary-tag {
+  color: rgba(8, 39, 80, .45);
+}
+
+/* .tag / .tag--{slug} / .card-border--{slug} are shared, generic classes
+   (not prefixed with the module's own BEM name), matching the same
+   convention blog-listing.module established — only guide/checklist
+   variants are defined here since this module's scope is Guide + Checklist
+   only; anything else falls back to --tag-default / var(--tag-default). */
+
+.tag {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: var(--color-white);
+  background: var(--tag-default);
+  font-size: 9px;
+  letter-spacing: 1.26px;
+}
+
+.tag--checklist { background: var(--tag-checklist); }
+.tag--guide { background: var(--tag-guide); }
+.tag--software-defined-access { background: var(--tag-software-defined-access); }
+.tag--managed-services { background: var(--tag-managed-services); }
+.tag--security { background: var(--tag-security); }
+.tag--consultation { background: var(--tag-consultation); }
+
+.card-border--guide { border-top-color: var(--tag-guide); }
+.card-border--checklist { border-top-color: var(--tag-checklist); }
+.card-border--software-defined-access { border-top-color: var(--tag-software-defined-access); }
+.card-border--managed-services { border-top-color: var(--tag-managed-services); }
+.card-border--security { border-top-color: var(--tag-security); }
+.card-border--consultation { border-top-color: var(--tag-consultation); }
+
+@media (max-width: 992px) {
+  .guides-checklists-grid-module__posts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .guides-checklists-grid-module__posts {
+    grid-template-columns: 1fr;
+  }
+}

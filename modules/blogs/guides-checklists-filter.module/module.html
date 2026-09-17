@@ -1,0 +1,103 @@
+{#
+  Guides + Checklists Filter — the pill row only ("All" + one pill per
+  configured tag).
+
+  Deliberately a SEPARATE module from guides-checklists-grid.module (not
+  bundled the way blog-listing.module bundles its own filter+grid) — these
+  are two distinct components in the Figma, and were asked for as two
+  separate deliverables. They coordinate through a shared, plain (not
+  per-instance-namespaced) URL query param, `gc_tag`, since each of these
+  modules is used exactly once on this page — there is no multi-instance
+  collision risk here the way there is for the general-purpose
+  blog-listing.module, so there is no need for the module-instance-ID
+  namespacing trick (and no need to depend on HubL's `name` variable).
+
+  No-JS: every pill is a real link to `?gc_tag=<slug>` — the grid module
+  independently reads the same query param server-side, so the full
+  filtered result is correct on a plain navigation with JS disabled.
+  With JS: module.js intercepts clicks and fetches the same URL (+ajax=1),
+  then swaps the grid module's own results container by its page-unique ID
+  — see module.js for exactly how the two modules find each other.
+
+  The tag set in scope comes from the `filter_tags` field below. The SAME
+  list must be configured on guides-checklists-grid.module, because "All"
+  means "every post carrying any of these tags" and both modules compute
+  that independently — they cannot share fields. Both ship with identical
+  defaults, so they only diverge if someone edits one and not the other.
+#}
+
+{% set active_tag = request.query_dict.gc_tag|default("all") %}
+{% set base_path = request.path %}
+
+{% set tag_state = namespace(scope=[]) %}
+{% for item in module.filter_tags %}
+  {% if item.tag %}
+    {% set tag_state.scope = tag_state.scope + [item.tag] %}
+  {% endif %}
+{% endfor %}
+{% set scope_tags = tag_state.scope %}
+
+{% set all_tags = [] %}
+{% set count_state = namespace(all=0, seen=[]) %}
+
+{% if module.blog %}
+  {% set all_tags = blog_tags(module.blog, 250) %}
+  {% for t in scope_tags %}
+    {% for p in blog_recent_tag_posts(module.blog, t, 100) %}
+      {% if p.id not in count_state.seen %}
+        {% set count_state.seen = count_state.seen + [p.id] %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+  {% set count_state.all = count_state.seen|length %}
+{% endif %}
+
+{% require_css %}
+<style>
+{% scope_css %}
+  .guides-checklists-filter-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .guides-checklists-filter-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="guides-checklists-filter-module" data-screen-label="Guides + Checklists filter"
+  data-guides-checklists-filter
+  data-base-path="{{ base_path|escape_attr }}"
+  data-active-tag="{{ active_tag|escape_attr }}">
+  <div class="content-wrapper">
+    <div class="guides-checklists-filter-module__row" role="group" aria-label="Filter by type">
+      <a
+        class="guides-checklists-filter-module__tag-btn{% if active_tag == "all" %} is-active{% endif %}"
+        href="{{ base_path }}?gc_tag=all"
+        data-tag-link
+        data-tag="all"
+        {% if active_tag == "all" %}aria-current="true"{% endif %}
+      >All <span class="guides-checklists-filter-module__tag-count">{{ count_state.all }}</span></a>
+      {% for t in scope_tags %}
+        {# Real tag name from HubSpot when the Blog field is set; otherwise
+           fall back to a readable version of the slug ("software-defined-
+           access" → "Software Defined Access") rather than showing the raw
+           lowercase slug. #}
+        {% set tag_label = t|replace("-", " ")|title %}
+        {% set tag_label_matches = all_tags|selectattr("slug", "equalto", t)|list %}
+        {% if tag_label_matches|length > 0 %}{% set tag_label = tag_label_matches[0].name %}{% endif %}
+        {% set tag_item_count = 0 %}
+        {% if module.blog %}{% set tag_item_count = blog_recent_tag_posts(module.blog, t, 100)|length %}{% endif %}
+        <a
+          class="guides-checklists-filter-module__tag-btn{% if active_tag == t %} is-active{% endif %}"
+          href="{{ base_path }}?gc_tag={{ t|escape_attr }}"
+          data-tag-link
+          data-tag="{{ t|escape_attr }}"
+          {% if active_tag == t %}aria-current="true"{% endif %}
+        >{{ tag_label|escape_html }} <span class="guides-checklists-filter-module__tag-count">{{ tag_item_count }}</span></a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
