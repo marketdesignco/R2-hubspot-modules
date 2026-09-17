@@ -1,0 +1,82 @@
+.sticky-filter-tabs-module {
+  background: var(--color-white);
+}
+
+.sticky-filter-tabs-module__tabs {
+  position: sticky;
+  top: var(--r2-header-height, 0);
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: var(--color-white);
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(8, 39, 80, .08);
+}
+
+.sticky-filter-tabs-module__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-primary);
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(8, 39, 80, .6);
+  background: var(--color-white);
+  border: 1px solid rgba(8, 39, 80, .14);
+  border-radius: var(--button-radius);
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: border-color .15s, color .15s, background-color .15s;
+}
+
+.sticky-filter-tabs-module__tab:hover,
+.sticky-filter-tabs-module__tab:focus-visible {
+  border-color: var(--color-primary-blue);
+  color: var(--color-navy-blue);
+}
+
+.sticky-filter-tabs-module__tab.is-active {
+  background: var(--color-primary-blue);
+  border-color: var(--color-primary-blue);
+  color: var(--color-white);
+}
+
+.sticky-filter-tabs-module__tab-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* The dot's own color comes from a per-tab inline style (module.html), so
+   overriding it for the active state needs !important — the only place
+   in this module that's necessary. */
+.sticky-filter-tabs-module__tab.is-active .sticky-filter-tabs-module__tab-dot {
+  background: var(--color-white) !important;
+}
+
+.sticky-filter-tabs-module__tab-count {
+  font-size: 11px;
+  opacity: .7;
+}
+
+.sticky-filter-tabs-module__tab.is-active .sticky-filter-tabs-module__tab-count {
+  opacity: 1;
+  background: rgba(255, 255, 255, .25);
+  color: var(--color-white);
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+
+/* Responsive: horizontal scroll instead of wrapping, matching the
+   established R2 breakpoint used elsewhere in the theme. */
+
+@media (max-width: 992px) {
+  .sticky-filter-tabs-module__tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

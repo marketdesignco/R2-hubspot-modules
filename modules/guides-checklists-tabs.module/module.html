@@ -1,0 +1,57 @@
+{#
+  Guides + Checklists Tabs — forked from sticky-filter-tabs.module.
+
+  Forked instead of editing the shared module directly, matching the same
+  precedent as hero-partners.module (forked from hero.module) and
+  guides-checklists-listing.module (forked from blog-listing.module): this
+  variant adds an optional handwritten-style aside note next to the tab row
+  (e.g. "no gate, no follow-up sequence", per the Figma), which
+  sticky-filter-tabs.module itself does not have and is not expected to gain
+  — other pages using the original module are unaffected by this file.
+
+  All BEM classes renamed from sticky-filter-tabs-module to
+  guides-checklists-tabs-module so this can never cross-wire with
+  sticky-filter-tabs.module if both ever render on the same page.
+#}
+
+{% require_css %}
+<style>
+{% scope_css %}
+  .guides-checklists-tabs-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .guides-checklists-tabs-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="guides-checklists-tabs-module" id="guides-checklists-tabs" data-screen-label="Guides + Checklists tabs">
+  <div class="content-wrapper">
+    <div class="guides-checklists-tabs-module__row">
+      {% if module.tabs %}
+        <div class="guides-checklists-tabs-module__tabs" role="navigation" aria-label="Content filters">
+          {% for tab in module.tabs %}
+            {% set tab_is_active = tab.tab_label == module.active_tab_label if module.active_tab_label else tab.is_current %}
+            <a
+              class="guides-checklists-tabs-module__tab{% if tab_is_active %} is-active{% endif %}"
+              href="{{ tab.tab_link.url.href|escape_url }}"
+              {% if tab.tab_link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}
+              {% if tab_is_active %}aria-current="page"{% endif %}
+            >
+              <span class="guides-checklists-tabs-module__tab-dot" style="background: rgba({{ tab.tab_color.color|convert_rgb }}, {{ tab.tab_color.opacity / 100 }});" aria-hidden="true"></span>
+              {{ tab.tab_label|escape_html }}
+              {% if tab.tab_count_label %}<span class="guides-checklists-tabs-module__tab-count">{{ tab.tab_count_label|escape_html }}</span>{% endif %}
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% if module.aside_note %}
+        <div class="guides-checklists-tabs-module__aside">{{ module.aside_note|escape_html }}</div>
+      {% endif %}
+    </div>
+  </div>
+</section>

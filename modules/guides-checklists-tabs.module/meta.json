@@ -1,0 +1,9 @@
+{
+  "global" : false,
+  "content_types" : [ "LANDING_PAGE", "SITE_PAGE", "BLOG_LISTING" ],
+  "categories" : [ "body_content" ],
+  "host_template_types" : [ "PAGE", "BLOG_LISTING" ],
+  "label" : "Guides + Checklists Tabs",
+  "icon" : "../../images/module-icons/list-solid.svg",
+  "is_available_for_new_content" : true
+}

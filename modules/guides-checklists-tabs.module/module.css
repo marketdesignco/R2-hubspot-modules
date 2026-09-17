@@ -1,0 +1,117 @@
+/*
+  Guides + Checklists Tabs module — static visual styling.
+
+  Forked from sticky-filter-tabs.module; classes renamed to
+  guides-checklists-tabs-module throughout so this module can never
+  cross-wire with sticky-filter-tabs.module if both ever render on one page.
+*/
+
+.guides-checklists-tabs-module {
+  background: var(--color-white);
+}
+
+.guides-checklists-tabs-module__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+  background: var(--color-white);
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(8, 39, 80, .08);
+}
+
+.guides-checklists-tabs-module__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Handwritten-style aside note to the right of the tab row — same Caveat
+   accent + slight rotation convention already used by cta.module's kicker
+   and blog-listing.module's featured-aside, reused here rather than
+   inventing a third variant. Hidden on mobile: it's a decorative flourish,
+   not critical content, and the tab row already needs its own horizontal
+   scroll room there. */
+.guides-checklists-tabs-module__aside {
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  font-size: 15px;
+  color: rgba(8, 39, 80, .45);
+  transform: rotate(-2deg);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.guides-checklists-tabs-module__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-primary);
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(8, 39, 80, .6);
+  background: var(--color-white);
+  border: 1px solid rgba(8, 39, 80, .14);
+  border-radius: var(--button-radius, 6px);
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: border-color .15s, color .15s, background-color .15s;
+}
+
+.guides-checklists-tabs-module__tab:hover,
+.guides-checklists-tabs-module__tab:focus-visible {
+  border-color: var(--color-primary-blue);
+  color: var(--color-navy-blue);
+}
+
+.guides-checklists-tabs-module__tab.is-active {
+  background: var(--color-primary-blue);
+  border-color: var(--color-primary-blue);
+  color: var(--color-white);
+}
+
+.guides-checklists-tabs-module__tab-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* The dot's own color comes from a per-tab inline style (module.html), so
+   overriding it for the active state needs !important — the only place
+   in this module that's necessary. */
+.guides-checklists-tabs-module__tab.is-active .guides-checklists-tabs-module__tab-dot {
+  background: var(--color-white) !important;
+}
+
+.guides-checklists-tabs-module__tab-count {
+  font-size: 11px;
+  opacity: .7;
+}
+
+.guides-checklists-tabs-module__tab.is-active .guides-checklists-tabs-module__tab-count {
+  opacity: 1;
+  background: rgba(255, 255, 255, .25);
+  color: var(--color-white);
+  border-radius: 999px;
+  padding: 1px 7px;
+}
+
+/* Responsive: horizontal scroll instead of wrapping, matching the
+   established R2 breakpoint used elsewhere in the theme. */
+
+@media (max-width: 992px) {
+  .guides-checklists-tabs-module__tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 767px) {
+  .guides-checklists-tabs-module__aside {
+    display: none;
+  }
+}

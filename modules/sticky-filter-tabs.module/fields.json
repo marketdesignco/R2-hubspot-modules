@@ -1,0 +1,162 @@
+[ {
+  "id" : "active_tab_label",
+  "name" : "active_tab_label",
+  "label" : "Active tab",
+  "help_text" : "Optional. Set this to a tab's Label exactly (e.g. \"Case Studies\") to mark that tab active — overrides every tab's own \"Highlight as active\" checkbox below. Use this when placing the module from a page template's dnd_module block, since per-tab fields inside a repeater can't be reliably overridden that way. Leave empty to use each tab's own checkbox instead.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "tabs",
+  "name" : "tabs",
+  "label" : "Sticky filter tabs",
+  "help_text" : "Each tab is a plain link to that category's own listing page (this module does not filter in place). Add/remove tabs freely.",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "tabs.tab_label",
+    "default" : 6
+  },
+  "children" : [ {
+    "id" : "tabs.tab_label",
+    "name" : "tab_label",
+    "label" : "Label",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Everything"
+  }, {
+    "id" : "tabs.tab_color",
+    "name" : "tab_color",
+    "label" : "Dot color",
+    "help_text" : "Color of the small dot shown before the label.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : { "color" : "#0D6FFC", "opacity" : 100 }
+  }, {
+    "id" : "tabs.tab_link",
+    "name" : "tab_link",
+    "label" : "Link",
+    "help_text" : "Where this tab navigates to when clicked.",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "href" : "#",
+        "type" : "EXTERNAL"
+      },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    }
+  }, {
+    "id" : "tabs.tab_count_label",
+    "name" : "tab_count_label",
+    "label" : "Count badge (optional)",
+    "help_text" : "Manual count shown next to the label, e.g. \"35\". Leave empty to hide the badge.",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : ""
+  }, {
+    "id" : "tabs.is_current",
+    "name" : "is_current",
+    "label" : "Highlight as active",
+    "help_text" : "Manually mark the tab matching the current page — there's no reliable way to detect this automatically across every page this module is used on.",
+    "required" : false,
+    "locked" : false,
+    "display" : "checkbox",
+    "type" : "boolean",
+    "display_width" : null,
+    "default" : false
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [
+    { "tab_label" : "Everything", "is_current" : true, "tab_count_label" : "", "tab_color" : { "color" : "#0D6FFC", "opacity" : 100 } },
+    { "tab_label" : "Insights", "tab_count_label" : "", "tab_color" : { "color" : "#0D6FFC", "opacity" : 100 } },
+    { "tab_label" : "Videos", "tab_count_label" : "", "tab_color" : { "color" : "#0D6FFC", "opacity" : 100 } },
+    { "tab_label" : "Events", "tab_count_label" : "", "tab_color" : { "color" : "#DB535F", "opacity" : 100 } },
+    { "tab_label" : "Guides + Checklists", "tab_count_label" : "", "tab_color" : { "color" : "#0D6FFC", "opacity" : 100 } },
+    { "tab_label" : "Case Studies", "tab_count_label" : "", "tab_color" : { "color" : "#DB535F", "opacity" : 100 } }
+  ]
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : {
+      "padding" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 0, "units" : "px" }, "left" : { "value" : 0, "units" : "px" }, "right" : { "value" : 0, "units" : "px" } },
+      "margin" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 0, "units" : "px" } }
+    },
+    "spacing_mobile" : {
+      "padding" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 0, "units" : "px" }, "left" : { "value" : 0, "units" : "px" }, "right" : { "value" : 0, "units" : "px" } },
+      "margin" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 0, "units" : "px" } }
+    }
+  }
+} ]
