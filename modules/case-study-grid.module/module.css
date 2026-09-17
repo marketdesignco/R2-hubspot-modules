@@ -1,0 +1,130 @@
+.case-study-grid-module {
+  background: #FFFFFF;
+}
+
+.case-study-grid-module__header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.case-study-grid-module__eyebrow {
+  color: #0D6FFC;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.case-study-grid-module__eyebrow span {
+  width: 16px;
+  height: 2px;
+  background: #DB535F;
+  flex-shrink: 0;
+}
+
+.case-study-grid-module__heading-wrap * {
+  margin: 0;
+  color: #082750;
+}
+
+.case-study-grid-module__heading-wrap strong {
+  color: #0D6FFC;
+  font-family: var(--font-secondary);
+  font-weight: 700;
+}
+
+.case-study-grid-module__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.case-study-grid-module__grid--2-col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.case-study-grid-module__card {
+  background: #FFFFFF;
+  border: 1px solid rgba(8, 39, 80, .1);
+  border-top: 3px solid rgba(8, 39, 80, .1);
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow .2s;
+}
+
+.case-study-grid-module__card:hover {
+  box-shadow: 0 12px 32px rgba(8, 39, 80, .1);
+}
+
+.case-study-grid-module__card--blue {
+  border-top-color: #0D6FFC;
+}
+
+.case-study-grid-module__card--navy {
+  border-top-color: #082750;
+}
+
+.case-study-grid-module__card--red {
+  border-top-color: #DB535F;
+}
+
+.case-study-grid-module__card--teal {
+  border-top-color: #4792A6;
+}
+
+.case-study-grid-module__image {
+  height: 170px;
+  background: rgba(8, 39, 80, .04);
+}
+
+.case-study-grid-module__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.case-study-grid-module__body {
+  padding: 22px 22px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.case-study-grid-module__category {
+  color: #8A96A6;
+}
+
+.case-study-grid-module__card-heading * {
+  margin: 0;
+  color: #082750;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.case-study-grid-module__link {
+  margin-top: 2px;
+}
+
+/* Responsive: 2 columns on tablet, single column on mobile */
+
+@media (max-width: 992px) {
+  .case-study-grid-module__grid,
+  .case-study-grid-module__grid--2-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .case-study-grid-module__header {
+    gap: 10px;
+  }
+
+  .case-study-grid-module__grid,
+  .case-study-grid-module__grid--2-col {
+    grid-template-columns: 1fr;
+  }
+}

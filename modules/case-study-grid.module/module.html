@@ -1,0 +1,52 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .case-study-grid-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .case-study-grid-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="case-study-grid-module" data-screen-label="Case study grid">
+  <div class="content-wrapper">
+    {% if module.eyebrow or module.heading %}
+      <div class="case-study-grid-module__header">
+        {% if module.eyebrow %}
+          <div class="case-study-grid-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+        {% endif %}
+        {% if module.heading %}
+          <div class="case-study-grid-module__heading-wrap">{{ module.heading|sanitize_html }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+    <div class="case-study-grid-module__grid{% if module.columns == "2" %} case-study-grid-module__grid--2-col{% endif %}">
+      {% for card in module.card %}
+        <div class="case-study-grid-module__card{% if card.accent_color and card.accent_color != "none" %} case-study-grid-module__card--{{ card.accent_color }}{% endif %}">
+          <div class="case-study-grid-module__image">
+            {% if card.image.src %}
+              <img src="{{ card.image.src|escape_url }}" alt="{{ card.image.alt|escape_attr }}" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="case-study-grid-module__body">
+            {% if card.category %}
+              <div class="case-study-grid-module__category eyebrow">{{ card.category|escape_html }}</div>
+            {% endif %}
+            {% if card.heading %}
+              <div class="case-study-grid-module__card-heading">{{ card.heading|sanitize_html }}</div>
+            {% endif %}
+            {% if card.link.url.href %}
+              <a class="case-study-grid-module__link link-1" href="{{ card.link.url.href|escape_url }}"
+                {% if card.link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ card.link_text|escape_html }}</a>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

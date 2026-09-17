@@ -1,0 +1,230 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "help_text" : "Optional eyebrow rendered above the grid. Leave empty to render nothing.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Optional heading rendered above the grid. Leave empty to render nothing. Bold a phrase to apply the R2 Caveat script accent treatment.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "columns",
+  "name" : "columns",
+  "label" : "Columns",
+  "help_text" : "Number of columns in the card grid on desktop.",
+  "required" : false,
+  "locked" : false,
+  "display" : "select",
+  "choices" : [ [ "3", "3 columns" ], [ "2", "2 columns" ] ],
+  "multiple" : false,
+  "reordering_enabled" : true,
+  "preset" : null,
+  "type" : "choice",
+  "display_width" : null,
+  "default" : "3"
+}, {
+  "id" : "card",
+  "name" : "card",
+  "label" : "Card",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "card.category",
+    "default" : 6
+  },
+  "children" : [ {
+    "id" : "card.image",
+    "name" : "image",
+    "label" : "Image",
+    "required" : false,
+    "locked" : false,
+    "responsive" : true,
+    "resizable" : true,
+    "show_loading" : true,
+    "type" : "image",
+    "display_width" : null,
+    "default" : {
+      "loading" : "lazy",
+      "alt" : "Case study photo"
+    }
+  }, {
+    "id" : "card.category",
+    "name" : "category",
+    "label" : "Category label",
+    "help_text" : "Small uppercase label rendered above the heading (e.g. \"Client · Industry\").",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Client · Industry"
+  }, {
+    "id" : "card.heading",
+    "name" : "heading",
+    "label" : "Heading",
+    "required" : false,
+    "locked" : false,
+    "enabled_features" : [ "standard_emphasis", "advanced_emphasis" ],
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<p>Placeholder case study headline</p>"
+  }, {
+    "id" : "card.accent_color",
+    "name" : "accent_color",
+    "label" : "Accent color",
+    "help_text" : "Top border accent color for the card.",
+    "required" : false,
+    "locked" : false,
+    "display" : "select",
+    "choices" : [ [ "none", "None" ], [ "blue", "Blue" ], [ "navy", "Navy" ], [ "red", "Red" ], [ "teal", "Teal" ] ],
+    "multiple" : false,
+    "reordering_enabled" : true,
+    "preset" : null,
+    "type" : "choice",
+    "display_width" : null,
+    "default" : "blue"
+  }, {
+    "id" : "card.link_text",
+    "name" : "link_text",
+    "label" : "Link text",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Read more →"
+  }, {
+    "id" : "card.link",
+    "name" : "link",
+    "label" : "Link",
+    "help_text" : "The page this card's \"Read more\" link should go to.",
+    "required" : false,
+    "locked" : false,
+    "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+    "show_advanced_rel_options" : false,
+    "type" : "link",
+    "display_width" : null,
+    "default" : {
+      "url" : {
+        "href" : "#",
+        "type" : "EXTERNAL"
+      },
+      "no_follow" : false,
+      "open_in_new_tab" : false
+    }
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "image" : { "loading" : "lazy", "alt" : "Embraer aerospace imagery" },
+    "category" : "Embraer · Aerospace",
+    "heading" : "<p>R2 helps Embraer enhance their customer excellence standards</p>",
+    "accent_color" : "blue",
+    "link_text" : "Read more →",
+    "link" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false }
+  }, {
+    "image" : { "loading" : "lazy", "alt" : "Sage Dental healthcare imagery" },
+    "category" : "Sage Dental · Healthcare",
+    "heading" : "<p>R2 deploys Cisco Meraki's SDWAN solution across Sage Dental Group</p>",
+    "accent_color" : "teal",
+    "link_text" : "Read more →",
+    "link" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false }
+  }, {
+    "image" : { "loading" : "lazy", "alt" : "Cendyn hospitality tech imagery" },
+    "category" : "Cendyn · Hospitality tech",
+    "heading" : "<p>Cendyn SPACES improves work culture and customer satisfaction</p>",
+    "accent_color" : "red",
+    "link_text" : "Read more →",
+    "link" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false }
+  }, {
+    "image" : { "loading" : "lazy", "alt" : "Platform transition use case imagery" },
+    "category" : "Use case · Platform transition",
+    "heading" : "<p>Use Case: Seamless Platform Transition Nets Measurable Improvements</p>",
+    "accent_color" : "navy",
+    "link_text" : "Read more →",
+    "link" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false }
+  }, {
+    "image" : { "loading" : "lazy", "alt" : "Municipal use case imagery" },
+    "category" : "Use case · Municipal",
+    "heading" : "<p>Use Case: Network Upgrade + Collaboration Enhancement</p>",
+    "accent_color" : "blue",
+    "link_text" : "Read more →",
+    "link" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false }
+  }, {
+    "image" : { "loading" : "lazy", "alt" : "City of Weston government imagery" },
+    "category" : "City of Weston · Government",
+    "heading" : "<p>R2 helps the City of Weston become one of the premier smart cities in the US</p>",
+    "accent_color" : "red",
+    "link_text" : "Read more →",
+    "link" : { "url" : { "href" : "#", "type" : "EXTERNAL" }, "no_follow" : false, "open_in_new_tab" : false }
+  } ]
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 96, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 56, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null
+} ]

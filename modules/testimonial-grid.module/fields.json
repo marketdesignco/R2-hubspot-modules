@@ -1,0 +1,198 @@
+[ {
+  "id" : "eyebrow",
+  "name" : "eyebrow",
+  "label" : "Eyebrow",
+  "help_text" : "Optional. Leave empty to render nothing.",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : ""
+}, {
+  "id" : "heading",
+  "name" : "heading",
+  "label" : "Heading",
+  "help_text" : "Use the rich text toolbar's Heading options (H2/H3/H4) to set the semantic level. Typography always comes from the R2 Design System for whichever level is chosen.",
+  "required" : false,
+  "locked" : false,
+  "type" : "richtext",
+  "display_width" : null,
+  "default" : "<h2>Our customers say it best.</h2>"
+}, {
+  "id" : "show_link",
+  "name" : "show_link",
+  "label" : "Show link",
+  "required" : false,
+  "locked" : false,
+  "display" : "checkbox",
+  "type" : "boolean",
+  "display_width" : null,
+  "default" : true
+}, {
+  "id" : "link_text",
+  "name" : "link_text",
+  "label" : "Link text",
+  "required" : false,
+  "locked" : false,
+  "allow_new_line" : false,
+  "type" : "text",
+  "display_width" : null,
+  "default" : "See more reviews →"
+}, {
+  "id" : "link",
+  "name" : "link",
+  "label" : "Link",
+  "required" : false,
+  "locked" : false,
+  "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS" ],
+  "show_advanced_rel_options" : false,
+  "type" : "link",
+  "display_width" : null,
+  "default" : {
+    "url" : {
+      "href" : "#",
+      "type" : "EXTERNAL"
+    },
+    "no_follow" : false,
+    "open_in_new_tab" : false
+  }
+}, {
+  "id" : "testimonials",
+  "name" : "testimonials",
+  "label" : "Testimonials",
+  "required" : false,
+  "locked" : false,
+  "occurrence" : {
+    "min" : 1,
+    "max" : null,
+    "sorting_label_field" : "testimonials.testimonial_name",
+    "default" : 3
+  },
+  "children" : [ {
+    "id" : "testimonials.accent_color",
+    "name" : "accent_color",
+    "label" : "Accent color",
+    "help_text" : "Sets this card's left border accent color.",
+    "required" : false,
+    "locked" : false,
+    "type" : "color",
+    "display_width" : null,
+    "default" : {
+      "color" : "#0D6FFC",
+      "opacity" : 100
+    }
+  }, {
+    "id" : "testimonials.quote_text",
+    "name" : "quote_text",
+    "label" : "Quote",
+    "required" : false,
+    "locked" : false,
+    "type" : "richtext",
+    "display_width" : null,
+    "default" : "<p>Placeholder quote — R2 has been a valued extension of our team.</p>"
+  }, {
+    "id" : "testimonials.testimonial_name",
+    "name" : "testimonial_name",
+    "label" : "Name",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Firstname Lastname"
+  }, {
+    "id" : "testimonials.title",
+    "name" : "title",
+    "label" : "Title / organization",
+    "required" : false,
+    "locked" : false,
+    "allow_new_line" : false,
+    "type" : "text",
+    "display_width" : null,
+    "default" : "Title, Organization — placeholder"
+  } ],
+  "tab" : "CONTENT",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : [ {
+    "accent_color" : { "color" : "#0D6FFC", "opacity" : 100 },
+    "quote_text" : "<p>SD-WAN across 60 locations is a big project. It's a scary project, and I can't imagine doing it with anybody else. R2 has helped us put the...</p>",
+    "testimonial_name" : "Dan Mirsky",
+    "title" : "VP of IT, Sage Dental"
+  }, {
+    "accent_color" : { "color" : "#4792A6", "opacity" : 100 },
+    "quote_text" : "<p>R2 has been a valued extension of our team for over a decade. I've worked with many MSPs over the years – none match R2's skill or commitmen...</p>",
+    "testimonial_name" : "Fred Weston",
+    "title" : "Sr. Manager of IT Operations, LPGA-Ladies Professional Golf Association"
+  }, {
+    "accent_color" : { "color" : "#DB535F", "opacity" : 100 },
+    "quote_text" : "<p>R2 has been a trusted partner of the Miami Dolphins for years. Their engineering resources have transformed our communication work flows mak...</p>",
+    "testimonial_name" : "Kim Rometo",
+    "title" : "Vice President, Chief Information Officer, Miami Dolphins"
+  } ]
+}, {
+  "id" : "styles",
+  "name" : "styles",
+  "label" : "Section spacing",
+  "required" : false,
+  "locked" : false,
+  "children" : [ {
+    "id" : "styles.spacing_desktop",
+    "name" : "spacing_desktop",
+    "label" : "Spacing - Desktop",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 96, "units" : "px" },
+        "bottom" : { "value" : 96, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  }, {
+    "id" : "styles.spacing_mobile",
+    "name" : "spacing_mobile",
+    "label" : "Spacing - Mobile",
+    "required" : false,
+    "locked" : false,
+    "type" : "spacing",
+    "display_width" : null,
+    "default" : {
+      "padding" : {
+        "top" : { "value" : 56, "units" : "px" },
+        "bottom" : { "value" : 56, "units" : "px" },
+        "left" : { "value" : 0, "units" : "px" },
+        "right" : { "value" : 0, "units" : "px" }
+      },
+      "margin" : {
+        "top" : { "value" : 0, "units" : "px" },
+        "bottom" : { "value" : 0, "units" : "px" }
+      }
+    }
+  } ],
+  "tab" : "STYLE",
+  "expanded" : false,
+  "group_occurrence_meta" : null,
+  "type" : "group",
+  "display_width" : null,
+  "default" : {
+    "spacing_desktop" : {
+      "padding" : { "top" : { "value" : 96, "units" : "px" }, "bottom" : { "value" : 96, "units" : "px" }, "left" : { "value" : 0, "units" : "px" }, "right" : { "value" : 0, "units" : "px" } },
+      "margin" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 0, "units" : "px" } }
+    },
+    "spacing_mobile" : {
+      "padding" : { "top" : { "value" : 56, "units" : "px" }, "bottom" : { "value" : 56, "units" : "px" }, "left" : { "value" : 0, "units" : "px" }, "right" : { "value" : 0, "units" : "px" } },
+      "margin" : { "top" : { "value" : 0, "units" : "px" }, "bottom" : { "value" : 0, "units" : "px" } }
+    }
+  }
+} ]

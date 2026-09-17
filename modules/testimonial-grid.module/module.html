@@ -1,0 +1,42 @@
+{% require_css %}
+<style>
+{% scope_css %}
+  .testimonial-grid-module {
+    {{ module.styles.spacing_desktop.css }}
+  }
+  @media (max-width: 992px) {
+    .testimonial-grid-module {
+      {{ module.styles.spacing_mobile.css }}
+    }
+  }
+{% end_scope_css %}
+</style>
+{% end_require_css %}
+
+<section class="testimonial-grid-module" id="testimonial-grid" data-screen-label="Testimonial grid">
+  <div class="content-wrapper">
+    <div class="testimonial-grid-module__header">
+      <div>
+        {% if module.eyebrow %}
+          <div class="testimonial-grid-module__eyebrow eyebrow"><span></span>{{ module.eyebrow|escape_html }}</div>
+        {% endif %}
+        <div class="testimonial-grid-module__heading">{{ module.heading|sanitize_html }}</div>
+      </div>
+      {% if module.show_link %}
+        <a class="testimonial-grid-module__link link-1" href="{{ module.link.url.href|escape_url }}"
+          {% if module.link.open_in_new_tab %}target="_blank" rel="noopener"{% endif %}>{{ module.link_text|escape_html }}</a>
+      {% endif %}
+    </div>
+    <div class="testimonial-grid-module__grid">
+      {% for item in module.testimonials %}
+        <div class="testimonial-grid-module__card" style="--accent-color: rgba({{ item.accent_color.color|convert_rgb }}, {{ item.accent_color.opacity / 100 }});">
+          <div class="testimonial-grid-module__quote">{{ item.quote_text|sanitize_html }}</div>
+          <div class="testimonial-grid-module__person">
+            <div class="testimonial-grid-module__name">{{ item.testimonial_name|escape_html }}</div>
+            <div class="testimonial-grid-module__title">{{ item.title|escape_html }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
